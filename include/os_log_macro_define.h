@@ -1,10 +1,33 @@
+/***********************************************************************************
+ * 文 件 名   : os_log_macro_define.h
+ * 负 责 人   : 卢美宏
+ * 创建日期   : 2018年11月23日
+ * 文件描述   : 日志记录宏扩展
+ * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公司
+ * 其    他   : 
+ * 修改日志   : 
+***********************************************************************************/
+
 #ifndef  __OS_LOG_MACRO_DEFINE__
 #define  __OS_LOG_MACRO_DEFINE__
 #include <string.h>
 #include "os_log.h"
-
 #define GETFILENAME(pFileName) (NULL == strrchr(pFileName, '/') ? pFileName : strrchr(pFileName, '/') + 1)
-#define OS_PLUG_LOG(eLeve,log_fmt, log_arg...) \
+/*****************************************************************************
+ * 函 数 名  : LVOS_Log
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 全局日志封装
+ * 输入参数  : eLeve       日志等级
+               log_fmt     日志格式
+               log_arg...  参数
+ * 输出参数  : 无
+ * 返 回 值  : 
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
+#define LVOS_Log(eLeve,log_fmt, log_arg...) \
     do{ \
            INFO_W.log(eLeve, "[%s:%d][%s] " log_fmt "\n", \
                      GETFILENAME(__FILE__), __LINE__, __FUNCTION__, ##log_arg); \

@@ -1,3 +1,13 @@
+/***********************************************************************************
+ * 文 件 名   : os_log.c
+ * 负 责 人   : 卢美宏
+ * 创建日期   : 2018年11月23日
+ * 文件描述   : 日志记录实现类
+ * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公司
+ * 其    他   : 
+ * 修改日志   : 
+***********************************************************************************/
+
 #include "os_log.h"
 #include "os_stacktrace.h"
 #include "os_log_macro_define.h"
@@ -12,9 +22,22 @@ static char LogLevelStr[][8] = {
 };
 
 Log_Writer INFO_W;
-
 __thread char Log_Writer::m_buffer[_LOG_BUFFSIZE] = {0};
 
+/*****************************************************************************
+ * 函 数 名  : log_init
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : C方式调用初始化日志类
+ * 输入参数  : LogLevel eLevel           日志等级
+               const char* p_modulename  日志记录文件名
+               const char* p_logdir      日志文件所在位置
+ * 输出参数  : 无
+ * 返 回 值  : 
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 bool log_init(LogLevel eLevel, const char* p_modulename, const char* p_logdir)
 {
 	//如果路径存在文件夹，则判断是否存在
@@ -34,6 +57,18 @@ bool log_init(LogLevel eLevel, const char* p_modulename, const char* p_logdir)
 	return true;
 }
 
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.logLevelToString
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 日志等级到对应字符串
+ * 输入参数  : LogLevel eLevel  日志等级
+ * 输出参数  : 无
+ * 返 回 值  : inline
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 inline const char* Log_Writer::logLevelToString(LogLevel eLevel) 
 {
     if(LL_DEBUG > eLevel || LL_ERROR < eLevel)
@@ -42,16 +77,55 @@ inline const char* Log_Writer::logLevelToString(LogLevel eLevel)
     }
     return (char*)LogLevelStr[eLevel];
 }
-	
+
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.IsValidLevel
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 对应日志等级是否在配置等级内
+ * 输入参数  : LogLevel eLevel  日志等级
+ * 输出参数  : 无
+ * 返 回 值  : inline
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 inline bool Log_Writer::IsValidLevel(LogLevel eLevel)
 {
 	return(eLevel >= m_system_level);
 }
 
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.Init
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 多带调用初始化日志类
+ * 输入参数  : 无
+ * 输出参数  : 无
+ * 返 回 值  : int
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 int Log_Writer::Init()
 {
     return log_init(LL_TRACE, "messsage", "./");
 }
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.loginit
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 初始化日志类
+ * 输入参数  : LogLevel eLevel            日志等级
+               const  char *filelocation  记录日志文件名
+               bool append                是否追加方式写入
+               bool issync                是否同步写入
+ * 输出参数  : 无
+ * 返 回 值  : bool
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 bool Log_Writer::loginit(LogLevel eLevel, const  char *filelocation, bool append, bool issync)
 {
 	MACRO_RET(NULL != m_fp, false);
@@ -94,6 +168,19 @@ bool Log_Writer::loginit(LogLevel eLevel, const  char *filelocation, bool append
 	return true;
 }
 
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.premakestr
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 封装日期字符串
+ * 输入参数  : char* m_buffer   封装日期字符串
+               LogLevel eLevel  日志等级
+ * 输出参数  : 无
+ * 返 回 值  : int
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 int Log_Writer::premakestr(char* m_buffer, LogLevel eLevel)
 {
     const byte dateStrLen = 20;
@@ -104,6 +191,20 @@ int Log_Writer::premakestr(char* m_buffer, LogLevel eLevel)
     return snprintf(m_buffer, _LOG_BUFFSIZE, "%s [%s]", timestr, logLevelToString(eLevel));
 }
 
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.log
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 写日志入口
+ * 输入参数  : LogLevel eLevel  日志等级
+               char* logformat  日志记录格式
+               ...              参数列表
+ * 输出参数  : 无
+ * 返 回 值  : bool
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 bool Log_Writer::log(LogLevel eLevel, char* logformat,...)
 {
 	MACRO_RET(!IsValidLevel(eLevel), false);
@@ -130,6 +231,19 @@ bool Log_Writer::log(LogLevel eLevel, char* logformat,...)
 	return true;
 }
 
+/*****************************************************************************
+ * 函 数 名  : Log_Writer._write
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 写入格式化后的日志
+ * 输入参数  : char *_pbuffer  写入封装后的流
+               int len         参数长度
+ * 输出参数  : 无
+ * 返 回 值  : bool
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 bool Log_Writer::_write(char *_pbuffer, int len)
 {
 	if(0 != access(m_filelocation, W_OK))
@@ -161,11 +275,35 @@ bool Log_Writer::_write(char *_pbuffer, int len)
 	return true;
 }
 
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.getLevel
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 日志等级你获取
+ * 输入参数  : 无
+ * 输出参数  : 无
+ * 返 回 值  : LogLevel
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 LogLevel inline Log_Writer::getLevel()
 {
 	return m_system_level; 
 }
 
+/*****************************************************************************
+ * 函 数 名  : Log_Writer.logclose
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 关闭日志
+ * 输入参数  : 无
+ * 输出参数  : 无
+ * 返 回 值  : bool
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
 bool Log_Writer::logclose()
 {
 	if(m_fp == NULL)
