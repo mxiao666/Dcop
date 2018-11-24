@@ -29,7 +29,7 @@
  * Æä    Ëü  : 
 
 *****************************************************************************/
-static byte signals_trace[] =
+static BYTE signals_trace[] =
 {
     SIGILL,  /* Illegal instruction (ANSI).  */
     SIGABRT, /* Abort (ANSI).  */

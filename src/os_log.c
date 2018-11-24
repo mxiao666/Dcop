@@ -183,7 +183,7 @@ bool Log_Writer::loginit(LogLevel eLevel, const  char *filelocation, bool append
 *****************************************************************************/
 int Log_Writer::premakestr(char* m_buffer, LogLevel eLevel)
 {
-    const byte dateStrLen = 20;
+    const BYTE dateStrLen = 20;
     char timestr[dateStrLen] = {0};
     time_t timer = time(NULL); 
     struct tm now_time;    

@@ -13,3 +13,8 @@ if ls *.error >/dev/null 2>/dev/null
 then 
 	rm *.error
 fi
+if ls *fuse_hidden* >/dev/null 2>/dev/null  
+then 
+	rm *fuse_hidden*
+fi
+
