@@ -99,7 +99,7 @@ private:
 };
 
 /*****************************************************************************
- * 函 数 名  : if REG_FUNCTION
+ * 函 数 名  : REG_FUNCTION_PLUS
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年11月23日
  * 函数功能  : 自动注册宏
@@ -111,15 +111,41 @@ private:
 
 *****************************************************************************/
 #if _SW_VER_
-#define REG_FUNCTION(Class, Name) \
+#define REG_FUNCTION_PLUS(Class, Name) \
 	static IplugFrameWork* g_IplugFrameWork_##Class(){ return new Class; } \
 	static FrameWork g_FrameWork_##Class = { g_IplugFrameWork_##Class, Name, NULL }; \
 	static FrameWorkMgrCollector g_FrameWorkMgrCollector_##Class(&g_FrameWork_##Class);
 #else
-#define REG_FUNCTION(Class, Name) \
+#define REG_FUNCTION_CPLUSPLUS(Class, Name) \
 	static IplugFrameWork* g_IplugFrameWork_##Class = new Class; \
 	static FrameWork g_FrameWork_##Class = { g_IplugFrameWork_##Class, Name, NULL }; \
 	static FrameWorkMgrCollector g_FrameWorkMgrCollector_##Class(&g_FrameWork_##Class);
 #endif
+
+/*****************************************************************************
+ * 函 数 名  : REG_FUNCTION
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年12月1日
+ * 函数功能  : C的方式调用初始化
+ * 输入参数  : Class  生成类名
+               Func   被调用的普通函数
+               Name   被调用者名字
+ * 输出参数  : 无
+ * 返 回 值  : 
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
+#define REG_FUNCTION(Class, Func, Name) \
+class IplugFrameWork##Func :public IplugFrameWork \
+{  \
+public:  \
+	IplugFrameWork##Func(){ } \
+	int Init(){ \
+		return  Func(); \
+	}  \
+};  \
+REG_FUNCTION_PLUS(Class, Name);
+
 
 #endif

@@ -14,7 +14,7 @@ public:
     	return 0;
 	}
 };
-REG_FUNCTION(Test, "classTest");
+REG_FUNCTION_PLUS(Test, "classTest");
 
 class Test1 :public IplugFrameWork
 {
@@ -22,12 +22,7 @@ public:
 	Test1(){
 	}
 	int Init(){
-    	printf("Hello world!12312\n");
-//	    char *tmp = NULL;    
-//        *tmp = 0;    
-//        printf("xxx=%s\n", tmp);    
-//        free(tmp);    
-//        free(tmp);
+    	printf("Hello world! Test1\n");
     	return 0;
 	}
     static void backtrace()
@@ -39,7 +34,14 @@ public:
         free(tmp);
     }	
 };
-REG_FUNCTION(Test1, "classTest1");
+REG_FUNCTION_PLUS(Test1, "classTest1");
+
+
+int MyInit(){
+	printf("Hello world! MyInit\n");
+	return 0;
+}
+REG_FUNCTION(IplugFrameWorkMyInit, MyInit, "MyInit111");
 
 int main()
 {

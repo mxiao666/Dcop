@@ -313,5 +313,5 @@ bool Log_Writer::logclose()
 	m_fp = NULL;
 	return true;
 }
-REG_FUNCTION(Log_Writer, "Log_Writer");
+REG_FUNCTION_PLUS(Log_Writer, "Log_Writer");
 
