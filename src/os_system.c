@@ -160,7 +160,7 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
     u32 iOffset     = 0;
     pid_t iStopPid  = 0;
     uiTime = (uiTimeout == 0) ? INVALUE_INAVLE : uiTimeout * 1000;
-    if(NULL == piFd || NULL == iScriptRet || NULL == pOutBuf)
+    if(NULL == iScriptRet)
     {
         return RET_ERR;
     }
@@ -168,7 +168,7 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
     for(;;)
     {
 
-        if(NULL != piFd && (iOffset < uiOutBufLen))
+        if((NULL != piFd) && (NULL != pOutBuf) && (iOffset < uiOutBufLen))
         {
             iOffset += OS_CheckReadBuf(*piFd, pOutBuf + iOffset, uiOutBufLen - iOffset);
         }
@@ -511,4 +511,5 @@ s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuf
         return RET_OK;
     }
 }
+
 

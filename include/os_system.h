@@ -11,7 +11,7 @@
 
 #ifndef __OS_SYSTEM_H__
 #define __OS_SYSTEM_H__
-
+#include "os_macro_define.h"
 #define STDOUT_FILENOED 2
 #define PATH_NAME_MAX_LEN 256
 #define OM_CMD_EXCE_TIME 5

@@ -1,5 +1,5 @@
 #include "os_frameworkmgr.h"
-
+#include "os_system.h"
 #include "os_macro_define.h"
 #include "iostream"
 #include "os_streamhelper.h"
@@ -63,7 +63,12 @@ int main()
 	convert(a, str1);
 	std::cout << a << std::endl;
 	LVOS_Log(LL_NOTICE, "a = %ld",a);
-
+	s32 iret;
+	s32 it = OS_SafeSystem("ls",NULL,5,&iret);
+	LVOS_Log(LL_NOTICE, "OS_SafeSystem %d,%d",it,iret);
+	char strcmd[100]= {0};
+	it = OS_GetStrValueByCmd("pwd",strcmd,100);
+	LVOS_Log(LL_NOTICE, "OS_GetStrValueByCmd %d,%s",it,strcmd);
 	//¶Î´íÎóÐÅÏ¢²¶»ñ
     Test1::backtrace();
 
