@@ -27,10 +27,9 @@
  * 其    它  : 
 
 *****************************************************************************/
-#define LVOS_Log(eLeve,log_fmt, log_arg...) \
+#define LVOS_Log(eLeve,...) \
     do{ \
-           INFO_W.log(eLeve, "[%s:%d][%s] " log_fmt "\n", \
-                     GETFILENAME(__FILE__), __LINE__, __FUNCTION__, ##log_arg); \
+        Logger::GetInstance()->AddToQueue(eLeve, GETFILENAME(__FILE__), __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__);\
     } while (0) 
         
     /*带有超频限制的日志打印函数*/
@@ -45,7 +44,7 @@
              { \
                 if(uiPrinted > 0)\
                 {\
-                    OS_PLUG_LOG(LL_NOTICE,"%d repeat logs was suppressed.",uiPrinted); \
+                    LVOS_Log(LL_NOTICE,"%d repeat logs was suppressed.",uiPrinted); \
                 }\
                 uiPrinted = 0; \
                 uiMissed = 0; \
@@ -54,45 +53,40 @@
             if(uiPrinted < (burst)) \
             { \
                 uiPrinted++; \
-                OS_PLUG_LOG(eLeve,log_fmt, ##log_arg); \
+                LVOS_Log(eLeve,log_fmt, ##log_arg); \
             } \
             else \
             { \
                 uiMissed++; \
-                OS_PLUG_LOG(LL_DEBUG,log_fmt, ##log_arg); \
+                LVOS_Log(LL_DEBUG,log_fmt, ##log_arg); \
             } \
         }while(0)
 
             //============basic===================
             
-#define LOG_ERROR(log_fmt, log_arg...) \
+#define LOG_ERROR(...) \
             do{ \
-                INFO_W.log(LL_ERROR,   "[%s:%d][%s] " log_fmt "\n", \
-                             GETFILENAME(__FILE__), __LINE__, __FUNCTION__, ##log_arg); \
+                Logger::GetInstance()->AddToQueue(LL_ERROR, GETFILENAME(__FILE__), __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__);\
             } while (0) 
             
-#define LOG_WARN(log_fmt, log_arg...) \
+#define LOG_WARN(...) \
             do{ \
-                INFO_W.log(LL_WARNING,   "[%s:%d][%s] " log_fmt "\n", \
-                             GETFILENAME(__FILE__), __LINE__, __FUNCTION__, ##log_arg); \
+                Logger::GetInstance()->AddToQueue(LL_WARNING, GETFILENAME(__FILE__), __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__);\
             } while (0) 
             
-#define LOG_NOTICE(log_fmt, log_arg...) \
+#define LOG_NOTICE(...) \
             do{ \
-                INFO_W.log(LL_NOTICE,   "[%s:%d][%s] " log_fmt "\n", \
-                             GETFILENAME(__FILE__), __LINE__, __FUNCTION__, ##log_arg); \
+                Logger::GetInstance()->AddToQueue(LL_NOTICE, GETFILENAME(__FILE__), __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__);\
             } while (0) 
             
-#define LOG_TRACE(log_fmt, log_arg...) \
+#define LOG_TRACE(...) \
             do{ \
-                INFO_W.log(LL_TRACE,   "[%s:%d][%s] " log_fmt "\n", \
-                             GETFILENAME(__FILE__), __LINE__, __FUNCTION__, ##log_arg); \
+                Logger::GetInstance()->AddToQueue(LL_TRACE, GETFILENAME(__FILE__), __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__);\
             } while (0) 
             
-#define LOG_DEBUG(log_fmt, log_arg...) \
+#define LOG_DEBUG(...) \
             do{ \
-                INFO_W.log(LL_DEBUG,   "[%s:%d][%s] " log_fmt "\n", \
-                             GETFILENAME(__FILE__), __LINE__, __FUNCTION__, ##log_arg); \
+                Logger::GetInstance()->AddToQueue(LL_DEBUG, GETFILENAME(__FILE__), __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__);\
             } while (0) 
             
             //============extend===================

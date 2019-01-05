@@ -45,6 +45,8 @@ REG_FUNCTION(IplugFrameWorkMyInit, MyInit, "MyInit111");
 
 int main()
 {
+    Logger::GetInstance()->Start();
+
     //需要初始化的模块
 	FrameWorkMgr::getInstance()->RegInit();
 	
