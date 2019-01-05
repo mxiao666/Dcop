@@ -47,8 +47,8 @@ public:
     void AddToQueue(LogLevel pszLevel, const char* pszFile, int lineNo, const char* pszFuncSig, char* pszFmt, ...);  
     bool isEmpty();
 private:
-	inline const char*logLevelToString(LogLevel eLevel);
-	inline bool IsValidLevel(LogLevel eLevel);
+    inline const char*logLevelToString(LogLevel eLevel);
+    inline bool IsValidLevel(LogLevel eLevel);
     Logger() = default;  
     Logger(const Logger& rhs) = delete;  
     Logger& operator =(Logger& rhs) = delete;  
@@ -64,8 +64,8 @@ private:
     std::condition_variable         m_Notify;            //有新的日志到来的标识  
     bool                            m_Exit{false};  
     std::list<std::string>          m_Queue;
-	static Logger*					m_Logger;
-	LogLevel						m_system_level;
+    static Logger*                  m_Logger;
+    LogLevel                        m_system_level;
 };  
   
 #endif //!__LOGGER_H__ 
