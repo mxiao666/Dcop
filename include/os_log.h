@@ -43,7 +43,7 @@ public:
     static Logger* GetInstance();   
     bool Start();  
     void Stop();  
-    void SetFileName(const char* filename);  
+    void CfgLog(const char* filename, LogLevel level);  
     void AddToQueue(LogLevel pszLevel, const char* pszFile, int lineNo, const char* pszFuncSig, char* pszFmt, ...);  
     bool isEmpty();
 private:
@@ -65,7 +65,7 @@ private:
     bool                            m_Exit{false};  
     std::list<std::string>          m_Queue;
     static Logger*                  m_Logger;
-    LogLevel                        m_system_level;
+    LogLevel                        m_system_level{LL_TRACE};
 };  
   
 #endif //!__LOGGER_H__ 

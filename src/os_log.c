@@ -26,9 +26,10 @@ static char LogLevelStr[][8] = {
     "DEBUG", "TRACE", "NOTICE", "WARN","ERROR" 
 };
   
-void Logger::SetFileName(const char* filename)  
+void Logger::CfgLog(const char* filename, LogLevel level)  
 {  
-  m_FileName = filename;  
+  m_FileName = filename;
+  m_system_level = level;
 }
 
 bool Logger::Start()  
@@ -85,8 +86,13 @@ bool Logger::isEmpty()
 	return m_Queue.empty();
 }
 
-void Logger::AddToQueue(LogLevel pszLevel, const char* pszFile, int lineNo, const char* pszFuncSig, char* pszFmt, ...)  
+void Logger::AddToQueue(LogLevel pszLevel, const char* pszFile, int lineNo,
+                        const char* pszFuncSig, char* pszFmt, ...)  
 {  
+    if(!IsValidLevel(pszLevel))
+    {
+        return;
+    }
     char msg[LOG_CONTENT_LEN] = { 0 };  
   
     va_list vArgList;                              
