@@ -11,24 +11,29 @@
 
 CStream::CStream()
 {
-    m_bufType = FREAMm_bufFER;
+    Init();
+}
+void CStream::Init(){
+
+    m_bufType = FREAM_BUFFER;
     m_cbuf = m_buf;
     m_len = Stackm_len;
     m_curLen = 0;
     m_buf[0] = '\0';
+    m_pos = 0;
 }
-
 CStream::CStream(BYTE *buf,DWORD len)
 {
-    m_bufType = USERm_bufFER;
+    m_bufType = USER_BUFFER;
     m_cbuf = buf;
     m_len = len;
     m_curLen = 0;
     m_buf[0] = '\0';
+    m_pos = 0;
 }
 
 CStream::~CStream(){
-    if (MACLLOCm_bufFER == m_bufType){
+    if (MALLOC_BUFFER == m_bufType){
         delete[] m_cbuf;
     }
 }
@@ -82,7 +87,7 @@ CStream& CStream::operator >> (WORD &t){
 }
 bool CStream::GetMoreCapacity(DWORD len)
 {
-    if (USERm_bufFER == m_bufType){
+    if (USER_BUFFER == m_bufType){
         return false;
     }
     DWORD nSizeNew = m_curLen + len;
@@ -100,9 +105,10 @@ bool CStream::GetMoreCapacity(DWORD len)
     (void)memcpy_s(bytesMore, m_len, m_cbuf, m_curLen);
     (void)memset(bytesMore + m_curLen, 0, m_len - m_curLen);
 
-    if (MACLLOCm_bufFER == m_bufType){
+    if (MALLOC_BUFFER == m_bufType){
         delete[] m_cbuf;
     }
+    m_bufType = MALLOC_BUFFER;
     m_cbuf = bytesMore;
     return true;
 }
@@ -137,4 +143,18 @@ CStream& CStream::operator >> (CStream &t){
 CStream& CStream::operator << (CStream &t){
 
     return this->Append(t.GetBuff(), t.length());
+}
+void CStream::Clear(){
+
+    if (USER_BUFFER == m_bufType){
+        m_curLen = 0;
+        m_pos = 0;
+        m_buf[0] = '\0';
+    }
+    else{
+        if (MALLOC_BUFFER == m_bufType){
+            delete[] m_cbuf;
+        }
+        Init();
+    }
 }

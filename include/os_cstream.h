@@ -26,23 +26,24 @@ public:
     CStream& operator >>(BYTE &t);
     CStream& operator >>(WORD &t);
     CStream& operator >>(DWORD &t);
-	CStream& operator >>(CStream &t);
+    CStream& operator >>(CStream &t);
 
     CStream& Append(const BYTE *t, DWORD len);
     CStream& Extract(const BYTE *buf, DWORD len, DWORD begin = 0);
-
+    void Clear();
 private:                                   
     CStream(const CStream &);
     CStream &operator=(const CStream &);
     bool GetMoreCapacity(DWORD len);
+    void Init();
 private:
     BYTE m_buf[Stackm_len]; //缺省值放在栈上
     BYTE *m_cbuf;
     enum BufType
     {
-        USERm_bufFER,
-        FREAMm_bufFER,
-        MACLLOCm_bufFER
+        USER_BUFFER,
+        FREAM_BUFFER,
+        MALLOC_BUFFER
     };
     BYTE m_bufType;//根据此值决定释放空间
     DWORD m_len;
