@@ -18,18 +18,20 @@ void CStream::Init(){
     m_bufType = FREAM_BUFFER;
     m_cbuf = m_buf;
     m_len = Stackm_len;
+    _PubInit();
+}
+void CStream::_PubInit(){
     m_curLen = 0;
     m_buf[0] = '\0';
     m_pos = 0;
+    m_count = 0;
 }
 CStream::CStream(BYTE *buf,DWORD len)
 {
     m_bufType = USER_BUFFER;
     m_cbuf = buf;
     m_len = len;
-    m_curLen = 0;
-    m_buf[0] = '\0';
-    m_pos = 0;
+    _PubInit();
 }
 
 CStream::~CStream(){

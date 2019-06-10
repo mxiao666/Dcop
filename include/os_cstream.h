@@ -18,6 +18,15 @@ public:
     inline void SetPos(DWORD len){
         m_pos = len < m_len ? len : m_len;
     }
+    inline DWORD GetPos(){
+        return m_pos;
+    }
+    inline void SetCount(DWORD count){
+        m_count = count;
+    }
+    inline DWORD GetCount(){
+        return m_count;
+    }
     CStream& operator <<(BYTE t);
     CStream& operator <<(WORD t);
     CStream& operator <<(DWORD t);
@@ -36,6 +45,7 @@ private:
     CStream &operator=(const CStream &);
     bool GetMoreCapacity(DWORD len);
     void Init();
+    void _PubInit();
 private:
     BYTE m_buf[Stackm_len]; //缺省值放在栈上
     BYTE *m_cbuf;
@@ -49,6 +59,7 @@ private:
     DWORD m_len;
     DWORD m_curLen;
     DWORD m_pos;
+    DWORD m_count;
 };
 
 #endif
