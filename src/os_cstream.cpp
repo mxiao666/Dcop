@@ -149,7 +149,6 @@ void CStream::Clear(){
     if (USER_BUFFER == m_bufType){
         m_curLen = 0;
         m_pos = 0;
-        m_buf[0] = '\0';
     }
     else{
         if (MALLOC_BUFFER == m_bufType){
@@ -157,4 +156,5 @@ void CStream::Clear(){
         }
         Init();
     }
+    (void)memset(m_cbuf , 0, m_len);
 }

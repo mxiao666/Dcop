@@ -1,5 +1,5 @@
-#ifndef __OS_CSTREAM_H__
-#define __OS_CSTREAM_H__
+#ifndef __OS_CSTREAM_H__ 
+#define __OS_CSTREAM_H__ 
 using BYTE = unsigned char;
 using DWORD = unsigned int;
 using WORD = unsigned short;
@@ -37,7 +37,7 @@ private:
     bool GetMoreCapacity(DWORD len);
     void Init();
 private:
-    BYTE m_buf[Stackm_len]; //ç¼ºçœå€¼æ”¾åœ¨æ ˆä¸Š
+    BYTE m_buf[Stackm_len]; //È±Ê¡Öµ·ÅÔÚÕ»ÉÏ
     BYTE *m_cbuf;
     enum BufType
     {
@@ -45,7 +45,7 @@ private:
         FREAM_BUFFER,
         MALLOC_BUFFER
     };
-    BYTE m_bufType;//æ ¹æ®æ­¤å€¼å†³å®šé‡Šæ”¾ç©ºé—´
+    BYTE m_bufType;//¸ù¾İ´ËÖµ¾ö¶¨ÊÍ·Å¿Õ¼ä
     DWORD m_len;
     DWORD m_curLen;
     DWORD m_pos;

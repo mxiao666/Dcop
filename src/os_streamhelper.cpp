@@ -24,7 +24,7 @@
 
 *****************************************************************************/
 //template<class T>
-CStream::CStream(BYTE *byInput, const int/*T*/& Len){
+CStreamPrint::CStreamPrint(BYTE *byInput, const int/*T*/& Len){
         m_ByStream = byInput;
         m_length   = Len;
     }
@@ -41,7 +41,7 @@ CStream::CStream(BYTE *byInput, const int/*T*/& Len){
  * 其    它  : 
 
 *****************************************************************************/
-const std::string CStream::ByteToString()
+const std::string CStreamPrint::ByteToString()
 {
     BYTE byArray[4] = { 0 };
     m_Stream.clear();
@@ -55,7 +55,7 @@ const std::string CStream::ByteToString()
 
 
 /*****************************************************************************
- * 函 数 名  : CStream.Print
+ * 函 数 名  : CStreamPrint.Print
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年11月24日
  * 函数功能  : 打印字节流为十六进制
@@ -66,7 +66,7 @@ const std::string CStream::ByteToString()
  * 其    它  : 
 
 *****************************************************************************/
-void CStream::Print()
+void CStreamPrint::Print()
 {
     ByteToString();
     const BYTE iOutLen = 78; // 必须为3的倍数

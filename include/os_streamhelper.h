@@ -28,10 +28,10 @@
 
 *****************************************************************************/
 //template<class T>
-class CStream
+class CStreamPrint
 {
 public:
-	CStream(BYTE *byInput, const int/*T*/& Len);
+	CStreamPrint(BYTE *byInput, const int/*T*/& Len);
 	const std::string ByteToString();
 	void Print();
 private:
