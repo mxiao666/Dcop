@@ -3,7 +3,7 @@ SRCPATH="../src/"
 HEADPATH="../include/"
 rm -f test_log test_pthread_log ultimate_test
 g++ -o test_pthread_log  "$SRCPATH"*.cpp  thread_test.cpp  \
--lpthread -I "$HEADPATH"  -rdynamic -Wno-write-strings  -g  -D_SW_VER_ #-D_DEBUG_
+-lpthread -I "$HEADPATH"  -rdynamic -Wno-write-strings  -g  -D_SW_VER_  -D_LINUX_ #-D_DEBUG_
 
 if ls *.access >/dev/null 2>/dev/null  
 then
