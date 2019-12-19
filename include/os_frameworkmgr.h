@@ -28,11 +28,7 @@ public:
 	IplugFrameWork(){ };
 	virtual int Init() = 0;
 };
-#if _SW_VER_
-    typedef IplugFrameWork* (*RegFun)();
-#else
-    typedef IplugFrameWork* RegFun;
-#endif
+typedef IplugFrameWork* RegFun;
 
 /*****************************************************************************
  * 函 数 名  : FrameWork
@@ -102,7 +98,7 @@ private:
  * 函 数 名  : REG_FUNCTION_PLUS
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年11月23日
- * 函数功能  : 自动注册宏
+ * 函数功能  : C++自动注册宏
  * 输入参数  : 无
  * 输出参数  : 无
  * 返 回 值  : 
@@ -110,17 +106,9 @@ private:
  * 其    它  : 
 
 *****************************************************************************/
-#if _SW_VER_
 #define REG_FUNCTION_PLUS(Class, Name) \
-	static IplugFrameWork* g_IplugFrameWork_##Class(){ return new Class; } \
-	static FrameWork g_FrameWork_##Class = { g_IplugFrameWork_##Class, Name, NULL }; \
+	static FrameWork g_FrameWork_##Class = { new Class, Name, NULL }; \
 	static FrameWorkMgrCollector g_FrameWorkMgrCollector_##Class(&g_FrameWork_##Class);
-#else
-#define REG_FUNCTION_CPLUSPLUS(Class, Name) \
-	static IplugFrameWork* g_IplugFrameWork_##Class = new Class; \
-	static FrameWork g_FrameWork_##Class = { g_IplugFrameWork_##Class, Name, NULL }; \
-	static FrameWorkMgrCollector g_FrameWorkMgrCollector_##Class(&g_FrameWork_##Class);
-#endif
 
 /*****************************************************************************
  * 函 数 名  : REG_FUNCTION
@@ -136,7 +124,7 @@ private:
  * 其    它  : 
 
 *****************************************************************************/
-#define REG_FUNCTION(Class, Func, Name) \
+#define REG_FUNCTION(Func, Name) \
 class IplugFrameWork##Func :public IplugFrameWork \
 {  \
 public:  \
@@ -145,7 +133,7 @@ public:  \
 		return  Func(); \
 	}  \
 };  \
-REG_FUNCTION_PLUS(Class, Name);
+REG_FUNCTION_PLUS(IplugFrameWork##Func, Name);
 
 
 #endif

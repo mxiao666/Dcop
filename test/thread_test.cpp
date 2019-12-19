@@ -43,7 +43,7 @@ int MyInit(){
 	printf("Hello world! MyInit\n");
 	return 0;
 }
-REG_FUNCTION(IplugFrameWorkMyInit, MyInit, "MyInit111");
+REG_FUNCTION(MyInit, "MyInit111");
 int testStream(){
 
     CStream buffer;

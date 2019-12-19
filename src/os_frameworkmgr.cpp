@@ -68,15 +68,9 @@ FrameWorkMgrCollector::FrameWorkMgrCollector(FrameWork* F){
 void FrameWorkMgr::RegInit()
 {
     FrameWork* frmgr= m_Node;
-    for (int i = 0; (i< m_NodeCnt) && (NULL !=frmgr); i++)
+    for (int i = 0; (i< m_NodeCnt) && (NULL != frmgr); i++)
     {
-        if(0 != 
-#if _SW_VER_	
-        (frmgr->fun())->Init()
-#else
-        frmgr->fun->Init()
-#endif
-        )
+        if(0 != frmgr->fun->Init())
         {
             LVOS_Log(LL_WARNING, "Init module %s fail.", frmgr->ModuleName);
         }
