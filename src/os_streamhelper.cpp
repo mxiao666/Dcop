@@ -9,6 +9,7 @@
 ***********************************************************************************/
 
 #include "os_streamhelper.h"
+#include "os_log.h"
 
 /*****************************************************************************
  * 函 数 名  : CStreamCStream
@@ -72,7 +73,7 @@ void CStreamPrint::Print()
     const BYTE iOutLen = 78; // 必须为3的倍数
     for (int iLen = 0; iLen < m_Stream.length(); iLen += iOutLen)
     {
-        LVOS_Log(LL_NOTICE,"%s", m_Stream.substr(iLen, iOutLen).c_str());
+        LVOS_Log(LL_INFO,"%s", m_Stream.substr(iLen, iOutLen).c_str());
     }
 }
 

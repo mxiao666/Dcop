@@ -10,7 +10,6 @@
 
 #ifndef  _MACRO_DEFINE
 #define  _MACRO_DEFINE
-#include "os_log_macro_define.h"
 
 typedef  long int s32;
 typedef  unsigned int u32;

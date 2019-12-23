@@ -240,19 +240,19 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
     //select error
     if(0 == iRet)
     {
-        //LVOS_Log(LOG_DEBUG,"Select function execl fail.");
+        //LVOS_Log(LL_DEBUG,"Select function execl fail.");
         return 0;
     }
     //timeout
     if(0 > iRet)
     {
-        //LVOS_Log(LOG_DEBUG,"Select function execl timeout.");
+        //LVOS_Log(LL_DEBUG,"Select function execl timeout.");
         return 0;
     }
     //read is true
     if(!FD_ISSET(v_uiFd, &fdset))
     {
-        //LVOS_Log(LOG_DEBUG,"Select function execl really read.");
+        //LVOS_Log(LL_DEBUG,"Select function execl really read.");
         return 0;
     }
 

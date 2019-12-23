@@ -10,7 +10,6 @@
 
 #include "os_log.h"
 #include "os_stacktrace.h"
-#include "os_log_macro_define.h"
 #include "os_macro_define.h"
 #include <sys/file.h>
 #include <stdarg.h>
@@ -20,135 +19,59 @@
 #include <functional>   
 const int LOG_MESSAGE_LEN = 512;
 const int LOG_CONTENT_LEN = 256;
-Logger* Logger::m_Logger = NULL;
 
 static char LogLevelStr[][8] = {
-    "DEBUG", "TRACE", "NOTICE", "WARN","ERROR" 
+    "DEBUG", "INFO", "WARN", "ERROR","FATAL" 
 };
-  
-void Logger::CfgLog(const char* filename, LogLevel level)  
-{  
-  m_FileName = filename;
-  m_system_level = level;
-}
+	 
+static FILE *log_file;
+static int log_level = LL_INFO;
+#define GETFILENAME(pFileName) (NULL == strrchr(pFileName, '/') ? pFileName : strrchr(pFileName, '/') + 1)
 
-bool Logger::Start()  
-{  
-    if (m_FileName.empty())  
-    {  
-        time_t time_seconds = time(NULL);
-		struct tm now_time = {0};
-		const BYTE FileNameLength = 16;
-        char timestr[FileNameLength] = { 0 };
-		strftime(timestr, FileNameLength, "%Y%m%d%H%M%S", localtime_r(&time_seconds,&now_time));       
-        m_FileName = timestr;  
-    }  
-  
-    m_Fp = fopen(m_FileName.c_str(), "at+");  
-    if (m_Fp == NULL)  
-        return false;  
-  
-    m_SPthread.reset(new std::thread(std::bind(&Logger::threadfunc, this)));  
-    debug_backtrace_init();
-    return true;  
-}  
-  
-void Logger::Stop()  
-{  
-    m_Exit = true;  
-    m_Notify.notify_one();  
-  
-    //等待时间线程结束  
-    m_SPthread->join();  
-}  
- inline const char* Logger::logLevelToString(LogLevel eLevel) 
+int LogInit(int level, const char *path)
 {
-    if(LL_DEBUG > eLevel || LL_ERROR < eLevel)
+    log_level = level;
+    log_file = fopen(path, "at+");
+    if (NULL == log_file)
     {
-        return "UNKNOWN";
+        return -1;
     }
-    return (char*)LogLevelStr[eLevel];
-} 
-Logger* Logger::GetInstance()  
-{  
-   if(NULL == m_Logger)
-   	{
-   		m_Logger = new Logger();
-   	}
-    return m_Logger;  
-} 
-inline bool Logger::IsValidLevel(LogLevel eLevel)
-{
-	return(eLevel >= m_system_level);
+    setvbuf(log_file, NULL, _IOLBF, 0);  /* 行缓冲 */
+	debug_backtrace_init();
+    return 0;
 }
-bool Logger::isEmpty()
+ 
+int WriteLog(int v_level,int line, const char *func, const char *file, const char * format, ...)
 {
-	return m_Queue.empty();
-}
-
-void Logger::AddToQueue(LogLevel pszLevel, const char* pszFile, int lineNo,
-                        const char* pszFuncSig, char* pszFmt, ...)  
-{  
-    if(!IsValidLevel(pszLevel))
+	if (v_level > LL_FATAL_ERROR || v_level < LL_DEBUG){return -1;}
+    if (log_level < v_level){return -1;}
+ 
+    /* ---时间戮--- */
+    char log_time[64] = {0};
+    time_t t = time(NULL);
+    struct tm ptm;
+    localtime_r(&t, &ptm);
+    sprintf(log_time, "%4d-%02d-%02d %02d:%02d:%02d",
+            ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday, ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
+	
+     /* ---文件名---行号---函数名---- */
+    char log_pos[64] = {0};
+    sprintf(log_pos, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level], GETFILENAME(file), line, func);
+	
+    /* ---日志内容--- */
+    char log_msg[1024] = {0};
+    va_list arg_ptr;
+    va_start(arg_ptr, format);
+    int nWrittenBytes = vsnprintf(log_msg,sizeof(log_msg), format, arg_ptr);
+    if (nWrittenBytes < 0)
     {
-        return;
+        //perror("vsnprintf");
+        return -1;
     }
-    char msg[LOG_CONTENT_LEN] = { 0 };  
-  
-    va_list vArgList;                              
-    va_start(vArgList, pszFmt);  
-    vsnprintf(msg, LOG_CONTENT_LEN, pszFmt, vArgList);  
-    va_end(vArgList);  
-  
-    time_t now = time(NULL);  
-    struct tm  now_time = {0};
-	(void)localtime_r(&now,&now_time);  
-    char content[LOG_MESSAGE_LEN] = { 0 };  
-    sprintf(content, "[%04d-%02d-%02d %02d:%02d:%02d][%s][0x%04x][%s:%d %s]%s\n",  
-                now_time.tm_year + 1900,  
-                now_time.tm_mon + 1,  
-                now_time.tm_mday,  
-                now_time.tm_hour,  
-                now_time.tm_min,  
-                now_time.tm_sec,  
-                logLevelToString(pszLevel),  
-                std::this_thread::get_id(),  
-                pszFile,  
-                lineNo,  
-                pszFuncSig,  
-                msg);  
-  
-    {  
-        std::lock_guard<std::mutex> guard(m_Mutex);  
-        m_Queue.emplace_back(content);  
-    }  
-      
-    m_Notify.notify_one();  
-}  
-  
-void Logger::threadfunc()  
-{  
-    if (m_Fp == NULL)  
-        return;  
-  
-    while (!m_Exit)  
-    {  
-        //写日志  
-        std::unique_lock<std::mutex> guard(m_Mutex); 
-        while (m_Queue.empty())  
-        {  
-            if (m_Exit)  
-                return;  
-  
-            m_Notify.wait(guard);  
-        }  
-  
-        //写日志  
-        const std::string& str = m_Queue.front();  
-  
-        fwrite((void*)str.c_str(), str.length(), 1, m_Fp);  
-        fflush(m_Fp);  
-        m_Queue.pop_front();  
-    }  
+    va_end(arg_ptr);
+ 
+    /* ---完整日志拼接--- */
+    fprintf(log_file, "%s%s%s\n", log_time, log_pos, log_msg);
+    return nWrittenBytes;
 }
 

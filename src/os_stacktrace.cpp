@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "os_macro_define.h"
+#include "os_log.h"
 
 /*****************************************************************************
  * 函 数 名  : signals_trace
@@ -100,7 +101,6 @@ extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontex
 	LOG_ERROR("Dump stack start...");
 	debug_backtrace_dump();
 	LOG_ERROR("Dump stack end...");
-	while(!Logger::GetInstance()->isEmpty());    
 #ifdef _DEBUG_ 
 	signal(sig_num, SIG_DFL); /* 恢复信号默认处理 */
 	raise(sig_num);           /* 重新发送信号 */

@@ -1,6 +1,6 @@
 #include "os_frameworkmgr.h"
 #include "os_system.h"
-#include "os_macro_define.h"
+#include "os_log.h"
 #include "iostream"
 #include "os_streamhelper.h"
 #include "os_cstream.h"
@@ -103,7 +103,7 @@ int testStream(){
 }
 int main()
 {
-    Logger::GetInstance()->Start();
+    LogInit(LL_INFO);
 
     //需要初始化的模块
 	FrameWorkMgr::getInstance()->RegInit();
@@ -118,17 +118,17 @@ int main()
 	long b = 123;
 	convert(str, str1);
 	std::cout << str.c_str() << std::endl;
-    LVOS_Log(LL_NOTICE, "str = %s",str.c_str());
+    LVOS_Log(LL_INFO, "str = %s",str.c_str());
 	long a = 10;
 	convert(a, str1);
 	std::cout << a << std::endl;
-	LVOS_Log(LL_NOTICE, "a = %ld",a);
+	LVOS_Log(LL_INFO, "a = %ld",a);
 	s32 iret;
 	s32 it = OS_SafeSystem("ls",NULL,5,&iret);
-	LVOS_Log(LL_NOTICE, "OS_SafeSystem %d,%d",it,iret);
+	LVOS_Log(LL_INFO, "OS_SafeSystem %d,%d",it,iret);
 	char strcmd[100]= {0};
 	it = OS_GetStrValueByCmd("pwd",strcmd,100);
-	LVOS_Log(LL_NOTICE, "OS_GetStrValueByCmd %d,%s",it,strcmd);
+	LVOS_Log(LL_INFO, "OS_GetStrValueByCmd %d,%s",it,strcmd);
     testStream();
 	//段错误信息捕获
     Test1::backtrace();
