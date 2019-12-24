@@ -6,7 +6,7 @@
 #include <time.h>
 #include <string.h>
 #define  LL_DEBUG           0x01
-#define  LL_INFO           0x02
+#define  LL_INFO            0x02
 #define  LL_WARNING         0x03
 #define  LL_ERROR           0x04
 #define  LL_FATAL_ERROR     0x05

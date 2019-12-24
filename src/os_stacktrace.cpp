@@ -97,7 +97,7 @@ extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontex
 	system((const char*) buff);
 #endif	
 
-	LOG_ERROR("=========>>>catch signal %d <<<=========", sig_num);	
+	LOG_ERROR("=========>>>catch signal %s(%d) <<<=========", strsignal(sig_num), sig_num);
 	LOG_ERROR("Dump stack start...");
 	debug_backtrace_dump();
 	LOG_ERROR("Dump stack end...");
