@@ -489,7 +489,7 @@ s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuf
             for(uiFileIndex = STDOUT_FILENOED + 1; uiFileIndex < stFileLimit.rlim_max; ++uiFileIndex)
             {
                 //关闭子进程的非写端
-                if(uiFileIndex != pdes[1])
+                if((int)uiFileIndex != pdes[1])
                     close((int32_t)uiFileIndex);
             }
             dup2(pdes[1], STDOUT_FILENO);

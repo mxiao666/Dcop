@@ -70,7 +70,7 @@ public:
 private:
 	FrameWorkMgr(){}
 	FrameWorkMgr(FrameWorkMgr&){}
-	FrameWorkMgr& opertor(FrameWorkMgr&){}
+	FrameWorkMgr& opertor(FrameWorkMgr&) = delete;
 	static FrameWorkMgr* m_Instance;
 };
 

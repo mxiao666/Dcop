@@ -1,11 +1,12 @@
 #include "os_cstream.h"
 #include <iostream>
+#include <string.h>
+
 #ifndef nullptr
 #define nullptr 0
 #endif
 
-#if _LINUX_
-#include <string.h>
+#ifndef __WIN_API__
 #define    memcpy_s(dest, mlen, src, len)   memcpy(dest, src, len)
 #endif
 
@@ -25,6 +26,7 @@ void CStream::_PubInit(){
     m_buf[0] = '\0';
     m_pos = 0;
     m_count = 0;
+    m_isOk = true;
 }
 CStream::CStream(BYTE *buf,DWORD len)
 {
@@ -33,7 +35,11 @@ CStream::CStream(BYTE *buf,DWORD len)
     m_len = len;
     _PubInit();
 }
-
+CStream::CStream(const BYTE *buf)
+{
+    Init();
+    Append(buf, strlen((const char*)buf));
+}
 CStream::~CStream(){
     if (MALLOC_BUFFER == m_bufType){
         delete[] m_cbuf;
@@ -101,6 +107,7 @@ bool CStream::GetMoreCapacity(DWORD len)
     }
     BYTE *bytesMore = new BYTE[m_len]; //Á½±¶
     if (bytesMore == nullptr){
+        m_isOk = false;
         return false;
     }
 
@@ -119,6 +126,7 @@ BYTE *CStream::GetBuff(){
 }
 CStream& CStream::Append(const BYTE *buf, DWORD len){
     if (buf == nullptr || !GetMoreCapacity(len)){
+        m_isOk = false;
         return *this;
     }
     (void)memcpy_s(m_cbuf + m_curLen, m_len - m_curLen, buf, len);
@@ -128,9 +136,10 @@ CStream& CStream::Append(const BYTE *buf, DWORD len){
 
 CStream& CStream::Extract(const BYTE *buf, DWORD len, DWORD begin){
     if (buf == nullptr || begin > m_curLen){
+        m_isOk = false;
         return *this;
     }
-    DWORD ff = m_curLen - begin;
+
     DWORD nlen = m_curLen - begin > len ? len : m_curLen - begin;
     (void)memcpy_s((BYTE*)buf, len, m_cbuf + begin, nlen);
     m_pos += m_curLen - m_pos;

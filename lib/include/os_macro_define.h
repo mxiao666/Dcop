@@ -16,6 +16,8 @@ typedef  unsigned int u32;
 typedef  long long int s64;
 typedef  unsigned long long int u64;
 typedef  unsigned char BYTE;
+typedef  unsigned int DWORD;
+typedef  unsigned short WORD;
 
 
 #define RET_OK 0

@@ -1,8 +1,6 @@
 #ifndef __OS_CSTREAM_H__ 
 #define __OS_CSTREAM_H__ 
-using BYTE = unsigned char;
-using DWORD = unsigned int;
-using WORD = unsigned short;
+#include "os_macro_define.h"
 #define Stackm_len  64
 
 class CStream
@@ -11,6 +9,7 @@ public:
     CStream();
     ~CStream();
     CStream(BYTE *buf, DWORD len);
+    CStream(const BYTE *buf);
     BYTE *GetBuff();
     inline DWORD  length(){
         return m_curLen;
@@ -60,6 +59,7 @@ private:
     DWORD m_curLen;
     DWORD m_pos;
     DWORD m_count;
+    bool  m_isOk; // 流的状态是否正常，上一步操作是否成功
 };
 
 #endif

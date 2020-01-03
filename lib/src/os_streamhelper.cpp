@@ -71,7 +71,7 @@ void CStreamPrint::Print()
 {
     ByteToString();
     const BYTE iOutLen = 78; // 必须为3的倍数
-    for (int iLen = 0; iLen < m_Stream.length(); iLen += iOutLen)
+    for (WORD iLen = 0; iLen < m_Stream.length(); iLen += iOutLen)
     {
         LVOS_Log(LL_INFO,"%s", m_Stream.substr(iLen, iOutLen).c_str());
     }

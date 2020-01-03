@@ -122,14 +122,13 @@ extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontex
 
 *****************************************************************************/
 extern "C" int debug_backtrace_init(void)
-{    
-    int i;    
+{        
     struct sigaction sa;    
     (void)memset(&sa, 0, sizeof(struct sigaction));    
     sa.sa_sigaction = debug_signal_handler;    
     sa.sa_flags = SA_RESTART | SA_SIGINFO;    
     int ret = 0;    
-    for (i = 0; i < (sizeof(signals_trace) / sizeof(signals_trace[0])); ++i) 
+    for (BYTE i = 0; i < (sizeof(signals_trace) / sizeof(signals_trace[0])); ++i) 
     {        
         if (sigaction(signals_trace[i], &sa, NULL) != 0) 
         {    
