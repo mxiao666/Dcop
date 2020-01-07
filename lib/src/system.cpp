@@ -7,8 +7,8 @@
  * 其    他   :
  * 修改日志   :
 ***********************************************************************************/
-#include "os_log.h"
-#include "os_system.h"
+#include "log.h"
+#include "system.h"
 #include <sys/time.h>
 #include <sys/wait.h>
 #include <sys/resource.h>

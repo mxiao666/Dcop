@@ -15,8 +15,8 @@
 #include <execinfo.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "os_macro_define.h"
-#include "os_log.h"
+#include "macro_define.h"
+#include "log.h"
 
 /*****************************************************************************
  * º¯ Êý Ãû  : signals_trace

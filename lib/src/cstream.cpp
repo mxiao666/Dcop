@@ -1,4 +1,4 @@
-#include "os_cstream.h"
+#include "cstream.h"
 #include <iostream>
 #include <string.h>
 

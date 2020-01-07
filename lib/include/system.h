@@ -11,7 +11,7 @@
 
 #ifndef __OS_SYSTEM_H__
 #define __OS_SYSTEM_H__
-#include "os_macro_define.h"
+#include "macro_define.h"
 #include <sys/types.h>
 
 #define STDOUT_FILENOED 2

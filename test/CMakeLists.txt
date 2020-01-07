@@ -18,16 +18,18 @@ add_compile_options(-Wall -g)
 link_directories(${PROJECT_OUTPUT_DIR})
 
 # 设置生成的库文件目录，这里我们设置成和库目录相同
-set(LIBRARY_OUTPUT_PATH ${PROJECT_OUTPUT_DIR})
+set(LIBRARY_OUTPUT_PATH ${PROJECT_OUTPUT_DIR}/lib)
 
 # 设置可执行文件目录，同样设成和库目录相同
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_OUTPUT_DIR})
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_OUTPUT_DIR}/bin)
 
 # 添加子目录（每个子目录下都必须有自已的CMakeLists.txt文件
 add_subdirectory(${PROJECT_BINARY_DIR}/../lib lib.out)
 
 # 生成可执行文件
-add_executable(thread_test thread_test.cpp)
+add_executable(thread_test 
+	getmessage.cpp
+	thread_test.cpp)
 
 #连接成最后的可执行文件	
 target_link_libraries(thread_test sys)

@@ -5,13 +5,14 @@ project(${PROJECT_NAME})
 include_directories(../include)
 # 设置库生成依赖文件
 set(syslib 
-	src/os_clibase.cpp
-	src/os_cstream.cpp
-	src/os_frameworkmgr.cpp
-	src/os_log.cpp
-	src/os_stacktrace.cpp
-	src/os_streamhelper.cpp
-	src/os_system.cpp)
+	src/clibase.cpp
+	src/cstream.cpp
+	src/frameworkmgr.cpp
+	src/log.cpp
+	src/stacktrace.cpp
+	src/streamhelper.cpp
+	src/system.cpp
+	src/cnotify.cpp)
 	
 # 生成libsys.a静态库 	
 add_library(sys STATIC ${syslib})

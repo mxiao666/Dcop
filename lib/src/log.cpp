@@ -1,16 +1,12 @@
 /***********************************************************************************
- * 文 件 名   : os_log.c
- * 负 责 人   : 卢美宏
- * 创建日期   : 2018年11月23日
- * 文件描述   : 日志记录实现类
- * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公司
- * 其    他   : 
+ * �?�?�?  : os_log.c
+ * �?�?�?  : 卢美�? * 创建日期   : 2018�?1�?3�? * 文件描述   : 日志记录实现�? * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公�? * �?   �?  : 
  * 修改日志   : 
 ***********************************************************************************/
 
-#include "os_log.h"
-#include "os_stacktrace.h"
-#include "os_macro_define.h"
+#include "log.h"
+#include "stacktrace.h"
+#include "macro_define.h"
 #include <sys/file.h>
 #include <stdarg.h>
 #include <time.h>
@@ -36,7 +32,7 @@ int LogInit(int level, const char *path)
     {
         return RET_ERR;
     }
-    setvbuf(log_file, NULL, _IOLBF, 0);  /* 行缓冲 */
+    setvbuf(log_file, NULL, _IOLBF, 0);  /* 行缓�?*/
 	debug_backtrace_init();
     return RET_OK;
 }
@@ -46,7 +42,7 @@ int WriteLog(int v_level,int line, const char *func, const char *file, const cha
     if (v_level > LL_FATAL_ERROR || v_level < LL_DEBUG){return RET_ERR;}
     if (log_level > v_level){return RET_ERR;}
  
-    /* ---时间戮--- */
+    /* ---时间�?-- */
     char log_time[LOG_CONTENT_LEN] = {0};
     time_t t = time(NULL);
     struct tm ptm;
@@ -54,7 +50,7 @@ int WriteLog(int v_level,int line, const char *func, const char *file, const cha
     sprintf(log_time, "%4d-%02d-%02d %02d:%02d:%02d",
             ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday, ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 	
-     /* ---文件名---行号---函数名---- */
+     /* ---文件�?--行号---函数�?--- */
     char log_pos[LOG_CONTENT_LEN] = {0};
     sprintf(log_pos, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level], GETFILENAME(file), line, func);
 	
