@@ -22,7 +22,6 @@ static char LogLevelStr[][8] = {
 	 
 static FILE *log_file;
 static int log_level = LL_INFO;
-#define GETFILENAME(pFileName) (NULL == strrchr(pFileName, '/') ? pFileName : strrchr(pFileName, '/') + 1)
 
 int LogInit(int level, const char *path)
 {
@@ -52,7 +51,7 @@ int WriteLog(int v_level,int line, const char *func, const char *file, const cha
 	
      /* ---文件�?--行号---函数�?--- */
     char log_pos[LOG_CONTENT_LEN] = {0};
-    sprintf(log_pos, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level], GETFILENAME(file), line, func);
+    sprintf(log_pos, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level], FILE_NAME(file), line, func);
 	
     /* ---日志内容--- */
     char log_msg[LOG_MESSAGE_LEN] = {0};

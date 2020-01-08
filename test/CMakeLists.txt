@@ -12,7 +12,7 @@ set(PROJECT_OUTPUT_DIR ${PROJECT_BINARY_DIR}/../output)
 include_directories(${PROJECT_SOURCE_DIR}/../lib/include)
 
 #添加编写gcc参数
-add_compile_options(-Wall -g)
+add_compile_options(-Wall -g -std=c++11)
 
 # 添加链接库查找目录，库查找序按照参数顺序从向右查
 link_directories(${PROJECT_OUTPUT_DIR})

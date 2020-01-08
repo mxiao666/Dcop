@@ -1,29 +1,32 @@
+#include <stdlib.h>   
+#include <stdio.h>   
+#include <errno.h>   
+#include <pthread.h>
+#include <time.h>
+#include <unistd.h>
+
 #include <iostream>
-#include <vector>
-#include "getmessage.h"
-#include "receiver.h"
- #include "cnotify.h"
+#include "objbase.h"
+#include "log.h"
+
 using namespace std;
- 
+
+
+void* start_run(objPara* arg)
+{
+    //dosomework
+    sleep(2);
+    printf("%s,%d\n",__FILE__,__LINE__);
+}
 int main()
 {
-    cout << "Hello World!" << endl;
- 
-   /////////////////////
-   Cnotify notifier1;
-   getMessage receiver1;
-   getMessage receiver2;
- 
-   notifier1.regReceiver(1,&receiver1);
-   notifier1.regReceiver(2,&receiver2);
-    CAgrcList aa;
-    aa.addAgrc("A","here it is");
-   //notifier1.sendToAllRecv("here it is");
-    notifier1.sendToAllRecv(&aa,nullptr,1,2);
-    notifier1.notify(&aa,nullptr,2,33);
-   ////////////////////////
- 
- 
-    getchar();
-    return 0;
+    LogInit(LL_DEBUG);
+
+    objPara* parm = new objPara(nullptr);
+    objbase::GetInstance();
+    CREATE_OBJTASK("test", start_run, &parm);
+    sleep(5);
+    parm->GetPara();
+    exit(0);
 }
+

@@ -12,6 +12,7 @@
 #define  LL_FATAL_ERROR     0x05
 int WriteLog(int v_level,int line, const char *func, const char *file, const char * format, ...);
 int LogInit(int level = LL_INFO, const char *path = "message");
+#define FILE_NAME(pFileName) (NULL == strrchr(pFileName, '/') ? pFileName : strrchr(pFileName, '/') + 1)
 
 #define  LVOS_Log(level, ...) WriteLog(level, __LINE__, __FUNCTION__, __FILE__, __VA_ARGS__)
 #define  LOG_DBG(format, ...) \
