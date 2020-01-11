@@ -5,9 +5,9 @@ class objbase
 private:
     /* data */
 public:
-    objbase(int a){this->a = a;}
-    ~objbase(){ }
-    void dump(){}
+    objbase(int a) { this->a = a; }
+    ~objbase() {}
+    void dump() {}
     int a = 0;
 };
 

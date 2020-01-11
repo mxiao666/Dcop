@@ -25,10 +25,11 @@
 
 *****************************************************************************/
 //template<class T>
-CStreamPrint::CStreamPrint(BYTE *byInput, const int/*T*/& Len){
-        m_ByStream = byInput;
-        m_length   = Len;
-    }
+CStreamPrint::CStreamPrint(BYTE *byInput, const int /*T*/ &Len)
+{
+    m_ByStream = byInput;
+    m_length = Len;
+}
 
 /*****************************************************************************
  * 函 数 名  : ByteToString
@@ -44,16 +45,15 @@ CStreamPrint::CStreamPrint(BYTE *byInput, const int/*T*/& Len){
 *****************************************************************************/
 const std::string CStreamPrint::ByteToString()
 {
-    BYTE byArray[4] = { 0 };
+    BYTE byArray[4] = {0};
     m_Stream.clear();
     for (BYTE i = 0; i < m_length; ++i)
     {
-        (void)snprintf((char*)byArray, 4, "%02x ", m_ByStream[i]);//linux
-        (void)m_Stream.append((char*)byArray);
+        (void)snprintf((char *)byArray, 4, "%02x ", m_ByStream[i]); //linux
+        (void)m_Stream.append((char *)byArray);
     }
     return m_Stream;
 }
-
 
 /*****************************************************************************
  * 函 数 名  : CStreamPrint.Print
@@ -73,8 +73,6 @@ void CStreamPrint::Print()
     const BYTE iOutLen = 78; // 必须为3的倍数
     for (WORD iLen = 0; iLen < m_Stream.length(); iLen += iOutLen)
     {
-        LVOS_Log(LL_INFO,"%s", m_Stream.substr(iLen, iOutLen).c_str());
+        LVOS_Log(LL_INFO, "%s", m_Stream.substr(iLen, iOutLen).c_str());
     }
 }
-
-

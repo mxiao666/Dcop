@@ -12,14 +12,13 @@
 #include <time.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <functional>   
+#include <functional>
 const int LOG_MESSAGE_LEN = 512;
 const int LOG_CONTENT_LEN = 64;
 
 static char LogLevelStr[][8] = {
-    "DEBUG", "INFO", "WARN", "ERROR","FATAL" 
-};
-	 
+    "DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
+
 static FILE *log_file;
 static int log_level = LL_INFO;
 
@@ -31,16 +30,22 @@ int LogInit(int level, const char *path)
     {
         return RET_ERR;
     }
-    setvbuf(log_file, NULL, _IOLBF, 0);  /* 行缓�?*/
-	debug_backtrace_init();
+    setvbuf(log_file, NULL, _IOLBF, 0); /* 行缓�?*/
+    debug_backtrace_init();
     return RET_OK;
 }
- 
-int WriteLog(int v_level,int line, const char *func, const char *file, const char * format, ...)
+
+int WriteLog(int v_level, int line, const char *func, const char *file, const char *format, ...)
 {
-    if (v_level > LL_FATAL_ERROR || v_level < LL_DEBUG){return RET_ERR;}
-    if (log_level > v_level){return RET_ERR;}
- 
+    if (v_level > LL_FATAL_ERROR || v_level < LL_DEBUG)
+    {
+        return RET_ERR;
+    }
+    if (log_level > v_level)
+    {
+        return RET_ERR;
+    }
+
     /* ---时间�?-- */
     char log_time[LOG_CONTENT_LEN] = {0};
     time_t t = time(NULL);
@@ -48,25 +53,24 @@ int WriteLog(int v_level,int line, const char *func, const char *file, const cha
     localtime_r(&t, &ptm);
     sprintf(log_time, "%4d-%02d-%02d %02d:%02d:%02d",
             ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday, ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
-	
-     /* ---文件�?--行号---函数�?--- */
+
+    /* ---文件�?--行号---函数�?--- */
     char log_pos[LOG_CONTENT_LEN] = {0};
     sprintf(log_pos, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level], FILE_NAME(file), line, func);
-	
+
     /* ---日志内容--- */
     char log_msg[LOG_MESSAGE_LEN] = {0};
     va_list arg_ptr;
     va_start(arg_ptr, format);
-    int nWrittenBytes = vsnprintf(log_msg,sizeof(log_msg), format, arg_ptr);
+    int nWrittenBytes = vsnprintf(log_msg, sizeof(log_msg), format, arg_ptr);
     if (nWrittenBytes < 0)
     {
         //perror("vsnprintf");
         return RET_ERR;
     }
     va_end(arg_ptr);
- 
+
     /* ---完整日志拼接--- */
     fprintf(log_file, "%s%s%s\n", log_time, log_pos, log_msg);
     return nWrittenBytes;
 }
-

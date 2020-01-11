@@ -23,8 +23,8 @@
  * 其    它  : 
 
 *****************************************************************************/
-FrameWork* FrameWorkMgr::m_Node = NULL;
-FrameWork* FrameWorkMgr::m_Current = NULL;
+FrameWork *FrameWorkMgr::m_Node = NULL;
+FrameWork *FrameWorkMgr::m_Current = NULL;
 int FrameWorkMgr::m_NodeCnt = 0;
 
 /*****************************************************************************
@@ -39,7 +39,8 @@ int FrameWorkMgr::m_NodeCnt = 0;
  * 其    它  : 
 
 *****************************************************************************/
-FrameWorkMgrCollector::FrameWorkMgrCollector(FrameWork* F){
+FrameWorkMgrCollector::FrameWorkMgrCollector(FrameWork *F)
+{
     if (NULL == FrameWorkMgr::m_Node)
     {
         FrameWorkMgr::m_Node = F;
@@ -67,10 +68,10 @@ FrameWorkMgrCollector::FrameWorkMgrCollector(FrameWork* F){
 *****************************************************************************/
 void FrameWorkMgr::RegInit()
 {
-    FrameWork* frmgr= m_Node;
-    for (int i = 0; (i< m_NodeCnt) && (NULL != frmgr); i++)
+    FrameWork *frmgr = m_Node;
+    for (int i = 0; (i < m_NodeCnt) && (NULL != frmgr); i++)
     {
-        if(0 != frmgr->fun->Init())
+        if (0 != frmgr->fun->Init())
         {
             LVOS_Log(LL_WARNING, "Init module %s fail.", frmgr->ModuleName);
         }
@@ -90,7 +91,7 @@ void FrameWorkMgr::RegInit()
  * 其    它  : 
 
 *****************************************************************************/
-FrameWorkMgr* FrameWorkMgr::m_Instance = NULL;
+FrameWorkMgr *FrameWorkMgr::m_Instance = NULL;
 
 /*****************************************************************************
  * 函 数 名  : FrameWorkMgr.getInstance
@@ -104,7 +105,7 @@ FrameWorkMgr* FrameWorkMgr::m_Instance = NULL;
  * 其    它  : 
 
 *****************************************************************************/
-FrameWorkMgr* FrameWorkMgr::getInstance()
+FrameWorkMgr *FrameWorkMgr::getInstance()
 {
     if (NULL == m_Instance)
     {

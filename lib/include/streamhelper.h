@@ -31,13 +31,14 @@
 class CStreamPrint
 {
 public:
-	CStreamPrint(BYTE *byInput, const int/*T*/& Len);
-	const std::string ByteToString();
-	void Print();
+    CStreamPrint(BYTE *byInput, const int /*T*/ &Len);
+    const std::string ByteToString();
+    void Print();
+
 private:
-	BYTE *m_ByStream;
-	int  m_length;
-	std::string m_Stream;
+    BYTE *m_ByStream;
+    int m_length;
+    std::string m_Stream;
 };
 
 /*****************************************************************************
@@ -53,15 +54,20 @@ private:
  * 其    它  : 
 
 *****************************************************************************/
-template<class T, class U> 
-class MConvertsion{
+template <class T, class U>
+class MConvertsion
+{
 private:
     //目的保证sizeof 得出大小不一致
-    static  __int64_t Test(T);
-    static  u_int  Test(...);
+    static __int64_t Test(T);
+    static u_int Test(...);
     static U genU();
+
 public:
-	enum{ value = (sizeof(Test(genU())) == sizeof(__int64_t)) };
+    enum
+    {
+        value = (sizeof(Test(genU())) == sizeof(__int64_t))
+    };
 };
 
 /*****************************************************************************
@@ -76,25 +82,27 @@ public:
  * 其    它  : 
 
 *****************************************************************************/
-template<bool>
-struct MCopyValue{
-    template<class T, class U>
-    static void inline apply(T& val1, const U& val2)
+template <bool>
+struct MCopyValue
+{
+    template <class T, class U>
+    static void inline apply(T &val1, const U &val2)
     {
         val1 = val2;
     }
 };
-template<>
-struct MCopyValue<false>{
-    template<class T, class U>
-    static void inline apply(T& val1, const U& val2)
+template <>
+struct MCopyValue<false>
+{
+    template <class T, class U>
+    static void inline apply(T &val1, const U &val2)
     {
         std::stringstream os;
         os << val2;
         os >> val1;
     }
-    template<class U>
-    static void inline apply(std::string& str, const U& val2)
+    template <class U>
+    static void inline apply(std::string &str, const U &val2)
     {
         std::stringstream os;
         os << val2;
@@ -115,9 +123,9 @@ struct MCopyValue<false>{
  * 其    它  : 
 
 *****************************************************************************/
-template<class L, class R> 
-void inline convert(L& val, R& right)
+template <class L, class R>
+void inline convert(L &val, R &right)
 {
-	MCopyValue<MConvertsion<L, R>::value>::apply(val, right);
+    MCopyValue<MConvertsion<L, R>::value>::apply(val, right);
 }
 #endif

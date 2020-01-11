@@ -8,7 +8,6 @@
  * 修改日志   :
 ***********************************************************************************/
 
-
 #ifndef __OS_SYSTEM_H__
 #define __OS_SYSTEM_H__
 #include "macro_define.h"
@@ -18,10 +17,11 @@
 #define PATH_NAME_MAX_LEN 256
 #define OM_CMD_EXCE_TIME 5
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_SafeSystem
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -36,9 +36,9 @@ extern "C" {
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_SafeSystem(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet);
+    s32 OS_SafeSystem(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet);
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_SafeSystemSub
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年6月16日
@@ -54,9 +54,9 @@ s32 OS_SafeSystem(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet);
  * 其    它  : 
 
 *****************************************************************************/
-s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet, pid_t *ptChildPid);
+    s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet, pid_t *ptChildPid);
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_WaitChild
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -73,9 +73,9 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, char *pOutBuf, u64 uiOutBufLen);
+    s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, char *pOutBuf, u64 uiOutBufLen);
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_CheckReadBuf
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -89,9 +89,9 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen);
+    s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen);
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_Kill
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年6月16日
@@ -103,9 +103,9 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen);
  * 其    它  : 
 
 *****************************************************************************/
-s32 OS_Kill(pid_t uiChildPid);
+    s32 OS_Kill(pid_t uiChildPid);
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_GetProcessStatus
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -118,9 +118,9 @@ s32 OS_Kill(pid_t uiChildPid);
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_GetProcessStatus(pid_t uiPid, char *v_Status);
+    s32 OS_GetProcessStatus(pid_t uiPid, char *v_Status);
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_GetExitStatus
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -133,8 +133,8 @@ s32 OS_GetProcessStatus(pid_t uiPid, char *v_Status);
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_GetExitStatus(s32 iStatus, s32 *v_ScriptRet);
-/*****************************************************************************
+    s32 OS_GetExitStatus(s32 iStatus, s32 *v_ScriptRet);
+    /*****************************************************************************
  * 函 数 名  : OS_GetSystemLlitm
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -146,9 +146,9 @@ s32 OS_GetExitStatus(s32 iStatus, s32 *v_ScriptRet);
  * 其    它  :
 
 *****************************************************************************/
-u64 OS_GetSystemLlitm();
+    u64 OS_GetSystemLlitm();
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_ReadBufByCmd
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -163,9 +163,9 @@ u64 OS_GetSystemLlitm();
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBufferLen);
+    s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBufferLen);
 
-/*****************************************************************************
+    /*****************************************************************************
  * 函 数 名  : OS_GetStrValueByCmd
  * 负 责 人  : 卢美宏
  * 创建日期  : 2018年4月1日
@@ -179,7 +179,7 @@ s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuf
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_GetStrValueByCmd(const char * pacCmd, char *pBuffer, u64 uiBufferLen);
+    s32 OS_GetStrValueByCmd(const char *pacCmd, char *pBuffer, u64 uiBufferLen);
 
 #ifdef __cplusplus
 }

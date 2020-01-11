@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include "unistd.h"
 
-
 /*****************************************************************************
  * 函 数 名  : OS_GetSystemLlitm
  * 负 责 人  : 卢美宏
@@ -35,7 +34,6 @@ u64 OS_GetSystemLlitm()
     gettimeofday(&tv, NULL);
     return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
-
 
 /*****************************************************************************
  * 函 数 名  : OS_SafeSystem
@@ -56,7 +54,6 @@ s32 OS_SafeSystem(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet)
 {
     pid_t tChildPid = 0;
     return OS_SafeSystemSub(pcCmd, argv, uiTimeOut, piScriptRet, &tChildPid);
-
 }
 
 /*****************************************************************************
@@ -82,17 +79,17 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
     pid_t tChildPid = 0;
     struct rlimit stFileLimit;
     u32 uiFileIndex = 0;
-    if(NULL == pcCmd || NULL == piScriptRet || NULL == ptChildPid)
+    if (NULL == pcCmd || NULL == piScriptRet || NULL == ptChildPid)
     {
         return RET_ERR;
     }
 
-    if(0 > (tChildPid = vfork()))
+    if (0 > (tChildPid = vfork()))
     {
         LVOS_Log(LL_ERROR, "Creat Child fail.");
         return RET_ERR;
     }
-    if(tChildPid == 0)
+    if (tChildPid == 0)
     {
         //恢复三种信号源
         (void)signal(SIGQUIT, SIG_DFL);
@@ -100,28 +97,27 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
         (void)signal(SIGINT, SIG_DFL);
         setpgid(0, 0); //设置组便于一次kill
         //获取进程能打开最大文件数并关闭
-        if(0 == getrlimit(RLIMIT_NOFILE, &stFileLimit))
+        if (0 == getrlimit(RLIMIT_NOFILE, &stFileLimit))
         {
-            for(uiFileIndex = STDOUT_FILENOED + 1; uiFileIndex < stFileLimit.rlim_max; ++uiFileIndex)
+            for (uiFileIndex = STDOUT_FILENOED + 1; uiFileIndex < stFileLimit.rlim_max; ++uiFileIndex)
             {
                 close((int32_t)uiFileIndex);
             }
-            if(NULL == argv)
+            if (NULL == argv)
             {
-                (void)execl("/bin/sh", "sh", "-c", pcCmd, (char*)0);
+                (void)execl("/bin/sh", "sh", "-c", pcCmd, (char *)0);
             }
             else
             {
                 (void)execv(pcCmd, argv);
             }
-
         }
         _exit(127);
     }
     else
     {
         iRet = OS_WaitChild(tChildPid, NULL, uiTimeOut, piScriptRet, NULL, 0);
-        if(RET_OK != iRet)
+        if (RET_OK != iRet)
         {
             LVOS_Log(LL_ERROR, "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).", pcCmd, iRet, *piScriptRet);
             return RET_ERR;
@@ -152,23 +148,23 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
 *****************************************************************************/
 s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, char *pOutBuf, u64 uiOutBufLen)
 {
-    s32 iRet  = RET_ERR;
+    s32 iRet = RET_ERR;
     s32 iStat = 0;
     u64 uiBeginTime = 0;
-    u64 uiEndTime   = 0;
-    u64 uiTime      = 0;
-    u32 iOffset     = 0;
-    pid_t iStopPid  = 0;
+    u64 uiEndTime = 0;
+    u64 uiTime = 0;
+    u32 iOffset = 0;
+    pid_t iStopPid = 0;
     uiTime = (uiTimeout == 0) ? INVALUE_INAVLE : uiTimeout * 1000;
-    if(NULL == iScriptRet)
+    if (NULL == iScriptRet)
     {
         return RET_ERR;
     }
     uiBeginTime = OS_GetSystemLlitm();
-    for(;;)
+    for (;;)
     {
 
-        if((NULL != piFd) && (NULL != pOutBuf) && (iOffset < uiOutBufLen))
+        if ((NULL != piFd) && (NULL != pOutBuf) && (iOffset < uiOutBufLen))
         {
             iOffset += OS_CheckReadBuf(*piFd, pOutBuf + iOffset, uiOutBufLen - iOffset);
         }
@@ -177,26 +173,26 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
         uiEndTime = OS_GetSystemLlitm();
 
         //wait4异常 或者等待超时
-        if((0 != iStopPid) || ((uiEndTime - uiBeginTime) > uiTime))
+        if ((0 != iStopPid) || ((uiEndTime - uiBeginTime) > uiTime))
         {
             break;
         }
         usleep(200);
     }
 
-    if(0 > iStopPid)
+    if (0 > iStopPid)
     {
         iRet = OS_Kill(uiChildPid);
         LVOS_Log(LL_WARNING, "wait child exit fail,iRet(%ld) .", iRet);
         return RET_INDIDE_ERR;
     }
-    else if(0 == iStopPid)
+    else if (0 == iStopPid)
     {
         iRet = OS_Kill(uiChildPid);
         LVOS_Log(LL_WARNING, "Wait Child Timeout(%llu) but used(%llu),iRet(%ld).", uiTime, uiEndTime - uiBeginTime, iRet);
         return RET_TIMEOUT;
     }
-    else if(iStopPid == uiChildPid)
+    else if (iStopPid == uiChildPid)
     {
         return OS_GetExitStatus(iStat, iScriptRet);
     }
@@ -204,7 +200,6 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
     {
         return RET_ERR;
     }
-
 }
 
 /*****************************************************************************
@@ -229,7 +224,7 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
     fd_set fdset;
     tv.tv_usec = TV_USEC_VALUE;
     tv.tv_sec = TV_USEC_VALUE / 1000;
-    if(NULL == pOutBuf)
+    if (NULL == pOutBuf)
     {
         return 0;
     }
@@ -238,19 +233,19 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
 
     iRet = select(v_uiFd + 1, &fdset, NULL, NULL, &tv);
     //select error
-    if(0 == iRet)
+    if (0 == iRet)
     {
         //LVOS_Log(LL_DEBUG,"Select function execl fail.");
         return 0;
     }
     //timeout
-    if(0 > iRet)
+    if (0 > iRet)
     {
         //LVOS_Log(LL_DEBUG,"Select function execl timeout.");
         return 0;
     }
     //read is true
-    if(!FD_ISSET(v_uiFd, &fdset))
+    if (!FD_ISSET(v_uiFd, &fdset))
     {
         //LVOS_Log(LL_DEBUG,"Select function execl really read.");
         return 0;
@@ -258,7 +253,6 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
 
     iReadLen = read(v_uiFd, pOutBuf, uiOutBufLen);
     return (iReadLen ? iReadLen : 0);
-
 }
 
 /*****************************************************************************
@@ -284,16 +278,16 @@ s32 OS_Kill(pid_t uiChildPid)
     (void)killpg(uiChildPid, SIGKILL);
 
     tKillPid = wait4(uiChildPid, NULL, WNOHANG, 0);
-    if(tKillPid == uiChildPid)
+    if (tKillPid == uiChildPid)
     {
         return RET_OK;
     }
 
     iRet = OS_GetProcessStatus(uiChildPid, &sChildStat);
-    if(RET_OK != iRet)
+    if (RET_OK != iRet)
     {
         tKillPid = wait4(uiChildPid, NULL, WNOHANG, 0);
-        if(tKillPid == uiChildPid)
+        if (tKillPid == uiChildPid)
         {
             return RET_OK;
         }
@@ -303,7 +297,7 @@ s32 OS_Kill(pid_t uiChildPid)
             return RET_INDIDE_ERR;
         }
     }
-    else if('D' != sChildStat)
+    else if ('D' != sChildStat)
     {
         return RET_STAT_D;
     }
@@ -330,31 +324,31 @@ s32 OS_Kill(pid_t uiChildPid)
 s32 OS_GetProcessStatus(pid_t uiPid, char *v_Status)
 {
     s32 iRet = RET_ERR;
-    s32 iFd  = RET_ERR;
+    s32 iFd = RET_ERR;
     char acStatPath[STAT_PATH_LEN] = {0};
     char acStatBuffer[STAT_BUFFER_LEN] = {0};
     char *pcEedBracket = NULL;
-    if(NULL == v_Status)
+    if (NULL == v_Status)
     {
         return RET_ERR;
     }
-    iRet = snprintf(acStatPath, STAT_PATH_LEN -1, "/proc/%d/stat", uiPid);
-    if(RET_ERR == iRet)
+    iRet = snprintf(acStatPath, STAT_PATH_LEN - 1, "/proc/%d/stat", uiPid);
+    if (RET_ERR == iRet)
         return RET_INDIDE_ERR;
 
     iFd = open(acStatPath, O_RDONLY, NULL);
 
-    if(0 >= iFd)
+    if (0 >= iFd)
         return RET_INDIDE_ERR;
 
     iRet = read(iFd, acStatBuffer, STAT_BUFFER_LEN - 1);
     close(iFd);
 
-    if(RET_OK != iRet)
+    if (RET_OK != iRet)
         return RET_INDIDE_ERR;
 
     pcEedBracket = strstr(acStatBuffer, ")");
-    if(NULL == pcEedBracket)
+    if (NULL == pcEedBracket)
         return RET_INDIDE_ERR;
 
     *v_Status = *(pcEedBracket + 2);
@@ -376,26 +370,25 @@ s32 OS_GetProcessStatus(pid_t uiPid, char *v_Status)
 *****************************************************************************/
 s32 OS_GetExitStatus(s32 iStatus, s32 *v_ScriptRet)
 {
-    if(NULL == v_ScriptRet)
+    if (NULL == v_ScriptRet)
     {
         return RET_ERR;
     }
     //正常退出
-    if(WIFEXITED(iStatus))
+    if (WIFEXITED(iStatus))
     {
-        if(NULL != v_ScriptRet)
+        if (NULL != v_ScriptRet)
         {
             *v_ScriptRet = WEXITSTATUS(iStatus);
         }
         return RET_OK;
     }
 
-    if(WIFSIGNALED(iStatus))
+    if (WIFSIGNALED(iStatus))
     {
         LVOS_Log(LL_WARNING, "Get pid exit status fail.");
     }
     return RET_EXCEPTIONAL;
-
 }
 /*****************************************************************************
  * 函 数 名  : OS_GetStrValueByCmd
@@ -411,22 +404,22 @@ s32 OS_GetExitStatus(s32 iStatus, s32 *v_ScriptRet)
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_GetStrValueByCmd(const char * pacCmd, char *pBuffer, u64 uiBufferLen)
+s32 OS_GetStrValueByCmd(const char *pacCmd, char *pBuffer, u64 uiBufferLen)
 {
     s32 iRet = RET_ERR;
     u64 uiLen = 0;
-    if(NULL == pacCmd || NULL == pBuffer || (0 >= uiBufferLen))
+    if (NULL == pacCmd || NULL == pBuffer || (0 >= uiBufferLen))
     {
         return RET_ERR;
     }
     iRet = OS_ReadBufByCmd(pacCmd, OM_CMD_EXCE_TIME, pBuffer, uiBufferLen);
-    if(RET_OK != iRet)
+    if (RET_OK != iRet)
     {
         LVOS_Log(LL_WARNING, "Get cmd execl result fail.");
         return RET_ERR;
     }
     uiLen = strlen(pBuffer);
-    if(0 == uiLen)
+    if (0 == uiLen)
     {
         LVOS_Log(LL_WARNING, "Get cmd execl result is null.");
         return RET_ERR;
@@ -452,23 +445,23 @@ s32 OS_GetStrValueByCmd(const char * pacCmd, char *pBuffer, u64 uiBufferLen)
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBufferLen)
+s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBufferLen)
 {
 
     s32 iRet = RET_ERR;
-    s32 iScriptRet  =  RET_ERR;
+    s32 iScriptRet = RET_ERR;
     pid_t iChildPid = 0;
     u32 uiFileIndex = 0;
     int pdes[2] = {0};
     struct rlimit stFileLimit;
 
-    if(0 > pipe(pdes))
+    if (0 > pipe(pdes))
     {
         LVOS_Log(LL_ERROR, "Creat pipe fail.");
         return RET_ERR;
     }
 
-    if(0 > (iChildPid = vfork()))
+    if (0 > (iChildPid = vfork()))
     {
         close(pdes[0]);
         close(pdes[1]);
@@ -476,7 +469,7 @@ s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuf
         return RET_ERR;
     }
 
-    if(iChildPid == 0)
+    if (iChildPid == 0)
     {
         //恢复三种信号源
         (void)signal(SIGQUIT, SIG_DFL);
@@ -484,17 +477,17 @@ s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuf
         (void)signal(SIGINT, SIG_DFL);
         setpgid(0, 0); //设置组便于一次kill
         //获取进程能打开最大文件数并关闭
-        if(0 == getrlimit(RLIMIT_NOFILE, &stFileLimit))
+        if (0 == getrlimit(RLIMIT_NOFILE, &stFileLimit))
         {
-            for(uiFileIndex = STDOUT_FILENOED + 1; uiFileIndex < stFileLimit.rlim_max; ++uiFileIndex)
+            for (uiFileIndex = STDOUT_FILENOED + 1; uiFileIndex < stFileLimit.rlim_max; ++uiFileIndex)
             {
                 //关闭子进程的非写端
-                if((int)uiFileIndex != pdes[1])
+                if ((int)uiFileIndex != pdes[1])
                     close((int32_t)uiFileIndex);
             }
             dup2(pdes[1], STDOUT_FILENO);
             close(pdes[1]);
-            (void)execl("/bin/sh", "sh", "-c", pacCmd, (char*)0);
+            (void)execl("/bin/sh", "sh", "-c", pacCmd, (char *)0);
         }
         _exit(127);
     }
@@ -503,7 +496,7 @@ s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuf
         close(pdes[1]);
         iRet = OS_WaitChild(iChildPid, &pdes[0], uiTimeout, &iScriptRet, pBuffer, uiBufferLen);
         close(pdes[0]);
-        if(RET_OK != iRet || RET_OK != iScriptRet)
+        if (RET_OK != iRet || RET_OK != iScriptRet)
         {
             LVOS_Log(LL_ERROR, "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).", pacCmd, iRet, iScriptRet);
             return RET_ERR;
@@ -511,5 +504,3 @@ s32 OS_ReadBufByCmd(const char * pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuf
         return RET_OK;
     }
 }
-
-

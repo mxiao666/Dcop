@@ -8,8 +8,8 @@
  * 修改日志   : 
 ***********************************************************************************/
 
-#ifndef   __OS_FRAMEWORKMGR__
-#define   __OS_FRAMEWORKMGR__
+#ifndef __OS_FRAMEWORKMGR__
+#define __OS_FRAMEWORKMGR__
 
 /*****************************************************************************
  * 函 数 名  : IplugFrameWork
@@ -23,12 +23,13 @@
  * 其    它  : 
 
 *****************************************************************************/
-class IplugFrameWork{
+class IplugFrameWork
+{
 public:
-	IplugFrameWork(){ };
+	IplugFrameWork(){};
 	virtual int Init() = 0;
 };
-typedef IplugFrameWork* RegFun;
+typedef IplugFrameWork *RegFun;
 
 /*****************************************************************************
  * 函 数 名  : FrameWork
@@ -42,11 +43,12 @@ typedef IplugFrameWork* RegFun;
  * 其    它  : 
 
 *****************************************************************************/
-typedef struct FrameWork{
+typedef struct FrameWork
+{
 	RegFun fun;
-	const char* ModuleName;
-	FrameWork* Next;
-}FrameWork;
+	const char *ModuleName;
+	FrameWork *Next;
+} FrameWork;
 
 /*****************************************************************************
  * 函 数 名  : FrameWorkMgr
@@ -60,18 +62,20 @@ typedef struct FrameWork{
  * 其    它  : 
 
 *****************************************************************************/
-class FrameWorkMgr{
+class FrameWorkMgr
+{
 public:
-	static  FrameWork* m_Node;
-	static  FrameWork* m_Current;
-	static int  m_NodeCnt;
+	static FrameWork *m_Node;
+	static FrameWork *m_Current;
+	static int m_NodeCnt;
 	void RegInit();
-	static FrameWorkMgr* getInstance();
+	static FrameWorkMgr *getInstance();
+
 private:
-	FrameWorkMgr(){}
-	FrameWorkMgr(FrameWorkMgr&){}
-	FrameWorkMgr& opertor(FrameWorkMgr&) = delete;
-	static FrameWorkMgr* m_Instance;
+	FrameWorkMgr() {}
+	FrameWorkMgr(FrameWorkMgr &) {}
+	FrameWorkMgr &opertor(FrameWorkMgr &) = delete;
+	static FrameWorkMgr *m_Instance;
 };
 
 /*****************************************************************************
@@ -86,12 +90,13 @@ private:
  * 其    它  : 
 
 *****************************************************************************/
-class FrameWorkMgrCollector{
+class FrameWorkMgrCollector
+{
 public:
-	FrameWorkMgrCollector(FrameWork* F);
+	FrameWorkMgrCollector(FrameWork *F);
+
 private:
 	FrameWorkMgrCollector();
-
 };
 
 /*****************************************************************************
@@ -106,8 +111,8 @@ private:
  * 其    它  : 
 
 *****************************************************************************/
-#define REG_FUNCTION_PLUS(Class, Name) \
-	static FrameWork g_FrameWork_##Class = { new Class, Name, NULL }; \
+#define REG_FUNCTION_PLUS(Class, Name)                              \
+	static FrameWork g_FrameWork_##Class = {new Class, Name, NULL}; \
 	static FrameWorkMgrCollector g_FrameWorkMgrCollector_##Class(&g_FrameWork_##Class);
 
 /*****************************************************************************
@@ -124,16 +129,16 @@ private:
  * 其    它  : 
 
 *****************************************************************************/
-#define REG_FUNCTION(Func, Name) \
-class IplugFrameWork##Func :public IplugFrameWork \
-{  \
-public:  \
-	IplugFrameWork##Func(){ } \
-	int Init(){ \
-		return  Func(); \
-	}  \
-};  \
-REG_FUNCTION_PLUS(IplugFrameWork##Func, Name);
-
+#define REG_FUNCTION(Func, Name)                       \
+	class IplugFrameWork##Func : public IplugFrameWork \
+	{                                                  \
+	public:                                            \
+		IplugFrameWork##Func() {}                      \
+		int Init()                                     \
+		{                                              \
+			return Func();                             \
+		}                                              \
+	};                                                 \
+	REG_FUNCTION_PLUS(IplugFrameWork##Func, Name);
 
 #endif

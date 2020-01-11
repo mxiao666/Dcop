@@ -6,15 +6,15 @@
 
 typedef struct _ObjModule
 {
-    objbase* obj;
+    objbase *obj;
     int refCount;
-    _ObjModule(objbase* obj) : refCount(0)
+    _ObjModule(objbase *obj) : refCount(0)
     {
         this->obj = obj;
     }
     ~_ObjModule()
     {
-        if(obj != nullptr)
+        if (obj != nullptr)
         {
             delete obj;
             obj = nullptr;
@@ -22,18 +22,20 @@ typedef struct _ObjModule
     }
 } ObjModule;
 
-class objKernel{
+class objKernel
+{
 public:
     objKernel();
     ~objKernel();
-    objbase* InterFace();
-    objbase* Query(const char* pzName);
-    void Release(const char* pzName);
+    objbase *InterFace();
+    objbase *Query(const char *pzName);
+    void Release(const char *pzName);
     void Entry();
+
 private:
-    objKernel(objKernel&) = delete;
-    const objKernel& operator=(const objKernel&) = delete;
-    inline std::map<const char*, ObjModule*>::iterator find(const char* pzName);
-    std::map<const char*, ObjModule*> m_objList;
+    objKernel(objKernel &) = delete;
+    const objKernel &operator=(const objKernel &) = delete;
+    inline std::map<const char *, ObjModule *>::iterator find(const char *pzName);
+    std::map<const char *, ObjModule *> m_objList;
 };
 #endif
