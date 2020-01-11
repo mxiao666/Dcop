@@ -1,6 +1,8 @@
 #include <mutex>
+#ifndef __WIN32__
 #include <pthread.h>
 #include <unistd.h>
+#endif
 #include "objTask.h"
 #include "log.h"
 
@@ -45,6 +47,7 @@ objTask *objTaskEntry(const char *objTaskName,
     if (obj == nullptr)
         return nullptr;
 
+#ifndef __WIN32__
     pthread_t thread_id;
     pthread_attr_t attr;
     pthread_attr_init(&attr);
@@ -63,7 +66,9 @@ objTask *objTaskEntry(const char *objTaskName,
                    },
                    obj);
     pthread_attr_destroy(&attr);
+
     LVOS_Log(LL_DEBUG, "%s:%d objTask id(%#0x)", FILE_NAME(file), len, thread_id);
+#endif // !__WIN32__
     return obj;
 }
 

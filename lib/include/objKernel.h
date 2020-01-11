@@ -35,7 +35,7 @@ public:
 private:
     objKernel(objKernel &) = delete;
     const objKernel &operator=(const objKernel &) = delete;
-    inline std::map<const char *, ObjModule *>::iterator find(const char *pzName);
     std::map<const char *, ObjModule *> m_objList;
 };
+extern objKernel *g_objKernel;
 #endif

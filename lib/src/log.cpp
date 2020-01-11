@@ -7,12 +7,13 @@
 #include "log.h"
 #include "stacktrace.h"
 #include "macro_define.h"
-#include <sys/file.h>
 #include <stdarg.h>
 #include <time.h>
 #include <stdlib.h>
+#ifndef __WIN32__
 #include <unistd.h>
 #include <functional>
+#endif
 const int LOG_MESSAGE_LEN = 512;
 const int LOG_CONTENT_LEN = 64;
 
@@ -30,7 +31,13 @@ int LogInit(int level, const char *path)
     {
         return RET_ERR;
     }
-    setvbuf(log_file, NULL, _IOLBF, 0); /* 行缓�?*/
+    setvbuf(log_file, NULL, _IOLBF,
+#ifndef __WIN32__
+            0
+#else
+            512
+#endif
+    ); /* 行缓�?*/
     debug_backtrace_init();
     return RET_OK;
 }
@@ -50,7 +57,11 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
     char log_time[LOG_CONTENT_LEN] = {0};
     time_t t = time(NULL);
     struct tm ptm;
+#ifndef __WIN32__
     localtime_r(&t, &ptm);
+#else
+    localtime_s(&ptm, &t);
+#endif
     sprintf(log_time, "%4d-%02d-%02d %02d:%02d:%02d",
             ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday, ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 

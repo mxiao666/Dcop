@@ -12,7 +12,9 @@
 #define __OS_SYSTEM_H__
 #include "macro_define.h"
 #include <sys/types.h>
-
+#ifdef __WIN32__
+#define pid_t int
+#endif
 #define STDOUT_FILENOED 2
 #define PATH_NAME_MAX_LEN 256
 #define OM_CMD_EXCE_TIME 5

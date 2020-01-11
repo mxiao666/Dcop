@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\lib">
+      <UniqueIdentifier>{ad283d3d-d4b6-40ed-a30d-23456c9a0a59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\lib">
+      <UniqueIdentifier>{3a07cab4-445c-46d3-b139-a9ff0f2a4a89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\lib\include\cargclist.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\clibase.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\cnotify.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\cstream.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\frameworkmgr.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\log.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\macro_define.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\objbase.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\objKernel.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\objTask.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\receiver.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\stacktrace.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\streamhelper.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\system.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\threadpool.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\getmessage.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\lib\src\clibase.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\cnotify.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\cstream.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\frameworkmgr.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\log.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\objKernel.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\objTask.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\stacktrace.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\streamhelper.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\system.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\getmessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\thread_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

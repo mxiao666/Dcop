@@ -9,12 +9,14 @@
 ***********************************************************************************/
 
 #include <errno.h>
-#include <unistd.h>
-#include <ucontext.h>
 #include <signal.h>
-#include <execinfo.h>
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef __WIN32__
+#include <unistd.h>
+#include <ucontext.h>
+#include <execinfo.h>
+#endif
 #include "macro_define.h"
 #include "log.h"
 
@@ -34,7 +36,9 @@ static BYTE signals_trace[] =
     {
         SIGILL,  /* Illegal instruction (ANSI).  */
         SIGABRT, /* Abort (ANSI).  */
-        SIGBUS,  /* BUS error (4.2 BSD). (unaligned access) */
+#ifndef __WIN32__
+        SIGBUS, /* BUS error (4.2 BSD). (unaligned access) */
+#endif
         SIGFPE,  /* Floating-point exception (ANSI).  */
         SIGSEGV, /* Segmentation violation (ANSI).  */
 };
@@ -54,6 +58,7 @@ static BYTE signals_trace[] =
 *****************************************************************************/
 extern "C" void debug_backtrace_dump(void)
 {
+#ifndef __WIN32__
     int j, nptrs;
     void *buffer[BACKTRACE_SIZE];
     char **strings;
@@ -73,6 +78,7 @@ extern "C" void debug_backtrace_dump(void)
         LOG_ERROR("\t[%02d] %s", j, strings[j]);
 
     free(strings);
+#endif
 }
 
 /*****************************************************************************
@@ -89,6 +95,7 @@ extern "C" void debug_backtrace_dump(void)
  * 其    它  : 
 
 *****************************************************************************/
+#ifndef __WIN32__
 extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontext)
 {
 
@@ -109,7 +116,7 @@ extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontex
     exit(EXIT_FAILURE);
 #endif
 }
-
+#endif
 /*****************************************************************************
  * 函 数 名  : debug_backtrace_init
  * 负 责 人  : 卢美宏
@@ -124,6 +131,7 @@ extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontex
 *****************************************************************************/
 extern "C" int debug_backtrace_init(void)
 {
+#ifndef __WIN32__
     struct sigaction sa;
     (void)memset(&sa, 0, sizeof(struct sigaction));
     sa.sa_sigaction = debug_signal_handler;
@@ -144,4 +152,7 @@ extern "C" int debug_backtrace_init(void)
         }
     }
     return ret;
+#else
+    return 0;
+#endif
 }

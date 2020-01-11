@@ -1,6 +1,7 @@
 #include <string.h>
 #include "objKernel.h"
-
+#include "frameworkmgr.h"
+objKernel *g_objKernel;
 objKernel::objKernel()
 {
     printf(
@@ -15,6 +16,7 @@ objKernel::objKernel()
         " [Update Date: %-17.17s]\n"
         " [Update Time: %-17.17s]\n",
         __DATE__, __TIME__);
+    g_objKernel = this;
 }
 objKernel::~objKernel()
 {
@@ -32,14 +34,14 @@ objbase *objKernel::InterFace()
 }
 objbase *objKernel::Query(const char *pzName)
 {
-    auto iter = find(pzName);
+    auto iter = OS::find(pzName, m_objList);
     if (iter != m_objList.end())
         return iter->second->obj;
     return nullptr;
 }
 void objKernel::Release(const char *pzName)
 {
-    auto iter = find(pzName);
+    auto iter = OS::find(pzName, m_objList);
     if ((iter != m_objList.end()) && (--iter->second->refCount <= 0))
     {
         delete iter->second;
@@ -49,18 +51,8 @@ void objKernel::Release(const char *pzName)
 }
 void objKernel::Entry()
 {
-    m_objList["test1"] = new ObjModule(new objbase(100));
-    m_objList["test2"] = new ObjModule(new objbase(205));
-}
-std::map<const char *, ObjModule *>::iterator objKernel::find(const char *pzName)
-{
-    for (std::map<const char *, ObjModule *>::iterator iter = m_objList.begin();
-         iter != m_objList.end(); iter++)
-    {
-        if (strcasecmp(pzName, iter->first) == 0)
-        {
-            return iter;
-        }
-    }
-    return m_objList.end();
+    FrameWorkMgr::getInstance()->RegInit([](FrameWork *func) {
+        if (func)
+            g_objKernel->m_objList[func->ModuleName] = new ObjModule((objbase *)func->fun);
+    });
 }

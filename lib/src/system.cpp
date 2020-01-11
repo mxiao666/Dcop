@@ -9,11 +9,12 @@
 ***********************************************************************************/
 #include "log.h"
 #include "system.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#ifndef __WIN32__
 #include <sys/time.h>
 #include <sys/wait.h>
 #include <sys/resource.h>
-#include <fcntl.h>
-#include <stdlib.h>
 #include "unistd.h"
 
 /*****************************************************************************
@@ -74,7 +75,7 @@ s32 OS_SafeSystem(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet)
 *****************************************************************************/
 s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet, pid_t *ptChildPid)
 {
-
+#ifndef __WIN32__
     s32 iRet = RET_ERR;
     pid_t tChildPid = 0;
     struct rlimit stFileLimit;
@@ -127,6 +128,9 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
             return RET_OK;
         }
     }
+#else
+    return RET_OK;
+#endif
 }
 
 /*****************************************************************************
@@ -218,6 +222,7 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
 *****************************************************************************/
 s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
 {
+#ifndef __WIN32__
     s32 iRet = RET_ERR;
     u32 iReadLen = 0;
     struct timeval tv;
@@ -253,6 +258,9 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
 
     iReadLen = read(v_uiFd, pOutBuf, uiOutBufLen);
     return (iReadLen ? iReadLen : 0);
+#else
+    return RET_OK;
+#endif
 }
 
 /*****************************************************************************
@@ -269,6 +277,7 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
 *****************************************************************************/
 s32 OS_Kill(pid_t uiChildPid)
 {
+#ifndef __WIN32__
     s32 iRet = RET_ERR;
     pid_t tKillPid = 0;
     char sChildStat = 0;
@@ -306,6 +315,9 @@ s32 OS_Kill(pid_t uiChildPid)
         (void)wait4(uiChildPid, NULL, 0, 0);
         return RET_OK;
     }
+#else
+    return RET_OK;
+#endif
 }
 
 /*****************************************************************************
@@ -504,3 +516,4 @@ s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuff
         return RET_OK;
     }
 }
+#endif
