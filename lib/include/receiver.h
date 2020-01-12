@@ -1,16 +1,13 @@
 #ifndef RECEIVER_H
 #define RECEIVER_H
 
-#include <vector>
-#include <string>
-#include <iostream>
 #include "cargclist.h"
-
-class receiver
+#include "objbase.h"
+class receiver :public objbase
 {
 public:
     receiver() {}
-    ~receiver() {}
+    virtual ~receiver() {}
     virtual int recvMessage(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd) = 0;
 };
 

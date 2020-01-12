@@ -1,37 +1,19 @@
 #ifndef __OBJBASE_H__
 #define __OBJBASE_H__
+#include <atomic>
 
 class objbase
 {
 private:
-    /* data */
+    std::atomic<int> m_debug;
+
 public:
-    objbase() {}
-    ~objbase() {}
+    objbase() : m_debug(0) {}
+    virtual ~objbase() {}
+    virtual int Init() { return 0; };
     void dump() {}
-    int a = 1;
+    int GetDebug() { return m_debug; }
+    int SetDebug(int value) { return (m_debug = value); }
 };
-namespace OS
-{
-template <class T>
-inline typename T::iterator find(const char *pzName, T &list)
-{
-    for (typename T::iterator iter = list.begin();
-         iter != list.end(); iter++)
-    {
-        if (
-#ifndef __WIN32__
-            strcasecmp
-#else
-            _stricmp
-#endif
-            (pzName, iter->first) == 0)
-        {
-            return iter;
-        }
-    }
-    return list.end();
-}
-}; // namespace OS
 
 #endif

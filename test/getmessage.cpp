@@ -1,11 +1,5 @@
 #include "getmessage.h"
-
-getMessage::getMessage()
-{
-}
-getMessage::~getMessage()
-{
-}
+#include "frameworkmgr.h"
 
 int getMessage::recvMessage(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd)
 {
@@ -13,3 +7,4 @@ int getMessage::recvMessage(CAgrcList *message, CAgrcList *outmessage, int iModu
     printf("%s\n", (char *)message->GetAgrc("A")->GetBuff());
     return 0;
 }
+REG_FUNCTION_PLUS(getMessage, "getMessage")

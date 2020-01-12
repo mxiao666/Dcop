@@ -16,11 +16,10 @@ int main()
     obj->Entry();
     objbase *p = obj->Query("getMessage");
     CAgrcList msg;
-    msg.addAgrc("A", "deda");
+    msg.addAgrc("A", "hello world.");
     std::cout << ((getMessage *)p)->recvMessage(&msg, nullptr, __LINE__, 100) << std::endl;
-    obj->Release("objbase");
-    // p = obj->Query("test2");
-    //std::cout << (p)->a << std::endl;
+    obj->Release("getMessage");
+    std::cout << ((getMessage *)p)->recvMessage(&msg, nullptr, __LINE__, 100) << std::endl;
 
-    exit(0);
+    return 0;
 }

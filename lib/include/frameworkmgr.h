@@ -10,26 +10,9 @@
 
 #ifndef __OS_FRAMEWORKMGR__
 #define __OS_FRAMEWORKMGR__
+#include "objbase.h"
 
-/*****************************************************************************
- * 函 数 名  : IplugFrameWork
- * 负 责 人  : 卢美宏
- * 创建日期  : 2018年11月23日
- * 函数功能  : 基类定义
- * 输入参数  : 无
- * 输出参数  : 无
- * 返 回 值  : 
- * 调用关系  : 
- * 其    它  : 
-
-*****************************************************************************/
-class IplugFrameWork
-{
-public:
-    IplugFrameWork(){};
-    virtual int Init() { return 0; };
-};
-typedef IplugFrameWork *RegFun;
+typedef objbase *RegFun;
 
 /*****************************************************************************
  * 函 数 名  : FrameWork

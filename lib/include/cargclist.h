@@ -2,9 +2,9 @@
 #define __OS_CARGCLIST__
 #include <iostream>
 #include <map>
-#include "cstream.h"
 #include <string.h>
-
+#include "template.h"
+#include "cstream.h"
 class CAgrcList
 {
 public:
@@ -18,22 +18,21 @@ public:
     {
         if (pzName != nullptr)
         {
-            CStream *arg = new CStream((const BYTE *)pzValue);
-            m_arglist[pzName] = arg;
+            m_arglist[pzName] = new CStream((const BYTE *)pzValue);
         }
         return *this;
     }
     CStream *GetAgrc(const char *pzName)
     {
-        for (auto &iter : m_arglist)
+        auto iter = OS::find(pzName, m_arglist);
+        if (iter != m_arglist.end())
         {
-            if (0 == strncmp(iter.first, pzName, strlen(iter.first)))
-                return iter.second;
+            return iter->second;
         }
         return nullptr;
     }
     int GetCount() { return m_count; }
-    int GetSize() { return m_arglist.size(); }
+    size_t GetSize() { return m_arglist.size(); }
     ~CAgrcList()
     {
         for (auto &iter : m_arglist)
