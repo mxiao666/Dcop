@@ -22,15 +22,19 @@ typedef struct _ObjModule
     }
 } ObjModule;
 
-class objKernel
+class objKernel : public objbase
 {
 public:
     objKernel();
     ~objKernel();
-    objbase *InterFace();
+    /*普通对象查询*/
+    objbase *InterFace(const char *pzName);
+    /*引用对象查询*/
     objbase *Query(const char *pzName);
+    /*引用对象释放*/
     void Release(const char *pzName);
     void Entry();
+    void dump(Printfun callback);
 
 private:
     objKernel(objKernel &) = delete;

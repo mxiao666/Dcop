@@ -29,9 +29,22 @@ objKernel::~objKernel()
         pObj = nullptr;
     }
 }
-objbase *objKernel::InterFace()
+objbase *objKernel::InterFace(const char *pzName)
 {
+    auto iter = OS::find(pzName, m_objList);
+    if (iter != m_objList.end())
+        return iter->second->obj;
     return nullptr;
+}
+void objKernel::dump(Printfun callback)
+{
+    objbase::PrintHead(callback, "objKernel", 48, '=');
+    (void)callback("%-16s %#-16s %-16s\n", "objName", "objPtr", "refCount");
+    for (auto &iter : m_objList)
+    {
+        (void)callback("%-16s %#-16x %-16d\n", iter.first, iter.second->obj, iter.second->refCount);
+    }
+    (void)callback("Tatol: %d\n", m_objList.size());
 }
 objbase *objKernel::Query(const char *pzName)
 {

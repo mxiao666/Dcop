@@ -112,16 +112,16 @@ private:
  * Æä    Ëü  : 
 
 *****************************************************************************/
-#define REG_FUNCTION(Func, Name)                       \
-    class IplugFrameWork##Func : public IplugFrameWork \
-    {                                                  \
-    public:                                            \
-        IplugFrameWork##Func() {}                      \
-        int Init()                                     \
-        {                                              \
-            return Func();                             \
-        }                                              \
-    };                                                 \
-    REG_FUNCTION_PLUS(IplugFrameWork##Func, Name);
+#define REG_FUNCTION(Func, Name)         \
+    class objbase##Func : public objbase \
+    {                                    \
+    public:                              \
+        objbase##Func() {}               \
+        int Init()                       \
+        {                                \
+            return Func();               \
+        }                                \
+    };                                   \
+    REG_FUNCTION_PLUS(objbase##Func, Name);
 
 #endif

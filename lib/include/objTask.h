@@ -4,6 +4,7 @@
 #include <map>
 #include <mutex>
 #include <string.h>
+#include <objbase.h>
 class objPara
 {
 public:
@@ -20,12 +21,12 @@ class objTask
 {
 
 public:
-    objTask(const char *pzName, FunEntry func, objPara **obj);
+    objTask(const char *pzName, FunEntry func, objPara *obj);
     inline const char *Name() { return name; }
     inline int GetId() { return tId; }
     inline void SetId(int id) { tId = id; }
-    inline objPara *Para() { return *m_objPara; }
-    inline void Run() { m_func(*m_objPara); }
+    inline objPara *Para() { return m_objPara; }
+    inline void Run() { m_func(m_objPara); }
     ~objTask();
 
 private:
@@ -34,22 +35,24 @@ private:
     int tId = 0;
     char name[TASK_NAME_LEN] = {0};
     FunEntry m_func;
-    objPara **m_objPara;
+    objPara *m_objPara;
 };
-class objTaskMgr
+
+class objTaskMgr : public objbase
 {
 
 public:
     static objTaskMgr *GetInstance();
-    int addObj(objTask *&obj);
+    int addObj(objTask *obj);
     void delObj(int id);
-    ~objTaskMgr() {}
+    ~objTaskMgr();
+    objTaskMgr();
+    void dump(Printfun callback);
 
 private:
-    objTaskMgr() {}
     objTaskMgr(objTaskMgr &) = delete;
     const objTaskMgr &operator=(const objTaskMgr &) = delete;
-    std::map<int, objTask **> m_objlist;
+    std::map<int, objTask *> m_objlist;
     std::mutex m_lock;
 };
 
@@ -58,7 +61,7 @@ private:
 
 objTask *objTaskEntry(const char *objTaskName,
                       FunEntry func,
-                      objPara **pObjPara,
+                      objPara *pObjPara,
                       const char *file,
                       int len);
 

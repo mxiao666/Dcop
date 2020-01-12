@@ -1,7 +1,7 @@
 /***********************************************************************************
- * 鏂?浠?鍚?  : os_log.c
- * 璐?璐?浜?  : 鍗㈢編瀹? * 鍒涘缓鏃ユ湡   : 2018骞?1鏈?3鏃? * 鏂囦欢鎻忚堪   : 鏃ュ織璁板綍瀹炵幇绫? * 鐗堟潈璇存槑   : Copyright (c) 2008-2018   xx xx xx xx 鎶�鏈湁闄愬叕鍙? * 鍏?   浠?  : 
- * 淇敼鏃ュ織   : 
+ * ??????  : os_log.c
+ * ??????  : 卢美?? * 创建日期   : 2018??1??3?? * 文件描述   : 日志记录实现?? * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公?? * ??   ??  : 
+ * 修改日志   : 
 ***********************************************************************************/
 
 #include "log.h"
@@ -37,7 +37,7 @@ int LogInit(int level, const char *path)
 #else
             512
 #endif
-    ); /* 琛岀紦鍐?*/
+    ); /* 行缓??*/
     debug_backtrace_init();
     return RET_OK;
 }
@@ -53,7 +53,7 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
         return RET_ERR;
     }
 
-    /* ---鏃堕棿鎴?-- */
+    /* ---时间??-- */
     char log_time[LOG_CONTENT_LEN] = {0};
     time_t t = time(NULL);
     struct tm ptm;
@@ -62,14 +62,22 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
 #else
     localtime_s(&ptm, &t);
 #endif
-    sprintf(log_time, "%4d-%02d-%02d %02d:%02d:%02d",
-            ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday, ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
+    snprintf(log_time, LOG_CONTENT_LEN - 1, "%4d-%02d-%02d %02d:%02d:%02d",
+             ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday, ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 
-    /* ---鏂囦欢鍚?--琛屽彿---鍑芥暟鍚?--- */
+    /* ---文件??--行号---函数??--- */
     char log_pos[LOG_CONTENT_LEN] = {0};
-    sprintf(log_pos, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level], FILE_NAME(file), line, func);
+    const char *linuxpos = strrchr(file, '/');
+    const char *winwpso = strrchr(file, '\\');
+    snprintf(log_pos, LOG_CONTENT_LEN - 1, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level],
+             (NULL != strrchr(file, '/'))
+                 ? (strrchr(file, '/') + 1)
+                 : (NULL != strrchr(file, '\\'))
+                       ? (strrchr(file, '\\') + 2)
+                       : file,
+             line, func);
 
-    /* ---鏃ュ織鍐呭--- */
+    /* ---日志内容--- */
     char log_msg[LOG_MESSAGE_LEN] = {0};
     va_list arg_ptr;
     va_start(arg_ptr, format);
@@ -81,7 +89,7 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
     }
     va_end(arg_ptr);
 
-    /* ---瀹屾暣鏃ュ織鎷兼帴--- */
+    /* ---完整日志拼接--- */
     fprintf(log_file, "%s%s%s\n", log_time, log_pos, log_msg);
     return nWrittenBytes;
 }
