@@ -14,6 +14,7 @@ set(syslib
 	src/objTask.cpp
 	src/stacktrace.cpp
 	src/streamhelper.cpp
+	src/clibase.cpp	
 	src/system.cpp)
 # 生成libsys.a静态库 	
 add_library(sys STATIC ${syslib})

@@ -66,15 +66,14 @@ FrameWorkMgrCollector::FrameWorkMgrCollector(FrameWork *F)
  * Æä    Ëü  : 
 
 *****************************************************************************/
-void FrameWorkMgr::RegInit(CallBackFunc callback)
+void FrameWorkMgr::RegInit(CallBackFunc callback, bool isCurinit)
 {
     FrameWork *frmgr = m_Node;
     for (int i = 0; (i < m_NodeCnt) && (NULL != frmgr); i++)
     {
-        if (0 != frmgr->fun->Init())
-        {
-            LVOS_Log(LL_WARNING, "Init module %s fail.", frmgr->ModuleName);
-        }
+        if (isCurinit)
+            if (0 != frmgr->fun->Init())
+                LVOS_Log(LL_WARNING, "Init module %s fail.", frmgr->ModuleName);
         (void)callback(frmgr);
         frmgr = frmgr->Next;
     }

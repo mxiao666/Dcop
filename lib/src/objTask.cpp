@@ -27,7 +27,7 @@ objTaskMgr *objTaskMgr::GetInstance()
 }
 void objTaskMgr::dump(Printfun callback)
 {
-    objbase::PrintHead(callback, "objTaskMgr", 36, '=');
+    objbase::PrintHead(callback, "objTaskMgr", 48);
     (void)callback("%-12s\t%-12s\t%-12s\n",
                    "taskName", "taskId", "taskPtr");
     for (auto &iter : m_objlist)

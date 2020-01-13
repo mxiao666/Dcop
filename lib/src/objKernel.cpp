@@ -38,8 +38,8 @@ objbase *objKernel::InterFace(const char *pzName)
 }
 void objKernel::dump(Printfun callback)
 {
-    objbase::PrintHead(callback, "objKernel", 48, '=');
-    (void)callback("%-16s %#-16s %-16s\n", "objName", "objPtr", "refCount");
+    objbase::PrintHead(callback, "objKernel", 50);
+    (void)callback("%-16s %-16s %-16s\n", "objName", "objPtr", "refCount");
     for (auto &iter : m_objList)
     {
         (void)callback("%-16s %#-16x %-16d\n", iter.first, iter.second->obj, iter.second->refCount);
@@ -71,5 +71,12 @@ void objKernel::Entry()
     FrameWorkMgr::getInstance()->RegInit([](FrameWork *func) {
         if (func)
             g_objKernel->m_objList[func->ModuleName] = new ObjModule((objbase *)(func->fun));
-    });
+    },
+                                         false);
+    for (auto &iter : m_objList)
+    {
+        ObjModule *pObj = iter.second;
+        if (pObj != nullptr)
+            pObj->obj->Init();
+    }
 }

@@ -1,19 +1,30 @@
 #ifndef __OS_CLIBASE__
 #define __OS_CLIBASE__
-#include "os_argclist.h"
+#include "cargclist.h"
+#include "objbase.h"
 
-using Printfun = void (*)(const char *format, ...);
 class CClibase
 {
 public:
     CClibase() {}
-    ~CClibase() {}
+    virtual ~CClibase() {}
     void Help(Printfun func)
     {
-        func("plase man cmd.");
+        (void)func("plase man cmd.");
     }
-    virtual int Set(CAgrcList &inPut, CAgrcList &outPut, bool &bOp = false) = 0;
-    virtual int Get(CAgrcList &inPut, CAgrcList &outPut, bool &bOp = false) = 0;
-    virtual int Add(CAgrcList &inPut, CAgrcList &outPut, bool &bOp = false) = 0;
+    virtual int Set(CAgrcList &inPut, CAgrcList &outPut, bool &bOp) = 0;
+    virtual int Get(CAgrcList &inPut, CAgrcList &outPut, bool &bOp) = 0;
+    virtual int Add(CAgrcList &inPut, CAgrcList &outPut, bool &bOp) = 0;
+};
+class cliMgr : public objbase
+{
+private:
+    std::map<int, CClibase *> m_cmdList;
+
+public:
+    cliMgr() {}
+    ~cliMgr() {}
+    int Dispatch();
+    int Proc();
 };
 #endif

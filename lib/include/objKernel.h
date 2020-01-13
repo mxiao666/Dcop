@@ -34,7 +34,7 @@ public:
     /*引用对象释放*/
     void Release(const char *pzName);
     void Entry();
-    void dump(Printfun callback);
+    void dump(Printfun callback = printf);
 
 private:
     objKernel(objKernel &) = delete;

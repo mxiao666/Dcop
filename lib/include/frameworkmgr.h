@@ -51,7 +51,7 @@ public:
     static FrameWork *m_Node;
     static FrameWork *m_Current;
     static int m_NodeCnt;
-    void RegInit(CallBackFunc);
+    void RegInit(CallBackFunc, bool isCurinit = true);
     static FrameWorkMgr *getInstance();
 
 private:

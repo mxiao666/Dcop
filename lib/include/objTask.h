@@ -47,7 +47,7 @@ public:
     void delObj(int id);
     ~objTaskMgr();
     objTaskMgr();
-    void dump(Printfun callback);
+    void dump(Printfun callback = printf);
 
 private:
     objTaskMgr(objTaskMgr &) = delete;

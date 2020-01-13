@@ -70,10 +70,10 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
     const char *linuxpos = strrchr(file, '/');
     const char *winwpso = strrchr(file, '\\');
     snprintf(log_pos, LOG_CONTENT_LEN - 1, " [%s] [%s:%d] [%s] ", LogLevelStr[--v_level],
-             (NULL != strrchr(file, '/'))
-                 ? (strrchr(file, '/') + 1)
-                 : (NULL != strrchr(file, '\\'))
-                       ? (strrchr(file, '\\') + 2)
+             (NULL != linuxpos)
+                 ? (linuxpos + 1)
+                 : (NULL != winwpso)
+                       ? (winwpso + 2)
                        : file,
              line, func);
 
