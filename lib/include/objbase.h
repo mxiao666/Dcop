@@ -14,7 +14,7 @@ public:
     objbase() : m_debug(0) {}
     virtual ~objbase() {}
     virtual int Init() { return 0; };
-    virtual void dump(Printfun callback = printf) {}
+    virtual void dump(Printfun callback = printf) { (void)callback("Query is NULL.\n"); }
     int GetDebug() { return m_debug; }
     int SetDebug(int value) { return (m_debug = value); }
     virtual void PrintHead(Printfun callback, const char *tableName, int tatol, char split = '-')
