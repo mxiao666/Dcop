@@ -80,9 +80,6 @@
     <ClCompile Include="..\lib\src\cstream.cpp">
       <Filter>源文件\lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\src\frameworkmgr.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\src\log.cpp">
       <Filter>源文件\lib</Filter>
     </ClCompile>

@@ -40,7 +40,6 @@
     <ClCompile Include="..\lib\src\clibase.cpp" />
     <ClCompile Include="..\lib\src\cnotify.cpp" />
     <ClCompile Include="..\lib\src\cstream.cpp" />
-    <ClCompile Include="..\lib\src\frameworkmgr.cpp" />
     <ClCompile Include="..\lib\src\log.cpp" />
     <ClCompile Include="..\lib\src\objbase.cpp" />
     <ClCompile Include="..\lib\src\objKernel.cpp" />
