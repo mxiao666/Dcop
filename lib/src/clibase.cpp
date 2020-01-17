@@ -1,6 +1,7 @@
 #include "clibase.h"
-#include "frameworkmgr.h"
+#include "log.h"
 #include "objKernel.h"
+
 int cliMgr::Dispatch()
 {
     return 0;
@@ -58,4 +59,40 @@ int cliMgr::Proc()
     }
     return 0;
 }
-REG_FUNCTION_PLUS(cliMgr, "cliMgr")
+void cliMgr::dump(Printfun callback)
+{
+    objbase::PrintHead(callback, "cliMgr", 66);
+    (void)callback("%-16s %-16s %-32s\n", "id", "objPtr", "cmd");
+    for (auto &iter : m_cmdList)
+        (void)callback("%#-16x %#-16x %-32s\n", iter.second->cmdModule, iter.second->objCli, iter.first);
+    (void)callback("Tatol: %d\n", m_cmdList.size());
+}
+cliMgr::~cliMgr()
+{
+    for (auto &iter : m_cmdList)
+        if (iter.second != nullptr)
+        {
+            delete iter.second;
+            iter.second = nullptr;
+        }
+}
+int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
+{
+    std::unique_lock<std::mutex> lock{m_reglock};
+    for (auto &iter : m_cmdList)
+        if (OS::equal(pzName, iter.first))
+            return -1;
+    m_cmdList[pzName] = pobj;
+    return 0;
+}
+int cliMgr::Init()
+{
+    FRAMEWORK_BEGINE(CLI)
+    if (0 != frmgr->fun->Init())
+        LVOS_Log(LL_WARNING, "Init CLI module %s fail.", frmgr->ModuleName);
+    FRAMEWORK_END(CLI)
+    return 0;
+}
+INIT_FRAMEWORK(CLI)
+
+REG_FUNCTION_PLUS(cliMgr, "cliMgr");

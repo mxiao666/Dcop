@@ -42,6 +42,7 @@
     <ClCompile Include="..\lib\src\cstream.cpp" />
     <ClCompile Include="..\lib\src\frameworkmgr.cpp" />
     <ClCompile Include="..\lib\src\log.cpp" />
+    <ClCompile Include="..\lib\src\objbase.cpp" />
     <ClCompile Include="..\lib\src\objKernel.cpp" />
     <ClCompile Include="..\lib\src\objTask.cpp" />
     <ClCompile Include="..\lib\src\stacktrace.cpp" />

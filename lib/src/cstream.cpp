@@ -152,7 +152,7 @@ CStream &CStream::Append(const BYTE *buf, DWORD len)
     }
     (void)memcpy_s(m_cbuf + m_curLen, m_len - m_curLen, buf, len);
     m_curLen += len;
-    m_cbuf[m_curLen] ='\0';
+    m_cbuf[m_curLen] = '\0';
     return *this;
 }
 

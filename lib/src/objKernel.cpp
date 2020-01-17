@@ -68,11 +68,10 @@ void objKernel::Release(const char *pzName)
 }
 void objKernel::Entry()
 {
-    FrameWorkMgr::getInstance()->RegInit([](FrameWork *func) {
-        if (func)
-            g_objKernel->m_objList[func->ModuleName] = new ObjModule((objbase *)(func->fun));
-    },
-                                         false);
+    FRAMEWORK_BEGINE(objbase)
+    m_objList[frmgr->ModuleName] = new ObjModule((objbase *)(frmgr->fun));
+    FRAMEWORK_END(objbase)
+
     for (auto &iter : m_objList)
     {
         ObjModule *pObj = iter.second;

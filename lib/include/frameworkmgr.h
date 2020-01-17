@@ -10,118 +10,63 @@
 
 #ifndef __OS_FRAMEWORKMGR__
 #define __OS_FRAMEWORKMGR__
-#include "objbase.h"
 
-typedef objbase *RegFun;
+#define REG_FRAMEWORK(BaseClass, NAME)                               \
+    typedef struct g_##NAME##_FrameWork                              \
+    {                                                                \
+        BaseClass *fun;                                              \
+        const char *ModuleName;                                      \
+        g_##NAME##_FrameWork *Next;                                  \
+    } g_##NAME##_FrameWork;                                          \
+                                                                     \
+    class g_##NAME##_FrameWorkMgr                                    \
+    {                                                                \
+    public:                                                          \
+        static g_##NAME##_FrameWork *m_Node;                         \
+        static g_##NAME##_FrameWork *m_Current;                      \
+        static int m_NodeCnt;                                        \
+                                                                     \
+    private:                                                         \
+        g_##NAME##_FrameWorkMgr(){};                                 \
+    };                                                               \
+    class g_##NAME##_FrameWorkMgrCollector                           \
+    {                                                                \
+    public:                                                          \
+        g_##NAME##_FrameWorkMgrCollector(g_##NAME##_FrameWork *func) \
+        {                                                            \
+            if (NULL == g_##NAME##_FrameWorkMgr::m_Node)             \
+            {                                                        \
+                g_##NAME##_FrameWorkMgr::m_Node = func;              \
+                g_##NAME##_FrameWorkMgr::m_Current = func;           \
+            }                                                        \
+            else                                                     \
+            {                                                        \
+                g_##NAME##_FrameWorkMgr::m_Current->Next = func;     \
+                g_##NAME##_FrameWorkMgr::m_Current = func;           \
+            }                                                        \
+            g_##NAME##_FrameWorkMgr::m_NodeCnt += 1;                 \
+        }                                                            \
+                                                                     \
+    private:                                                         \
+        g_##NAME##_FrameWorkMgrCollector() = delete;                 \
+    };
+#define INIT_FRAMEWORK(NAME)                                         \
+    g_##NAME##_FrameWork *g_##NAME##_FrameWorkMgr::m_Node = NULL;    \
+    g_##NAME##_FrameWork *g_##NAME##_FrameWorkMgr::m_Current = NULL; \
+    int g_##NAME##_FrameWorkMgr::m_NodeCnt = 0;
+#define FRAMEWORK_BEGINE(NAME)                                                        \
+    g_##NAME##_FrameWork *frmgr = g_##NAME##_FrameWorkMgr::m_Node;                    \
+    for (int i = 0; (i < g_##NAME##_FrameWorkMgr::m_NodeCnt) && (NULL != frmgr); i++) \
+    {
 
-/*****************************************************************************
- * 函 数 名  : FrameWork
- * 负 责 人  : 卢美宏
- * 创建日期  : 2018年11月23日
- * 函数功能  : 注册链表结构体
- * 输入参数  : 无
- * 输出参数  : 无
- * 返 回 值  : typedef
- * 调用关系  : 
- * 其    它  : 
+#define FRAMEWORK_END(NAME) \
+    frmgr = frmgr->Next;    \
+    }
 
-*****************************************************************************/
-typedef struct FrameWork
-{
-    RegFun fun;
-    const char *ModuleName;
-    FrameWork *Next;
-} FrameWork;
-typedef void (*CallBackFunc)(FrameWork *);
-/*****************************************************************************
- * 函 数 名  : FrameWorkMgr
- * 负 责 人  : 卢美宏
- * 创建日期  : 2018年11月23日
- * 函数功能  : 链表注册管理类
- * 输入参数  : 无
- * 输出参数  : 无
- * 返 回 值  : 
- * 调用关系  : 
- * 其    它  : 
-
-*****************************************************************************/
-class FrameWorkMgr
-{
-public:
-    static FrameWork *m_Node;
-    static FrameWork *m_Current;
-    static int m_NodeCnt;
-    void RegInit(CallBackFunc, bool isCurinit = true);
-    static FrameWorkMgr *getInstance();
-
-private:
-    FrameWorkMgr(){};
-    FrameWorkMgr(FrameWorkMgr &) = delete;
-    FrameWorkMgr &opertor(FrameWorkMgr &) = delete;
-    static FrameWorkMgr *m_Instance;
-};
-
-/*****************************************************************************
- * 函 数 名  : FrameWorkMgrCollector
- * 负 责 人  : 卢美宏
- * 创建日期  : 2018年11月23日
- * 函数功能  : 注册收集类
- * 输入参数  : 无
- * 输出参数  : 无
- * 返 回 值  : 
- * 调用关系  : 
- * 其    它  : 
-
-*****************************************************************************/
-class FrameWorkMgrCollector
-{
-public:
-    FrameWorkMgrCollector(FrameWork *F);
-
-private:
-    FrameWorkMgrCollector();
-};
-
-/*****************************************************************************
- * 函 数 名  : REG_FUNCTION_PLUS
- * 负 责 人  : 卢美宏
- * 创建日期  : 2018年11月23日
- * 函数功能  : C++自动注册宏
- * 输入参数  : 无
- * 输出参数  : 无
- * 返 回 值  : 
- * 调用关系  : 
- * 其    它  : 
-
-*****************************************************************************/
-#define REG_FUNCTION_PLUS(Class, Name)                              \
-    static FrameWork g_FrameWork_##Class = {new Class, Name, NULL}; \
-    static FrameWorkMgrCollector g_FrameWorkMgrCollector_##Class(&g_FrameWork_##Class);
-
-/*****************************************************************************
- * 函 数 名  : REG_FUNCTION
- * 负 责 人  : 卢美宏
- * 创建日期  : 2018年12月1日
- * 函数功能  : C的方式调用初始化
- * 输入参数  : Class  生成类名
-               Func   被调用的普通函数
-               Name   被调用者名字
- * 输出参数  : 无
- * 返 回 值  : 
- * 调用关系  : 
- * 其    它  : 
-
-*****************************************************************************/
-#define REG_FUNCTION(Func, Name)         \
-    class objbase##Func : public objbase \
-    {                                    \
-    public:                              \
-        objbase##Func() {}               \
-        int Init()                       \
-        {                                \
-            return Func();               \
-        }                                \
-    };                                   \
-    REG_FUNCTION_PLUS(objbase##Func, Name);
+#define FRAMEWORK_REG_FUNCTION(BaseClass, Class, Name)                 \
+    static g_##BaseClass##_FrameWork                                   \
+        g_g_##BaseClass##_FrameWork_##Class = {new Class, Name, NULL}; \
+    static g_##BaseClass##_FrameWorkMgrCollector                       \
+        g_##BaseClass##_FrameWorkMgrCollector_##Class(&g_g_##BaseClass##_FrameWork_##Class);
 
 #endif

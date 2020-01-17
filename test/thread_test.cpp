@@ -22,15 +22,9 @@ int main()
     objKernel *obj = new objKernel;
     obj->Entry();
     CREATE_OBJTASK("test_thread1", test, nullptr);
-    objbase *cli = obj->Query("cliMgr");
+    objbase *cli = obj->InterFace("cliMgr");
     if (cli)
-        ((cliMgr*)cli)->Proc();
-
-    //objbase *p = obj->Query("objTaskMgr");
-    //p->dump();
-    //obj->dump();
-    //obj->Release("getMessage");
-    //std::cout << ((getMessage *)p)->recvMessage(&msg, nullptr, __LINE__, 100) << std::endl;
+        ((cliMgr *)cli)->Proc();
 
     return 0;
 }

@@ -12,18 +12,18 @@
 #include "log.h"
 #include "frameworkmgr.h"
 #include "template.h"
-static objTaskMgr *g_objbase;
+static objTaskMgr *g_objTaskMgr;
 objTaskMgr::objTaskMgr()
 {
-    g_objbase = this;
+    g_objTaskMgr = this;
 }
 objTaskMgr::~objTaskMgr()
 {
-    g_objbase = nullptr;
+    g_objTaskMgr = nullptr;
 }
 objTaskMgr *objTaskMgr::GetInstance()
 {
-    return g_objbase;
+    return g_objTaskMgr;
 }
 void objTaskMgr::dump(Printfun callback)
 {
