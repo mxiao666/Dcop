@@ -1,4 +1,4 @@
-#include "Cnotify.h"
+#include "cnotify.h"
 #include "frameworkmgr.h"
 
 void Cnotify::regReceiver(int iModule, receiver *pRecv)
