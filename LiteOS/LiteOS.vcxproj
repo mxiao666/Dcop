@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\lib\include\cargclist.h" />
     <ClInclude Include="..\lib\include\clibase.h" />
+    <ClInclude Include="..\lib\include\cmdid.h" />
     <ClInclude Include="..\lib\include\cnotify.h" />
     <ClInclude Include="..\lib\include\cstream.h" />
     <ClInclude Include="..\lib\include\frameworkmgr.h" />
@@ -29,12 +30,11 @@
     <ClInclude Include="..\lib\include\objbase.h" />
     <ClInclude Include="..\lib\include\objKernel.h" />
     <ClInclude Include="..\lib\include\objTask.h" />
-    <ClInclude Include="..\lib\include\receiver.h" />
     <ClInclude Include="..\lib\include\stacktrace.h" />
     <ClInclude Include="..\lib\include\streamhelper.h" />
     <ClInclude Include="..\lib\include\system.h" />
+    <ClInclude Include="..\lib\include\template.h" />
     <ClInclude Include="..\lib\include\threadpool.h" />
-    <ClInclude Include="..\test\getmessage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\src\clibase.cpp" />

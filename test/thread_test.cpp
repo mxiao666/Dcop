@@ -7,7 +7,6 @@
 #include "objKernel.h"
 #include "objTask.h"
 #include "log.h"
-#include "getmessage.h"
 #include "clibase.h"
 void *test(objPara *)
 {
@@ -24,7 +23,7 @@ int main()
     CREATE_OBJTASK("test_thread1", test, nullptr);
     objbase *cli = obj->InterFace("cliMgr");
     if (cli)
-        ((cliMgr *)cli)->Proc();
+        ((cliMgr *)cli)->Process();
 
     return 0;
 }

@@ -51,9 +51,6 @@
     <ClInclude Include="..\lib\include\objTask.h">
       <Filter>头文件\lib</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\include\receiver.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
     <ClInclude Include="..\lib\include\stacktrace.h">
       <Filter>头文件\lib</Filter>
     </ClInclude>
@@ -66,8 +63,11 @@
     <ClInclude Include="..\lib\include\threadpool.h">
       <Filter>头文件\lib</Filter>
     </ClInclude>
-    <ClInclude Include="..\test\getmessage.h">
-      <Filter>源文件</Filter>
+    <ClInclude Include="..\lib\include\cmdid.h">
+      <Filter>头文件\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\include\template.h">
+      <Filter>头文件\lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

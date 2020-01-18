@@ -6,6 +6,12 @@
 #include <condition_variable>
 #include <future>
 #include <functional>
+typedef struct _ResTable
+{
+    const char *item;
+    int fmrlen;
+} ResTable;
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 class CClibase
 {
 public:
@@ -13,12 +19,13 @@ public:
     virtual ~CClibase() {}
     virtual void Help(Printfun func)
     {
-        (void)func("plase man cmd.");
+        (void)func("plase man cmd.\n");
     }
     virtual int Set(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
     virtual int Get(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
     virtual int Add(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
     virtual int Init() { return 0; };
+    virtual int ResponseTable(ResTable **tbl) { return 0; };
 };
 
 REG_FRAMEWORK(CClibase, CLI)
@@ -28,10 +35,12 @@ REG_FRAMEWORK(CClibase, CLI)
 typedef struct _cmdObj
 {
     int cmdModule;
+    int cmdid;
     CClibase *objCli;
-    _cmdObj(int cmd, CClibase *obj)
+    _cmdObj(CClibase *obj, int cmdMod, int cmd)
     {
-        cmdModule = cmd;
+        cmdModule = cmdMod;
+        cmdid = cmd;
         objCli = obj;
     }
     ~_cmdObj()
@@ -47,12 +56,17 @@ private:
     std::map<const char *, cmdObj *> m_cmdList;
     std::mutex m_reglock;
     std::mutex m_excelock;
+    cmdObj *FindModule(const char *cmdName);
+    const int CMD_OP_MAX = 3;
+    const char *GET_STR = "get";
+    const char *SET_STR = "set";
+    const char *ADD_STR = "add";
 
 public:
     cliMgr() {}
     ~cliMgr();
-    int Dispatch();
-    int Proc();
+    int Dispatch(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd);
+    int Process();
     void dump(Printfun callback = printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
     int Init();
