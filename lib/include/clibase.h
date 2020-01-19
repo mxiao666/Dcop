@@ -3,9 +3,9 @@
 #include "cargclist.h"
 #include "objbase.h"
 #include "frameworkmgr.h"
+#include "cnotify.h"
 #include <condition_variable>
-#include <future>
-#include <functional>
+#include <queue>
 typedef struct _ResTable
 {
     const char *item;
@@ -36,12 +36,14 @@ typedef struct _cmdObj
 {
     int cmdModule;
     int cmdid;
+    bool bSync;
     CClibase *objCli;
-    _cmdObj(CClibase *obj, int cmdMod, int cmd)
+    _cmdObj(CClibase *obj, int cmdMod, int cmd, bool sync)
     {
         cmdModule = cmdMod;
         cmdid = cmd;
         objCli = obj;
+        bSync = sync;
     }
     ~_cmdObj()
     {
@@ -50,25 +52,53 @@ typedef struct _cmdObj
         objCli = nullptr;
     }
 } cmdObj;
+typedef struct _argcPool
+{
+    CAgrcList *msg;
+    cmdObj *cli;
+    _argcPool(CAgrcList *objmsg, cmdObj *objcli)
+    {
+        msg = objmsg;
+        cli = objcli;
+    }
+    ~_argcPool()
+    {
+        if (msg)
+            delete msg;
+    }
+
+} argcPool;
 class cliMgr : public objbase
 {
 private:
     std::map<const char *, cmdObj *> m_cmdList;
     std::mutex m_reglock;
-    std::mutex m_excelock;
+    Cnotify *m_Cnotify = nullptr;
     cmdObj *FindModule(const char *cmdName);
     const int CMD_OP_MAX = 3;
     const char *GET_STR = "get";
     const char *SET_STR = "set";
     const char *ADD_STR = "add";
 
+    // 任务队列
+    std::queue<argcPool *> tasks;
+    // 同步
+    std::mutex m_lock;
+    // 条件阻塞
+    std::condition_variable cv_task;
+    // 是否关闭提交
+    std::atomic<bool> stoped;
+    //空闲线程数量
+    std::atomic<int> idlThrNum;
+
 public:
-    cliMgr() {}
+    cliMgr();
     ~cliMgr();
-    int Dispatch(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd);
+    int Dispatch(CAgrcList *message, CAgrcList *outmessage, cmdObj *);
     int Process();
     void dump(Printfun callback = printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
     int Init();
+    void AsyncProc();
 };
 #endif

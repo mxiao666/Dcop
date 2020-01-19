@@ -1,7 +1,7 @@
 #include "cnotify.h"
 #include "frameworkmgr.h"
 
-void Cnotify::regReceiver(int iModule, objbase *pRecv)
+void Cnotify::RegReceiver(int iModule, objbase *pRecv)
 {
     if (pRecv != nullptr)
     {
@@ -12,19 +12,29 @@ void Cnotify::regReceiver(int iModule, objbase *pRecv)
         }
     }
 }
+void Cnotify::UnRegReceiver(int iModule)
+{
 
-void Cnotify::sendToAllRecv(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd)
+    auto iter = observerList.find(iModule);
+    if (iter != observerList.end())
+    {
+        observerList.erase(iter);
+    }
+}
+void Cnotify::SendToAll(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd)
 {
     for (auto &iter : observerList)
     {
+        std::unique_lock<std::mutex> lock{m_excelock};
         iter.second->Process(message, outmessage, iModule, iCmd);
     }
 }
-int Cnotify::notify(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd)
+int Cnotify::Notify(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd)
 {
     auto iter = observerList.find(iModule);
     if (iter != observerList.end() && iModule == iter->first)
     {
+        std::unique_lock<std::mutex> lock{m_excelock};
         return iter->second->Process(message, outmessage, iModule, iCmd);
     }
     return -1;

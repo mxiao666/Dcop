@@ -44,14 +44,12 @@ int LogInit(int level, const char *path)
 
 int WriteLog(int v_level, int line, const char *func, const char *file, const char *format, ...)
 {
+    if (log_file == nullptr)
+        return RET_ERR;
     if (v_level > LL_FATAL_ERROR || v_level < LL_DEBUG)
-    {
         return RET_ERR;
-    }
     if (log_level > v_level)
-    {
         return RET_ERR;
-    }
 
     /* ---Ê±¼ä??-- */
     char log_time[LOG_CONTENT_LEN] = {0};

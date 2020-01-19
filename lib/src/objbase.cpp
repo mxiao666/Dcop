@@ -6,7 +6,7 @@ void objbase::dump(Printfun callback)
 void objbase::PrintHead(Printfun callback, const char *tableName, int tatol, char split)
 {
     (void)callback("\n%*s\n", tatol / 2 + 1, tableName);
-    PrintEnd(callback, tatol, split);
+    //PrintEnd(callback, tatol, split);
 }
 void objbase::PrintEnd(Printfun callback, int tatol, char split)
 {

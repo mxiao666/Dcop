@@ -5,6 +5,7 @@
 #include <mutex>
 #include <string.h>
 #include <objbase.h>
+#include "macro_define.h"
 class objPara
 {
 public:
@@ -23,8 +24,8 @@ class objTask
 public:
     objTask(const char *pzName, FunEntry func, objPara *obj);
     inline const char *Name() { return name; }
-    inline int GetId() { return tId; }
-    inline void SetId(int id) { tId = id; }
+    inline u64 GetId() { return tId; }
+    inline void SetId(u64 id) { tId = id; }
     inline objPara *Para() { return m_objPara; }
     inline void Run() { m_func(m_objPara); }
     ~objTask();
@@ -32,7 +33,7 @@ public:
 private:
     objTask() = delete;
     objTask(objTask &) = delete;
-    int tId = 0;
+    u64 tId = 0;
     char name[TASK_NAME_LEN] = {0};
     FunEntry m_func;
     objPara *m_objPara;
@@ -44,7 +45,7 @@ class objTaskMgr : public objbase
 public:
     static objTaskMgr *GetInstance();
     int addObj(objTask *obj);
-    void delObj(int id);
+    void delObj(u64 id);
     ~objTaskMgr();
     objTaskMgr();
     void dump(Printfun callback = printf);
@@ -52,7 +53,7 @@ public:
 private:
     objTaskMgr(objTaskMgr &) = delete;
     const objTaskMgr &operator=(const objTaskMgr &) = delete;
-    std::map<int, objTask *> m_objlist;
+    std::map<u64, objTask *> m_objlist;
     std::mutex m_lock;
 };
 

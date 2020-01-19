@@ -20,7 +20,6 @@ int main()
 
     objKernel *obj = new objKernel;
     obj->Entry();
-    CREATE_OBJTASK("test_thread1", test, nullptr);
     objbase *cli = obj->InterFace("cliMgr");
     if (cli)
         ((cliMgr *)cli)->Process();

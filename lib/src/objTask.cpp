@@ -27,13 +27,13 @@ objTaskMgr *objTaskMgr::GetInstance()
 }
 void objTaskMgr::dump(Printfun callback)
 {
-    objbase::PrintHead(callback, "objTaskMgr", 48);
-    (void)callback("%-12s\t%-12s\t%-12s\n",
+    objbase::PrintHead(callback, "objTaskMgr", 54);
+    (void)callback("%-12s %-16s %-12s\n",
                    "taskName", "taskId", "taskPtr");
     for (auto &iter : m_objlist)
     {
         if (iter.second != nullptr)
-            (void)callback("%-12s\t%-12d\t%#-12x\n",
+            (void)callback("%-12s %#-16x %#-12x\n",
                            iter.second->Name(),
                            iter.second->GetId(),
                            iter.second);
@@ -43,7 +43,7 @@ void objTaskMgr::dump(Printfun callback)
 int objTaskMgr::addObj(objTask *obj)
 {
     auto iter = m_objlist.find(obj->GetId());
-    if (iter != m_objlist.end())
+    if ((iter != m_objlist.end()) && (m_objlist.size() != 0))
     {
         return -1;
     }
@@ -51,7 +51,7 @@ int objTaskMgr::addObj(objTask *obj)
     m_objlist[obj->GetId()] = obj;
     return 0;
 }
-void objTaskMgr::delObj(int id)
+void objTaskMgr::delObj(u64 id)
 {
     auto iter = m_objlist.find(id);
     if (iter != m_objlist.end())
@@ -87,13 +87,13 @@ objTask *objTaskEntry(const char *objTaskName,
             std::string stid = oss.str();
             obj->SetId(std::stoull(stid));
 #endif
-            //objTaskMgr::GetInstance()->addObj(obj);
+            objTaskMgr::GetInstance()->addObj(obj);
             obj->Run();
             objTaskMgr::GetInstance()->delObj(obj->GetId());
         }
         return (void *)0;
     };
-    objTaskMgr::GetInstance()->addObj(obj);
+    //objTaskMgr::GetInstance()->addObj(obj);
 #ifndef __WIN32__
     pthread_t thread_id;
     pthread_attr_t attr;

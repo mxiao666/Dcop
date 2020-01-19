@@ -25,7 +25,7 @@ class cmdTest : public CClibase
     {
         cliMgr *cli = reinterpret_cast<cliMgr *>(g_objKernel->InterFace("cliMgr"));
         if (cli)
-            cli->RegCmd("get-test", new cmdObj(this, MODELU_GET_TEST, CMD_GET_TEST));
+            cli->RegCmd("get-test", new cmdObj(this, MODELU_GET_TEST, CMD_GET_TEST, true));
         return 0;
     }
     int ResponseTable(ResTable **tbl)
@@ -54,7 +54,7 @@ public:
     {
         Cnotify *obj = reinterpret_cast<Cnotify *>(g_objKernel->InterFace("Cnotify"));
         if (obj)
-            obj->regReceiver(MODELU_GET_TEST, this);
+            obj->RegReceiver(MODELU_GET_TEST, this);
         return 0;
     }
 };

@@ -1,14 +1,67 @@
 #include "clibase.h"
 #include "log.h"
 #include "objKernel.h"
-#include "cnotify.h"
-int cliMgr::Dispatch(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd)
+#include "objTask.h"
+int cliMgr::Dispatch(CAgrcList *inMessage, CAgrcList *outMessage, cmdObj *pcmdObj)
 {
-    std::unique_lock<std::mutex> lock{m_excelock};
-    Cnotify *obj = reinterpret_cast<Cnotify *>(g_objKernel->InterFace("Cnotify"));
-    if (obj)
-        return obj->notify(message, outmessage, iModule, iCmd);
-    return -1;
+
+    if (pcmdObj->cmdModule == 0)
+    {
+        m_Cnotify->SendToAll(inMessage, outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
+        return 0;
+    }
+    int iRet = m_Cnotify->Notify(inMessage, outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
+    if (iRet != 0)
+    {
+        printf("Dispatch is process error:%#16x\n", iRet);
+    }
+    ResTable *ptbl = nullptr;
+    int num = pcmdObj->objCli->ResponseTable(&ptbl);
+    if (ptbl == nullptr)
+        return iRet;
+    CAgrcList outinfo;
+    printf("\n");
+    for (int i = 0; i < num; i++)
+    {
+        printf("%-*s", ptbl[i].fmrlen, ptbl[i].item);
+        CStream framtlen;
+        framtlen << (WORD)ptbl[i].fmrlen;
+        outinfo.addAgrc(ptbl[i].item, (const char *)framtlen.GetBuff());
+    }
+    printf("\n");
+    for (int i = 0; i < outMessage->GetCount(); i++)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            printf("%-*s", ptbl[i].fmrlen, outMessage->GetAgrc(ptbl[i].item)->GetBuff());
+            printf("\n");
+        }
+    }
+    printf("Command response %d line record\n", outMessage->GetCount());
+    return iRet;
+}
+void cliMgr::AsyncProc()
+{
+    while (!this->stoped)
+    {
+        argcPool *message = nullptr;
+        {
+            std::unique_lock<std::mutex> lock{this->m_lock};
+
+            this->cv_task.wait(lock,
+                               [this] {
+                                   return this->stoped.load() || !this->tasks.empty();
+                               });
+            if (this->stoped && this->tasks.empty())
+                return;
+            message = this->tasks.front(); // 取一个 task
+            this->tasks.pop();
+        }
+        idlThrNum--;
+        CAgrcList outmessage;
+        (void)Dispatch(message->msg, &outmessage, message->cli);
+        idlThrNum++;
+    }
 }
 namespace OS
 {
@@ -42,7 +95,7 @@ int cliMgr::Process()
         const char *pos = strchr(name, ':');
         CStream cmd;
         CStream argc;
-        CAgrcList inMessage;
+        CAgrcList *inMessage = new CAgrcList;
         CAgrcList outMessage;
         CAgrcList cliMessage;
         if (pos != nullptr)
@@ -84,15 +137,15 @@ int cliMgr::Process()
         {
             if (OS::equal((char *)cmd.GetBuff(), GET_STR, CMD_OP_MAX))
             {
-                iRet = pcmdObj->objCli->Get(&inMessage, &cliMessage, &cliOp);
+                iRet = pcmdObj->objCli->Get(inMessage, &cliMessage, &cliOp);
             }
             else if (OS::equal((char *)cmd.GetBuff(), SET_STR, CMD_OP_MAX))
             {
-                iRet = pcmdObj->objCli->Get(&inMessage, &cliMessage, &cliOp);
+                iRet = pcmdObj->objCli->Get(inMessage, &cliMessage, &cliOp);
             }
             else if (OS::equal((char *)cmd.GetBuff(), ADD_STR, CMD_OP_MAX))
             {
-                iRet = pcmdObj->objCli->Get(&inMessage, &cliMessage, &cliOp);
+                iRet = pcmdObj->objCli->Get(inMessage, &cliMessage, &cliOp);
             }
             else
             {
@@ -108,37 +161,17 @@ int cliMgr::Process()
             printf("Cmd is unregister.\n");
             continue;
         }
-
-        iRet = Dispatch((cliOp == false) ? &inMessage : &cliMessage, &outMessage,
-                        pcmdObj->cmdModule, pcmdObj->cmdid);
-        if (iRet != 0)
+        if (pcmdObj)
         {
-            printf("Dispatch is process error:%#16x\n", iRet);
+            argcPool *pool = new argcPool(inMessage, pcmdObj);
+            std::lock_guard<std::mutex> lock{m_lock};
+            tasks.emplace(pool);
+            cv_task.notify_one(); // 唤醒一个线程执行
         }
         else
         {
-            ResTable *ptbl = nullptr;
-            int num = pcmdObj->objCli->ResponseTable(&ptbl);
-            if (ptbl == nullptr)
-                continue;
-            CAgrcList outinfo;
-            for (int i = 0; i < num; i++)
-            {
-                printf("%-*s", ptbl[i].fmrlen, ptbl[i].item);
-                CStream framtlen;
-                framtlen << (WORD)ptbl[i].fmrlen;
-                outinfo.addAgrc(ptbl[i].item, (const char *)framtlen.GetBuff());
-            }
-            printf("\n");
-            for (int i = 0; i < outMessage.GetCount(); i++)
-            {
-                for (int i = 0; i < num; i++)
-                {
-                    printf("%-*s", ptbl[i].fmrlen, outMessage.GetAgrc(ptbl[i].item)->GetBuff());
-                    printf("\n");
-                }
-            }
-            printf("Command response %d line record\n", outMessage.GetCount());
+            iRet = Dispatch((cliOp == false) ? inMessage : &cliMessage, &outMessage, pcmdObj);
+            delete inMessage;
         }
     }
     return 0;
@@ -166,6 +199,13 @@ cliMgr::~cliMgr()
             delete iter.second;
             iter.second = nullptr;
         }
+    stoped.store(true);
+    cv_task.notify_all(); // 唤醒所有线程执行
+}
+cliMgr::cliMgr()
+{
+    stoped = false;
+    idlThrNum = 10;
 }
 int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
 {
@@ -178,10 +218,26 @@ int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
 }
 int cliMgr::Init()
 {
+    m_Cnotify = reinterpret_cast<Cnotify *>(g_objKernel->Query("Cnotify"));
     FRAMEWORK_BEGINE(CLI)
     if (0 != frmgr->fun->Init())
         LVOS_Log(LL_WARNING, "Init CLI module %s fail.", frmgr->ModuleName);
     FRAMEWORK_END(CLI)
+    for (int i = 0; i < idlThrNum; i++)
+    {
+        const int ibufmaxlen = 12;
+        char buf[ibufmaxlen] = {0};
+        snprintf(buf, ibufmaxlen - 1, "clitask%d", i);
+        objPara *pObjPara = new objPara(this);
+        CREATE_OBJTASK(buf, [](objPara *pobjPara) {
+            cliMgr *obj = reinterpret_cast<cliMgr *>(pobjPara->GetPara());
+            if (obj)
+                obj->AsyncProc();
+            return (void *)0;
+        },
+                       pObjPara);
+    }
+
     return 0;
 }
 INIT_FRAMEWORK(CLI)
