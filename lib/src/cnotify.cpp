@@ -47,4 +47,4 @@ void Cnotify::dump(Printfun callback)
         (void)callback("%-12d %#-16x\n", iter.first, iter.second);
     (void)callback("Tatol: %d\n", observerList.size());
 }
-REG_FUNCTION_PLUS(Cnotify, "Cnotify")
+REG_FUNCTION_PLUS(Cnotify)

@@ -34,7 +34,7 @@ class cmdTest : public CClibase
         return ARRAY_SIZE(reptbl);
     };
 };
-CMD_REG_FUNCTION(cmdTest, "cmdTest")
+CMD_REG_FUNCTION(cmdTest)
 
 class ifBoard : public objbase
 {
@@ -58,4 +58,4 @@ public:
         return 0;
     }
 };
-REG_FUNCTION_PLUS(ifBoard, "ifBoard")
+REG_FUNCTION_PLUS(ifBoard)

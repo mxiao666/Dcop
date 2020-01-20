@@ -27,9 +27,9 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_OUTPUT_DIR}/bin)
 add_subdirectory(${PROJECT_BINARY_DIR}/../lib lib.out)
 
 # 生成可执行文件
-add_executable(thread_test 
+add_executable(demo 
 	getmessage.cpp
-	thread_test.cpp)
+	demo.cpp)
 
 #连接成最后的可执行文件	
-target_link_libraries(thread_test sys)
+target_link_libraries(demo sys)

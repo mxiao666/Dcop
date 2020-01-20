@@ -28,9 +28,9 @@ public:
     virtual int ResponseTable(ResTable **tbl) { return 0; };
 };
 
-REG_FRAMEWORK(CClibase, CLI)
-#define CMD_REG_FUNCTION(Class, Name) \
-    FRAMEWORK_REG_FUNCTION(CLI, Class, Name)
+REG_FRAMEWORK(CClibase)
+#define CMD_REG_FUNCTION(Class) \
+    FRAMEWORK_REG_FUNCTION(CClibase, Class)
 
 typedef struct _cmdObj
 {

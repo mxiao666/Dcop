@@ -65,7 +65,7 @@ void objTaskMgr::delObj(u64 id)
         m_objlist.erase(iter);
     }
 }
-REG_FUNCTION_PLUS(objTaskMgr, "objTaskMgr")
+REG_FUNCTION_PLUS(objTaskMgr)
 objTask *objTaskEntry(const char *objTaskName,
                       FunEntry func,
                       objPara *pObjPara,

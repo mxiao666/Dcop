@@ -8,12 +8,7 @@
 #include "objTask.h"
 #include "log.h"
 #include "clibase.h"
-void *test(objPara *)
-{
-    while (1)
-        ;
-    return (void *)0;
-}
+
 int main()
 {
     LogInit(LL_DEBUG);
@@ -23,6 +18,6 @@ int main()
     objbase *cli = obj->InterFace("cliMgr");
     if (cli)
         ((cliMgr *)cli)->Process();
-
+    delete obj;
     return 0;
 }

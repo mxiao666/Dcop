@@ -22,7 +22,7 @@ public:
     virtual void PrintEnd(Printfun callback, int tatol, char split = '-');
     virtual int Process(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd) { return 0; };
 };
-REG_FRAMEWORK(objbase, objbase)
-#define REG_FUNCTION_PLUS(Class, Name) \
-    FRAMEWORK_REG_FUNCTION(objbase, Class, Name)
+REG_FRAMEWORK(objbase)
+#define REG_FUNCTION_PLUS(Class) \
+    FRAMEWORK_REG_FUNCTION(objbase, Class)
 #endif

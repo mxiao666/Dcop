@@ -11,10 +11,10 @@
 #ifndef __OS_FRAMEWORKMGR__
 #define __OS_FRAMEWORKMGR__
 
-#define REG_FRAMEWORK(BaseClass, NAME)                               \
+#define REG_FRAMEWORK(NAME)                                          \
     typedef struct g_##NAME##_FrameWork                              \
     {                                                                \
-        BaseClass *fun;                                              \
+        NAME *fun;                                                   \
         const char *ModuleName;                                      \
         g_##NAME##_FrameWork *Next;                                  \
     } g_##NAME##_FrameWork;                                          \
@@ -63,10 +63,10 @@
     frmgr = frmgr->Next;    \
     }
 
-#define FRAMEWORK_REG_FUNCTION(BaseClass, Class, Name)                 \
-    static g_##BaseClass##_FrameWork                                   \
-        g_g_##BaseClass##_FrameWork_##Class = {new Class, Name, NULL}; \
-    static g_##BaseClass##_FrameWorkMgrCollector                       \
+#define FRAMEWORK_REG_FUNCTION(BaseClass, Class)                         \
+    static g_##BaseClass##_FrameWork                                     \
+        g_g_##BaseClass##_FrameWork_##Class = {new Class, #Class, NULL}; \
+    static g_##BaseClass##_FrameWorkMgrCollector                         \
         g_##BaseClass##_FrameWorkMgrCollector_##Class(&g_g_##BaseClass##_FrameWork_##Class);
 
 #endif

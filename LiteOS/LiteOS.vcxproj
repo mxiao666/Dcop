@@ -37,6 +37,8 @@
     <ClInclude Include="..\lib\include\threadpool.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\demo\demo.cpp" />
+    <ClCompile Include="..\demo\getmessage.cpp" />
     <ClCompile Include="..\lib\src\clibase.cpp" />
     <ClCompile Include="..\lib\src\cnotify.cpp" />
     <ClCompile Include="..\lib\src\cstream.cpp" />
@@ -47,8 +49,6 @@
     <ClCompile Include="..\lib\src\stacktrace.cpp" />
     <ClCompile Include="..\lib\src\streamhelper.cpp" />
     <ClCompile Include="..\lib\src\system.cpp" />
-    <ClCompile Include="..\test\getmessage.cpp" />
-    <ClCompile Include="..\test\thread_test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

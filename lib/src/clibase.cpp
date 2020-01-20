@@ -219,10 +219,10 @@ int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
 int cliMgr::Init()
 {
     m_Cnotify = reinterpret_cast<Cnotify *>(g_objKernel->Query("Cnotify"));
-    FRAMEWORK_BEGINE(CLI)
+    FRAMEWORK_BEGINE(CClibase)
     if (0 != frmgr->fun->Init())
         LVOS_Log(LL_WARNING, "Init CLI module %s fail.", frmgr->ModuleName);
-    FRAMEWORK_END(CLI)
+    FRAMEWORK_END(CClibase)
     for (int i = 0; i < idlThrNum; i++)
     {
         const int ibufmaxlen = 12;
@@ -240,6 +240,6 @@ int cliMgr::Init()
 
     return 0;
 }
-INIT_FRAMEWORK(CLI)
+INIT_FRAMEWORK(CClibase)
 
-REG_FUNCTION_PLUS(cliMgr, "cliMgr");
+REG_FUNCTION_PLUS(cliMgr);
