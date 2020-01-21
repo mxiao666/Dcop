@@ -47,5 +47,14 @@ private:
     int m_count;
     std::map<const char *, CStream *> m_arglist;
 };
-
+typedef struct _RspMsg
+{
+    CAgrcList *msg;
+    int count;
+    ~_RspMsg()
+    {
+        if (msg)
+            delete[] msg;
+    }
+} RspMsg;
 #endif

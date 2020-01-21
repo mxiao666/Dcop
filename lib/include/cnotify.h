@@ -13,9 +13,9 @@ public:
     Cnotify(){};
     virtual ~Cnotify(){};
     void UnRegReceiver(int iModule);
-    void SendToAll(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd);
+    void SendToAll(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd);
     void RegReceiver(int iModule, objbase *pRecv);
-    int Notify(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd);
+    int Notify(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd);
     void dump(Printfun callback);
 
 private:

@@ -2,42 +2,50 @@
 #include "log.h"
 #include "objKernel.h"
 #include "objTask.h"
-int cliMgr::Dispatch(CAgrcList *inMessage, CAgrcList *outMessage, cmdObj *pcmdObj)
+int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj)
 {
 
+    RspMsg outMessage;
     if (pcmdObj->cmdModule == 0)
     {
-        m_Cnotify->SendToAll(inMessage, outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
+        m_Cnotify->SendToAll(inMessage, &outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
         return 0;
     }
-    int iRet = m_Cnotify->Notify(inMessage, outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
+    int iRet = m_Cnotify->Notify(inMessage, &outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
     if (iRet != 0)
     {
         printf("Dispatch is process error:%#16x\n", iRet);
-    }
-    ResTable *ptbl = nullptr;
-    int num = pcmdObj->objCli->ResponseTable(&ptbl);
-    if (ptbl == nullptr)
         return iRet;
-    CAgrcList outinfo;
-    printf("\n");
-    for (int i = 0; i < num; i++)
-    {
-        printf("%-*s", ptbl[i].fmrlen, ptbl[i].item);
-        CStream framtlen;
-        framtlen << (WORD)ptbl[i].fmrlen;
-        outinfo.addAgrc(ptbl[i].item, (const char *)framtlen.GetBuff());
     }
-    printf("\n");
-    for (int i = 0; i < outMessage->GetCount(); i++)
+    if (outMessage.count == 0 || outMessage.msg == nullptr)
+        return iRet;
+
+    ResTable *ptbl = nullptr;
+    pcmdObj->objCli->ResponseTable(&ptbl);
+    if (ptbl == nullptr || ptbl->count == 0 || ptbl->tblBody == nullptr)
+        return iRet;
+    CStream outinfo;
+    int totallen = 0;
+    for (int i = 0; i < ptbl->count; i++)
     {
-        for (int i = 0; i < num; i++)
+        const int maxlen = 16;
+        char buf[maxlen] = {0};
+        int len = snprintf(buf, maxlen, "%-*s", ptbl->tblBody[i].fmrlen, ptbl->tblBody[i].item);
+        outinfo.Append((const BYTE *)buf, len);
+        totallen += ptbl->tblBody[i].fmrlen;
+    }
+    printf("\n%*s\n%s\n", totallen / 2, ptbl->tblName, outinfo.GetBuff());
+    for (int i = 0; i < outMessage.count; i++)
+    {
+        for (int j = 0; j < ptbl->count; j++)
         {
-            printf("%-*s", ptbl[i].fmrlen, outMessage->GetAgrc(ptbl[i].item)->GetBuff());
-            printf("\n");
+            printf("%-*s",
+                   ptbl->tblBody[j].fmrlen,
+                   outMessage.msg[i].GetAgrc(ptbl->tblBody[j].item)->GetBuff());
         }
+        printf("\n");
     }
-    printf("Command response %d line record\n", outMessage->GetCount());
+    printf("Command response %d line record\n", outMessage.count);
     return iRet;
 }
 void cliMgr::AsyncProc()
@@ -58,8 +66,7 @@ void cliMgr::AsyncProc()
             this->tasks.pop();
         }
         idlThrNum--;
-        CAgrcList outmessage;
-        (void)Dispatch(message->msg, &outmessage, message->cli);
+        (void)Dispatch(message->msg, message->cli);
         idlThrNum++;
     }
 }
@@ -170,7 +177,7 @@ int cliMgr::Process()
         }
         else
         {
-            iRet = Dispatch((cliOp == false) ? inMessage : &cliMessage, &outMessage, pcmdObj);
+            iRet = Dispatch((cliOp == false) ? inMessage : &cliMessage, pcmdObj);
             delete inMessage;
         }
     }

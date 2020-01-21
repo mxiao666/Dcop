@@ -20,7 +20,7 @@ public:
     int SetDebug(int value) { return (m_debug = value); }
     virtual void PrintHead(Printfun callback, const char *tableName, int tatol, char split = '-');
     virtual void PrintEnd(Printfun callback, int tatol, char split = '-');
-    virtual int Process(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd) { return 0; };
+    virtual int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd) { return 0; };
 };
 REG_FRAMEWORK(objbase)
 #define REG_FUNCTION_PLUS(Class) \

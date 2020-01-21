@@ -6,10 +6,16 @@
 #include "cnotify.h"
 #include <condition_variable>
 #include <queue>
-typedef struct _ResTable
+typedef struct _TblBody
 {
     const char *item;
     int fmrlen;
+} TblBody;
+typedef struct _ResTable
+{
+    const char *tblName;
+    TblBody * tblBody;
+    int count;
 } ResTable;
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 class CClibase
@@ -90,11 +96,11 @@ private:
     std::atomic<bool> stoped;
     //空闲线程数量
     std::atomic<int> idlThrNum;
+    int Dispatch(CAgrcList *message, cmdObj *);
 
 public:
     cliMgr();
     ~cliMgr();
-    int Dispatch(CAgrcList *message, CAgrcList *outmessage, cmdObj *);
     int Process();
     void dump(Printfun callback = printf);
     int RegCmd(const char *pzName, cmdObj *pobj);

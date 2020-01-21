@@ -3,10 +3,12 @@
 #include "objKernel.h"
 #include "cnotify.h"
 #include "cmdid.h"
-static ResTable reptbl[] =
+static TblBody tblbody[] =
     {
-        {"ret", 8},
+        {"status", 8},
+        {"error", 8},
 };
+ResTable reptbl = {"TEST", tblbody, ARRAY_SIZE(tblbody)};
 class cmdTest : public CClibase
 {
     int Set(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)
@@ -30,8 +32,8 @@ class cmdTest : public CClibase
     }
     int ResponseTable(ResTable **tbl)
     {
-        *tbl = reptbl;
-        return ARRAY_SIZE(reptbl);
+        *tbl = &reptbl;
+        return 1;
     };
 };
 CMD_REG_FUNCTION(cmdTest)
@@ -40,10 +42,13 @@ class ifBoard : public objbase
 {
 
 public:
-    int Process(CAgrcList *message, CAgrcList *outmessage, int iModule, int iCmd)
+    int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
     {
-        outmessage->addAgrc("ret", "ok");
-        outmessage->addCount();
+        CAgrcList *list = new CAgrcList[1];
+        list[0].addAgrc("status", "ok");
+        list[0].addAgrc("error", "err");
+        outmessage->count = 1;
+        outmessage->msg = list;
         return 0;
     }
     void dump(Printfun callback = printf)
