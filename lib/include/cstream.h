@@ -11,6 +11,7 @@ public:
     CStream(BYTE *buf, DWORD len);
     CStream(const BYTE *buf);
     BYTE *GetBuff();
+    char *c_str(){ return (char*)m_cbuf;}
     inline DWORD length()
     {
         return m_curLen;

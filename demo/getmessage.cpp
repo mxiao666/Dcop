@@ -4,9 +4,9 @@
 #include "cnotify.h"
 #include "cmdid.h"
 static TblBody tblbody[] =
-    {
-        {"status", 8},
-        {"error", 8},
+{
+    {"status", 8},
+    {"error", 8},
 };
 ResTable reptbl = {"TEST", tblbody, ARRAY_SIZE(tblbody)};
 class cmdTest : public CClibase
@@ -27,7 +27,10 @@ class cmdTest : public CClibase
     {
         cliMgr *cli = reinterpret_cast<cliMgr *>(g_objKernel->InterFace("cliMgr"));
         if (cli)
-            cli->RegCmd("get-test", new cmdObj(this, MODELU_GET_TEST, CMD_GET_TEST, true));
+            {
+                cli->RegCmd("get-test-sync", new cmdObj(this, MODELU_GET_TEST, CMD_GET_TEST, true));
+                cli->RegCmd("get-test-async", new cmdObj(this, MODELU_GET_TEST, CMD_GET_TEST, false));
+            }
         return 0;
     }
     int ResponseTable(ResTable **tbl)
@@ -45,10 +48,24 @@ public:
     int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
     {
         CAgrcList *list = new CAgrcList[1];
-        list[0].addAgrc("status", "ok");
-        list[0].addAgrc("error", "err");
-        outmessage->count = 1;
-        outmessage->msg = list;
+        CStream * stat = message->GetAgrc("status");
+        CStream * err = message->GetAgrc("error");
+        list[0].addAgrc("status", stat != nullptr ? stat->c_str() : "null");
+        list[0].addAgrc("error", err != nullptr ? err->c_str() : "null");
+        if (outmessage != nullptr)
+        {
+            outmessage->count = 1;
+            outmessage->msg = list;
+        }
+        else
+        {
+            RspMsg  message;
+            message.count = 1;
+            message.msg = list;
+            cliMgr *cli = reinterpret_cast<cliMgr*>(g_objKernel->InterFace("cliMgr"));
+            if (cli)
+                cli->Report(&message, iCmd);
+        }
         return 0;
     }
     void dump(Printfun callback = printf)

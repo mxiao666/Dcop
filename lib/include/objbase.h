@@ -2,6 +2,7 @@
 #define __OBJBASE_H__
 #include <atomic>
 #include <stdio.h>
+#include <condition_variable>
 #include "cargclist.h"
 #include "frameworkmgr.h"
 typedef int (*Printfun)(const char *format, ...);
@@ -10,6 +11,7 @@ class objbase
 {
 private:
     std::atomic<int> m_debug;
+    std::mutex m_synclock;
 
 public:
     objbase() : m_debug(0) {}

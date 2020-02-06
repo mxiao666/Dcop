@@ -4,8 +4,6 @@
 #include "objbase.h"
 #include "frameworkmgr.h"
 #include "cnotify.h"
-#include <condition_variable>
-#include <queue>
 typedef struct _TblBody
 {
     const char *item;
@@ -58,22 +56,7 @@ typedef struct _cmdObj
         objCli = nullptr;
     }
 } cmdObj;
-typedef struct _argcPool
-{
-    CAgrcList *msg;
-    cmdObj *cli;
-    _argcPool(CAgrcList *objmsg, cmdObj *objcli)
-    {
-        msg = objmsg;
-        cli = objcli;
-    }
-    ~_argcPool()
-    {
-        if (msg)
-            delete msg;
-    }
 
-} argcPool;
 class cliMgr : public objbase
 {
 private:
@@ -85,17 +68,6 @@ private:
     const char *GET_STR = "get";
     const char *SET_STR = "set";
     const char *ADD_STR = "add";
-
-    // 任务队列
-    std::queue<argcPool *> tasks;
-    // 同步
-    std::mutex m_lock;
-    // 条件阻塞
-    std::condition_variable cv_task;
-    // 是否关闭提交
-    std::atomic<bool> stoped;
-    //空闲线程数量
-    std::atomic<int> idlThrNum;
     int Dispatch(CAgrcList *message, cmdObj *);
 
 public:
@@ -105,6 +77,6 @@ public:
     void dump(Printfun callback = printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
     int Init();
-    void AsyncProc();
+    int Report(RspMsg *outMessage, int cmd);    
 };
 #endif
