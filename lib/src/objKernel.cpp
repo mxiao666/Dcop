@@ -78,4 +78,13 @@ void objKernel::Entry()
         if (pObj != nullptr)
             pObj->obj->Init();
     }
+    /*启动循环处理*/
+    if(m_EntryFunc)
+        m_EntryFunc();
 }
+void objKernel::Init(void (*EntryFunc)())
+{
+    if (EntryFunc)
+        m_EntryFunc = EntryFunc;
+}
+

@@ -13,7 +13,7 @@ int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj)
         {
             iRet = m_Cnotify->Notify(inMessage, &outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
             if (iRet == 0)
-                iRet = Report(&outMessage, pcmdObj->cmdid);            
+                iRet = Report(&outMessage, pcmdObj->cmdid);
         }
         else
         {
@@ -121,12 +121,13 @@ int cliMgr::Process()
         if (pos != nullptr && ++pos != nullptr)
         {
             argc.Append((BYTE *)pos, strlen(pos));
-            // 提取参数列表  
+            // 提取参数列表
             char delims[] = ",";
             char *result = NULL;
             char *argcpos = NULL;
             result = strtok(pos, delims);
-            while(result != NULL) {
+            while(result != NULL)
+            {
                 argcpos = strstr(result, "=");
                 if (argcpos != nullptr)
                 {
@@ -134,7 +135,7 @@ int cliMgr::Process()
                     if (strlen(argcpos) > 0)
                         inMessage.addAgrc(result, argcpos);
                 }
-            result = strtok(NULL, delims);
+                result = strtok(NULL, delims);
             }
         }
         if (OS::equal((char *)cmd.GetBuff(), "q") ||
@@ -166,7 +167,7 @@ int cliMgr::Process()
                 dump();
             continue;
         }
-        
+
         pcmdObj = FindModule((char *)cmd.GetBuff());
         int iRet = -1;
         bool cliOp = false;
@@ -204,7 +205,7 @@ int cliMgr::Process()
         if (iRet != 0)
         {
             printf("Dispatch is process error:%#16x\n", iRet);
-        }        
+        }
     }
     return 0;
 }
@@ -251,7 +252,13 @@ int cliMgr::Init()
     if (0 != frmgr->fun->Init())
         LVOS_Log(LL_WARNING, "Init CLI module %s fail.", frmgr->ModuleName);
     FRAMEWORK_END(CClibase)
-
+    // 注册cli循环处理
+    g_objKernel->Init([]()->void
+    {
+        cliMgr *obj = reinterpret_cast<cliMgr*>(g_objKernel->InterFace("cliMgr"));
+        if (obj != nullptr)
+            obj->Process();
+    });
     return 0;
 }
 INIT_FRAMEWORK(CClibase)

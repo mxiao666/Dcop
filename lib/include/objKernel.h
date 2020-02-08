@@ -35,11 +35,13 @@ public:
     void Release(const char *pzName);
     void Entry();
     void dump(Printfun callback = printf);
+    void Init(void (*EntryFunc)());
 
 private:
     objKernel(objKernel &) = delete;
     const objKernel &operator=(const objKernel &) = delete;
     std::map<const char *, ObjModule *> m_objList;
+    void (*m_EntryFunc)() = nullptr;
 };
 extern objKernel *g_objKernel;
 #endif

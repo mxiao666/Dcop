@@ -15,9 +15,6 @@ int main()
 
     objKernel *obj = new objKernel;
     obj->Entry();
-    objbase *cli = obj->InterFace("cliMgr");
-    if (cli)
-        ((cliMgr *)cli)->Process();
     delete obj;
     return 0;
 }
