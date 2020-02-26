@@ -4,12 +4,15 @@ enum
 {
     CMD_BASE_ID = 0,
     CMD_GET_TEST,
+    CMD_GET_LOG_LEVEL,
+    CMD_SET_LOG_LEVEL,    
     CMD_BASE_NUM,
 };
 enum
 {
     MODULE_BASE_ID = 0,
     MODELU_GET_TEST,
+    MODELU_LOG,
     MODULE_BASE_END,
 };
 #endif

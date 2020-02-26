@@ -19,6 +19,9 @@
     <Filter Include="源文件\lib">
       <UniqueIdentifier>{3a07cab4-445c-46d3-b139-a9ff0f2a4a89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\usr">
+      <UniqueIdentifier>{ed6b0128-7852-416a-ba01-b589a5994411}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\include\cargclist.h">
@@ -106,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="..\demo\getmessage.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\src\template.cpp">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\demo\usr\logmgr.cpp">
+      <Filter>源文件\usr</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,14 +5,20 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-#define LL_DEBUG 0x01
-#define LL_INFO 0x02
-#define LL_WARNING 0x03
-#define LL_ERROR 0x04
-#define LL_FATAL_ERROR 0x05
+enum
+{
+    LL_BASE_ID = 0,
+    LL_DEBUG = 0,
+    LL_INFO,
+    LL_WARNING,
+    LL_ERROR,
+    LL_FATAL_ERROR,
+    LL_LEVEL_NUM
+};
 int WriteLog(int v_level, int line, const char *func, const char *file, const char *format, ...);
 int LogInit(int level = LL_INFO, const char *path = "message");
-
+int GetLogLevel();
+int SetLogLevel(int level);
 #define LVOS_Log(level, ...) WriteLog(level, __LINE__, __FUNCTION__, __FILE__, __VA_ARGS__)
 #define LOG_DBG(format, ...) \
     WriteLog(LL_DEBUG, __LINE__, __FUNCTION__, __FILE__, format, ##__VA_ARGS__)

@@ -1,7 +1,7 @@
 #include "clibase.h"
 #include "log.h"
 #include "objKernel.h"
-
+#include "template.h"
 int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj)
 {
 
@@ -12,14 +12,13 @@ int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj)
         if (pcmdObj->cmdModule != 0)
         {
             iRet = m_Cnotify->Notify(inMessage, &outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
-            if (iRet == 0)
+            if (iRet == 0 && outMessage.count != 0)
                 iRet = Report(&outMessage, pcmdObj->cmdid);
         }
         else
         {
             m_Cnotify->SendToAll(inMessage, &outMessage, pcmdObj->cmdModule, pcmdObj->cmdid);
         }
-
     }
     else
     {
@@ -37,18 +36,18 @@ int cliMgr::Report(RspMsg *outMessage, int cmd)
     // 查找命令模块
     bool isfind = false;
     cmdObj *pcmdObj = nullptr;
-    for(auto & iter : m_cmdList)
+    for (auto &iter : m_cmdList)
     {
-        if(iter.second != nullptr)
+        if (iter.second != nullptr)
         {
-            if(iter.second->cmdid == cmd)
+            if (iter.second->cmdid == cmd)
             {
                 isfind = true;
                 pcmdObj = iter.second;
             }
         }
     }
-    if(!isfind)
+    if (!isfind)
         return -1;
     ResTable *ptbl = nullptr;
     pcmdObj->objCli->ResponseTable(&ptbl);
@@ -80,24 +79,6 @@ int cliMgr::Report(RspMsg *outMessage, int cmd)
     printf("Command response %d line record\n", outMessage->count);
     return 0;
 }
-
-namespace OS
-{
-    bool equal(const char *s1, const char *s2)
-    {
-        return
-#ifndef __WIN32__
-            strcasecmp
-#else
-            _stricmp
-#endif
-            (s1, s2) == 0;
-    }
-    bool equal(const char *s1, const char *s2, int max)
-    {
-        return (strncmp(s1, s2, max) == 0);
-    }
-}; // namespace OS
 int cliMgr::Process()
 {
 
@@ -126,7 +107,7 @@ int cliMgr::Process()
             char *result = NULL;
             char *argcpos = NULL;
             result = strtok(pos, delims);
-            while(result != NULL)
+            while (result != NULL)
             {
                 argcpos = strstr(result, "=");
                 if (argcpos != nullptr)
@@ -137,6 +118,10 @@ int cliMgr::Process()
                 }
                 result = strtok(NULL, delims);
             }
+        }
+        if (inMessage.GetCount() == 0 && pos != nullptr && *pos != '\0')
+        {
+            inMessage.addAgrc(pos, pos);
         }
         if (OS::equal((char *)cmd.GetBuff(), "q") ||
             OS::equal((char *)cmd.GetBuff(), "quit") ||
@@ -253,9 +238,8 @@ int cliMgr::Init()
         LVOS_Log(LL_WARNING, "Init CLI module %s fail.", frmgr->ModuleName);
     FRAMEWORK_END(CClibase)
     // 注册cli循环处理
-    g_objKernel->Init([]()->void
-    {
-        cliMgr *obj = reinterpret_cast<cliMgr*>(g_objKernel->InterFace("cliMgr"));
+    g_objKernel->Init([]() -> void {
+        cliMgr *obj = reinterpret_cast<cliMgr *>(g_objKernel->InterFace("cliMgr"));
         if (obj != nullptr)
             obj->Process();
     });

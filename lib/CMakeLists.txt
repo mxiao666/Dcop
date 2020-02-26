@@ -2,7 +2,7 @@
 project(${PROJECT_NAME})
 
 # 添加include目录
-include_directories(../include)
+include_directories(./include)
 # 设置库生成依赖文件
 set(syslib
 	src/clibase.cpp
@@ -14,7 +14,8 @@ set(syslib
 	src/objbase.cpp
 	src/stacktrace.cpp
 	src/streamhelper.cpp
-	src/system.cpp)
+	src/system.cpp
+	src/template.cpp)
 # 生成libsys.a静态库 	
 add_library(sys STATIC ${syslib})
 

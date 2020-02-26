@@ -17,12 +17,16 @@
 const int LOG_MESSAGE_LEN = 512;
 const int LOG_CONTENT_LEN = 64;
 
-static char LogLevelStr[][8] = {
-    "DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
-
 static FILE *log_file;
 static int log_level = LL_INFO;
-
+char LogLevelStr[][8] =
+    {"DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
+int GetLogLevel() { return log_level; }
+int SetLogLevel(int level)
+{
+    log_level = level;
+    return level;
+}
 int LogInit(int level, const char *path)
 {
     log_level = level;

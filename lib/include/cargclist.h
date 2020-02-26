@@ -69,6 +69,7 @@ typedef struct _RspMsg
     _RspMsg()
     {
         msg = nullptr;
+        count = 0;
     }
     ~_RspMsg()
     {

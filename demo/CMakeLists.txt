@@ -29,7 +29,8 @@ add_subdirectory(${PROJECT_BINARY_DIR}/../lib lib.out)
 # 生成可执行文件
 add_executable(demo 
 	getmessage.cpp
-	demo.cpp)
+	demo.cpp
+	usr/logmgr.cpp)
 
 #连接成最后的可执行文件	
-target_link_libraries(demo sys)
+target_link_libraries(demo  sys)

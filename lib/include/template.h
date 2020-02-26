@@ -22,5 +22,8 @@ inline typename T::iterator find(const char *pzName, T &list)
     }
     return list.end();
 }
+
+bool equal(const char *s1, const char *s2);
+bool equal(const char *s1, const char *s2, int max);
 }; // namespace OS
 #endif
