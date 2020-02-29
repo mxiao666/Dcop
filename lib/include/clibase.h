@@ -12,9 +12,9 @@ typedef struct _TblBody
 typedef struct _ResTable
 {
     const char *tblName;
-    TblBody * tblBody;
+    TblBody *tblBody;
     int count;
-} ResTable;
+} RspTable;
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 class CClibase
 {
@@ -29,7 +29,6 @@ public:
     virtual int Get(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
     virtual int Add(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
     virtual int Init() { return 0; };
-    virtual int ResponseTable(ResTable **tbl) { return 0; };
 };
 
 REG_FRAMEWORK(CClibase)
@@ -42,17 +41,19 @@ typedef struct _cmdObj
     int cmdid;
     bool bSync;
     CClibase *objCli;
-    _cmdObj(CClibase *obj, int cmdMod, int cmd, bool sync)
+    RspTable *rspTable;
+    _cmdObj(CClibase *obj, int cmdMod, int cmd, RspTable *tbl = nullptr, bool sync = true)
     {
         cmdModule = cmdMod;
         cmdid = cmd;
         objCli = obj;
         bSync = sync;
+        rspTable = tbl;
     }
     ~_cmdObj()
     {
-        if (objCli != nullptr)
-            delete objCli;
+        //if (objCli != nullptr)
+        //    delete objCli;
         objCli = nullptr;
     }
 } cmdObj;
@@ -77,6 +78,6 @@ public:
     void dump(Printfun callback = printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
     int Init();
-    int Report(RspMsg *outMessage, int cmd);    
+    int Report(RspMsg *outMessage, int cmd);
 };
 #endif

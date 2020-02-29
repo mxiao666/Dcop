@@ -38,7 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\demo\demo.cpp" />
-    <ClCompile Include="..\demo\getmessage.cpp" />
     <ClCompile Include="..\demo\usr\logmgr.cpp" />
     <ClCompile Include="..\lib\src\clibase.cpp" />
     <ClCompile Include="..\lib\src\cnotify.cpp" />

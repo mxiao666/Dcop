@@ -33,6 +33,7 @@ public:
         if (pzName != nullptr)
         {
             m_arglist[pzName] = new CStream((const BYTE *)pzValue);
+            addCount();
         }
         return *this;
     }

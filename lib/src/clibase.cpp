@@ -49,8 +49,7 @@ int cliMgr::Report(RspMsg *outMessage, int cmd)
     }
     if (!isfind)
         return -1;
-    ResTable *ptbl = nullptr;
-    pcmdObj->objCli->ResponseTable(&ptbl);
+    RspTable *ptbl = pcmdObj->rspTable;
     if (ptbl == nullptr ||
         ptbl->count == 0 ||
         ptbl->tblBody == nullptr)
@@ -143,7 +142,8 @@ int cliMgr::Process()
         }
 
         cmdObj *pcmdObj = nullptr;
-        if (OS::equal((char *)cmd.GetBuff(), "man"))
+        if (OS::equal((char *)cmd.GetBuff(), "man") ||
+            OS::equal((char *)cmd.GetBuff(), "help"))
         {
             pcmdObj = FindModule((char *)argc.GetBuff());
             if (pcmdObj)
@@ -189,7 +189,8 @@ int cliMgr::Process()
         iRet = Dispatch((cliOp == false) ? &inMessage : &cliMessage, pcmdObj);
         if (iRet != 0)
         {
-            printf("Dispatch is process error:%#16x\n", iRet);
+            LOG_DBG("Dispatch is process error:%#016x", iRet);
+            printf("Dispatch is process error:%#016x\n", iRet);
         }
     }
     return 0;

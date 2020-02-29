@@ -28,7 +28,6 @@ add_subdirectory(${PROJECT_BINARY_DIR}/../lib lib.out)
 
 # 生成可执行文件
 add_executable(demo 
-	getmessage.cpp
 	demo.cpp
 	usr/logmgr.cpp)
 

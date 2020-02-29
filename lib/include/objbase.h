@@ -11,6 +11,8 @@ class objbase
 {
 private:
     std::atomic<int> m_debug;
+
+public:
     std::mutex m_synclock;
 
 public:
@@ -27,4 +29,22 @@ public:
 REG_FRAMEWORK(objbase)
 #define REG_FUNCTION_PLUS(Class) \
     FRAMEWORK_REG_FUNCTION(objbase, Class)
+
+#define PROCESS_BEGIN                             \
+    std::lock_guard<std::mutex> lock{m_synclock}; \
+    int iRet = 0;                                 \
+    switch (iCmd)                                 \
+    {
+
+#define PROCESS_CALL(cmd, func)                            \
+    case cmd:                                              \
+        iRet = (func)(message, outmessage, iModule, iCmd); \
+        break;
+
+#define PROCESS_END \
+    default:        \
+        iRet = -1;  \
+        break;      \
+        }           \
+        return iRet;
 #endif

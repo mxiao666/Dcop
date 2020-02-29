@@ -107,9 +107,6 @@
     <ClCompile Include="..\demo\demo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\demo\getmessage.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\src\template.cpp">
       <Filter>源文件\lib</Filter>
     </ClCompile>
