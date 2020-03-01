@@ -3,4 +3,4 @@
 mkdir ./build
 cd ./build
 cmake ../demo
-make
+make -j32

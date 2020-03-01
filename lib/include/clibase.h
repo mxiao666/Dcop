@@ -80,4 +80,5 @@ public:
     int Init();
     int Report(RspMsg *outMessage, int cmd);
 };
+#define ARGC_DEFAULT "ARGC"
 #endif

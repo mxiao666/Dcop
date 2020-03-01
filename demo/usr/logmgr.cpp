@@ -61,7 +61,7 @@ private:
     {
         if (message == nullptr)
             return -1;
-        CStream *level = message->GetAgrc(LEVEL);
+        CStream *level = message->GetAgrc(ARGC_DEFAULT);
         if (level == nullptr)
             return -1;
         for (int i = 0; i < LL_LEVEL_NUM; i++)
@@ -78,7 +78,7 @@ private:
     {
         if (message == nullptr)
             return -1;
-        CStream *level = message->GetAgrc(TRACE);
+        CStream *level = message->GetAgrc(ARGC_DEFAULT);
         if (level == nullptr)
             return -1;
         if (OS::equal(level->c_str(), ON))

@@ -11,7 +11,7 @@
 
 int main()
 {
-    LogInit(LL_DEBUG);
+    LogInit(LL_WARNING);
 
     objKernel *obj = new objKernel;
     obj->Entry();

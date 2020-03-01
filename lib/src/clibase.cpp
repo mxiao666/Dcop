@@ -120,7 +120,7 @@ int cliMgr::Process()
         }
         if (inMessage.GetCount() == 0 && pos != nullptr && *pos != '\0')
         {
-            inMessage.addAgrc(pos, pos);
+            inMessage.addAgrc(ARGC_DEFAULT, pos);
         }
         if (OS::equal((char *)cmd.GetBuff(), "q") ||
             OS::equal((char *)cmd.GetBuff(), "quit") ||
@@ -166,10 +166,12 @@ int cliMgr::Process()
             else if (OS::equal((char *)cmd.GetBuff(), SET_STR, CMD_OP_MAX))
             {
                 iRet = pcmdObj->objCli->Get(&inMessage, &cliMessage, &cliOp);
+                LOG_INFO("cmd:%s", name);
             }
             else if (OS::equal((char *)cmd.GetBuff(), ADD_STR, CMD_OP_MAX))
             {
                 iRet = pcmdObj->objCli->Get(&inMessage, &cliMessage, &cliOp);
+                LOG_INFO("cmd:%s", name);
             }
             else
             {
@@ -189,7 +191,7 @@ int cliMgr::Process()
         iRet = Dispatch((cliOp == false) ? &inMessage : &cliMessage, pcmdObj);
         if (iRet != 0)
         {
-            LOG_DBG("Dispatch is process error:%#016x", iRet);
+            LOG_WARN("Dispatch is process error:%#016x", iRet);
             printf("Dispatch is process error:%#016x\n", iRet);
         }
     }
@@ -205,7 +207,7 @@ cmdObj *cliMgr::FindModule(const char *cmdName)
 void cliMgr::dump(Printfun callback)
 {
     objbase::PrintHead(callback, "cliMgr", 66);
-    (void)callback("%-16s %-16s %-32s\n", "id", "objPtr", "cmd");
+    (void)callback("%-16s %-16s %-32s\n", "ModuleId", "objPtr", "cmd");
     for (auto &iter : m_cmdList)
         (void)callback("%#-16x %#-16x %-32s\n", iter.second->cmdModule, iter.second->objCli, iter.first);
     (void)callback("Tatol: %d\n", m_cmdList.size());
