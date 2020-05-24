@@ -18,13 +18,14 @@ objKernel::objKernel()
         " [Update Time: %-17.17s]\n",
         __DATE__, __TIME__);
     g_objKernel = this;
+    m_objList["objKernel"] = new ObjModule((objbase *)(this));
 }
 objKernel::~objKernel()
 {
     for (auto &iter : m_objList)
     {
         ObjModule *pObj = iter.second;
-        if (pObj != nullptr)
+        if (pObj != nullptr && pObj->obj != this)
             delete pObj;
         pObj = nullptr;
     }
@@ -34,6 +35,16 @@ objbase *objKernel::InterFace(const char *pzName)
     auto iter = OS::find(pzName, m_objList);
     if (iter != m_objList.end())
         return iter->second->obj;
+    return nullptr;
+}
+objbase *objKernel::InterFace(int key)
+{
+    for (auto &iter : m_objList)
+    {
+        ObjModule *pObj = iter.second;
+        if (pObj != nullptr && pObj->id == key)
+            return pObj->obj;
+    }
     return nullptr;
 }
 void objKernel::dump(int fd, Printfun callback)
@@ -68,10 +79,7 @@ void objKernel::Release(const char *pzName)
 }
 void objKernel::Entry()
 {
-    FRAMEWORK_BEGINE(objbase)
-    m_objList[frmgr->ModuleName] = new ObjModule((objbase *)(frmgr->fun));
-    FRAMEWORK_END(objbase)
-
+    FRAMEWORK_INIT();
     for (auto &iter : m_objList)
     {
         ObjModule *pObj = iter.second;
@@ -79,7 +87,7 @@ void objKernel::Entry()
             pObj->obj->Init();
     }
     /*启动循环处理*/
-    if(m_EntryFunc)
+    if (m_EntryFunc)
         m_EntryFunc();
 }
 void objKernel::Init(void (*EntryFunc)())
@@ -88,3 +96,7 @@ void objKernel::Init(void (*EntryFunc)())
         m_EntryFunc = EntryFunc;
 }
 
+void objKernel::Reg(const char *pzName, void *obj, int id)
+{
+    m_objList[pzName] = new ObjModule((objbase*)obj, id);
+}

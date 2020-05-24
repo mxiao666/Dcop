@@ -11,8 +11,12 @@ enum
 };
 enum
 {
-    MODULE_BASE_ID = 0,
+    MODELU_KERNEL,
     MODELU_LOG,
+    MODELU_NOTIFY,
+    MODELU_CLI,
+    MODELU_TASK,
+    MODELU_TELNET,
     MODULE_BASE_END,
 };
 #endif

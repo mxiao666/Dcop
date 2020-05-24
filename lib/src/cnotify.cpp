@@ -39,10 +39,10 @@ int Cnotify::Notify(CAgrcList *message, RspMsg *outmessage, int iModule, int iCm
     }
     return -1;
 }
-int Cnotify::AsyncNotify(CAgrcList *message,int iModule, int iCmd)
+int Cnotify::AsyncNotify(CAgrcList *message, int iModule, int iCmd)
 {
     AsyncArgc *pool = new AsyncArgc(message, iModule, iCmd);
-    if(pool == nullptr)
+    if (pool == nullptr)
         return -1;
     std::lock_guard<std::mutex> lock{m_lock};
     tasks.emplace(pool);
@@ -53,8 +53,9 @@ Cnotify::~Cnotify()
 {
     stoped.store(true);
     cv_task.notify_all();
-    while(idlThrNum > 0);
-}  
+    while (idlThrNum > 0)
+        ;
+}
 Cnotify::Cnotify()
 {
     stoped = false;
@@ -69,10 +70,9 @@ void Cnotify::AsyncProc()
             std::unique_lock<std::mutex> lock{this->m_lock};
 
             this->cv_task.wait(lock,
-                               [this]
-            {
-                return this->stoped.load() || !this->tasks.empty();
-            });
+                               [this] {
+                                   return this->stoped.load() || !this->tasks.empty();
+                               });
             if (this->stoped && this->tasks.empty())
             {
                 idlThrNum--;
@@ -104,14 +104,14 @@ int Cnotify::Init()
         char buf[ibufmaxlen] = {0};
         (void)snprintf(buf, ibufmaxlen - 1, "NotifyTask%d", i);
         objPara *pObjPara = new objPara(this);
-        CREATE_OBJTASK(buf, [](objPara * pobjPara)
-        {
-            Cnotify *obj = reinterpret_cast<Cnotify *>(pobjPara->GetPara());
-            if (obj)
-                obj->AsyncProc();
-            return (void *)0;
-        },
-        pObjPara);
+        CREATE_OBJTASK(
+            buf, [](objPara *pobjPara) {
+                Cnotify *obj = reinterpret_cast<Cnotify *>(pobjPara->GetPara());
+                if (obj)
+                    obj->AsyncProc();
+                return (void *)0;
+            },
+            pObjPara);
     }
 
     return 0;
@@ -124,4 +124,5 @@ void Cnotify::dump(int fd, Printfun callback)
         (void)callback(fd, "%-12d %#-16x\n", iter.first, iter.second);
     (void)callback(fd, "Tatol: %d\n", observerList.size());
 }
-REG_FUNCTION_PLUS(Cnotify)
+
+REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, Cnotify, MODELU_NOTIFY)

@@ -33,6 +33,7 @@
     <ClInclude Include="..\lib\include\stacktrace.h" />
     <ClInclude Include="..\lib\include\streamhelper.h" />
     <ClInclude Include="..\lib\include\system.h" />
+    <ClInclude Include="..\lib\include\telnet.h" />
     <ClInclude Include="..\lib\include\template.h" />
     <ClInclude Include="..\lib\include\threadpool.h" />
   </ItemGroup>
@@ -42,6 +43,7 @@
     <ClCompile Include="..\lib\src\clibase.cpp" />
     <ClCompile Include="..\lib\src\cnotify.cpp" />
     <ClCompile Include="..\lib\src\cstream.cpp" />
+    <ClCompile Include="..\lib\src\frameworkmgr.cpp" />
     <ClCompile Include="..\lib\src\log.cpp" />
     <ClCompile Include="..\lib\src\objbase.cpp" />
     <ClCompile Include="..\lib\src\objKernel.cpp" />
@@ -49,6 +51,7 @@
     <ClCompile Include="..\lib\src\stacktrace.cpp" />
     <ClCompile Include="..\lib\src\streamhelper.cpp" />
     <ClCompile Include="..\lib\src\system.cpp" />
+    <ClCompile Include="..\lib\src\telnet.cpp" />
     <ClCompile Include="..\lib\src\template.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

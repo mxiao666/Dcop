@@ -29,10 +29,8 @@ public:
                           int tatol, char split = '-');
     virtual int Process(CAgrcList *message,
                         RspMsg *outmessage, int iModule, int iCmd) { return 0; };
+    virtual void Reg(const char *pzName, void *obj, int id){};
 };
-REG_FRAMEWORK(objbase)
-#define REG_FUNCTION_PLUS(Class) \
-    FRAMEWORK_REG_FUNCTION(objbase, Class)
 
 #define PROCESS_BEGIN                             \
     std::lock_guard<std::mutex> lock{m_synclock}; \
@@ -51,4 +49,5 @@ REG_FRAMEWORK(objbase)
         break;      \
         }           \
         return iRet;
+
 #endif

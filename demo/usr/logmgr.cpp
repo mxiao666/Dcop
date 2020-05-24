@@ -17,9 +17,9 @@ static TblBody tracetblbody[] = {
     {TRACE, 8},
 };
 static RspTable tracereptbl = {"LOG-TRACE", tracetblbody, ARRAY_SIZE(tracetblbody)};
-class LogCmd : public CClibase
+class LogCmd : public CClibase, public objbase
 {
-    int Init()
+    virtual int Init()
     {
         cliMgr *cli = reinterpret_cast<cliMgr *>(g_objKernel->InterFace("cliMgr"));
         if (cli)
@@ -32,7 +32,7 @@ class LogCmd : public CClibase
         return 0;
     }
 };
-CMD_REG_FUNCTION(LogCmd)
+REG_TO_FRAMEWORK(TABLE_TWO, MODELU_CLI, LogCmd, MODELU_CLI)
 extern char LogLevelStr[][8];
 class LogMgr : public objbase
 {
@@ -118,4 +118,5 @@ public:
         return 0;
     }
 };
-REG_FUNCTION_PLUS(LogMgr)
+
+REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, LogMgr, MODELU_LOG)

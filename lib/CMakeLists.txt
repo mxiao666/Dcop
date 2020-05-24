@@ -15,7 +15,8 @@ set(syslib
 	src/stacktrace.cpp
 	src/streamhelper.cpp
 	src/system.cpp
-	src/template.cpp)
+	src/template.cpp
+	src/frameworkmgr.cpp)
 # 生成libsys.a静态库 	
 add_library(sys STATIC ${syslib})
 

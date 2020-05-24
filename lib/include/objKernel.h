@@ -8,9 +8,11 @@ typedef struct _ObjModule
 {
     objbase *obj;
     int refCount;
-    _ObjModule(objbase *obj) : refCount(0)
+    int id;
+    _ObjModule(objbase *obj, int key = 0) : refCount(0)
     {
         this->obj = obj;
+        id = key;
     }
     ~_ObjModule()
     {
@@ -29,6 +31,7 @@ public:
     ~objKernel();
     /*普通对象查询*/
     objbase *InterFace(const char *pzName);
+    objbase *InterFace(int key);
     /*引用对象查询*/
     objbase *Query(const char *pzName);
     /*引用对象释放*/
@@ -36,6 +39,7 @@ public:
     void Entry();
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void Init(void (*EntryFunc)());
+    void Reg(const char *pzName, void *obj, int id);
 
 private:
     objKernel(objKernel &) = delete;
@@ -44,4 +48,5 @@ private:
     void (*m_EntryFunc)() = nullptr;
 };
 extern objKernel *g_objKernel;
+
 #endif

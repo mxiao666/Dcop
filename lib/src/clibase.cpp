@@ -147,7 +147,7 @@ int cliMgr::Process()
         {
             pcmdObj = FindModule((char *)argc.GetBuff());
             if (pcmdObj)
-                pcmdObj->objCli->Help(0,LVOS_Printf);
+                pcmdObj->objCli->Help(0, LVOS_Printf);
             else
                 dump();
             continue;
@@ -236,10 +236,6 @@ int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
 int cliMgr::Init()
 {
     m_Cnotify = reinterpret_cast<Cnotify *>(g_objKernel->Query("Cnotify"));
-    FRAMEWORK_BEGINE(CClibase)
-    if (0 != frmgr->fun->Init())
-        LVOS_Log(LL_WARNING, "Init CLI module %s fail.", frmgr->ModuleName);
-    FRAMEWORK_END(CClibase)
     // ×¢²ácliÑ­»·´¦Àí
     g_objKernel->Init([]() -> void {
         cliMgr *obj = reinterpret_cast<cliMgr *>(g_objKernel->InterFace("cliMgr"));
@@ -248,6 +244,8 @@ int cliMgr::Init()
     });
     return 0;
 }
-INIT_FRAMEWORK(CClibase)
-
-REG_FUNCTION_PLUS(cliMgr);
+void cliMgr::Reg(const char *pzName, void *obj, int id)
+{
+    ((CClibase *)obj)->Init();
+}
+REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, cliMgr, MODELU_CLI)

@@ -65,7 +65,7 @@ void objTaskMgr::delObj(u64 id)
         m_objlist.erase(iter);
     }
 }
-REG_FUNCTION_PLUS(objTaskMgr)
+
 objTask *objTaskEntry(const char *objTaskName,
                       FunEntry func,
                       objPara *pObjPara,
@@ -123,3 +123,5 @@ objTask::~objTask()
         delete m_objPara;
     m_objPara = nullptr;
 }
+
+REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, objTaskMgr, MODELU_TASK)

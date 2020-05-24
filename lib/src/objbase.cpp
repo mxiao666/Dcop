@@ -14,4 +14,3 @@ void objbase::PrintEnd(int fd, Printfun callback, int tatol, char split)
         (void)callback(fd, "%c", split);
     (void)callback(fd, "\n");
 }
-INIT_FRAMEWORK(objbase)

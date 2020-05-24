@@ -10,63 +10,89 @@
 
 #ifndef __OS_FRAMEWORKMGR__
 #define __OS_FRAMEWORKMGR__
+#include "objbase.h"
+#include "cmdid.h"
+/*****************************************************************************
+ * 函 数 名  : FrameWork
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 注册链表结构体
+ * 输入参数  : 无
+ * 输出参数  : 无
+ * 返 回 值  : typedef
+ * 调用关系  : 
+ * 其    它  : 
 
-#define REG_FRAMEWORK(NAME)                                          \
-    typedef struct g_##NAME##_FrameWork                              \
-    {                                                                \
-        NAME *fun;                                                   \
-        const char *ModuleName;                                      \
-        g_##NAME##_FrameWork *Next;                                  \
-    } g_##NAME##_FrameWork;                                          \
-                                                                     \
-    class g_##NAME##_FrameWorkMgr                                    \
-    {                                                                \
-    public:                                                          \
-        static g_##NAME##_FrameWork *m_Node;                         \
-        static g_##NAME##_FrameWork *m_Current;                      \
-        static int m_NodeCnt;                                        \
-                                                                     \
-    private:                                                         \
-        g_##NAME##_FrameWorkMgr(){};                                 \
-    };                                                               \
-    class g_##NAME##_FrameWorkMgrCollector                           \
-    {                                                                \
-    public:                                                          \
-        g_##NAME##_FrameWorkMgrCollector(g_##NAME##_FrameWork *func) \
-        {                                                            \
-            if (NULL == g_##NAME##_FrameWorkMgr::m_Node)             \
-            {                                                        \
-                g_##NAME##_FrameWorkMgr::m_Node = func;              \
-                g_##NAME##_FrameWorkMgr::m_Current = func;           \
-            }                                                        \
-            else                                                     \
-            {                                                        \
-                g_##NAME##_FrameWorkMgr::m_Current->Next = func;     \
-                g_##NAME##_FrameWorkMgr::m_Current = func;           \
-            }                                                        \
-            g_##NAME##_FrameWorkMgr::m_NodeCnt += 1;                 \
-        }                                                            \
-                                                                     \
-    private:                                                         \
-        g_##NAME##_FrameWorkMgrCollector() = delete;                 \
-    };
-#define INIT_FRAMEWORK(NAME)                                         \
-    g_##NAME##_FrameWork *g_##NAME##_FrameWorkMgr::m_Node = NULL;    \
-    g_##NAME##_FrameWork *g_##NAME##_FrameWorkMgr::m_Current = NULL; \
-    int g_##NAME##_FrameWorkMgr::m_NodeCnt = 0;
-#define FRAMEWORK_BEGINE(NAME)                                                        \
-    g_##NAME##_FrameWork *frmgr = g_##NAME##_FrameWorkMgr::m_Node;                    \
-    for (int i = 0; (i < g_##NAME##_FrameWorkMgr::m_NodeCnt) && (NULL != frmgr); i++) \
-    {
+*****************************************************************************/
+typedef struct FrameWork
+{
+    int SuperId; // 目的注册类Id
+    int id;      // 自身id
+    void *fun;
+    const char *ModuleName;
+    FrameWork *Next;
+} FrameWork;
 
-#define FRAMEWORK_END(NAME) \
-    frmgr = frmgr->Next;    \
-    }
+/*****************************************************************************
+ * 函 数 名  : FrameWorkMgr
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 链表注册管理类
+ * 输入参数  : 无
+ * 输出参数  : 无
+ * 返 回 值  : 
+ * 调用关系  : 
+ * 其    它  : 
 
-#define FRAMEWORK_REG_FUNCTION(BaseClass, Class)                         \
-    static g_##BaseClass##_FrameWork                                     \
-        g_g_##BaseClass##_FrameWork_##Class = {new Class, #Class, NULL}; \
-    static g_##BaseClass##_FrameWorkMgrCollector                         \
-        g_##BaseClass##_FrameWorkMgrCollector_##Class(&g_g_##BaseClass##_FrameWork_##Class);
+*****************************************************************************/
+enum
+{
+    TABLE_ONE,
+    TABLE_TWO,
+    TABLE_THREE,
+    TABLE_NUM
+};
+class FrameWorkMgr
+{
+public:
+    static FrameWork *m_Node[TABLE_NUM];
+    static FrameWork *m_Current[TABLE_NUM];
+    static int m_NodeCnt[TABLE_NUM];
+    void RegInit();
+    static FrameWorkMgr *getInstance();
 
+private:
+    FrameWorkMgr() {}
+    FrameWorkMgr(FrameWorkMgr &) {}
+    static FrameWorkMgr *m_Instance;
+};
+
+/*****************************************************************************
+ * 函 数 名  : FrameWorkMgrCollector
+ * 负 责 人  : 卢美宏
+ * 创建日期  : 2018年11月23日
+ * 函数功能  : 注册收集类
+ * 输入参数  : 无
+ * 输出参数  : 无
+ * 返 回 值  : 
+ * 调用关系  : 
+ * 其    它  : 
+
+*****************************************************************************/
+class FrameWorkMgrCollector
+{
+public:
+    FrameWorkMgrCollector(int index, FrameWork *F);
+
+private:
+    FrameWorkMgrCollector();
+};
+
+#define FRAMEWORK_INIT() FrameWorkMgr::getInstance()->RegInit()
+
+#define REG_TO_FRAMEWORK(TableId, SuperId, Class, selfId) \
+    static FrameWork g_FrameWork_##Class =                \
+        {SuperId, selfId, new Class, #Class, NULL};       \
+    static FrameWorkMgrCollector                          \
+        g_FrameWorkMgrCollector_##Class(TableId, &g_FrameWork_##Class);
 #endif

@@ -31,10 +31,6 @@ public:
     virtual int Init() { return 0; };
 };
 
-REG_FRAMEWORK(CClibase)
-#define CMD_REG_FUNCTION(Class) \
-    FRAMEWORK_REG_FUNCTION(CClibase, Class)
-
 typedef struct _cmdObj
 {
     int cmdModule;
@@ -79,6 +75,7 @@ public:
     int RegCmd(const char *pzName, cmdObj *pobj);
     int Init();
     int Report(RspMsg *outMessage, int cmd);
+    virtual void Reg(const char *pzName, void *obj, int id);
 };
 #define ARGC_DEFAULT "ARGC"
 #endif
