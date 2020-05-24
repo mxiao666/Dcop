@@ -48,7 +48,7 @@ public:
     void delObj(u64 id);
     ~objTaskMgr();
     objTaskMgr();
-    void dump(Printfun callback = printf);
+    void dump(int fd = 0, Printfun callback = LVOS_Printf);
 
 private:
     objTaskMgr(objTaskMgr &) = delete;

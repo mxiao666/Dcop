@@ -105,10 +105,10 @@ public:
         PROCESS_CALL(CMD_GET_LOG_TRACE, GetLogTreace)
         PROCESS_END
     }
-    void dump(Printfun callback = printf)
+    void dump(int fd, Printfun callback)
     {
-        (void)callback("log-level:%s(%d)\n", LogLevelStr[GetLogLevel()], GetLogLevel());
-        (void)callback("log-trace:%s(%d)\n", GetMethod() ? ON : OFF, GetMethod());
+        (void)callback(fd, "log-level:%s(%d)\n", LogLevelStr[GetLogLevel()], GetLogLevel());
+        (void)callback(fd, "log-trace:%s(%d)\n", GetMethod() ? ON : OFF, GetMethod());
     }
     int Init()
     {

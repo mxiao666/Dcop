@@ -21,9 +21,9 @@ class CClibase
 public:
     CClibase() {}
     virtual ~CClibase() {}
-    virtual void Help(Printfun func)
+    virtual void Help(int fd = 0, Printfun callback = LVOS_Printf)
     {
-        (void)func("plase man cmd.\n");
+        (void)callback(fd, "plase man cmd.\n");
     }
     virtual int Set(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
     virtual int Get(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
@@ -75,7 +75,7 @@ public:
     cliMgr();
     ~cliMgr();
     int Process();
-    void dump(Printfun callback = printf);
+    void dump(int fd = 0, Printfun callback = LVOS_Printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
     int Init();
     int Report(RspMsg *outMessage, int cmd);

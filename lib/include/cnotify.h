@@ -32,10 +32,12 @@ public:
     Cnotify();
     virtual ~Cnotify();
     void UnRegReceiver(int iModule);
-    void SendToAll(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd);
+    void SendToAll(CAgrcList *message,
+                   RspMsg *outmessage, int iModule, int iCmd);
     void RegReceiver(int iModule, objbase *pRecv);
-    int Notify(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd);
-    void dump(Printfun callback);
+    int Notify(CAgrcList *message,
+               RspMsg *outmessage, int iModule, int iCmd);
+    void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void AsyncProc();
     int Init();
     int AsyncNotify(CAgrcList *message,int iModule, int iCmd);

@@ -36,15 +36,15 @@ objbase *objKernel::InterFace(const char *pzName)
         return iter->second->obj;
     return nullptr;
 }
-void objKernel::dump(Printfun callback)
+void objKernel::dump(int fd, Printfun callback)
 {
-    objbase::PrintHead(callback, "objKernel", 50);
-    (void)callback("%-16s %-16s %-16s\n", "objName", "objPtr", "refCount");
+    objbase::PrintHead(fd, callback, "objKernel", 50);
+    (void)callback(fd, "%-16s %-16s %-16s\n", "objName", "objPtr", "refCount");
     for (auto &iter : m_objList)
     {
-        (void)callback("%-16s %#-16x %-16d\n", iter.first, iter.second->obj, iter.second->refCount);
+        (void)callback(fd, "%-16s %#-16x %-16d\n", iter.first, iter.second->obj, iter.second->refCount);
     }
-    (void)callback("Tatol: %d\n", m_objList.size());
+    (void)callback(fd, "Tatol: %d\n", m_objList.size());
 }
 objbase *objKernel::Query(const char *pzName)
 {

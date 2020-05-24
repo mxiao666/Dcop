@@ -34,7 +34,7 @@ public:
     /*引用对象释放*/
     void Release(const char *pzName);
     void Entry();
-    void dump(Printfun callback = printf);
+    void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void Init(void (*EntryFunc)());
 
 private:

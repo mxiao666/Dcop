@@ -147,7 +147,7 @@ int cliMgr::Process()
         {
             pcmdObj = FindModule((char *)argc.GetBuff());
             if (pcmdObj)
-                pcmdObj->objCli->Help(printf);
+                pcmdObj->objCli->Help(0,LVOS_Printf);
             else
                 dump();
             continue;
@@ -204,13 +204,13 @@ cmdObj *cliMgr::FindModule(const char *cmdName)
             return iter.second;
     return nullptr;
 }
-void cliMgr::dump(Printfun callback)
+void cliMgr::dump(int fd, Printfun callback)
 {
-    objbase::PrintHead(callback, "cliMgr", 66);
-    (void)callback("%-16s %-16s %-32s\n", "ModuleId", "objPtr", "cmd");
+    objbase::PrintHead(fd, callback, "cliMgr", 66);
+    (void)callback(fd, "%-16s %-16s %-32s\n", "ModuleId", "objPtr", "cmd");
     for (auto &iter : m_cmdList)
-        (void)callback("%#-16x %#-16x %-32s\n", iter.second->cmdModule, iter.second->objCli, iter.first);
-    (void)callback("Tatol: %d\n", m_cmdList.size());
+        (void)callback(fd, "%#-16x %#-16x %-32s\n", iter.second->cmdModule, iter.second->objCli, iter.first);
+    (void)callback(fd, "Tatol: %d\n", m_cmdList.size());
 }
 cliMgr::~cliMgr()
 {

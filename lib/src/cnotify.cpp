@@ -116,12 +116,12 @@ int Cnotify::Init()
 
     return 0;
 }
-void Cnotify::dump(Printfun callback)
+void Cnotify::dump(int fd, Printfun callback)
 {
-    objbase::PrintHead(callback, "Cnotify", 30);
-    (void)callback("%-12s %-16s\n", "cmdId", "objPtr");
+    objbase::PrintHead(fd, callback, "Cnotify", 30);
+    (void)callback(fd, "%-12s %-16s\n", "cmdId", "objPtr");
     for (auto &iter : observerList)
-        (void)callback("%-12d %#-16x\n", iter.first, iter.second);
-    (void)callback("Tatol: %d\n", observerList.size());
+        (void)callback(fd, "%-12d %#-16x\n", iter.first, iter.second);
+    (void)callback(fd, "Tatol: %d\n", observerList.size());
 }
 REG_FUNCTION_PLUS(Cnotify)

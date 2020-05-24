@@ -1,9 +1,3 @@
-/***********************************************************************************
- * ??????  : os_log.c
- * ??????  : 卢美?? * 创建日期   : 2018??1??3?? * 文件描述   : 日志记录实现?? * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公?? * ??   ??  : 
- * 修改日志   : 
-***********************************************************************************/
-
 #include "log.h"
 #include "stacktrace.h"
 #include "macro_define.h"
@@ -48,7 +42,7 @@ int LogInit(int level, const char *path)
 #else
             512
 #endif
-    ); /* 行缓??*/
+    ); /* 行缓存*/
     debug_backtrace_init();
     return RET_OK;
 }
@@ -62,7 +56,7 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
     if (log_level > v_level)
         return RET_ERR;
 
-    /* ---时间??-- */
+    /* ---时间-- */
     char log_time[LOG_CONTENT_LEN] = {0};
     time_t t = time(NULL);
     struct tm ptm;
@@ -74,7 +68,7 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
     snprintf(log_time, LOG_CONTENT_LEN - 1, "%4d-%02d-%02d %02d:%02d:%02d",
              ptm.tm_year + 1900, ptm.tm_mon + 1, ptm.tm_mday, ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 
-    /* ---文件??--行号---函数??--- */
+    /* ---文件--行号---函数--- */
     char log_pos[LOG_CONTENT_LEN] = {0};
     const char *linuxpos = strrchr(file, '/');
     const char *winwpso = strrchr(file, '\\');
@@ -102,5 +96,38 @@ int WriteLog(int v_level, int line, const char *func, const char *file, const ch
     nWrittenBytes = fprintf(log_file, "%s%s%s\n", log_time, log_pos, log_msg);
     if (bConsolePrint)
         printf("%s%s%s\n", log_time, log_pos, log_msg);
+    return nWrittenBytes;
+}
+
+int LVOS_Printf(int fd, const char *format, ...)
+{
+    char buffer[1024] = {0};
+    va_list arg_ptr;
+    va_start(arg_ptr, format);
+    int nWrittenBytes = vsnprintf(buffer, sizeof(buffer), format, arg_ptr);
+    va_end(arg_ptr);
+    if (nWrittenBytes <= 0)
+    {
+        return nWrittenBytes;
+    }
+#ifndef __WIN32__
+    if (fd != 0)
+    {
+        int tatol = 0;
+        while (tatol != nWrittenBytes)
+        {
+            int len = write(fd, buffer + tatol, nWrittenBytes - tatol);
+            if (len <= 0)
+            {
+                return len;
+            }
+            tatol += len;
+        }
+    }
+    else
+#endif
+    {
+        printf("%s", buffer);
+    }
     return nWrittenBytes;
 }

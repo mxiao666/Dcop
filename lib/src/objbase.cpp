@@ -1,17 +1,17 @@
 #include "objbase.h"
-void objbase::dump(Printfun callback)
+void objbase::dump(int fd, Printfun callback)
 {
-    (void)callback("Query is NULL.\n");
+    (void)callback(fd, "Query is NULL.\n");
 }
-void objbase::PrintHead(Printfun callback, const char *tableName, int tatol, char split)
+void objbase::PrintHead(int fd, Printfun callback, const char *tableName, int tatol, char split)
 {
-    (void)callback("\n%*s\n", tatol / 2 + 1, tableName);
+    (void)callback(fd, "\n%*s\n", tatol / 2 + 1, tableName);
     //PrintEnd(callback, tatol, split);
 }
-void objbase::PrintEnd(Printfun callback, int tatol, char split)
+void objbase::PrintEnd(int fd, Printfun callback, int tatol, char split)
 {
     for (int i = 0; i < tatol; i++)
-        (void)callback("%c", split);
-    (void)callback("\n");
+        (void)callback(fd, "%c", split);
+    (void)callback(fd, "\n");
 }
 INIT_FRAMEWORK(objbase)
