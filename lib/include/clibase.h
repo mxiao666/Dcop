@@ -71,7 +71,9 @@ public:
     cliMgr();
     ~cliMgr();
     int Process();
+    int Process(int fd, char *cmdbuffer, int len, bool &isExit);
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
+    void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
     int Init();
     int Report(RspMsg *outMessage, int cmd);
