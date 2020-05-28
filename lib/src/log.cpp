@@ -292,7 +292,7 @@ public:
         Cnotify *obj =
             reinterpret_cast<Cnotify *>(g_objKernel->InterFace(MODELU_NOTIFY));
         if (obj)
-            obj->RegReceiver(MODELU_LOG, this);
+            obj->RegReceiver(MODELU_LOG, new REGNOTIFY(this, "LogMgr"));
         return 0;
     }
     LogMgr()

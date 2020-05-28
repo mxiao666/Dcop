@@ -544,7 +544,7 @@ int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
 int cliMgr::Init()
 {
     m_Cnotify = reinterpret_cast<Cnotify *>(g_objKernel->Query(MODELU_NOTIFY));
-    m_Cnotify->RegReceiver(MODELU_CLI, this);
+    m_Cnotify->RegReceiver(MODELU_CLI, new REGNOTIFY(this, "cliMgr"));
 #ifdef __WIN32__
     g_objKernel->Init([]() -> void {
         cliMgr *obj =

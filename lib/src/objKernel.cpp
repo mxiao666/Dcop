@@ -33,6 +33,7 @@ objKernel::~objKernel()
             delete pObj;
         pObj = nullptr;
     }
+    m_objList.clear();
 }
 objbase *objKernel::InterFace(const char *pzName)
 {

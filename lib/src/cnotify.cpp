@@ -2,7 +2,7 @@
 #include "frameworkmgr.h"
 #include "objTask.h"
 
-void Cnotify::RegReceiver(int iModule, objbase *pRecv)
+void Cnotify::RegReceiver(int iModule, REGNOTIFY *pRecv)
 {
     if (pRecv != nullptr)
     {
@@ -20,6 +20,7 @@ void Cnotify::UnRegReceiver(int iModule)
     auto iter = observerList.find(iModule);
     if (iter != observerList.end())
     {
+        delete iter->second;
         observerList.erase(iter);
     }
 }
@@ -30,7 +31,7 @@ void Cnotify::SendToAll(CAgrcList *message,
 {
     for (auto &iter : observerList)
     {
-        iter.second->Process(message, outmessage, iModule, iCmd);
+        iter.second->obj->Process(message, outmessage, iModule, iCmd);
     }
 }
 int Cnotify::Notify(CAgrcList *message,
@@ -41,7 +42,7 @@ int Cnotify::Notify(CAgrcList *message,
     auto iter = observerList.find(iModule);
     if (iter != observerList.end() && iModule == iter->first)
     {
-        return iter->second->Process(message, outmessage, iModule, iCmd);
+        return iter->second->obj->Process(message, outmessage, iModule, iCmd);
     }
     return -1;
 }
@@ -61,6 +62,11 @@ Cnotify::~Cnotify()
     cv_task.notify_all();
     while (idlThrNum > 0)
         ;
+    for (auto &iter : observerList)
+    {
+        delete iter.second;
+    }
+    observerList.clear();
 }
 Cnotify::Cnotify()
 {
@@ -132,10 +138,13 @@ int Cnotify::Init()
 }
 void Cnotify::dump(int fd, Printfun callback)
 {
-    objbase::PrintHead(fd, callback, "Cnotify", 30);
-    (void)callback(fd, "%-12s %-16s\n", "cmdId", "objPtr");
+    objbase::PrintHead(fd, callback, "Cnotify", 44);
+    (void)callback(fd, "%-12s %-16s %-16s\n", "objId", "objPtr", "objName");
     for (auto &iter : observerList)
-        (void)callback(fd, "%-12d %#-16x\n", iter.first, iter.second);
+        (void)callback(fd, "%-12d %#-16x %-16s\n",
+                       iter.first,
+                       iter.second->obj,
+                       iter.second->name);
     (void)callback(fd, "Tatol: %d\n", observerList.size());
 }
 

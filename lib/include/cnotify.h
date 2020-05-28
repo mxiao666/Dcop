@@ -27,7 +27,21 @@ typedef struct _AsyncArgc
     }
 
 } AsyncArgc;
-
+typedef struct regNotify
+{
+#define REG_NAME_MAX_LEN 16
+    objbase *obj;
+    char name[REG_NAME_MAX_LEN];
+    regNotify(objbase *_obj, const char *_name)
+    {
+        this->obj = _obj;
+        (void)snprintf(this->name, REG_NAME_MAX_LEN, "%s", _name);
+    }
+    ~regNotify()
+    {
+        this->obj = nullptr;
+    }
+} REGNOTIFY;
 class Cnotify : public objbase
 {
 public:
@@ -36,7 +50,7 @@ public:
     void UnRegReceiver(int iModule);
     void SendToAll(CAgrcList *message,
                    RspMsg *outmessage, int iModule, int iCmd);
-    void RegReceiver(int iModule, objbase *pRecv);
+    void RegReceiver(int iModule, REGNOTIFY *pRecv);
     int Notify(CAgrcList *message,
                RspMsg *outmessage, int iModule, int iCmd);
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
@@ -46,7 +60,7 @@ public:
                     int iCmd, void *parm = nullptr);
 
 private:
-    std::map<int, objbase *> observerList;
+    std::map<int, REGNOTIFY *> observerList;
     std::mutex m_reglock;
     // 任务队列
     std::queue<AsyncArgc *> tasks;
