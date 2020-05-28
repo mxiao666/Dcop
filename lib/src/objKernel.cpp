@@ -2,23 +2,27 @@
 #include "objKernel.h"
 #include "frameworkmgr.h"
 #include "template.h"
+#define VER "v1.0"
 objKernel *g_objKernel;
 objKernel::objKernel()
 {
-    printf(
-        "  __      __    __\n"
-        " |  |    |  |  |__|   __________\n"
-        " |  |____|  |   __   |  __  __  |\n"
-        " |   ____   |  |  |  |  ||  ||  |\n"
-        " |  |    |  |  |  |  |  ||  ||  |\n"
-        " |__|    |__|  |__|  |__||__||__|\n"
-        "\n"
-        " [Herobrine (Alpha)             ]\n"
-        " [Update Date: %-17.17s]\n"
-        " [Update Time: %-17.17s]\n",
-        __DATE__, __TIME__);
+    Welcome();
     g_objKernel = this;
     m_objList["objKernel"] = new ObjModule((objbase *)(this));
+}
+void objKernel::Welcome(int fd, Printfun callback)
+{
+    (void)callback(fd, "\n");
+    (void)callback(fd, "  __      __    __\n");
+    (void)callback(fd, " |  |    |  |  |__|   __________\n");
+    (void)callback(fd, " |  |____|  |   __   |  __  __  |\n");
+    (void)callback(fd, " |   ____   |  |  |  |  ||  ||  |\n");
+    (void)callback(fd, " |  |    |  |  |  |  |  ||  ||  |\n");
+    (void)callback(fd, " |__|    |__|  |__|  |__||__||__|\n");
+    (void)callback(fd, "\n");
+    (void)callback(fd, " Herobrine (Alpha) %-s\n", VER);
+    (void)callback(fd, " Update Date: %-17.17s\n", __DATE__);
+    (void)callback(fd, " Update Time: %-17.17s\n", __TIME__);
 }
 objKernel::~objKernel()
 {
@@ -50,31 +54,43 @@ objbase *objKernel::InterFace(int key)
 void objKernel::dump(int fd, Printfun callback)
 {
     objbase::PrintHead(fd, callback, "objKernel", 50);
-    (void)callback(fd, "%-16s %-16s %-16s\n", "objName", "objPtr", "refCount");
+    (void)callback(fd,
+                   "%-16s %-16s %-16s\n",
+                   "objName",
+                   "objPtr",
+                   "refCount");
     for (auto &iter : m_objList)
     {
-        (void)callback(fd, "%-16s %#-16x %-16d\n", iter.first, iter.second->obj, iter.second->refCount);
+        (void)callback(fd,
+                       "%-16s %#-16x %-16d\n",
+                       iter.first,
+                       iter.second->obj,
+                       iter.second->refCount);
     }
     (void)callback(fd, "Tatol: %d\n", m_objList.size());
 }
-objbase *objKernel::Query(const char *pzName)
+objbase *objKernel::Query(int key)
 {
-    auto iter = OS::find(pzName, m_objList);
-    if (iter != m_objList.end())
+    for (auto &iter : m_objList)
     {
-        ++iter->second->refCount;
-        return iter->second->obj;
+        ObjModule *pObj = iter.second;
+        if (pObj != nullptr && pObj->id == key)
+        {
+            pObj->refCount++;
+            return pObj->obj;
+        }
     }
     return nullptr;
 }
-void objKernel::Release(const char *pzName)
+void objKernel::Release(int key)
 {
-    auto iter = OS::find(pzName, m_objList);
-    if ((iter != m_objList.end()) && (--iter->second->refCount <= 0))
+    for (auto &iter : m_objList)
     {
-        delete iter->second;
-        iter->second = nullptr;
-        m_objList.erase(iter);
+        ObjModule *pObj = iter.second;
+        if (pObj != nullptr && pObj->id == key && pObj->refCount > 0)
+        {
+            pObj->refCount--;
+        }
     }
 }
 void objKernel::Entry()
@@ -98,5 +114,5 @@ void objKernel::Init(void (*EntryFunc)())
 
 void objKernel::Reg(const char *pzName, void *obj, int id)
 {
-    m_objList[pzName] = new ObjModule((objbase*)obj, id);
+    m_objList[pzName] = new ObjModule((objbase *)obj, id);
 }

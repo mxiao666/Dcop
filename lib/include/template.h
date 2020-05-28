@@ -3,27 +3,27 @@
 
 namespace OS
 {
-template <class T>
-inline typename T::iterator find(const char *pzName, T &list)
-{
-    for (typename T::iterator iter = list.begin();
-         iter != list.end(); iter++)
+    template <class T>
+    inline typename T::iterator find(const char *pzName, T &list)
     {
-        if (
-#ifndef __WIN32__
-            strcasecmp
-#else
-            _stricmp
-#endif
-            (pzName, iter->first) == 0)
+        for (typename T::iterator iter = list.begin();
+             iter != list.end(); iter++)
         {
-            return iter;
+            if (
+#ifndef __WIN32__
+                strcasecmp
+#else
+                _stricmp
+#endif
+                (pzName, iter->first) == 0)
+            {
+                return iter;
+            }
         }
+        return list.end();
     }
-    return list.end();
-}
 
-bool equal(const char *s1, const char *s2);
-bool equal(const char *s1, const char *s2, int max);
+    bool equal(const char *s1, const char *s2);
+    bool equal(const char *s1, const char *s2, int max);
 }; // namespace OS
 #endif

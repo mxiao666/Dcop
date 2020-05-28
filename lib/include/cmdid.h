@@ -6,7 +6,8 @@ enum
     CMD_GET_LOG_LEVEL,
     CMD_SET_LOG_LEVEL,
     CMD_GET_LOG_TRACE,
-    CMD_SET_LOG_TRACE,       
+    CMD_SET_LOG_TRACE,
+    CMD_MSG_REPORT,
     CMD_BASE_NUM,
 };
 enum

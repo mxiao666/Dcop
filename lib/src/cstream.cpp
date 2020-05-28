@@ -83,7 +83,7 @@ CStream &CStream::operator<<(DWORD t)
 
     for (size_t i = 0; i < sizeof(t); i++)
     {
-        m_cbuf[m_curLen + i] = (t >> (24 - i * 8));
+        m_cbuf[m_curLen + i] = (BYTE)(t >> (24 - i * 8));
     }
     m_curLen += sizeof(t); //移动当前索引
     return *this;
@@ -96,7 +96,10 @@ CStream &CStream::operator>>(BYTE &t)
 }
 CStream &CStream::operator>>(DWORD &t)
 {
-    t = m_cbuf[m_pos] << 24 | m_cbuf[m_pos + 1] << 16 | m_cbuf[m_pos + 2] << 8 | m_cbuf[m_pos + 3];
+    t = m_cbuf[m_pos] << 24 |
+        m_cbuf[m_pos + 1] << 16 |
+        m_cbuf[m_pos + 2] << 8 |
+        m_cbuf[m_pos + 3];
     m_pos += sizeof(t); //移动当前索引
     return *this;
 }

@@ -12,11 +12,13 @@ typedef struct _AsyncArgc
     CAgrcList *msg;
     int iModule;
     int iCmd;
-    _AsyncArgc(CAgrcList *objmsg, int module, int cmd)
+    void *m_ptr;
+    _AsyncArgc(CAgrcList *objmsg, int module, int cmd, void *parm = nullptr)
     {
         msg = new CAgrcList(objmsg);
         iModule = module;
-        iCmd = cmd;        
+        iCmd = cmd;
+        m_ptr = parm;
     }
     ~_AsyncArgc()
     {
@@ -40,13 +42,14 @@ public:
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void AsyncProc();
     int Init();
-    int AsyncNotify(CAgrcList *message,int iModule, int iCmd);
+    int AsyncNotify(CAgrcList *message, int iModule,
+                    int iCmd, void *parm = nullptr);
 
 private:
     std::map<int, objbase *> observerList;
     std::mutex m_reglock;
     // 任务队列
-    std::queue<AsyncArgc*> tasks;
+    std::queue<AsyncArgc *> tasks;
     // 同步
     std::mutex m_lock;
     // 条件阻塞
@@ -54,7 +57,7 @@ private:
     // 是否关闭提交
     std::atomic<bool> stoped;
     //空闲线程数量
-    std::atomic<int> idlThrNum;    
+    std::atomic<int> idlThrNum;
 };
 
 #endif // NOTIFIER_H

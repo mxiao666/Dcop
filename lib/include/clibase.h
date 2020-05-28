@@ -25,9 +25,18 @@ public:
     {
         (void)callback(fd, "plase man cmd.\n");
     }
-    virtual int Set(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
-    virtual int Get(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
-    virtual int Add(CAgrcList *inPut, CAgrcList *outPut, bool *bOp) { return 0; };
+    virtual int Set(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)
+    {
+        return 0;
+    };
+    virtual int Get(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)
+    {
+        return 0;
+    };
+    virtual int Add(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)
+    {
+        return 0;
+    };
     virtual int Init() { return 0; };
 };
 
@@ -38,7 +47,8 @@ typedef struct _cmdObj
     bool bSync;
     CClibase *objCli;
     RspTable *rspTable;
-    _cmdObj(CClibase *obj, int cmdMod, int cmd, RspTable *tbl = nullptr, bool sync = true)
+    _cmdObj(CClibase *obj, int cmdMod, int cmd,
+            RspTable *tbl = nullptr, bool sync = true)
     {
         cmdModule = cmdMod;
         cmdid = cmd;
@@ -65,19 +75,26 @@ private:
     const char *GET_STR = "get";
     const char *SET_STR = "set";
     const char *ADD_STR = "add";
-    int Dispatch(CAgrcList *message, cmdObj *);
+    int Dispatch(CAgrcList *message, cmdObj *, int fd = 0);
+    int Report(RspMsg *outMessage, cmdObj *pcmdObj, int fd = 0);
+    int Report(CAgrcList *message,
+               RspMsg *outmessage,
+               int iModule,
+               int iCmd);
 
 public:
     cliMgr();
     ~cliMgr();
+    int Init();
     int Process();
     int Process(int fd, char *cmdbuffer, int len, bool &isExit);
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
-    int Init();
-    int Report(RspMsg *outMessage, int cmd);
+    int Report(RspMsg *outMessage, int module, int cmd);
     virtual void Reg(const char *pzName, void *obj, int id);
+    virtual int Process(CAgrcList *message,
+                        RspMsg *outmessage, int iModule, int iCmd);
 };
 #define ARGC_DEFAULT "ARGC"
 #endif

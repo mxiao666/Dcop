@@ -1,4 +1,4 @@
-/***********************************************************************************
+/******************************************************************************
  * 文 件 名   : os_system.c
  * 负 责 人   : 卢美宏
  * 创建日期   : 2018年4月1日
@@ -6,7 +6,7 @@
  * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公司
  * 其    他   :
  * 修改日志   :
-***********************************************************************************/
+******************************************************************************/
 #include "log.h"
 #include "system.h"
 #include <fcntl.h>
@@ -73,7 +73,8 @@ s32 OS_SafeSystem(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet)
  * 其    它  : 
 
 *****************************************************************************/
-s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet, pid_t *ptChildPid)
+s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut,
+                     s32 *piScriptRet, pid_t *ptChildPid)
 {
 #ifndef __WIN32__
     s32 iRet = RET_ERR;
@@ -100,7 +101,9 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
         //获取进程能打开最大文件数并关闭
         if (0 == getrlimit(RLIMIT_NOFILE, &stFileLimit))
         {
-            for (uiFileIndex = STDOUT_FILENOED + 1; uiFileIndex < stFileLimit.rlim_max; ++uiFileIndex)
+            for (uiFileIndex = STDOUT_FILENOED + 1;
+                 uiFileIndex < stFileLimit.rlim_max;
+                 ++uiFileIndex)
             {
                 close((int32_t)uiFileIndex);
             }
@@ -120,7 +123,9 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
         iRet = OS_WaitChild(tChildPid, NULL, uiTimeOut, piScriptRet, NULL, 0);
         if (RET_OK != iRet)
         {
-            LVOS_Log(LL_ERROR, "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).", pcCmd, iRet, *piScriptRet);
+            LVOS_Log(LL_ERROR,
+                     "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).",
+                     pcCmd, iRet, *piScriptRet);
             return RET_ERR;
         }
         else
@@ -150,7 +155,8 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut, s32 *piScriptRet,
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, char *pOutBuf, u64 uiOutBufLen)
+s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout,
+                 s32 *iScriptRet, char *pOutBuf, u64 uiOutBufLen)
 {
     s32 iRet = RET_ERR;
     s32 iStat = 0;
@@ -170,7 +176,8 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
 
         if ((NULL != piFd) && (NULL != pOutBuf) && (iOffset < uiOutBufLen))
         {
-            iOffset += OS_CheckReadBuf(*piFd, pOutBuf + iOffset, uiOutBufLen - iOffset);
+            iOffset += OS_CheckReadBuf(*piFd, pOutBuf + iOffset,
+                                       uiOutBufLen - iOffset);
         }
 
         iStopPid = wait4(uiChildPid, (int *)&iStat, WNOHANG, 0);
@@ -193,7 +200,9 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout, s32 *iScriptRet, ch
     else if (0 == iStopPid)
     {
         iRet = OS_Kill(uiChildPid);
-        LVOS_Log(LL_WARNING, "Wait Child Timeout(%llu) but used(%llu),iRet(%ld).", uiTime, uiEndTime - uiBeginTime, iRet);
+        LVOS_Log(LL_WARNING,
+                 "Wait Child Timeout(%llu) but used(%llu),iRet(%ld).",
+                 uiTime, uiEndTime - uiBeginTime, iRet);
         return RET_TIMEOUT;
     }
     else if (iStopPid == uiChildPid)
@@ -457,7 +466,8 @@ s32 OS_GetStrValueByCmd(const char *pacCmd, char *pBuffer, u64 uiBufferLen)
  * 其    它  :
 
 *****************************************************************************/
-s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBufferLen)
+s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout,
+                    char *pBuffer, u64 uiBufferLen)
 {
 
     s32 iRet = RET_ERR;
@@ -491,7 +501,9 @@ s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuff
         //获取进程能打开最大文件数并关闭
         if (0 == getrlimit(RLIMIT_NOFILE, &stFileLimit))
         {
-            for (uiFileIndex = STDOUT_FILENOED + 1; uiFileIndex < stFileLimit.rlim_max; ++uiFileIndex)
+            for (uiFileIndex = STDOUT_FILENOED + 1;
+                 uiFileIndex < stFileLimit.rlim_max;
+                 ++uiFileIndex)
             {
                 //关闭子进程的非写端
                 if ((int)uiFileIndex != pdes[1])
@@ -506,11 +518,14 @@ s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout, char *pBuffer, u64 uiBuff
     else
     {
         close(pdes[1]);
-        iRet = OS_WaitChild(iChildPid, &pdes[0], uiTimeout, &iScriptRet, pBuffer, uiBufferLen);
+        iRet = OS_WaitChild(iChildPid, &pdes[0], uiTimeout,
+                            &iScriptRet, pBuffer, uiBufferLen);
         close(pdes[0]);
         if (RET_OK != iRet || RET_OK != iScriptRet)
         {
-            LVOS_Log(LL_ERROR, "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).", pacCmd, iRet, iScriptRet);
+            LVOS_Log(LL_ERROR,
+                     "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).",
+                     pacCmd, iRet, iScriptRet);
             return RET_ERR;
         }
         return RET_OK;

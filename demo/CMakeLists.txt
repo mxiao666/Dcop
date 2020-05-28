@@ -1,5 +1,5 @@
 # 工程lib库配置文件
-
+cmake_minimum_required(VERSION 3.16)
 set(PROJECT_NAME "OSTEST")
 
 # 工程名称
@@ -28,8 +28,7 @@ add_subdirectory(${PROJECT_BINARY_DIR}/../lib lib.out)
 
 # 生成可执行文件
 add_executable(demo 
-	demo.cpp
-	usr/logmgr.cpp)
+	demo.cpp)
 
 #连接成最后的可执行文件	
 target_link_libraries(demo  sys)

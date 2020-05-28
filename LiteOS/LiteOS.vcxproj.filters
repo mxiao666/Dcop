@@ -72,9 +72,6 @@
     <ClInclude Include="..\lib\include\template.h">
       <Filter>头文件\lib</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\include\telnet.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\src\clibase.cpp">
@@ -113,14 +110,8 @@
     <ClCompile Include="..\lib\src\template.cpp">
       <Filter>源文件\lib</Filter>
     </ClCompile>
-    <ClCompile Include="..\demo\usr\logmgr.cpp">
-      <Filter>源文件\usr</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\src\frameworkmgr.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\telnet.cpp">
-      <Filter>源文件\lib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

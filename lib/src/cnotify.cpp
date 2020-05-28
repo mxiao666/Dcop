@@ -23,14 +23,20 @@ void Cnotify::UnRegReceiver(int iModule)
         observerList.erase(iter);
     }
 }
-void Cnotify::SendToAll(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
+void Cnotify::SendToAll(CAgrcList *message,
+                        RspMsg *outmessage,
+                        int iModule,
+                        int iCmd)
 {
     for (auto &iter : observerList)
     {
         iter.second->Process(message, outmessage, iModule, iCmd);
     }
 }
-int Cnotify::Notify(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
+int Cnotify::Notify(CAgrcList *message,
+                    RspMsg *outmessage,
+                    int iModule,
+                    int iCmd)
 {
     auto iter = observerList.find(iModule);
     if (iter != observerList.end() && iModule == iter->first)
@@ -39,9 +45,9 @@ int Cnotify::Notify(CAgrcList *message, RspMsg *outmessage, int iModule, int iCm
     }
     return -1;
 }
-int Cnotify::AsyncNotify(CAgrcList *message, int iModule, int iCmd)
+int Cnotify::AsyncNotify(CAgrcList *message, int iModule, int iCmd, void *parm)
 {
-    AsyncArgc *pool = new AsyncArgc(message, iModule, iCmd);
+    AsyncArgc *pool = new AsyncArgc(message, iModule, iCmd, parm);
     if (pool == nullptr)
         return -1;
     std::lock_guard<std::mutex> lock{m_lock};
@@ -71,7 +77,8 @@ void Cnotify::AsyncProc()
 
             this->cv_task.wait(lock,
                                [this] {
-                                   return this->stoped.load() || !this->tasks.empty();
+                                   return this->stoped.load() ||
+                                          !this->tasks.empty();
                                });
             if (this->stoped && this->tasks.empty())
             {
@@ -86,15 +93,22 @@ void Cnotify::AsyncProc()
         {
             if (message->iModule == 0)
             {
-                SendToAll(message->msg, nullptr, message->iModule, message->iCmd);
+                SendToAll(message->msg,
+                          (RspMsg *)message->m_ptr,
+                          message->iModule,
+                          message->iCmd);
             }
             else
             {
-                Notify(message->msg, nullptr, message->iModule, message->iCmd);
+                Notify(message->msg,
+                       (RspMsg *)message->m_ptr,
+                       message->iModule,
+                       message->iCmd);
             }
         }
         idlThrNum++;
     }
+    idlThrNum--;
 }
 int Cnotify::Init()
 {

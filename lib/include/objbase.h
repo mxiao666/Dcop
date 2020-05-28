@@ -28,14 +28,17 @@ public:
     virtual void PrintEnd(int fd, Printfun callback,
                           int tatol, char split = '-');
     virtual int Process(CAgrcList *message,
-                        RspMsg *outmessage, int iModule, int iCmd) { return 0; };
+                        RspMsg *outmessage, int iModule, int iCmd)
+    {
+        return 0;
+    };
     virtual void Reg(const char *pzName, void *obj, int id){};
 };
 
-#define PROCESS_BEGIN                             \
+#define PROCESS_BEGIN(cmd)                        \
     std::lock_guard<std::mutex> lock{m_synclock}; \
     int iRet = 0;                                 \
-    switch (iCmd)                                 \
+    switch (cmd)                                  \
     {
 
 #define PROCESS_CALL(cmd, func)                            \
@@ -43,11 +46,11 @@ public:
         iRet = (func)(message, outmessage, iModule, iCmd); \
         break;
 
-#define PROCESS_END \
-    default:        \
-        iRet = -1;  \
-        break;      \
-        }           \
+#define PROCESS_END() \
+    default:          \
+        iRet = -1;    \
+        break;        \
+        }             \
         return iRet;
 
 #endif

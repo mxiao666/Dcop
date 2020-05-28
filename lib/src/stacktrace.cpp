@@ -1,4 +1,4 @@
-/***********************************************************************************
+/****************************************************************************
  * 文 件 名   : os_stacktrace.c
  * 负 责 人   : 卢美宏
  * 创建日期   : 2018年11月23日
@@ -6,7 +6,7 @@
  * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公司
  * 其    他   : 
  * 修改日志   : 
-***********************************************************************************/
+******************************************************************************/
 
 #include <errno.h>
 #include <signal.h>
@@ -96,7 +96,8 @@ extern "C" void debug_backtrace_dump(void)
 
 *****************************************************************************/
 #ifndef __WIN32__
-extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontext)
+extern "C" void debug_signal_handler(int sig_num,
+                                     siginfo_t *info, void *ucontext)
 {
 
 #ifdef _DEBUG_
@@ -105,7 +106,8 @@ extern "C" void debug_signal_handler(int sig_num, siginfo_t *info, void *ucontex
     system((const char *)buff);
 #endif
 
-    LOG_ERROR("=========>>>catch signal %s(%d) <<<=========", strsignal(sig_num), sig_num);
+    LOG_ERROR("=========>>>catch signal %s(%d) <<<=========",
+              strsignal(sig_num), sig_num);
     LOG_ERROR("Dump stack start...");
     debug_backtrace_dump();
     LOG_ERROR("Dump stack end...");
@@ -137,7 +139,8 @@ extern "C" int debug_backtrace_init(void)
     sa.sa_sigaction = debug_signal_handler;
     sa.sa_flags = SA_RESTART | SA_SIGINFO;
     int ret = 0;
-    for (BYTE i = 0; i < (sizeof(signals_trace) / sizeof(signals_trace[0])); ++i)
+    for (BYTE i = 0; i < (sizeof(signals_trace) / sizeof(signals_trace[0]));
+         ++i)
     {
         if (sigaction(signals_trace[i], &sa, NULL) != 0)
         {
@@ -145,7 +148,9 @@ extern "C" int debug_backtrace_init(void)
             fprintf(stderr, "Failed to set signal handler for %s(%d)!\n",
                     strsignal(signals_trace[i]), signals_trace[i]);
 #else
-            LOG_ERROR("Failed to set signal handler for %s(%d)!", strsignal(signals_trace[i]), signals_trace[i]);
+            LOG_ERROR("Failed to set signal handler for %s(%d)!",
+                      strsignal(signals_trace[i]),
+                      signals_trace[i]);
 #endif
             ret = -1;
             break;

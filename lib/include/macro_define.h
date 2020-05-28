@@ -1,4 +1,4 @@
-/***********************************************************************************
+/*****************************************************************************
  * 文 件 名   : os_macro_define.h
  * 负 责 人   : 卢美宏
  * 创建日期   : 2018年11月23日
@@ -6,7 +6,7 @@
  * 版权说明   : Copyright (c) 2008-2018   xx xx xx xx 技术有限公司
  * 其    他   : 
  * 修改日志   : 
-***********************************************************************************/
+******************************************************************************/
 
 #ifndef _MACRO_DEFINE
 #define _MACRO_DEFINE
@@ -16,7 +16,7 @@ typedef unsigned int u32;
 typedef long long int s64;
 typedef unsigned long long int u64;
 typedef unsigned char BYTE;
-typedef unsigned int DWORD;
+typedef unsigned long DWORD;
 typedef unsigned short WORD;
 
 #define RET_OK 0

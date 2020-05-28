@@ -33,13 +33,14 @@ public:
     objbase *InterFace(const char *pzName);
     objbase *InterFace(int key);
     /*引用对象查询*/
-    objbase *Query(const char *pzName);
+    objbase *Query(int key);
     /*引用对象释放*/
-    void Release(const char *pzName);
+    void Release(int key);
     void Entry();
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void Init(void (*EntryFunc)());
     void Reg(const char *pzName, void *obj, int id);
+    void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
 
 private:
     objKernel(objKernel &) = delete;
