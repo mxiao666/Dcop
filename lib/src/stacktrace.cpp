@@ -145,7 +145,7 @@ extern "C" int debug_backtrace_init(void)
         if (sigaction(signals_trace[i], &sa, NULL) != 0)
         {
 #if _DEBUG_
-            fprintf(stderr, "Failed to set signal handler for %s(%d)!\n",
+            fprintf(stderr, "Failed to set signal handler for %s(%d)!\r\n",
                     strsignal(signals_trace[i]), signals_trace[i]);
 #else
             LOG_ERROR("Failed to set signal handler for %s(%d)!",

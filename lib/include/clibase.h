@@ -18,12 +18,18 @@ typedef struct _ResTable
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 class CClibase
 {
+private:
+    int m_refConut = 0;
+
 public:
     CClibase() {}
-    virtual ~CClibase() {}
+    virtual ~CClibase()
+    {
+        m_refConut = 0;
+    }
     virtual void Help(int fd = 0, Printfun callback = LVOS_Printf)
     {
-        (void)callback(fd, "plase man cmd.\n");
+        (void)callback(fd, "plase man cmd.\r\n");
     }
     virtual int Set(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)
     {
@@ -38,6 +44,18 @@ public:
         return 0;
     };
     virtual int Init() { return 0; };
+    int GetRefCount()
+    {
+        return m_refConut;
+    }
+    void AddRefConut()
+    {
+        ++m_refConut;
+    }
+    void DecRefConut()
+    {
+        --m_refConut;
+    }
 };
 
 typedef struct _cmdObj
@@ -58,8 +76,14 @@ typedef struct _cmdObj
     }
     ~_cmdObj()
     {
-        //if (objCli != nullptr)
-        //    delete objCli;
+        if (objCli != nullptr)
+        {
+            objCli->DecRefConut();
+            if (objCli->GetRefCount() == 0)
+                {
+                    delete objCli;
+                }
+        }
         objCli = nullptr;
     }
 } cmdObj;

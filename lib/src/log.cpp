@@ -19,8 +19,7 @@
 #define ON "ON"
 #define OFF "OFF"
 
-const int LOG_MESSAGE_LEN = 512;
-const int LOG_CONTENT_LEN = 64;
+#define LOG_MESSAGE_LEN 1024
 
 static FILE *log_file;
 static int log_level = LL_INFO;
@@ -74,60 +73,62 @@ int WriteLog(int v_level, int line,
         return RET_ERR;
 
     /* ---时间-- */
-    char log_time[LOG_CONTENT_LEN] = {0};
+    char log_msg[LOG_MESSAGE_LEN] = {0};
     time_t t = time(NULL);
     struct tm ptm;
+    int nWrittenBytes = 0;
 #ifndef __WIN32__
     localtime_r(&t, &ptm);
 #else
     localtime_s(&ptm, &t);
 #endif
-    snprintf(log_time,
-             LOG_CONTENT_LEN - 1,
-             "%4d-%02d-%02d %02d:%02d:%02d",
-             ptm.tm_year + 1900,
-             ptm.tm_mon + 1,
-             ptm.tm_mday,
-             ptm.tm_hour,
-             ptm.tm_min,
-             ptm.tm_sec);
+    nWrittenBytes = snprintf(log_msg,
+                             LOG_MESSAGE_LEN,
+                             "%4d-%02d-%02d %02d:%02d:%02d",
+                             ptm.tm_year + 1900,
+                             ptm.tm_mon + 1,
+                             ptm.tm_mday,
+                             ptm.tm_hour,
+                             ptm.tm_min,
+                             ptm.tm_sec);
 
     /* ---文件--行号---函数--- */
-    char log_pos[LOG_CONTENT_LEN] = {0};
     const char *linuxpos = strrchr(file, '/');
-    const char *winwpso = strrchr(file, '\\');
-    snprintf(log_pos, LOG_CONTENT_LEN - 1,
-             " [%s] [%s:%d] [%s] ",
-             LogLevelStr[v_level],
-             (NULL != linuxpos)
-                 ? (linuxpos + 1)
-                 : (NULL != winwpso)
-                       ? (winwpso + 2)
-                       : file,
-             line, func);
+    const char *winwpos = strrchr(file, '\\');
+    nWrittenBytes += snprintf(log_msg + nWrittenBytes,
+                              LOG_MESSAGE_LEN - nWrittenBytes,
+                              " [%s] [%s:%d] [%s] ",
+                              LogLevelStr[v_level],
+                              (NULL != linuxpos)
+                                  ? (linuxpos + 1)
+                                  : (NULL != winwpos)
+                                        ? (winwpos + 2)
+                                        : file,
+                              line, func);
 
     /* ---日志内容--- */
-    char log_msg[LOG_MESSAGE_LEN] = {0};
     va_list arg_ptr;
     va_start(arg_ptr, format);
-    int nWrittenBytes = vsnprintf(log_msg, sizeof(log_msg), format, arg_ptr);
-    if (nWrittenBytes < 0)
-    {
-        //perror("vsnprintf");
-        return RET_ERR;
-    }
+    nWrittenBytes += vsnprintf(log_msg + nWrittenBytes,
+                               LOG_MESSAGE_LEN - nWrittenBytes,
+                               format, arg_ptr);
     va_end(arg_ptr);
-
+    if (log_msg[nWrittenBytes - 1] != '\n')
+    {
+        nWrittenBytes += snprintf(log_msg + nWrittenBytes,
+                                  LOG_MESSAGE_LEN - nWrittenBytes,
+                                  "%s", "\n");
+    }
     /* ---完整日志拼接--- */
-    nWrittenBytes = fprintf(log_file, "%s%s%s\n", log_time, log_pos, log_msg);
+    fwrite(log_msg, 1, nWrittenBytes, log_file);
     if (bConsolePrint)
-        printf("%s%s%s\n", log_time, log_pos, log_msg);
+        printf("%s", log_msg);
     return nWrittenBytes;
 }
 
 int LVOS_Printf(int fd, const char *format, ...)
 {
-    char buffer[1024] = {0};
+    char buffer[LOG_MESSAGE_LEN] = {0};
     va_list arg_ptr;
     va_start(arg_ptr, format);
     int nWrittenBytes = vsnprintf(buffer, sizeof(buffer), format, arg_ptr);
@@ -167,7 +168,7 @@ static TblBody tracetblbody[] = {
 };
 static RspTable tracereptbl =
     {"LOG-TRACE", tracetblbody, ARRAY_SIZE(tracetblbody)};
-class LogCmd : public CClibase, public objbase
+class LogCmd : public CClibase
 {
     virtual int Init()
     {
@@ -279,11 +280,11 @@ public:
     }
     void dump(int fd, Printfun callback)
     {
-        (void)callback(fd, "log-level:%s(%d)\n",
+        (void)callback(fd, "log-level:%s(%d)\r\n",
                        LogLevelStr[GetLogLevel()],
                        GetLogLevel());
         (void)callback(fd,
-                       "log-trace:%s(%d)\n",
+                       "log-trace:%s(%d)\r\n",
                        GetMethod() ? ON : OFF,
                        GetMethod());
     }

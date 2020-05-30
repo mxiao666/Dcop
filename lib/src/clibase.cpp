@@ -9,6 +9,7 @@
 #include "log.h"
 #include "objKernel.h"
 #include "template.h"
+#define MAX_BUFFER_LEN 256
 #ifndef __WIN32__
 class telnet : public objbase
 {
@@ -20,8 +21,7 @@ private:
     cliMgr *m_cliMgr;
     std::map<int, int> m_servList;
     std::mutex m_synclock;
-#define MAX_BUFFER_LEN 1024
-#define MAX_EVENTS 1000
+#define MAX_EVENTS 100
 public:
     telnet(int port = 2323)
     {
@@ -155,9 +155,9 @@ public:
                     char buf[MAX_BUFFER_LEN] = {0};
                     // 开始处理每个新连接上的数据收发
                     bzero(buf, sizeof(buf));
-                    len = read(sockfd, buf, MAX_BUFFER_LEN);
+                    len = read(sockfd, buf, MAX_BUFFER_LEN - 1);
 
-                    if (len < 0)
+                    if (len <= 0)
                     {
                         close(sockfd);
                         events[i].data.fd = -1;
@@ -173,8 +173,9 @@ public:
                     }
                     else
                     {
-                        isExit = false;
                         char *pos = strrchr(buf, '\r');
+                        isExit = false;
+                        buf[len - 1] = '\0';
                         if (pos != nullptr)
                         {
                             *pos = '\0';
@@ -329,7 +330,7 @@ int cliMgr::Report(RspMsg *outMessage, cmdObj *pcmdObj, int fd)
     }
     len = snprintf(buf,
                    maxlen,
-                   "\n%*s\n%s\n",
+                   "\r\n%*s\r\n%s\r\n",
                    totallen / 2,
                    ptbl->tblName,
                    _outinfo.GetBuff());
@@ -345,12 +346,12 @@ int cliMgr::Report(RspMsg *outMessage, cmdObj *pcmdObj, int fd)
                                ->GetBuff());
             outinfo.Append((const BYTE *)buf, len);
         }
-        len = snprintf(buf, maxlen, "%s", "\n");
+        len = snprintf(buf, maxlen, "%s", "\r\n");
         outinfo.Append((const BYTE *)buf, len);
     }
     len = snprintf(buf,
                    maxlen,
-                   "Command response %d line record\n",
+                   "Command response %d line record\r\n",
                    outMessage->count);
     outinfo.Append((const BYTE *)buf, len);
     (void)LVOS_Printf(fd, (char *)outinfo.GetBuff());
@@ -362,7 +363,7 @@ void cliMgr::Welcome(int fd, Printfun callback)
     g_objKernel->Welcome(fd);
 #endif
     callback(fd, "\tWelcome!");
-    callback(fd, "\nhim:#", 6);
+    callback(fd, "\r\nhim:#", 6);
 }
 int cliMgr::Process(int fd, char *cmdbuffer, int len, bool &isExit)
 {
@@ -374,7 +375,10 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, bool &isExit)
     CAgrcList inMessage;
     CAgrcList cliMessage;
     char *pos = nullptr;
-    if (cmdbuffer == nullptr || len <= 0 || *cmdbuffer == '\0')
+    if (cmdbuffer == nullptr ||
+        len <= 0 ||
+        len > MAX_BUFFER_LEN ||
+        *cmdbuffer == '\0')
     {
         iRet = RET_ERR;
         goto _end;
@@ -463,14 +467,14 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, bool &isExit)
         }
         if (iRet != 0)
         {
-            LVOS_Printf(fd, "Cmd param is process error=%d\n", iRet);
+            LVOS_Printf(fd, "Cmd param is process error=%d\r\n", iRet);
             iRet = RET_ERR;
             goto _end;
         }
     }
     else
     {
-        LVOS_Printf(fd, "Cmd is unregister.\n");
+        LVOS_Printf(fd, "Cmd is unregister.\r\n");
         iRet = RET_ERR;
         goto _end;
     }
@@ -478,25 +482,23 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, bool &isExit)
     iRet = Dispatch((cliOp == false) ? &inMessage : &cliMessage, pcmdObj, fd);
     if (iRet != 0)
     {
-        LOG_WARN("Dispatch is process error:%#016x", iRet);
-        LVOS_Printf(fd, "Dispatch is process error:%#016x\n", iRet);
+        LOG_WARN("Dispatch is process error:%#016X", iRet);
+        LVOS_Printf(fd, "Dispatch is process error:%#016X\r\n", iRet);
     }
 _end:
-    LVOS_Printf(fd, "\nhim:#", 6);
+    LVOS_Printf(fd, "\r\nhim:#", 6);
     return iRet;
 }
 
 int cliMgr::Process()
 {
-
-    const int ArSize = 128;
     bool isExit = false;
     Welcome();
     while (!isExit)
     {
-        char name[ArSize] = {0};
+        char name[MAX_BUFFER_LEN] = {0};
         isExit = false;
-        std::cin.getline(name, ArSize);
+        std::cin.getline(name, MAX_BUFFER_LEN);
         Process(0, name, strlen(name), isExit);
     }
     return 0;
@@ -511,14 +513,14 @@ cmdObj *cliMgr::FindModule(const char *cmdName)
 void cliMgr::dump(int fd, Printfun callback)
 {
     objbase::PrintHead(fd, callback, "cliMgr", 66);
-    (void)callback(fd, "%-16s %-16s %-32s\n", "ModuleId", "objPtr", "cmd");
+    (void)callback(fd, "%-16s %-16s %-32s\r\n", "ModuleId", "objPtr", "cmd");
     for (auto &iter : m_cmdList)
         (void)callback(fd,
-                       "%#-16x %#-16x %-32s\n",
+                       "%#-16x %#-16x %-32s\r\n",
                        iter.second->cmdModule,
                        iter.second->objCli,
                        iter.first);
-    (void)callback(fd, "Tatol: %d\n", m_cmdList.size());
+    (void)callback(fd, "Tatol: %d\r\n", m_cmdList.size());
 }
 cliMgr::~cliMgr()
 {
@@ -528,6 +530,7 @@ cliMgr::~cliMgr()
             delete iter.second;
             iter.second = nullptr;
         }
+    m_cmdList.clear();
 }
 cliMgr::cliMgr()
 {
@@ -539,6 +542,7 @@ int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
         if (OS::equal(pzName, iter.first))
             return -1;
     m_cmdList[pzName] = pobj;
+    pobj->objCli->AddRefConut();
     return 0;
 }
 int cliMgr::Init()

@@ -140,13 +140,13 @@ int Cnotify::Init()
 void Cnotify::dump(int fd, Printfun callback)
 {
     objbase::PrintHead(fd, callback, "Cnotify", 44);
-    (void)callback(fd, "%-12s %-16s %-16s\n", "objId", "objPtr", "objName");
+    (void)callback(fd, "%-12s %-16s %-16s\r\n", "objId", "objPtr", "objName");
     for (auto &iter : observerList)
-        (void)callback(fd, "%-12d %#-16x %-16s\n",
+        (void)callback(fd, "%-12d %#-16x %-16s\r\n",
                        iter.first,
                        iter.second->obj,
                        iter.second->name);
-    (void)callback(fd, "Tatol: %d\n", observerList.size());
+    (void)callback(fd, "Tatol: %d\r\n", observerList.size());
 }
 
 REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, Cnotify, MODELU_NOTIFY)

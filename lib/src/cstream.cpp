@@ -120,7 +120,7 @@ bool CStream::GetMoreCapacity(DWORD len)
     {
         return true;
     }
-    while (nSizeNew > m_len)
+    while (nSizeNew >= m_len)
     {
         m_len *= 2;
     }

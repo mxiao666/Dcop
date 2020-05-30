@@ -111,7 +111,7 @@
       <Filter>源文件\lib</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\src\frameworkmgr.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\lib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

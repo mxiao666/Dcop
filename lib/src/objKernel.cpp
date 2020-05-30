@@ -12,17 +12,17 @@ objKernel::objKernel()
 }
 void objKernel::Welcome(int fd, Printfun callback)
 {
-    (void)callback(fd, "\n");
-    (void)callback(fd, "  __      __    __\n");
-    (void)callback(fd, " |  |    |  |  |__|   __________\n");
-    (void)callback(fd, " |  |____|  |   __   |  __  __  |\n");
-    (void)callback(fd, " |   ____   |  |  |  |  ||  ||  |\n");
-    (void)callback(fd, " |  |    |  |  |  |  |  ||  ||  |\n");
-    (void)callback(fd, " |__|    |__|  |__|  |__||__||__|\n");
-    (void)callback(fd, "\n");
-    (void)callback(fd, " Herobrine (Alpha) %-s\n", VER);
-    (void)callback(fd, " Update Date: %-17.17s\n", __DATE__);
-    (void)callback(fd, " Update Time: %-17.17s\n", __TIME__);
+    (void)callback(fd, "\r\n");
+    (void)callback(fd, "  __      __    __\r\n");
+    (void)callback(fd, " |  |    |  |  |__|   __________\r\n");
+    (void)callback(fd, " |  |____|  |   __   |  __  __  |\r\n");
+    (void)callback(fd, " |   ____   |  |  |  |  ||  ||  |\r\n");
+    (void)callback(fd, " |  |    |  |  |  |  |  ||  ||  |\r\n");
+    (void)callback(fd, " |__|    |__|  |__|  |__||__||__|\r\n");
+    (void)callback(fd, "\r\n");
+    (void)callback(fd, " Herobrine (Alpha) %-s\r\n", VER);
+    (void)callback(fd, " Update Date: %-17.17s\r\n", __DATE__);
+    (void)callback(fd, " Update Time: %-17.17s\r\n", __TIME__);
 }
 objKernel::~objKernel()
 {
@@ -56,19 +56,19 @@ void objKernel::dump(int fd, Printfun callback)
 {
     objbase::PrintHead(fd, callback, "objKernel", 50);
     (void)callback(fd,
-                   "%-16s %-16s %-16s\n",
+                   "%-16s %-16s %-16s\r\n",
                    "objName",
                    "objPtr",
                    "refCount");
     for (auto &iter : m_objList)
     {
         (void)callback(fd,
-                       "%-16s %#-16x %-16d\n",
+                       "%-16s %#-16x %-16d\r\n",
                        iter.first,
                        iter.second->obj,
                        iter.second->refCount);
     }
-    (void)callback(fd, "Tatol: %d\n", m_objList.size());
+    (void)callback(fd, "Tatol: %d\r\n", m_objList.size());
 }
 objbase *objKernel::Query(int key)
 {
