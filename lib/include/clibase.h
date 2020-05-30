@@ -19,13 +19,13 @@ typedef struct _ResTable
 class CClibase
 {
 private:
-    int m_refConut = 0;
+    int m_refCount = 0;
 
 public:
     CClibase() {}
     virtual ~CClibase()
     {
-        m_refConut = 0;
+        m_refCount = 0;
     }
     virtual void Help(int fd = 0, Printfun callback = LVOS_Printf)
     {
@@ -46,15 +46,15 @@ public:
     virtual int Init() { return 0; };
     int GetRefCount()
     {
-        return m_refConut;
+        return m_refCount;
     }
-    void AddRefConut()
+    void AddRefCount()
     {
-        ++m_refConut;
+        ++m_refCount;
     }
-    void DecRefConut()
+    void DecRefCount()
     {
-        --m_refConut;
+        --m_refCount;
     }
 };
 
@@ -78,11 +78,11 @@ typedef struct _cmdObj
     {
         if (objCli != nullptr)
         {
-            objCli->DecRefConut();
+            objCli->DecRefCount();
             if (objCli->GetRefCount() == 0)
-                {
-                    delete objCli;
-                }
+            {
+                delete objCli;
+            }
         }
         objCli = nullptr;
     }

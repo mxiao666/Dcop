@@ -542,7 +542,7 @@ int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
         if (OS::equal(pzName, iter.first))
             return -1;
     m_cmdList[pzName] = pobj;
-    pobj->objCli->AddRefConut();
+    pobj->objCli->AddRefCount();
     return 0;
 }
 int cliMgr::Init()
