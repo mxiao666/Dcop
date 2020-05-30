@@ -111,6 +111,7 @@ void Cnotify::AsyncProc()
                        message->iModule,
                        message->iCmd);
             }
+            delete message;
         }
         idlThrNum++;
     }
