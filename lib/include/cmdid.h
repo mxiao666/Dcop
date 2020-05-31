@@ -12,6 +12,7 @@ enum
 };
 enum
 {
+    MODULE_ALL,
     MODELU_KERNEL,
     MODELU_LOG,
     MODELU_NOTIFY,

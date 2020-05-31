@@ -115,7 +115,7 @@ public:
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
     int RegCmd(const char *pzName, cmdObj *pobj);
-    int Report(RspMsg *outMessage, int module, int cmd);
+    static int Report(RspMsg *outMessage, int module, int cmd);
     virtual void Reg(const char *pzName, void *obj, int id);
     virtual int Process(CAgrcList *message,
                         RspMsg *outmessage, int iModule, int iCmd);

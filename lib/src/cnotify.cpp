@@ -24,14 +24,14 @@ void Cnotify::UnRegReceiver(int iModule)
         observerList.erase(iter);
     }
 }
-void Cnotify::SendToAll(CAgrcList *message,
-                        RspMsg *outmessage,
-                        int iModule,
-                        int iCmd)
+void Cnotify::NotifyA(CAgrcList *message,
+                      RspMsg *outmessage,
+                      int iModule,
+                      int iCmd)
 {
     for (auto &iter : observerList)
     {
-        iter.second->obj->Process(message, outmessage, iModule, iCmd);
+        (void)AsyncNotify(message, iter.first, iCmd, nullptr);
     }
 }
 int Cnotify::Notify(CAgrcList *message,
@@ -99,10 +99,10 @@ void Cnotify::AsyncProc()
         {
             if (message->iModule == 0)
             {
-                SendToAll(message->msg,
-                          (RspMsg *)message->m_ptr,
-                          message->iModule,
-                          message->iCmd);
+                NotifyA(message->msg,
+                        (RspMsg *)message->m_ptr,
+                        message->iModule,
+                        message->iCmd);
             }
             else
             {

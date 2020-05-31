@@ -48,8 +48,8 @@ public:
     Cnotify();
     virtual ~Cnotify();
     void UnRegReceiver(int iModule);
-    void SendToAll(CAgrcList *message,
-                   RspMsg *outmessage, int iModule, int iCmd);
+    void NotifyA(CAgrcList *message,
+                 RspMsg *outmessage, int iModule, int iCmd);
     void RegReceiver(int iModule, REGNOTIFY *pRecv);
     int Notify(CAgrcList *message,
                RspMsg *outmessage, int iModule, int iCmd);

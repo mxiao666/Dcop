@@ -8,7 +8,7 @@ objKernel::objKernel()
 {
     Welcome();
     g_objKernel = this;
-    m_objList["objKernel"] = new ObjModule((objbase *)(this));
+    m_objList["objKernel"] = new ObjModule((objbase *)(this), MODELU_KERNEL);
 }
 void objKernel::Welcome(int fd, Printfun callback)
 {
@@ -103,7 +103,7 @@ void objKernel::Entry()
         if (pObj != nullptr)
             pObj->obj->Init();
     }
-    /*Æô¶¯Ñ­»·´¦Àí*/
+    /*ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
     if (m_EntryFunc)
         m_EntryFunc();
 }

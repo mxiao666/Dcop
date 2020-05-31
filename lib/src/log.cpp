@@ -200,21 +200,12 @@ private:
                       int iModule,
                       int iCmd)
     {
-        //    if (outmessage == nullptr)
-        //       return -1;
+        if (outmessage == nullptr)
+            return -1;
         CAgrcList *list = new CAgrcList[1];
         list[0].addAgrc(LEVEL, LogLevelStr[GetLogLevel()]);
-        //   outmessage->count = 1;
-        //  outmessage->msg = list;
-        cliMgr *objptr = (cliMgr *)g_objKernel->InterFace(MODELU_CLI);
-        RspMsg *rspMessage = new RspMsg;
-        rspMessage->count = 1;
-        rspMessage->msg = list;
-        rspMessage->cmd = CMD_GET_LOG_LEVEL;
-        if (objptr != nullptr)
-        {
-            objptr->Report(rspMessage, MODELU_CLI, CMD_GET_LOG_LEVEL);
-        }
+        outmessage->count = 1;
+        outmessage->msg = list;
         return 0;
     }
     int GetLogTreace(CAgrcList *message, RspMsg *outmessage,
@@ -241,6 +232,16 @@ private:
             if (OS::equal(level->c_str(), LogLevelStr[i]))
             {
                 SetLogLevel(i);
+                CAgrcList *list = new CAgrcList[1];
+                list[0].addAgrc(LEVEL, LogLevelStr[GetLogLevel()]);
+
+                RspMsg *rspMessage = new RspMsg;
+                rspMessage->count = 1;
+                rspMessage->msg = list;
+                rspMessage->cmd = CMD_GET_LOG_LEVEL;
+
+                cliMgr::Report(rspMessage, MODELU_CLI, CMD_GET_LOG_LEVEL);
+
                 return 0;
             }
         }

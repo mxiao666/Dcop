@@ -208,30 +208,30 @@ int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj, int fd)
     int iRet = 0;
     if (pcmdObj->bSync)
     {
-        if (pcmdObj->cmdModule != 0)
-        {
-            iRet = m_Cnotify->Notify(inMessage,
-                                     &outMessage,
-                                     pcmdObj->cmdModule,
-                                     pcmdObj->cmdid);
-            if (iRet == 0 && outMessage.count != 0)
-            {
-                iRet = Report(&outMessage, pcmdObj, fd);
-            }
-        }
-        else
-        {
-            m_Cnotify->SendToAll(inMessage,
+        iRet = m_Cnotify->Notify(inMessage,
                                  &outMessage,
                                  pcmdObj->cmdModule,
                                  pcmdObj->cmdid);
+        if (iRet == 0 && outMessage.count != 0)
+        {
+            iRet = Report(&outMessage, pcmdObj, fd);
         }
     }
     else
     {
-        iRet = m_Cnotify->AsyncNotify(inMessage,
-                                      pcmdObj->cmdModule,
-                                      pcmdObj->cmdid);
+        if (pcmdObj->cmdModule == MODULE_ALL)
+        {
+            m_Cnotify->NotifyA(inMessage,
+                               &outMessage,
+                               pcmdObj->cmdModule,
+                               pcmdObj->cmdid);
+        }
+        else
+        {
+            iRet = m_Cnotify->AsyncNotify(inMessage,
+                                          pcmdObj->cmdModule,
+                                          pcmdObj->cmdid);
+        }
     }
     return iRet;
 }
@@ -289,10 +289,18 @@ int cliMgr::Process(CAgrcList *message,
 
 int cliMgr::Report(RspMsg *outMessage, int module, int cmd)
 {
-    return m_Cnotify->AsyncNotify(nullptr,
-                                  MODELU_CLI,
-                                  CMD_MSG_REPORT,
-                                  outMessage);
+    if (g_objKernel != nullptr)
+    {
+        Cnotify *objptr = (Cnotify *)g_objKernel->InterFace(MODELU_NOTIFY);
+        if (objptr != nullptr)
+        {
+            objptr->AsyncNotify(nullptr,
+                                MODELU_CLI,
+                                CMD_MSG_REPORT,
+                                outMessage);
+        }
+    }
+    return RET_ERR;
 }
 int cliMgr::Report(RspMsg *outMessage, cmdObj *pcmdObj, int fd)
 {
