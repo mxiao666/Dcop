@@ -25,7 +25,7 @@ static FILE *log_file;
 static int log_level = LL_INFO;
 static bool bConsolePrint = false;
 char LogLevelStr[][8] =
-    {"DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
+    {"DEBUG", "INFO", "WARN", "ERROR", "FATAL", "TRACE"};
 int GetMethod() { return bConsolePrint; }
 int SetMethod(bool method)
 {
@@ -66,8 +66,6 @@ int WriteLog(int v_level, int line,
              const char *format, ...)
 {
     if (log_file == nullptr)
-        return RET_ERR;
-    if (v_level > LL_FATAL_ERROR || v_level < LL_DEBUG)
         return RET_ERR;
     if (log_level > v_level)
         return RET_ERR;

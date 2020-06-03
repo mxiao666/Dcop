@@ -463,12 +463,12 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, bool &isExit)
         else if (OS::equal((char *)cmd.GetBuff(), SET_STR, CMD_OP_MAX))
         {
             iRet = pcmdObj->objCli->Get(&inMessage, &cliMessage, &cliOp);
-            LOG_INFO("cmd:%s", cmdbuffer);
+            LOG_TRACE("cmd:%s", cmdbuffer);
         }
         else if (OS::equal((char *)cmd.GetBuff(), ADD_STR, CMD_OP_MAX))
         {
             iRet = pcmdObj->objCli->Get(&inMessage, &cliMessage, &cliOp);
-            LOG_INFO("cmd:%s", cmdbuffer);
+            LOG_TRACE("cmd:%s", cmdbuffer);
         }
         else
         {

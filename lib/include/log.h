@@ -7,12 +7,12 @@
 #include <string.h>
 enum
 {
-    LL_BASE_ID = 0,
-    LL_DEBUG = 0,
+    LL_DEBUG,
     LL_INFO,
     LL_WARNING,
     LL_ERROR,
     LL_FATAL_ERROR,
+    LL_TRACE,
     LL_LEVEL_NUM
 };
 int WriteLog(int v_level, int line,
@@ -40,5 +40,8 @@ int LVOS_Printf(int fd, const char *format, ...);
              __FILE__, format, ##__VA_ARGS__)
 #define LOG_FATAL(format, ...)                       \
     WriteLog(LL_FATAL_ERROR, __LINE__, __FUNCTION__, \
+             __FILE__, format, ##__VA_ARGS__)
+#define LOG_TRACE(format, ...)                 \
+    WriteLog(LL_TRACE, __LINE__, __FUNCTION__, \
              __FILE__, format, ##__VA_ARGS__)
 #endif
