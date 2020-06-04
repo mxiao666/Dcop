@@ -13,7 +13,7 @@
 #include "iostream"
 #include "stdio.h"
 #include <sstream>
-#include "macro_define.h"
+#include "type.h"
 
 /*****************************************************************************
  * 函 数 名  : 打印内存数据

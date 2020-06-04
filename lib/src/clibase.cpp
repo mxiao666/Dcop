@@ -522,12 +522,14 @@ void cliMgr::dump(int fd, Printfun callback)
 {
     objbase::PrintHead(fd, callback, "cliMgr", 66);
     (void)callback(fd, "%-16s %-16s %-32s\r\n", "ModuleId", "objPtr", "cmd");
+    objbase::PrintEnd(fd, callback, 66);
     for (auto &iter : m_cmdList)
         (void)callback(fd,
                        "%#-16x %#-16x %-32s\r\n",
                        iter.second->cmdModule,
                        iter.second->objCli,
                        iter.first);
+    objbase::PrintEnd(fd, callback, 66);
     (void)callback(fd, "Tatol: %d\r\n", m_cmdList.size());
 }
 cliMgr::~cliMgr()

@@ -10,7 +10,7 @@
 
 #ifndef __OS_SYSTEM_H__
 #define __OS_SYSTEM_H__
-#include "macro_define.h"
+#include "type.h"
 #include <sys/types.h>
 #ifdef __WIN32__
 #define pid_t int

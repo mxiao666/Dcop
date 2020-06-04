@@ -141,11 +141,13 @@ void Cnotify::dump(int fd, Printfun callback)
 {
     objbase::PrintHead(fd, callback, "Cnotify", 44);
     (void)callback(fd, "%-12s %-16s %-16s\r\n", "objId", "objPtr", "objName");
+    objbase::PrintEnd(fd, callback, 44);
     for (auto &iter : observerList)
         (void)callback(fd, "%-12d %#-16x %-16s\r\n",
                        iter.first,
                        iter.second->obj,
                        iter.second->name);
+    objbase::PrintEnd(fd, callback, 44);
     (void)callback(fd, "Tatol: %d\r\n", observerList.size());
 }
 

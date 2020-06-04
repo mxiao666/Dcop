@@ -15,9 +15,27 @@ typedef long int s32;
 typedef unsigned int u32;
 typedef long long int s64;
 typedef unsigned long long int u64;
-typedef unsigned char BYTE;
-typedef unsigned long DWORD;
-typedef unsigned short WORD;
+
+typedef int                 INT;
+typedef unsigned int        UINT;
+typedef unsigned char       UINT8;
+typedef unsigned short      UINT16;
+typedef unsigned int        UINT32;
+typedef unsigned long       ULONG;
+typedef unsigned short      USHORT;
+typedef unsigned char       UCHAR;
+typedef signed char         INT8;
+typedef signed long          LONG;
+typedef signed short        SHORT;
+typedef int                 BOOL;
+typedef int                 STATUS;
+typedef unsigned long       DWORD;
+typedef unsigned char       BYTE;
+typedef unsigned short      WORD;
+typedef float               FLOAT;
+
+#define	IMPORT	extern
+#define	LOCAL	static
 
 #define RET_OK 0
 #define RET_ERR -1

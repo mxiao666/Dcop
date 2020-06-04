@@ -30,6 +30,7 @@ void objTaskMgr::dump(int fd, Printfun callback)
     objbase::PrintHead(fd, callback, "objTaskMgr", 54);
     (void)callback(fd, "%-12s %-16s %-12s\r\n",
                    "taskName", "taskId", "taskPtr");
+    objbase::PrintEnd(fd, callback, 54);
     for (auto &iter : m_objlist)
     {
         if (iter.second != nullptr)
@@ -38,6 +39,7 @@ void objTaskMgr::dump(int fd, Printfun callback)
                            iter.second->GetId(),
                            iter.second);
     }
+    objbase::PrintEnd(fd, callback, 54);
     (void)callback(fd, "Tatol: %d\r\n", m_objlist.size());
 }
 int objTaskMgr::addObj(objTask *obj)

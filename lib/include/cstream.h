@@ -1,6 +1,6 @@
 #ifndef __OS_CSTREAM_H__
 #define __OS_CSTREAM_H__
-#include "macro_define.h"
+#include "type.h"
 #define Stackm_len 64
 
 class CStream

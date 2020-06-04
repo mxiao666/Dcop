@@ -1,6 +1,6 @@
 #include "log.h"
 #include "stacktrace.h"
-#include "macro_define.h"
+#include "type.h"
 #include <stdarg.h>
 #include <time.h>
 #include <stdlib.h>
@@ -279,6 +279,7 @@ public:
     }
     void dump(int fd, Printfun callback)
     {
+        objbase::PrintHead(fd, callback, "LOG_INFO", 32);
         (void)callback(fd, "log-level:%s(%d)\r\n",
                        LogLevelStr[GetLogLevel()],
                        GetLogLevel());
@@ -286,6 +287,7 @@ public:
                        "log-trace:%s(%d)\r\n",
                        GetMethod() ? ON : OFF,
                        GetMethod());
+        objbase::PrintEnd(fd, callback, 32);
     }
     int Init()
     {

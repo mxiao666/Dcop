@@ -5,7 +5,7 @@
 #include <mutex>
 #include <string.h>
 #include <objbase.h>
-#include "macro_define.h"
+#include "type.h"
 class objPara
 {
 public:

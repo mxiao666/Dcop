@@ -60,6 +60,7 @@ void objKernel::dump(int fd, Printfun callback)
                    "objName",
                    "objPtr",
                    "refCount");
+    objbase::PrintEnd(fd, callback, 50);
     for (auto &iter : m_objList)
     {
         (void)callback(fd,
@@ -68,6 +69,7 @@ void objKernel::dump(int fd, Printfun callback)
                        iter.second->obj,
                        iter.second->refCount);
     }
+    objbase::PrintEnd(fd, callback, 50);
     (void)callback(fd, "Tatol: %d\r\n", m_objList.size());
 }
 objbase *objKernel::Query(int key)

@@ -16,6 +16,7 @@ set(syslib
 	src/streamhelper.cpp
 	src/system.cpp
 	src/template.cpp
+	src/timer.cpp
 	src/frameworkmgr.cpp)
 # 生成libsys.a静态库 	
 add_library(sys STATIC ${syslib})

@@ -26,7 +26,6 @@
     <ClInclude Include="..\lib\include\cstream.h" />
     <ClInclude Include="..\lib\include\frameworkmgr.h" />
     <ClInclude Include="..\lib\include\log.h" />
-    <ClInclude Include="..\lib\include\macro_define.h" />
     <ClInclude Include="..\lib\include\objbase.h" />
     <ClInclude Include="..\lib\include\objKernel.h" />
     <ClInclude Include="..\lib\include\objTask.h" />
@@ -35,6 +34,8 @@
     <ClInclude Include="..\lib\include\system.h" />
     <ClInclude Include="..\lib\include\template.h" />
     <ClInclude Include="..\lib\include\threadpool.h" />
+    <ClInclude Include="..\lib\include\timer.h" />
+    <ClInclude Include="..\lib\include\type.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\demo\demo.cpp" />
@@ -50,6 +51,7 @@
     <ClCompile Include="..\lib\src\streamhelper.cpp" />
     <ClCompile Include="..\lib\src\system.cpp" />
     <ClCompile Include="..\lib\src\template.cpp" />
+    <ClCompile Include="..\lib\src\timer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

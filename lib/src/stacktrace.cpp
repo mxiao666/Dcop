@@ -17,7 +17,7 @@
 #include <ucontext.h>
 #include <execinfo.h>
 #endif
-#include "macro_define.h"
+#include "type.h"
 #include "log.h"
 
 /*****************************************************************************

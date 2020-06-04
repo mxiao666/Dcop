@@ -8,6 +8,7 @@ enum
     CMD_GET_LOG_TRACE,
     CMD_SET_LOG_TRACE,
     CMD_MSG_REPORT,
+    CMD_MSG_TIMER,
     CMD_BASE_NUM,
 };
 enum
@@ -19,6 +20,7 @@ enum
     MODELU_CLI,
     MODELU_TASK,
     MODELU_TELNET,
+    MODELU_TIMER,
     MODULE_BASE_END,
 };
 #endif
