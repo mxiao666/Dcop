@@ -1,6 +1,5 @@
 #ifndef __TEMPLATE_H__
 #define __TEMPLATE_H__
-
 namespace OS
 {
     template <class T>
@@ -22,7 +21,6 @@ namespace OS
         }
         return list.end();
     }
-
     bool equal(const char *s1, const char *s2);
     bool equal(const char *s1, const char *s2, int max);
 }; // namespace OS

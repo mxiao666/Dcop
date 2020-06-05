@@ -359,7 +359,7 @@ int cliMgr::Report(RspMsg *outMessage, cmdObj *pcmdObj, int fd)
     }
     len = snprintf(buf,
                    maxlen,
-                   "Command response %d line record\r\n",
+                   "Tatol: %d record\r\n",
                    outMessage->count);
     outinfo.Append((const BYTE *)buf, len);
     (void)LVOS_Printf(fd, (char *)outinfo.GetBuff());
@@ -491,7 +491,7 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, bool &isExit)
     if (iRet != 0)
     {
         LOG_WARN("Dispatch is process error:%#016X", iRet);
-        LVOS_Printf(fd, "Dispatch is process error:%#016X\r\n", iRet);
+        LVOS_Printf(fd, "ERROR:%#016X\r\n", iRet);
     }
 _end:
     LVOS_Printf(fd, "\r\nhim:#", 6);

@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <time.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #ifndef __WIN32__
 #include <unistd.h>
 #include <functional>
@@ -20,10 +21,16 @@
 #define OFF "OFF"
 
 #define LOG_MESSAGE_LEN 1024
-
+#define MAX_BUFFER_MANAGE_SIZE (10)     //一个日志文件最大限制xM
+#define MB_TO_BYTE(x) ((x)*1024 * 1024) //兆转字节
+#define MAX_DATE_STR_LEN (16)
+#define MAX_CMD_BUFFER_LEN (256 + 32)
+#define MAX_FILE_PATH_LEN (128)
+bool gIsCompressLog = false;
 static FILE *log_file;
 static int log_level = LL_INFO;
 static bool bConsolePrint = false;
+static char Debug_Logfile[MAX_FILE_PATH_LEN] = "message";
 char LogLevelStr[][8] =
     {"DEBUG", "INFO", "WARN", "ERROR", "FATAL", "TRACE"};
 int GetMethod() { return bConsolePrint; }
@@ -42,9 +49,8 @@ void LogDestory()
 {
     fclose(log_file);
 }
-int LogInit(int level, const char *path)
+static int _reOpen(const char *path)
 {
-    log_level = level;
     log_file = fopen(path, "at+");
     if (NULL == log_file)
     {
@@ -57,10 +63,56 @@ int LogInit(int level, const char *path)
             512
 #endif
     ); /* 行缓存*/
-    debug_backtrace_init();
     return RET_OK;
 }
+int LogInit(int level, const char *path)
+{
+    int len = 0;
+    gIsCompressLog = false;
+    log_level = level;
+    _reOpen(path);
+    debug_backtrace_init();
+    len = snprintf(Debug_Logfile,
+                   MAX_FILE_PATH_LEN,
+                   "%s", path);
+    Debug_Logfile[len - 1] = '\0';
+    return RET_OK;
+}
+int CompressLogFilePack(void)
+{
+#ifndef _MSC_VER
+    struct stat statbuff;
+    struct tm now_time;
+    time_t timer = time(NULL);
+    char datetime[MAX_DATE_STR_LEN] = {0};
+    char pCmdBuf[MAX_CMD_BUFFER_LEN] = {0};
 
+    if (stat(Debug_Logfile, &statbuff) < 0)
+    {
+        return RET_ERR;
+    }
+
+    if (MB_TO_BYTE(MAX_BUFFER_MANAGE_SIZE) < statbuff.st_size)
+    {
+        gIsCompressLog = true;
+        (void)fclose(log_file);
+        log_file = NULL;
+
+        //获取时间字符串
+        strftime(datetime, MAX_DATE_STR_LEN,
+                 "%Y%m%d%H%M%S",
+                 localtime_r(&timer, &now_time));
+        //移动文件重命名
+        snprintf(pCmdBuf, MAX_CMD_BUFFER_LEN,
+                 "mv %s %s_%s 2> /dev/null",
+                 Debug_Logfile, Debug_Logfile, datetime);
+        system(pCmdBuf);
+        _reOpen(Debug_Logfile);
+        gIsCompressLog = false;
+    }
+#endif
+    return RET_OK;
+}
 int WriteLog(int v_level, int line,
              const char *func, const char *file,
              const char *format, ...)
@@ -117,6 +169,11 @@ int WriteLog(int v_level, int line,
                                   LOG_MESSAGE_LEN - nWrittenBytes,
                                   "%s", "\n");
     }
+    while (gIsCompressLog)
+    {
+        /* 等待文件打开 */
+    }
+
     /* ---完整日志拼接--- */
     fwrite(log_msg, 1, nWrittenBytes, log_file);
     if (bConsolePrint)
@@ -160,7 +217,7 @@ int LVOS_Printf(int fd, const char *format, ...)
 static TblBody tblbody[] = {
     {LEVEL, 8},
 };
-static RspTable reptbl = {"LOG-INFO", tblbody, ARRAY_SIZE(tblbody)};
+static RspTable reptbl = {"EVENT-LOG-INFO", tblbody, ARRAY_SIZE(tblbody)};
 static TblBody tracetblbody[] = {
     {TRACE, 8},
 };
@@ -266,6 +323,12 @@ private:
         else
             return -1;
     }
+    int CompressLogFile(CAgrcList *message, RspMsg *outmessage,
+                        int iModule, int iCmd)
+    {
+        CompressLogFilePack();
+        return RET_OK;
+    }
 
 public:
     int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
@@ -275,6 +338,7 @@ public:
         PROCESS_CALL(CMD_SET_LOG_LEVEL, SetLogByLevel)
         PROCESS_CALL(CMD_SET_LOG_TRACE, SetLogTreace)
         PROCESS_CALL(CMD_GET_LOG_TRACE, GetLogTreace)
+        PROCESS_CALL(CMD_MSG_TIMER, CompressLogFile)
         PROCESS_END()
     }
     void dump(int fd, Printfun callback)
