@@ -12,28 +12,20 @@
 #include "template.h"
 
 #define LEVEL "LEVEL"
+#define FORMAT "FORMAT"
 #define TRACE "TRACE"
 #define ON "ON"
 #define OFF "OFF"
 #define LOG_MESSAGE_LEN 1024
-static int log_level = 0;
 
 char LogLevelStr[][8] =
-    {"DEBUG", "INFO", "WARN", "ERROR", "FATAL", "TRACE"};
-
-int GetLogLevel() { return log_level; }
-int SetLogLevel(int level)
-{
-    log_level = level;
-    return level;
-}
+    {"ASSERT", "ERROR", "WARN", "INFO", "DEBUG", "TRACE"};
 
 int LogInit()
 {
     /* close printf buffer */
     setbuf(stdout, NULL);
     /* initialize EasyLogger */
-    elog_set_output_enabled(false);
     elog_init();
     /* set EasyLogger log format */
     elog_set_fmt(ELOG_LVL_ASSERT, ELOG_FMT_ALL);
@@ -43,7 +35,7 @@ int LogInit()
     elog_set_fmt(ELOG_LVL_DEBUG, ELOG_FMT_ALL & ~ELOG_FMT_FUNC);
     elog_set_fmt(ELOG_LVL_VERBOSE, ELOG_FMT_ALL & ~ELOG_FMT_FUNC);
 #ifdef ELOG_COLOR_ENABLE
-    elog_set_text_color_enabled(true);
+    elog_set_text_color_enabled(false);
 #endif
     debug_backtrace_init();
     /* start EasyLogger */
@@ -86,6 +78,7 @@ int LVOS_Printf(int fd, const char *format, ...)
 
 static TblBody tblbody[] = {
     {LEVEL, 8},
+    {FORMAT, 8},
 };
 static RspTable reptbl = {"EVENT-LOG-INFO", tblbody, ARRAY_SIZE(tblbody)};
 static TblBody tracetblbody[] = {
@@ -127,11 +120,18 @@ private:
     {
         if (outmessage == nullptr)
             return -1;
-        CAgrcList *list = new CAgrcList[1];
-        list[0].addAgrc(LEVEL, LogLevelStr[GetLogLevel()]);
-        outmessage->count = 1;
+        int ret = 0;
+        CAgrcList *list = new CAgrcList[ELOG_LVL_TOTAL_NUM * 2];
         outmessage->msg = list;
-        return 0;
+        outmessage->count = ELOG_LVL_TOTAL_NUM;
+        for (int i = 0; i < ELOG_LVL_TOTAL_NUM; i++)
+        {
+            char fmt[4] = {0};
+            snprintf(fmt, 4, "%d", elog_get_fmt(i));
+            list[i].addAgrc(LEVEL, LogLevelStr[i]);
+            list[i].addAgrc(FORMAT, fmt);
+        }
+        return RET_OK;
     }
     int GetLogTreace(CAgrcList *message, RspMsg *outmessage,
                      int iModule, int iCmd)
@@ -139,7 +139,7 @@ private:
         if (outmessage == nullptr)
             return -1;
         CAgrcList *list = new CAgrcList[1];
-        list[0].addAgrc(TRACE, elog_get_output_enabled() ? ON : OFF);
+        list[0].addAgrc(TRACE, elog_get_Terminal_enabled() ? ON : OFF);
         outmessage->count = 1;
         outmessage->msg = list;
         return 0;
@@ -147,6 +147,7 @@ private:
     int SetLogByLevel(CAgrcList *message, RspMsg *outmessage,
                       int iModule, int iCmd)
     {
+        return -1;
         if (message == nullptr)
             return -1;
         CStream *level = message->GetAgrc(ARGC_DEFAULT);
@@ -156,9 +157,9 @@ private:
         {
             if (OS::equal(level->c_str(), LogLevelStr[i]))
             {
-                SetLogLevel(i);
+                // SetLogLevel(i);
                 CAgrcList *list = new CAgrcList[1];
-                list[0].addAgrc(LEVEL, LogLevelStr[GetLogLevel()]);
+                // list[0].addAgrc(LEVEL, LogLevelStr[GetLogLevel()]);
 
                 RspMsg *rspMessage = new RspMsg;
                 rspMessage->count = 1;
@@ -182,12 +183,12 @@ private:
             return -1;
         if (OS::equal(level->c_str(), ON))
         {
-            elog_set_output_enabled(true);
+            elog_set_Terminal_enabled(true);
             return 0;
         }
         else if (OS::equal(level->c_str(), OFF))
         {
-            elog_set_output_enabled(false);
+            elog_set_Terminal_enabled(false);
             return 0;
         }
         else
@@ -219,9 +220,9 @@ public:
     void dump(int fd, Printfun callback)
     {
         objbase::PrintHead(fd, callback, "LOG_INFO", 32);
-        (void)callback(fd, "log-level:%s(%d)\r\n",
-                       LogLevelStr[GetLogLevel()],
-                       GetLogLevel());
+        //   (void)callback(fd, "log-level:%s(%d)\r\n",
+        //                   LogLevelStr[GetLogLevel()],
+        //                    GetLogLevel());
         (void)callback(fd,
                        "log-trace:%s(%d)\r\n",
                        elog_get_output_enabled() ? ON : OFF,

@@ -13,10 +13,10 @@ TARGET = demo
 
 BIN_TARGET = ${DIR_BIN}/${TARGET}
 
-COM_LIB= -ljanisa -leasylogger -lpthread -L$(DIR_LIB)
+COM_LIB= -ljanisa -lelog -lpthread -L$(DIR_LIB)
 
 CC = g++
-CFLAGS = -g -Wall ${DIR_INC} -Wl,-rpath,$(DIR_DYN)
+CFLAGS =  -O2 -g3 -Wall -Wl,-rpath,$(DIR_DYN) 
 
 $(shell mkdir -p ${DIR_OBJ} ${DIR_BIN})
 
@@ -24,7 +24,7 @@ ${BIN_TARGET}:${OBJ}
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(COM_LIB)
 
 ${DIR_OBJ}/%.o:${DIR_SRC}/%.cpp
-	$(CC) $(CFLAGS) -c  $< -o $@
+	$(CC) $(CFLAGS) ${DIR_INC} -c  $< -o $@
 
 .PHONY:clean
 clean:
