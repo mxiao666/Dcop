@@ -1,0 +1,3 @@
+[submodule "3rd/EasyLogger"]
+	path = 3rd/EasyLogger
+	url = https://gitee.com/Janisa/EasyLogger.git
