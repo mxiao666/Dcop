@@ -88,7 +88,7 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut,
 
     if (0 > (tChildPid = vfork()))
     {
-        LVOS_Log(LL_ERROR, "Creat Child fail.");
+        LOG_ERROR("Creat Child fail.");
         return RET_ERR;
     }
     if (tChildPid == 0)
@@ -123,8 +123,7 @@ s32 OS_SafeSystemSub(char *pcCmd, char *argv[], u32 uiTimeOut,
         iRet = OS_WaitChild(tChildPid, NULL, uiTimeOut, piScriptRet, NULL, 0);
         if (RET_OK != iRet)
         {
-            LVOS_Log(LL_ERROR,
-                     "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).",
+            LOG_ERROR("Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).",
                      pcCmd, iRet, *piScriptRet);
             return RET_ERR;
         }
@@ -194,14 +193,13 @@ s32 OS_WaitChild(pid_t uiChildPid, int *piFd, u32 uiTimeout,
     if (0 > iStopPid)
     {
         iRet = OS_Kill(uiChildPid);
-        LVOS_Log(LL_WARNING, "wait child exit fail,iRet(%ld) .", iRet);
+        LOG_WARN("wait child exit fail,iRet(%ld) .", iRet);
         return RET_INDIDE_ERR;
     }
     else if (0 == iStopPid)
     {
         iRet = OS_Kill(uiChildPid);
-        LVOS_Log(LL_WARNING,
-                 "Wait Child Timeout(%llu) but used(%llu),iRet(%ld).",
+        LOG_WARN("Wait Child Timeout(%llu) but used(%llu),iRet(%ld).",
                  uiTime, uiEndTime - uiBeginTime, iRet);
         return RET_TIMEOUT;
     }
@@ -249,19 +247,19 @@ s32 OS_CheckReadBuf(s32 v_uiFd, char *pOutBuf, u32 uiOutBufLen)
     //select error
     if (0 == iRet)
     {
-        //LVOS_Log(LL_DEBUG,"Select function execl fail.");
+        //LOG_WARN("Select function execl fail.");
         return 0;
     }
     //timeout
     if (0 > iRet)
     {
-        //LVOS_Log(LL_DEBUG,"Select function execl timeout.");
+        //LOG_WARN("Select function execl timeout.");
         return 0;
     }
     //read is true
     if (!FD_ISSET(v_uiFd, &fdset))
     {
-        //LVOS_Log(LL_DEBUG,"Select function execl really read.");
+        //LOG_WARN("Select function execl really read.");
         return 0;
     }
 
@@ -311,7 +309,7 @@ s32 OS_Kill(pid_t uiChildPid)
         }
         else
         {
-            LVOS_Log(LL_WARNING, "kill childPid(%d) fail.", uiChildPid);
+            LOG_WARN("kill childPid(%d) fail.", uiChildPid);
             return RET_INDIDE_ERR;
         }
     }
@@ -407,7 +405,7 @@ s32 OS_GetExitStatus(s32 iStatus, s32 *v_ScriptRet)
 
     if (WIFSIGNALED(iStatus))
     {
-        LVOS_Log(LL_WARNING, "Get pid exit status fail.");
+        LOG_WARN("Get pid exit status fail.");
     }
     return RET_EXCEPTIONAL;
 }
@@ -436,13 +434,13 @@ s32 OS_GetStrValueByCmd(const char *pacCmd, char *pBuffer, u64 uiBufferLen)
     iRet = OS_ReadBufByCmd(pacCmd, OM_CMD_EXCE_TIME, pBuffer, uiBufferLen);
     if (RET_OK != iRet)
     {
-        LVOS_Log(LL_WARNING, "Get cmd execl result fail.");
+        LOG_WARN("Get cmd execl result fail.");
         return RET_ERR;
     }
     uiLen = strlen(pBuffer);
     if (0 == uiLen)
     {
-        LVOS_Log(LL_WARNING, "Get cmd execl result is null.");
+        LOG_WARN("Get cmd execl result is null.");
         return RET_ERR;
     }
     else
@@ -479,7 +477,7 @@ s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout,
 
     if (0 > pipe(pdes))
     {
-        LVOS_Log(LL_ERROR, "Creat pipe fail.");
+        LOG_ERROR("Creat pipe fail.");
         return RET_ERR;
     }
 
@@ -487,7 +485,7 @@ s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout,
     {
         close(pdes[0]);
         close(pdes[1]);
-        LVOS_Log(LL_ERROR, "Creat Child fail.");
+        LOG_ERROR("Creat Child fail.");
         return RET_ERR;
     }
 
@@ -523,7 +521,7 @@ s32 OS_ReadBufByCmd(const char *pacCmd, u32 uiTimeout,
         close(pdes[0]);
         if (RET_OK != iRet || RET_OK != iScriptRet)
         {
-            LVOS_Log(LL_ERROR,
+            LOG_ERROR(
                      "Execl shell cmd(%s) fail,iRet(%ld) iScriptRet(%ld).",
                      pacCmd, iRet, iScriptRet);
             return RET_ERR;

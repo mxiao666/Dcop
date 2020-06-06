@@ -107,7 +107,7 @@ objTask *objTaskEntry(const char *objTaskName,
     std::thread task(callfunc, obj);
     task.detach();
 #endif // !__WIN32__
-    LVOS_Log(LL_DEBUG, "%s:%d objTask id(%#0x)", file, len, obj->GetId());
+    LOG_TRACE("%s:%d objTask id(%#0x)", file, len, obj->GetId());
     return obj;
 }
 

@@ -1,184 +1,54 @@
+#ifndef __WIN32__
+#include <unistd.h>
+#endif
 #include "log.h"
 #include "stacktrace.h"
 #include "type.h"
-#include <stdarg.h>
-#include <time.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#ifndef __WIN32__
-#include <unistd.h>
-#include <functional>
-#endif
 #include "frameworkmgr.h"
 #include "clibase.h"
 #include "objKernel.h"
 #include "cnotify.h"
 #include "cmdid.h"
 #include "template.h"
+
 #define LEVEL "LEVEL"
 #define TRACE "TRACE"
 #define ON "ON"
 #define OFF "OFF"
-
 #define LOG_MESSAGE_LEN 1024
-#define MAX_BUFFER_MANAGE_SIZE (10)     //一个日志文件最大限制xM
-#define MB_TO_BYTE(x) ((x)*1024 * 1024) //兆转字节
-#define MAX_DATE_STR_LEN (16)
-#define MAX_CMD_BUFFER_LEN (256 + 32)
-#define MAX_FILE_PATH_LEN (128)
-bool gIsCompressLog = false;
-static FILE *log_file;
-static int log_level = LL_INFO;
-static bool bConsolePrint = false;
-static char Debug_Logfile[MAX_FILE_PATH_LEN] = "message";
+static int log_level = 0;
+
 char LogLevelStr[][8] =
     {"DEBUG", "INFO", "WARN", "ERROR", "FATAL", "TRACE"};
-int GetMethod() { return bConsolePrint; }
-int SetMethod(bool method)
-{
-    bConsolePrint = method;
-    return method;
-}
+
 int GetLogLevel() { return log_level; }
 int SetLogLevel(int level)
 {
     log_level = level;
     return level;
 }
-void LogDestory()
+
+int LogInit()
 {
-    fclose(log_file);
-}
-static int _reOpen(const char *path)
-{
-    log_file = fopen(path, "at+");
-    if (NULL == log_file)
-    {
-        return RET_ERR;
-    }
-    setvbuf(log_file, NULL, _IOLBF,
-#ifndef __WIN32__
-            0
-#else
-            512
+    /* close printf buffer */
+    setbuf(stdout, NULL);
+    /* initialize EasyLogger */
+    elog_set_output_enabled(false);
+    elog_init();
+    /* set EasyLogger log format */
+    elog_set_fmt(ELOG_LVL_ASSERT, ELOG_FMT_ALL);
+    elog_set_fmt(ELOG_LVL_ERROR, ELOG_FMT_LVL | ELOG_FMT_TAG | ELOG_FMT_TIME);
+    elog_set_fmt(ELOG_LVL_WARN, ELOG_FMT_LVL | ELOG_FMT_TAG | ELOG_FMT_TIME);
+    elog_set_fmt(ELOG_LVL_INFO, ELOG_FMT_LVL | ELOG_FMT_TAG | ELOG_FMT_TIME);
+    elog_set_fmt(ELOG_LVL_DEBUG, ELOG_FMT_ALL & ~ELOG_FMT_FUNC);
+    elog_set_fmt(ELOG_LVL_VERBOSE, ELOG_FMT_ALL & ~ELOG_FMT_FUNC);
+#ifdef ELOG_COLOR_ENABLE
+    elog_set_text_color_enabled(true);
 #endif
-    ); /* 行缓存*/
-    return RET_OK;
-}
-int LogInit(int level, const char *path)
-{
-    int len = 0;
-    gIsCompressLog = false;
-    log_level = level;
-    _reOpen(path);
     debug_backtrace_init();
-    len = snprintf(Debug_Logfile,
-                   MAX_FILE_PATH_LEN,
-                   "%s", path);
-    Debug_Logfile[len - 1] = '\0';
+    /* start EasyLogger */
+    elog_start();
     return RET_OK;
-}
-int CompressLogFilePack(void)
-{
-#ifndef _MSC_VER
-    struct stat statbuff;
-    struct tm now_time;
-    time_t timer = time(NULL);
-    char datetime[MAX_DATE_STR_LEN] = {0};
-    char pCmdBuf[MAX_CMD_BUFFER_LEN] = {0};
-
-    if (stat(Debug_Logfile, &statbuff) < 0)
-    {
-        return RET_ERR;
-    }
-
-    if (MB_TO_BYTE(MAX_BUFFER_MANAGE_SIZE) < statbuff.st_size)
-    {
-        gIsCompressLog = true;
-        (void)fclose(log_file);
-        log_file = NULL;
-
-        //获取时间字符串
-        strftime(datetime, MAX_DATE_STR_LEN,
-                 "%Y%m%d%H%M%S",
-                 localtime_r(&timer, &now_time));
-        //移动文件重命名
-        snprintf(pCmdBuf, MAX_CMD_BUFFER_LEN,
-                 "mv %s %s_%s 2> /dev/null",
-                 Debug_Logfile, Debug_Logfile, datetime);
-        system(pCmdBuf);
-        _reOpen(Debug_Logfile);
-        gIsCompressLog = false;
-    }
-#endif
-    return RET_OK;
-}
-int WriteLog(int v_level, int line,
-             const char *func, const char *file,
-             const char *format, ...)
-{
-    if (log_file == nullptr)
-        return RET_ERR;
-    if (log_level > v_level)
-        return RET_ERR;
-
-    /* ---时间-- */
-    char log_msg[LOG_MESSAGE_LEN] = {0};
-    time_t t = time(NULL);
-    struct tm ptm;
-    int nWrittenBytes = 0;
-#ifndef __WIN32__
-    localtime_r(&t, &ptm);
-#else
-    localtime_s(&ptm, &t);
-#endif
-    nWrittenBytes = snprintf(log_msg,
-                             LOG_MESSAGE_LEN,
-                             "%4d-%02d-%02d %02d:%02d:%02d",
-                             ptm.tm_year + 1900,
-                             ptm.tm_mon + 1,
-                             ptm.tm_mday,
-                             ptm.tm_hour,
-                             ptm.tm_min,
-                             ptm.tm_sec);
-
-    /* ---文件--行号---函数--- */
-    const char *linuxpos = strrchr(file, '/');
-    const char *winwpos = strrchr(file, '\\');
-    nWrittenBytes += snprintf(log_msg + nWrittenBytes,
-                              LOG_MESSAGE_LEN - nWrittenBytes,
-                              " [%s] [%s:%d] [%s] ",
-                              LogLevelStr[v_level],
-                              (NULL != linuxpos)
-                                  ? (linuxpos + 1)
-                                  : (NULL != winwpos)
-                                        ? (winwpos + 2)
-                                        : file,
-                              line, func);
-
-    /* ---日志内容--- */
-    va_list arg_ptr;
-    va_start(arg_ptr, format);
-    nWrittenBytes += vsnprintf(log_msg + nWrittenBytes,
-                               LOG_MESSAGE_LEN - nWrittenBytes,
-                               format, arg_ptr);
-    va_end(arg_ptr);
-    if (log_msg[nWrittenBytes - 1] != '\n')
-    {
-        nWrittenBytes += snprintf(log_msg + nWrittenBytes,
-                                  LOG_MESSAGE_LEN - nWrittenBytes,
-                                  "%s", "\n");
-    }
-    while (gIsCompressLog)
-    {
-        /* 等待文件打开 */
-    }
-
-    /* ---完整日志拼接--- */
-    fwrite(log_msg, 1, nWrittenBytes, log_file);
-    if (bConsolePrint)
-        printf("%s", log_msg);
-    return nWrittenBytes;
 }
 
 int LVOS_Printf(int fd, const char *format, ...)
@@ -269,7 +139,7 @@ private:
         if (outmessage == nullptr)
             return -1;
         CAgrcList *list = new CAgrcList[1];
-        list[0].addAgrc(TRACE, GetMethod() ? ON : OFF);
+        list[0].addAgrc(TRACE, elog_get_output_enabled() ? ON : OFF);
         outmessage->count = 1;
         outmessage->msg = list;
         return 0;
@@ -282,7 +152,7 @@ private:
         CStream *level = message->GetAgrc(ARGC_DEFAULT);
         if (level == nullptr)
             return -1;
-        for (int i = 0; i < LL_LEVEL_NUM; i++)
+        for (int i = 0; i < 0; i++)
         {
             if (OS::equal(level->c_str(), LogLevelStr[i]))
             {
@@ -312,12 +182,12 @@ private:
             return -1;
         if (OS::equal(level->c_str(), ON))
         {
-            SetMethod(true);
+            elog_set_output_enabled(true);
             return 0;
         }
         else if (OS::equal(level->c_str(), OFF))
         {
-            SetMethod(false);
+            elog_set_output_enabled(false);
             return 0;
         }
         else
@@ -326,7 +196,12 @@ private:
     int CompressLogFile(CAgrcList *message, RspMsg *outmessage,
                         int iModule, int iCmd)
     {
-        CompressLogFilePack();
+        log_a("Hello EasyLogger!");
+        log_e("Hello EasyLogger!");
+        log_w("Hello EasyLogger!");
+        log_i("Hello EasyLogger!");
+        log_d("Hello EasyLogger!");
+        log_v("Hello EasyLogger!");
         return RET_OK;
     }
 
@@ -349,12 +224,13 @@ public:
                        GetLogLevel());
         (void)callback(fd,
                        "log-trace:%s(%d)\r\n",
-                       GetMethod() ? ON : OFF,
-                       GetMethod());
+                       elog_get_output_enabled() ? ON : OFF,
+                       elog_get_output_enabled());
         objbase::PrintEnd(fd, callback, 32);
     }
     int Init()
     {
+        LogInit();
         Cnotify *obj =
             reinterpret_cast<Cnotify *>(g_objKernel->InterFace(MODELU_NOTIFY));
         if (obj)
@@ -363,11 +239,9 @@ public:
     }
     LogMgr()
     {
-        LogInit(LL_WARNING);
     }
     ~LogMgr()
     {
-        LogDestory();
     }
 };
 
