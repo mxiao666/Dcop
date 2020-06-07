@@ -120,7 +120,7 @@ private:
     {
         if (outmessage == nullptr)
             return -1;
-        int ret = 0;
+
         CAgrcList *list = new CAgrcList[ELOG_LVL_TOTAL_NUM * 2];
         outmessage->msg = list;
         outmessage->count = ELOG_LVL_TOTAL_NUM;
@@ -220,9 +220,13 @@ public:
     void dump(int fd, Printfun callback)
     {
         objbase::PrintHead(fd, callback, "LOG_INFO", 32);
-        //   (void)callback(fd, "log-level:%s(%d)\r\n",
-        //                   LogLevelStr[GetLogLevel()],
-        //                    GetLogLevel());
+        for (int i = 0; i < ELOG_LVL_TOTAL_NUM; i++)
+        {
+            (void)callback(fd,
+                           "log-level:%s(%d)\r\n",
+                           LogLevelStr[i],
+                           elog_get_fmt(i));
+        }
         (void)callback(fd,
                        "log-trace:%s(%d)\r\n",
                        elog_get_output_enabled() ? ON : OFF,

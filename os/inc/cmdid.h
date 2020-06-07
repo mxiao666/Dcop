@@ -9,8 +9,13 @@ enum
     CMD_SET_LOG_TRACE,
     CMD_MSG_REPORT,
     CMD_MSG_TIMER,
+    CMD_SYS_HELP,
+    CMD_SYS_DUMP,
+    CMD_SYS_EXIT,
+    CMD_SYS_SHUT_DOWN,
     CMD_BASE_NUM,
 };
+
 enum
 {
     MODULE_ALL,
