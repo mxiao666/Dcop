@@ -76,40 +76,44 @@ int LVOS_Printf(int fd, const char *format, ...)
     return nWrittenBytes;
 }
 
-static TblBody tblbody[] = {
-    {LEVEL, 8},
-    {FORMAT, 8},
-};
-static RspTable reptbl = {"EVENT-LOG-INFO", tblbody, ARRAY_SIZE(tblbody)};
-static TblBody tracetblbody[] = {
-    {TRACE, 8},
-};
-static RspTable tracereptbl =
-    {"LOG-TRACE", tracetblbody, ARRAY_SIZE(tracetblbody)};
 class LogCmd : public CClibase
 {
     virtual int Init()
     {
+        LOCAL TblBody tblbody[] = {{LEVEL, 8}, {FORMAT, 8}};
+        LOCAL RspTable reptbl = {
+            "EVENT-LOG-INFO", tblbody, ARRAY_SIZE(tblbody)};
+
+        LOCAL TblBody tracetblbody[] = {{TRACE, 8}};
+        LOCAL RspTable tracereptbl =
+            {"LOG-TRACE", tracetblbody, ARRAY_SIZE(tracetblbody)};
+
+        LOCAL CMD_OBJ syscmd[] =
+            {
+                {"set-log-level",
+                 "set-log-level:level=debug,value=255",
+                 MODELU_LOG, CMD_SET_LOG_LEVEL, this, &reptbl, true},
+                {"get-log-level",
+                 "get-log-level:debug",
+                 MODELU_LOG, CMD_GET_LOG_LEVEL, this, &reptbl, true},
+                {"set-log-trace",
+                 "set-log-trace:on",
+                 MODELU_LOG, CMD_SET_LOG_TRACE, this, &tracereptbl, true},
+                {"get-log-trace",
+                 "get-log-trace",
+                 MODELU_LOG, CMD_GET_LOG_TRACE, this, &tracereptbl, false},
+            };
         cliMgr *cli =
             reinterpret_cast<cliMgr *>(g_objKernel->InterFace(MODELU_CLI));
         if (cli)
         {
-            cli->RegCmd("set-log-level",
-                        new cmdObj(this, MODELU_LOG, CMD_SET_LOG_LEVEL));
-            cli->RegCmd("get-log-level",
-                        new cmdObj(this, MODELU_LOG, CMD_GET_LOG_LEVEL,
-                                   &reptbl, true));
-            cli->RegCmd("set-log-trace",
-                        new cmdObj(this, MODELU_LOG, CMD_SET_LOG_TRACE));
-            cli->RegCmd("get-log-trace",
-                        new cmdObj(this, MODELU_LOG, CMD_GET_LOG_TRACE,
-                                   &tracereptbl, true));
+            cli->RegCmd(syscmd, ARRAY_SIZE(syscmd));
         }
         return 0;
     }
 };
 REG_TO_FRAMEWORK(TABLE_TWO, MODELU_CLI, LogCmd, MODELU_CLI)
-extern char LogLevelStr[][8];
+
 class LogMgr : public objbase
 {
 private:
@@ -147,7 +151,7 @@ private:
     int SetLogByLevel(CAgrcList *message, RspMsg *outmessage,
                       int iModule, int iCmd)
     {
-        return -1;
+        return ERR_NOT_SUPPORT;
         if (message == nullptr)
             return -1;
         CStream *level = message->GetAgrc(ARGC_DEFAULT);

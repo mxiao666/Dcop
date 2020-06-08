@@ -214,7 +214,46 @@ public:
 };
 REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, telnet, MODELU_TELNET)
 #endif
-int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj, int fd)
+
+class SysCli : public CClibase
+{
+private:
+public:
+    virtual int Init()
+    {
+        LOCAL CMD_OBJ syscmd[] =
+            {
+                {"help", "help:dump", MODELU_CLI, CMD_SYS_HELP, this, nullptr, true},
+                {"dump", "dump:climgr", MODELU_CLI, CMD_SYS_DUMP, this, nullptr, true},
+                {"exit", "exits the current user", MODELU_CLI, CMD_SYS_EXIT, this, nullptr, true},
+                {"sys exit", "shutdown system", MODELU_CLI, CMD_SYS_SHUT_DOWN, this, nullptr, true},
+                {"get-err-list",
+                 "Get all the error code information registered by the system",
+                 MODELU_CLI, CMD_SYS_ERR_CODE, this, nullptr, true},
+            };
+
+        cliMgr *cli =
+            reinterpret_cast<cliMgr *>(g_objKernel->InterFace(MODELU_CLI));
+        if (cli)
+        {
+
+            cli->RegCmd(syscmd, ARRAY_SIZE(syscmd));
+        }
+
+        return 0;
+    }
+    void Help(int fd = 0, Printfun callback = LVOS_Printf)
+    {
+        (callback)(fd, "\r\nplease:\r\n");
+        (callback)(fd, "\tdump:climgr => Print the climgr module information\r\n");
+        (callback)(fd, "\thelp:dump => Print dump command information\r\n");
+        (callback)(fd, "\texit =>exits the current user\r\n");
+        (callback)(fd, "\tsys exit => shutdown system\r\n");
+    }
+};
+REG_TO_FRAMEWORK(TABLE_TWO, MODELU_CLI, SysCli, MODELU_CLI)
+
+int cliMgr::Dispatch(CAgrcList *inMessage, CMD_OBJ *pcmdObj, int fd)
 {
 
     RspMsg outMessage;
@@ -224,7 +263,7 @@ int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj, int fd)
         iRet = m_Cnotify->Notify(inMessage,
                                  &outMessage,
                                  pcmdObj->cmdModule,
-                                 pcmdObj->cmdid);
+                                 pcmdObj->cmdId);
         if (iRet == 0 && outMessage.count != 0)
         {
             iRet = Report(&outMessage, pcmdObj, fd);
@@ -237,13 +276,13 @@ int cliMgr::Dispatch(CAgrcList *inMessage, cmdObj *pcmdObj, int fd)
             m_Cnotify->NotifyA(inMessage,
                                &outMessage,
                                pcmdObj->cmdModule,
-                               pcmdObj->cmdid);
+                               pcmdObj->cmdId);
         }
         else
         {
             iRet = m_Cnotify->AsyncNotify(inMessage,
                                           pcmdObj->cmdModule,
-                                          pcmdObj->cmdid);
+                                          pcmdObj->cmdId);
         }
     }
     return iRet;
@@ -266,12 +305,12 @@ int cliMgr::Report(CAgrcList *message,
 #endif
         // 查找命令模块
         bool isfind = false;
-        cmdObj *pcmdObj = nullptr;
+        CMD_OBJ *pcmdObj = nullptr;
         for (auto &iter : m_cmdList)
         {
             if (iter.second != nullptr)
             {
-                if (iter.second->cmdid == outmessage->cmd)
+                if (iter.second->cmdId == outmessage->cmd)
                 {
                     isfind = true;
                     pcmdObj = iter.second;
@@ -315,7 +354,7 @@ int cliMgr::Report(RspMsg *outMessage, int module, int cmd)
     }
     return RET_ERR;
 }
-int cliMgr::Report(RspMsg *outMessage, cmdObj *pcmdObj, int fd)
+int cliMgr::Report(RspMsg *outMessage, CMD_OBJ *pcmdObj, int fd)
 {
 
     if ((outMessage == nullptr) ||
@@ -390,11 +429,12 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, int *isExit)
 {
     int iRet = -1;
     bool cliOp = false;
-    cmdObj *pcmdObj = nullptr;
+    CMD_OBJ *pcmdObj = nullptr;
     CStream cmd;
     CStream argc;
     CAgrcList inMessage;
     CAgrcList cliMessage;
+    ERR_CODE_INFO *err;
     char *pos = nullptr;
     if (cmdbuffer == nullptr ||
         len <= 0 ||
@@ -436,7 +476,7 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, int *isExit)
 
     pcmdObj = FindModule((char *)cmd.GetBuff());
 
-    iRet = CliSys(fd, pcmdObj, (char *)cmd.GetBuff(), (char *)argc.GetBuff(), isExit);
+    iRet = CliSys(fd, pcmdObj, (char *)argc.GetBuff(), isExit);
 
     if (iRet == RET_OK)
     {
@@ -464,7 +504,9 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, int *isExit)
         }
         if (iRet != 0)
         {
-            LVOS_Printf(fd, "Cmd param is process error=%d\r\n", iRet);
+            err = g_objKernel->ErrGet(iRet);
+            LVOS_Printf(fd, "Param process error:%s(%#X)",
+                        err->name, err->id);
             iRet = RET_ERR;
             goto _end;
         }
@@ -479,8 +521,9 @@ int cliMgr::Process(int fd, char *cmdbuffer, int len, int *isExit)
     iRet = Dispatch((cliOp == false) ? &inMessage : &cliMessage, pcmdObj, fd);
     if (iRet != 0)
     {
-        LOG_WARN("Dispatch is process error:%#016X", iRet);
-        LVOS_Printf(fd, "ERROR:%#016X\r\n", iRet);
+        err = g_objKernel->ErrGet(iRet);
+        LOG_WARN("Dispatch is process error:%s(%#X)", err->name, err->id);
+        LVOS_Printf(fd, "%s(%#X):%s\r\n", err->name, err->id, err->desc);
     }
 _end:
     LVOS_Printf(fd, "\r\nhim:#", 6);
@@ -500,24 +543,27 @@ int cliMgr::Process()
     }
     return 0;
 }
-cmdObj *cliMgr::FindModule(const char *cmdName)
+CMD_OBJ *cliMgr::FindModule(const char *cmdName)
 {
     for (auto &iter : m_cmdList)
-        if (OS::equal(cmdName, iter.first))
+    {
+        if (OS::equal(cmdName, iter.second->name))
             return iter.second;
+    }
     return nullptr;
 }
 void cliMgr::dump(int fd, Printfun callback)
 {
     objbase::PrintHead(fd, callback, "cliMgr", 66);
-    (void)callback(fd, "%-16s %-16s %-32s\r\n", "ModuleId", "objPtr", "cmd");
+    (void)callback(fd, "%-8s %-8s %-16s %-32s\r\n", "cmdId", "objId", "objPtr", "cmd");
     objbase::PrintEnd(fd, callback, 66);
     for (auto &iter : m_cmdList)
         (void)callback(fd,
-                       "%#-16x %#-16x %-32s\r\n",
+                       "%#-8x %#-8x %#-16x %-32s\r\n",
+                       iter.second->cmdId,
                        iter.second->cmdModule,
                        iter.second->objCli,
-                       iter.first);
+                       iter.second->name);
     objbase::PrintEnd(fd, callback, 66);
     (void)callback(fd, "Tatol: %d\r\n", m_cmdList.size());
 }
@@ -526,7 +572,16 @@ cliMgr::~cliMgr()
     for (auto &iter : m_cmdList)
         if (iter.second != nullptr)
         {
-            delete iter.second;
+            CClibase *objCli = iter.second->objCli;
+            if (objCli != nullptr)
+            {
+                objCli->DecRefCount();
+                if (objCli->GetRefCount() == 0)
+                {
+                    delete objCli;
+                }
+            }
+            objCli = nullptr;
             iter.second = nullptr;
         }
     m_cmdList.clear();
@@ -534,15 +589,26 @@ cliMgr::~cliMgr()
 cliMgr::cliMgr()
 {
 }
-int cliMgr::RegCmd(const char *pzName, cmdObj *pobj)
+/*
+    注册命令到cli管理模块
+*/
+int cliMgr::RegCmd(CMD_OBJ *list, int count)
 {
+    int index = 0;
+
     std::unique_lock<std::mutex> lock{m_reglock};
-    for (auto &iter : m_cmdList)
-        if (OS::equal(pzName, iter.first))
-            return -1;
-    m_cmdList[pzName] = pobj;
-    pobj->objCli->AddRefCount();
-    return 0;
+    for (index = 0; index < count; index++)
+    {
+        auto iter = m_cmdList.find(list[index].cmdId);
+        if (iter != m_cmdList.end())
+        {
+            continue;
+        }
+        m_cmdList[list[index].cmdId] = &list[index];
+        list[index].objCli->AddRefCount();
+    }
+
+    return (index + 1); //返回注册成功的数量
 }
 int cliMgr::Init()
 {
@@ -563,19 +629,35 @@ void cliMgr::Reg(const char *pzName, void *obj, int id)
     ((CClibase *)obj)->Init();
 }
 
-int cliMgr::CliSys(int fd, cmdObj *pcmdObj,
-                   const char *cmd, const char *argc, int *isExit)
+int cliMgr::CliSys(int fd, CMD_OBJ *pcmdObj,
+                   const char *argc, int *isExit)
 {
     int iRet = RET_ERR;
 
     if (pcmdObj != nullptr)
     {
-        switch (pcmdObj->cmdid)
+        switch (pcmdObj->cmdId)
         {
         case CMD_SYS_HELP:
         {
-            pcmdObj->objCli->Help(fd);
-            iRet = RET_OK;
+            if (!strlen(argc))
+            {
+                g_objKernel->Query(MODELU_CLI)->dump(fd);
+                iRet = RET_OK;
+                break;
+            }
+            CMD_OBJ *pobj = FindModule(argc);
+            if (pobj != nullptr)
+            {
+                LVOS_Printf(fd, pobj->help);
+                LVOS_Printf(fd, "\r\n");
+                iRet = RET_OK;
+            }
+            else
+            {
+                iRet = RET_ERR;
+            }
+
             break;
         }
 
@@ -605,6 +687,25 @@ int cliMgr::CliSys(int fd, cmdObj *pcmdObj,
             break;
         }
 
+        case CMD_SYS_ERR_CODE:
+        {
+            std::map<int, ERR_CODE_INFO *> list;
+            g_objKernel->ErrGet(list);
+            objbase::PrintHead(fd, LVOS_Printf, "ERR-CODE-TABLE", 128);
+            LVOS_Printf(fd, "%-16s %-32s %-16s\r\n", "errId", "Name", "Description");
+            objbase::PrintEnd(fd, LVOS_Printf, 128);
+            for (auto &iter : list)
+                (void)LVOS_Printf(fd,
+                                  "%#-16X %#-32s %-128s\r\n",
+                                  iter.second->id,
+                                  iter.second->name,
+                                  iter.second->desc);
+            objbase::PrintEnd(fd, LVOS_Printf, 128);
+            (void)LVOS_Printf(fd, "Tatol: %d\r\n", list.size());
+            iRet = RET_OK;
+            break;
+        }
+
         default:
         {
             break;
@@ -613,40 +714,4 @@ int cliMgr::CliSys(int fd, cmdObj *pcmdObj,
     }
     return iRet;
 }
-class SysCli : public CClibase
-{
-    virtual int Init()
-    {
-        CMD_REG syscmd[] = {
-
-            {"help", MODELU_LOG, CMD_SYS_HELP, nullptr, false},
-            {"dump", MODELU_LOG, CMD_SYS_DUMP, nullptr, false},
-            {"exit", MODELU_LOG, CMD_SYS_EXIT, nullptr, false},
-            {"sys exit", MODELU_LOG, CMD_SYS_SHUT_DOWN, nullptr, false}};
-        cliMgr *cli =
-            reinterpret_cast<cliMgr *>(g_objKernel->InterFace(MODELU_CLI));
-        if (cli)
-        {
-            for (size_t i = 0; i < sizeof(syscmd) / sizeof(syscmd[0]); i++)
-            {
-                cli->RegCmd(syscmd[i].name,
-                            new cmdObj(this,
-                                       syscmd[i].module,
-                                       syscmd[i].cmd,
-                                       syscmd[i].rsb,
-                                       syscmd[i].bSync));
-            }
-        }
-        return 0;
-    }
-    virtual void Help(int fd = 0, Printfun callback = LVOS_Printf)
-    {
-        (callback)(fd, "\r\nplease:\r\n");
-        (callback)(fd, "\tdump:climgr => Print the climgr module information\r\n");
-        (callback)(fd, "\thelp:dump => Print dump command information\r\n");
-        (callback)(fd, "\texit =>exits the current user\r\n");
-        (callback)(fd, "\tsys exit => shutdown system\r\n");
-    }
-};
 REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, cliMgr, MODELU_CLI)
-REG_TO_FRAMEWORK(TABLE_TWO, MODELU_CLI, SysCli, MODELU_CLI)

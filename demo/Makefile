@@ -14,7 +14,7 @@ TARGET = ${DIR_BIN}/demo
 COM_LIB= -ljanisa -lelog -lpthread $(DIR_LIB)
 
 CC = g++
-CFLAGS =  -O2 -g3 -Wall
+CFLAGS = -std=c++11 -O2 -g3 -Wall
 
 $(shell mkdir -p ${DIR_OBJ} ${DIR_BIN})
 

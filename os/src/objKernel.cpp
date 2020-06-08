@@ -4,6 +4,7 @@
 #include "template.h"
 #define VER "v1.0"
 objKernel *g_objKernel;
+
 objKernel::objKernel()
 {
     Welcome();
@@ -98,6 +99,7 @@ void objKernel::Release(int key)
 }
 void objKernel::Entry()
 {
+    ErroReg(gErrCode, gErrCodeCnt);
     FRAMEWORK_INIT();
     for (auto &iter : m_objList)
     {
@@ -105,7 +107,7 @@ void objKernel::Entry()
         if (pObj != nullptr)
             pObj->obj->Init();
     }
-    /*����ѭ������*/
+    /* 开始循环处理 */
     if (m_EntryFunc)
         m_EntryFunc();
 }
@@ -118,4 +120,30 @@ void objKernel::Init(void (*EntryFunc)())
 void objKernel::Reg(const char *pzName, void *obj, int id)
 {
     m_objList[pzName] = new ObjModule((objbase *)obj, id);
+}
+void objKernel::ErroReg(ERR_CODE_INFO *err, int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        auto iter = m_errList.find(err[i].id);
+        if (iter != m_errList.end())
+        {
+            continue;
+        }
+        m_errList[err[i].id] = &err[i];
+    }
+}
+ERR_CODE_INFO *objKernel::ErrGet(int err)
+{
+
+    auto iter = m_errList.find(err);
+    if (iter != m_errList.end())
+    {
+        return iter->second;
+    }
+    return m_errList[ERR_UNKOWN];
+}
+void objKernel::ErrGet(std::map<int, ERR_CODE_INFO *> &list)
+{
+    list = m_errList;
 }

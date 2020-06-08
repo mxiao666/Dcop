@@ -41,11 +41,15 @@ public:
     void Init(void (*EntryFunc)());
     void Reg(const char *pzName, void *obj, int id);
     void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
+    void ErroReg(ERR_CODE_INFO *err, int coount);
+    ERR_CODE_INFO *ErrGet(int err);
+    void ErrGet(std::map<int, ERR_CODE_INFO *> &list);
 
 private:
     objKernel(objKernel &) = delete;
     const objKernel &operator=(const objKernel &) = delete;
     std::map<const char *, ObjModule *> m_objList;
+    std::map<int, ERR_CODE_INFO *> m_errList;
     void (*m_EntryFunc)() = nullptr;
 };
 extern objKernel *g_objKernel;

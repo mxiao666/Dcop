@@ -12,7 +12,7 @@ OBJ = $(patsubst %.cpp,${OBJ_DIR}/%.o,$(notdir ${SRC}))
 TARGET = ${LIB_DIR}/libjanisa.so
 
 CC = g++
-CFLAGS = -O2 -g3 -Wall -fPIC -shared
+CFLAGS = -std=c++11 -O2 -g3 -Wall -fPIC -shared
 
 $(shell mkdir -p ${OBJ_DIR} ${LIB_DIR})
 
