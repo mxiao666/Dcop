@@ -9,5 +9,7 @@ ERR_CODE_INFO gErrCode[] =
         {ERR_PARAM, "ERR_PARAM", "Parameter processing error"},
         {ERR_UNKOWN, "ERR_UNKOWN", "Unregistered error"},
         {ERR_NOT_SUPPORT, "ERR_NOT_SUPPORT", "Feature not supported"},
+        {ERR_MSG_PARAM, "ERR_MSG_PARAM", "Message parameter is invalid"},
+        {ERR_MSG_FIELD, "ERR_MSG_FIELD", "Invalid message field"},
 };
 int gErrCodeCnt = sizeof(gErrCode) / sizeof(gErrCode[0]);

@@ -12,8 +12,8 @@
 #include "template.h"
 
 #define LEVEL "LEVEL"
-#define FORMAT "FORMAT"
-#define TRACE "TRACE"
+#define VALUE "VALUE"
+#define STATUS "STATUS"
 #define ON "ON"
 #define OFF "OFF"
 #define LOG_MESSAGE_LEN 1024
@@ -80,11 +80,11 @@ class LogCmd : public CClibase
 {
     virtual int Init()
     {
-        LOCAL TblBody tblbody[] = {{LEVEL, 8}, {FORMAT, 8}};
+        LOCAL TblBody tblbody[] = {{LEVEL, 8}, {VALUE, 8}};
         LOCAL RspTable reptbl = {
             "EVENT-LOG-INFO", tblbody, ARRAY_SIZE(tblbody)};
 
-        LOCAL TblBody tracetblbody[] = {{TRACE, 8}};
+        LOCAL TblBody tracetblbody[] = {{STATUS, 8}};
         LOCAL RspTable tracereptbl =
             {"LOG-TRACE", tracetblbody, ARRAY_SIZE(tracetblbody)};
 
@@ -101,7 +101,13 @@ class LogCmd : public CClibase
                  MODELU_LOG, CMD_SET_LOG_TRACE, this, &tracereptbl, true},
                 {"get-log-trace",
                  "get-log-trace",
-                 MODELU_LOG, CMD_GET_LOG_TRACE, this, &tracereptbl, false},
+                 MODELU_LOG, CMD_GET_LOG_TRACE, this, &tracereptbl, true},
+                {"set-log-text-color",
+                 "set-log-text-color:off",
+                 MODELU_LOG, CMD_SET_LOG_COLOR, this, &tracereptbl, true},
+                {"get-log-text-color",
+                 "get-log-text-color",
+                 MODELU_LOG, CMD_GET_LOG_COLOR, this, &tracereptbl, true},
             };
         cliMgr *cli =
             reinterpret_cast<cliMgr *>(g_objKernel->InterFace(MODELU_CLI));
@@ -133,7 +139,7 @@ private:
             char fmt[4] = {0};
             snprintf(fmt, 4, "%d", elog_get_fmt(i));
             list[i].addAgrc(LEVEL, LogLevelStr[i]);
-            list[i].addAgrc(FORMAT, fmt);
+            list[i].addAgrc(VALUE, fmt);
         }
         return RET_OK;
     }
@@ -143,7 +149,7 @@ private:
         if (outmessage == nullptr)
             return -1;
         CAgrcList *list = new CAgrcList[1];
-        list[0].addAgrc(TRACE, elog_get_Terminal_enabled() ? ON : OFF);
+        list[0].addAgrc(STATUS, elog_get_Terminal_enabled() ? ON : OFF);
         outmessage->count = 1;
         outmessage->msg = list;
         return 0;
@@ -151,62 +157,82 @@ private:
     int SetLogByLevel(CAgrcList *message, RspMsg *outmessage,
                       int iModule, int iCmd)
     {
-        return ERR_NOT_SUPPORT;
         if (message == nullptr)
-            return -1;
-        CStream *level = message->GetAgrc(ARGC_DEFAULT);
-        if (level == nullptr)
-            return -1;
-        for (int i = 0; i < 0; i++)
+            return ERR_MSG_PARAM;
+        CStream *level = message->GetAgrc(LEVEL);
+        CStream *value = message->GetAgrc(VALUE);
+        if (level == nullptr || value == nullptr)
+            return ERR_MSG_PARAM;
+
+        for (int i = 0; i < ELOG_LVL_TOTAL_NUM; i++)
         {
             if (OS::equal(level->c_str(), LogLevelStr[i]))
             {
-                // SetLogLevel(i);
-                CAgrcList *list = new CAgrcList[1];
-                // list[0].addAgrc(LEVEL, LogLevelStr[GetLogLevel()]);
-
-                RspMsg *rspMessage = new RspMsg;
-                rspMessage->count = 1;
-                rspMessage->msg = list;
-                rspMessage->cmd = CMD_GET_LOG_LEVEL;
-
-                cliMgr::Report(rspMessage, MODELU_CLI, CMD_GET_LOG_LEVEL);
-
-                return 0;
+                elog_set_fmt(i, ELOG_FMT_ALL & value->to_WORD());
+                return SUCCESS;
             }
         }
-        return -1;
+        return ERR_MSG_FIELD;
     }
     int SetLogTreace(CAgrcList *message, RspMsg *outmessage,
                      int iModule, int iCmd)
     {
         if (message == nullptr)
-            return -1;
+            return ERR_MSG_PARAM;
         CStream *level = message->GetAgrc(ARGC_DEFAULT);
         if (level == nullptr)
-            return -1;
+            return ERR_MSG_FIELD;
         if (OS::equal(level->c_str(), ON))
         {
             elog_set_Terminal_enabled(true);
-            return 0;
-        }
-        else if (OS::equal(level->c_str(), OFF))
-        {
-            elog_set_Terminal_enabled(false);
-            return 0;
         }
         else
-            return -1;
+        {
+            elog_set_Terminal_enabled(false);
+        }
+        return SUCCESS;
+    }
+    int SetLogTextColor(CAgrcList *message, RspMsg *outmessage,
+                        int iModule, int iCmd)
+    {
+        if (message == nullptr)
+            return ERR_MSG_PARAM;
+
+        CStream *level = message->GetAgrc(ARGC_DEFAULT);
+        if (level == nullptr)
+            return ERR_MSG_FIELD;
+        if (OS::equal(level->c_str(), ON))
+        {
+            elog_set_text_color_enabled(true);
+        }
+        else
+        {
+            elog_set_text_color_enabled(false);
+        }
+        return SUCCESS;
+    }
+    int GetLogTextColor(CAgrcList *message, RspMsg *outmessage,
+                        int iModule, int iCmd)
+    {
+        if (outmessage == nullptr)
+            return ERR_MSG_PARAM;
+        CAgrcList *list = new CAgrcList[1];
+        list[0].addAgrc(STATUS, elog_get_text_color_enabled() ? ON : OFF);
+        outmessage->count = 1;
+        outmessage->msg = list;
+        return SUCCESS;
     }
     int CompressLogFile(CAgrcList *message, RspMsg *outmessage,
                         int iModule, int iCmd)
     {
+        const char *pstr = __FILE__;
         log_a("Hello EasyLogger!");
         log_e("Hello EasyLogger!");
         log_w("Hello EasyLogger!");
         log_i("Hello EasyLogger!");
         log_d("Hello EasyLogger!");
         log_v("Hello EasyLogger!");
+        elog_hexdump("test", 16, (BYTE *)pstr, strlen(pstr));
         return RET_OK;
     }
 
@@ -219,6 +245,8 @@ public:
         PROCESS_CALL(CMD_SET_LOG_TRACE, SetLogTreace)
         PROCESS_CALL(CMD_GET_LOG_TRACE, GetLogTreace)
         PROCESS_CALL(CMD_MSG_TIMER, CompressLogFile)
+        PROCESS_CALL(CMD_SET_LOG_COLOR, SetLogTextColor)
+        PROCESS_CALL(CMD_GET_LOG_COLOR, GetLogTextColor)
         PROCESS_END()
     }
     void dump(int fd, Printfun callback)

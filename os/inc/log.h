@@ -10,12 +10,12 @@
 #define LOG_TAG "LiteOS"
 
 int LVOS_Printf(int fd, const char *format, ...);
-
-#define LOG_DBG log_d
-#define LOG_INFO log_i
-#define LOG_WARN log_w
-#define LOG_ERROR log_e
-#define LOG_FATAL LOG_ERROR
-#define LOG_TRACE log_v
-#define LVOS_ASSERT log_a
+#define LVOS_ASSERT ELOG_ASSERT
+#define LOG_DBG     log_d
+#define LOG_INFO    log_i
+#define LOG_WARN    log_w
+#define LOG_ERROR   log_e
+#define LOG_FATAL   LOG_ERROR
+#define LOG_TRACE   log_v
+#define LOG_ASSERT  log_a
 #endif

@@ -27,19 +27,19 @@ objTaskMgr *objTaskMgr::GetInstance()
 }
 void objTaskMgr::dump(int fd, Printfun callback)
 {
-    objbase::PrintHead(fd, callback, "objTaskMgr", 54);
-    (void)callback(fd, "%-12s %-16s %-12s\r\n",
+    objbase::PrintHead(fd, callback, "objTaskMgr", 58);
+    (void)callback(fd, "%-16s %-16s %-16s\r\n",
                    "taskName", "taskId", "taskPtr");
-    objbase::PrintEnd(fd, callback, 54);
+    objbase::PrintEnd(fd, callback, 58);
     for (auto &iter : m_objlist)
     {
         if (iter.second != nullptr)
-            (void)callback(fd, "%-12s %#-16x %#-12x\r\n",
+            (void)callback(fd, "%-16s %#-16x %#-16x\r\n",
                            iter.second->Name(),
                            iter.second->GetId(),
                            iter.second);
     }
-    objbase::PrintEnd(fd, callback, 54);
+    objbase::PrintEnd(fd, callback, 58);
     (void)callback(fd, "Tatol: %d\r\n", m_objlist.size());
 }
 int objTaskMgr::addObj(objTask *obj)

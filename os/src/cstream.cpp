@@ -184,6 +184,15 @@ CStream &CStream::operator<<(CStream &t)
 
     return this->Append(t.GetBuff(), t.length());
 }
+WORD CStream::to_WORD()
+{
+    return to_DWORD();
+}
+DWORD CStream::to_DWORD()
+{
+    char *pos;
+    return strtoul(c_str(), &pos, 10);
+}
 void CStream::Clear()
 {
 

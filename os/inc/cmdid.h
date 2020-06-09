@@ -15,6 +15,8 @@ enum CMD_ID
     CMD_SYS_EXIT,
     CMD_SYS_SHUT_DOWN,
     CMD_SYS_ERR_CODE,
+    CMD_SET_LOG_COLOR,
+    CMD_GET_LOG_COLOR,
     CMD_BASE_NUM,
 };
 
@@ -41,6 +43,8 @@ enum ERR_CODE
     ERR_PARAM,       //Parameter processing error
     ERR_UNKOWN,      //Unregistered error
     ERR_NOT_SUPPORT, //Feature not supported
+    ERR_MSG_PARAM,   //Message parameter is invalid
+    ERR_MSG_FIELD,   //Invalid message field
 };
 typedef struct
 {

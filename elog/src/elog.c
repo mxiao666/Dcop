@@ -515,7 +515,7 @@ void elog_output(uint8_t level, const char *tag, const char *file, const char *f
     extern const char *elog_port_get_time(void);
     extern const char *elog_port_get_p_info(void);
     extern const char *elog_port_get_t_info(void);
-
+    char * pos = NULL;
     size_t tag_len = strlen(tag), log_len = 0, newline_len = strlen(ELOG_NEWLINE_SIGN);
     char line_num[ELOG_LINE_NUM_MAX_LEN + 1] = { 0 };
     char tag_sapce[ELOG_FILTER_TAG_MAX_LEN / 2 + 1] = { 0 };
@@ -589,7 +589,10 @@ void elog_output(uint8_t level, const char *tag, const char *file, const char *f
         log_len += elog_strcpy(log_len, log_buf + log_len, "(");
         /* package time info */
         if (get_fmt_enabled(level, ELOG_FMT_DIR)) {
-            log_len += elog_strcpy(log_len, log_buf + log_len, file);
+            log_len += elog_strcpy(log_len, log_buf + log_len,
+                                   (NULL != (pos = strrchr(file, '/')))
+                                       ? (pos + 1)
+                                       : file);
             if (get_fmt_enabled(level, ELOG_FMT_FUNC)) {
                 log_len += elog_strcpy(log_len, log_buf + log_len, " ");
             } else if (get_fmt_enabled(level, ELOG_FMT_LINE)) {
