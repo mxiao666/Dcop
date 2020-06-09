@@ -55,22 +55,24 @@ objbase *objKernel::InterFace(int key)
 }
 void objKernel::dump(int fd, Printfun callback)
 {
-    objbase::PrintHead(fd, callback, "objKernel", 50);
+    objbase::PrintHead(fd, callback, "objKernel", 56);
     (void)callback(fd,
-                   "%-16s %-16s %-16s\r\n",
+                   "%-8s %-16s %-16s %-16s\r\n",
+                   "objId",
                    "objName",
                    "objPtr",
                    "refCount");
-    objbase::PrintEnd(fd, callback, 50);
+    objbase::PrintEnd(fd, callback, 56);
     for (auto &iter : m_objList)
     {
         (void)callback(fd,
-                       "%-16s %#-16x %-16d\r\n",
+                       "%#-8x %-16s %#-16x %-16d\r\n",
+                       iter.second->id,
                        iter.first,
                        iter.second->obj,
                        iter.second->refCount);
     }
-    objbase::PrintEnd(fd, callback, 50);
+    objbase::PrintEnd(fd, callback, 56);
     (void)callback(fd, "Tatol: %d\r\n", m_objList.size());
 }
 objbase *objKernel::Query(int key)
