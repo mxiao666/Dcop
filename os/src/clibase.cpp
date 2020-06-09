@@ -17,7 +17,7 @@ enum EXIT_TYPE
     SYS_EXIT
 };
 #ifndef __WIN32__
-class telnet : public objbase
+class Telnet : public objbase
 {
 private:
     int m_port;
@@ -29,7 +29,7 @@ private:
     std::mutex m_synclock;
 #define MAX_EVENTS 100
 public:
-    telnet(int port = 2323)
+    Telnet(int port = 2323)
     {
         m_port = port;
         m_listenFd = 0;
@@ -37,7 +37,7 @@ public:
         m_epfd = 0;
         m_servList.clear();
     }
-    ~telnet()
+    ~Telnet()
     {
         close(m_listenFd);
         close(m_epfd);
@@ -99,8 +99,8 @@ public:
         m_cliMgr =
             reinterpret_cast<cliMgr *>(g_objKernel->Query(MODELU_CLI));
         g_objKernel->Init([]() -> void {
-            telnet *obj =
-                reinterpret_cast<telnet *>(g_objKernel->InterFace(MODELU_TELNET));
+            Telnet *obj =
+                reinterpret_cast<Telnet *>(g_objKernel->InterFace(MODELU_TELNET));
             if (obj != nullptr)
                 obj->Process();
         });
@@ -212,10 +212,10 @@ public:
         list = m_servList;
     }
 };
-REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, telnet, MODELU_TELNET)
+REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, Telnet, MODELU_TELNET)
 #endif
 
-class SysCli : public CClibase
+class SysCli : public Clibase
 {
 private:
 public:
@@ -296,8 +296,8 @@ int cliMgr::Report(CAgrcList *message,
     {
         std::map<int, int> list;
 #ifndef __WIN32__
-        telnet *obj =
-            reinterpret_cast<telnet *>(g_objKernel->InterFace(MODELU_TELNET));
+        Telnet *obj =
+            reinterpret_cast<Telnet *>(g_objKernel->InterFace(MODELU_TELNET));
         if (obj != nullptr)
             obj->GetServerList(list);
 #else
@@ -572,7 +572,7 @@ cliMgr::~cliMgr()
     for (auto &iter : m_cmdList)
         if (iter.second != nullptr)
         {
-            CClibase *objCli = iter.second->objCli;
+            Clibase *objCli = iter.second->objCli;
             if (objCli != nullptr)
             {
                 objCli->DecRefCount();
@@ -626,7 +626,7 @@ int cliMgr::Init()
 }
 void cliMgr::Reg(const char *pzName, void *obj, int id)
 {
-    ((CClibase *)obj)->Init();
+    ((Clibase *)obj)->Init();
 }
 
 int cliMgr::CliSys(int fd, CMD_OBJ *pcmdObj,
@@ -696,7 +696,7 @@ int cliMgr::CliSys(int fd, CMD_OBJ *pcmdObj,
             objbase::PrintEnd(fd, LVOS_Printf, 128);
             for (auto &iter : list)
                 (void)LVOS_Printf(fd,
-                                  "%#-16X %#-32s %-128s\r\n",
+                                  "%#-016X %#-32s %-128s\r\n",
                                   iter.second->id,
                                   iter.second->name,
                                   iter.second->desc);

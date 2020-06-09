@@ -17,14 +17,14 @@ typedef struct
     int count;
 } RspTable;
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
-class CClibase
+class Clibase
 {
 private:
     int m_refCount = 0;
 
 public:
-    CClibase() {}
-    virtual ~CClibase()
+    Clibase() {}
+    virtual ~Clibase()
     {
         m_refCount = 0;
     }
@@ -60,7 +60,7 @@ typedef struct
     const char *help;   //命令的帮助信息
     int cmdModule;      // 命令所在模块的id
     int cmdId;          // 命令的id
-    CClibase *objCli;   // 命令或许需要自己处理入参，处理对象
+    Clibase *objCli;   // 命令或许需要自己处理入参，处理对象
     RspTable *rspTable; //命令需要响应输出时，对于表格信息
     bool bSync;         // 命令为同步 true
 } CMD_OBJ;

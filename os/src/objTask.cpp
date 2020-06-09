@@ -12,6 +12,7 @@
 #include "log.h"
 #include "frameworkmgr.h"
 #include "template.h"
+#include "cnotify.h"
 static objTaskMgr *g_objTaskMgr;
 objTaskMgr::objTaskMgr()
 {
@@ -127,3 +128,73 @@ objTask::~objTask()
 }
 
 REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, objTaskMgr, MODELU_TASK)
+
+int workQ::Init()
+{
+    Cnotify *obj =
+        reinterpret_cast<Cnotify *>(g_objKernel->InterFace(MODELU_NOTIFY));
+    if (obj)
+        obj->RegReceiver(MODELU_WORK_TASK, new REGNOTIFY(this, "workQ"));
+    objPara *pObjPara = new objPara(this);
+    CREATE_OBJTASK(
+        "WorkQueue", [](objPara *pobjPara) {
+            workQ *obj = reinterpret_cast<workQ *>(pobjPara->GetPara());
+            if (obj)
+                obj->Proc();
+            return (void *)0;
+        },
+        pObjPara);
+    return SUCCESS;
+}
+void workQ::Proc()
+{
+    while (!this->stoped)
+    {
+        Task task;
+        {
+            std::unique_lock<std::mutex> lock{this->m_lock};
+
+            this->cv_task.wait(lock,
+                               [this] {
+                                   return this->stoped.load() ||
+                                          !this->tasks.empty();
+                               });
+            if (this->stoped && this->tasks.empty())
+            {
+                return;
+            }
+            task = std::move(this->tasks.front());
+            this->tasks.pop();
+        }
+        task();
+    }
+}
+workQ::workQ()
+{
+}
+workQ::~workQ()
+{
+    stoped.store(true);
+    cv_task.notify_all();
+}
+void workQ::dump(int fd, Printfun callback)
+{
+    objbase::PrintHead(fd, callback, "work task queue", 44);
+    callback(fd, "Queue size:%d\r\n", tasks.size());
+    callback(fd, "Queue status:%s\r\n", stoped ? "Stop" : "Run");
+    objbase::PrintEnd(fd, callback, 44);
+}
+int workQ::Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
+{
+    PROCESS_BEGIN(iCmd)
+    PROCESS_CALL(CMD_SYS_SHUT_DOWN, sysShutdown)
+    PROCESS_END()
+}
+int workQ::sysShutdown(CAgrcList *message, RspMsg *outmessage,
+                       int iModule, int iCmd)
+{
+    stoped.store(true);
+    cv_task.notify_all();
+    return SUCCESS;
+}
+REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, workQ, MODELU_WORK_TASK)

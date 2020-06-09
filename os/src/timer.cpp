@@ -57,6 +57,10 @@ TimerManager::~TimerManager()
 }
 int TimerManager::Init()
 {
+    Cnotify *obj =
+        reinterpret_cast<Cnotify *>(g_objKernel->InterFace(MODELU_NOTIFY));
+    if (obj)
+        obj->RegReceiver(MODELU_TIMER, new REGNOTIFY(this, "TimerManager"));
     AddTimer("TimerManager",
              new Timer(TimerManager::TimerMsg,
                        g_objKernel->InterFace(MODELU_NOTIFY),
@@ -144,5 +148,17 @@ void TimerManager::dump(int fd, Printfun callback)
 
     objbase::PrintEnd(fd, callback, 32);
     (void)callback(fd, "Tatol: %d\r\n", heap.size());
+}
+int TimerManager::Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
+{
+    PROCESS_BEGIN(iCmd)
+    PROCESS_CALL(CMD_SYS_SHUT_DOWN, sysShutdown)
+    PROCESS_END()
+}
+int TimerManager::sysShutdown(CAgrcList *message, RspMsg *outmessage,
+                              int iModule, int iCmd)
+{
+    stop = true;
+    return SUCCESS;
 }
 REG_TO_FRAMEWORK(TABLE_ONE, MODELU_KERNEL, TimerManager, MODELU_TIMER)

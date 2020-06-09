@@ -1,7 +1,7 @@
-# LiteOS
+# Dcop
 
 #### 介绍
-LiteOS 是一个用于动态管理Linux运行时软件配置框架，以往Linux软件在运行是读取配置文件后，所有的参数不可再次调整，今天他来了LiteOS能够很好的满足你在启动软件后，再次根据自己的需求去配置软件各项参数。
+Dcop 是一个用于动态管理Linux运行时软件配置框架，以往Linux软件在运行是读取配置文件后，所有的参数不可再次调整，今天他来了Dcop能够很好的满足你在启动软件后，再次根据自己的需求去配置软件各项参数。
 
 #### 软件架构
 软件架构说明
@@ -16,14 +16,14 @@ LiteOS 是一个用于动态管理Linux运行时软件配置框架，以往Linux
 ### 核心功能
 软件启动后默认开启 2323端口，通过telnet 0 2323 连接进入后台
 1.  错误信息快速查询
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/223600_b6729f7a_1287788.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/223600_b6729f7a_1287788.png)
 2.  自带系统部分必备配置查询功能
 ###### dump模块信息
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/223130_af398cf4_1287788.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/223130_af398cf4_1287788.png)
 ###### dump notify模块
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/224059_c665d041_1287788.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/224059_c665d041_1287788.png)
 ###### 帮助信息
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/223159_94223a9b_1287788.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0609/223159_94223a9b_1287788.png)
 
 3.  基于EasyLogger 定制化
 

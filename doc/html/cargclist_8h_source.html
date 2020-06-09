@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OS系统接口查询手册: D:/code/LiteOS/os/inc/cargclist.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OS系统接口查询手册
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li><a href="namespaces.html"><span>命名空间</span></a></li>
+      <li><a href="annotated.html"><span>类</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8b7cb6c889a10e2a101a7e90c854ca4d.html">os</a></li><li class="navelem"><a class="el" href="dir_74a0f00179eada1dfee08aecb51588ec.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">cargclist.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __OS_CARGCLIST__</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __OS_CARGCLIST__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;template.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;cstream.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classCAgrcList.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCAgrcList.html">CAgrcList</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classCAgrcList.html#adef69842f8185c26a9880b61563d55a9">   11</a></span>&#160;    <a class="code" href="classCAgrcList.html#adef69842f8185c26a9880b61563d55a9">CAgrcList</a>() : <a class="code" href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">m_count</a>(0) {}</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classCAgrcList.html#a1838067409b11c9168334710cd71d84f">   12</a></span>&#160;    <a class="code" href="classCAgrcList.html#a1838067409b11c9168334710cd71d84f">CAgrcList</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *argc)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordflow">if</span> (argc != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <a class="code" href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">m_count</a> = argc-&gt;<a class="code" href="classCAgrcList.html#a34fbc0a2b2e311c2daa6628325cf4e3c">GetCount</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            std::map&lt;const char *, CStream *&gt; list = argc-&gt;<a class="code" href="classCAgrcList.html#ad920ca4368268e25e061d1e4a7200e43">GetList</a>();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;iter : list)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>[iter.first] =</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                    (iter.second != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                        ? <span class="keyword">new</span> <a class="code" href="classCStream.html">CStream</a>(iter.second-&gt;GetBuff())</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                        : <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <a class="code" href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">m_count</a> = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classCAgrcList.html#aa7b77c2da453ccee3edfa71976e9f6c4">   29</a></span>&#160;    <a class="code" href="classCAgrcList.html">CAgrcList</a> &amp;<a class="code" href="classCAgrcList.html#aa7b77c2da453ccee3edfa71976e9f6c4">addCount</a>()</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        ++<a class="code" href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">m_count</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classCAgrcList.html#aadb84d7f1c2d1538e175fec68bf938f1">   34</a></span>&#160;    <a class="code" href="classCAgrcList.html">CAgrcList</a> &amp;<a class="code" href="classCAgrcList.html#aadb84d7f1c2d1538e175fec68bf938f1">addAgrc</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pzName, <span class="keyword">const</span> <span class="keywordtype">char</span> *pzValue)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">if</span> (pzName != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>[pzName] = <span class="keyword">new</span> <a class="code" href="classCStream.html">CStream</a>((<span class="keyword">const</span> BYTE *)pzValue);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="classCAgrcList.html#aa7b77c2da453ccee3edfa71976e9f6c4">addCount</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classCAgrcList.html#a8afe470e2ba62934a613241ffec6d73a">   43</a></span>&#160;    <a class="code" href="classCStream.html">CStream</a> *<a class="code" href="classCAgrcList.html#a8afe470e2ba62934a613241ffec6d73a">GetAgrc</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pzName)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">auto</span> iter = <a class="code" href="namespaceOS.html#acb6d28a6967ec8cdf0ce86a58f86d2b9">OS::find</a>(pzName, <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">if</span> (iter != <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>.end())</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">return</span> iter-&gt;second;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classCAgrcList.html#a34fbc0a2b2e311c2daa6628325cf4e3c">   52</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCAgrcList.html#a34fbc0a2b2e311c2daa6628325cf4e3c">GetCount</a>() { <span class="keywordflow">return</span> <a class="code" href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">m_count</a>; }</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classCAgrcList.html#ad920ca4368268e25e061d1e4a7200e43">   53</a></span>&#160;    std::map&lt;const char *, CStream *&gt; &amp;<a class="code" href="classCAgrcList.html#ad920ca4368268e25e061d1e4a7200e43">GetList</a>() { <span class="keywordflow">return</span> <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>; }</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classCAgrcList.html#a217a5485ea04b34a7f8fb638b8f42a38">   54</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classCAgrcList.html#a217a5485ea04b34a7f8fb638b8f42a38">GetSize</a>() { <span class="keywordflow">return</span> <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>.size(); }</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classCAgrcList.html#ae02e2eb91863dc6469c31fbf71046fb7">   55</a></span>&#160;    <a class="code" href="classCAgrcList.html#ae02e2eb91863dc6469c31fbf71046fb7">~CAgrcList</a>()</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;iter : <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">if</span> (iter.second != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keyword">delete</span> iter.second;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            iter.second = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">   66</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">m_count</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">   67</a></span>&#160;    std::map&lt;const char *, CStream *&gt; <a class="code" href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">m_arglist</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="struct__RspMsg.html">   69</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct__RspMsg.html">_RspMsg</a></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="struct__RspMsg.html#a1ae5ed143d05321a65df81c24c91d95f">   71</a></span>&#160;    <a class="code" href="classCAgrcList.html">CAgrcList</a> *<a class="code" href="struct__RspMsg.html#a1ae5ed143d05321a65df81c24c91d95f">msg</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="struct__RspMsg.html#aee7aa678cc3c31ccd7660979a9b61f19">   72</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct__RspMsg.html#aee7aa678cc3c31ccd7660979a9b61f19">count</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="struct__RspMsg.html#a5456d9b303a99b25ea30b3c7543a1c3c">   73</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct__RspMsg.html#a5456d9b303a99b25ea30b3c7543a1c3c">cmd</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="struct__RspMsg.html#af5eed62945b300b08397cba76b2844dd">   74</a></span>&#160;    <a class="code" href="struct__RspMsg.html#af5eed62945b300b08397cba76b2844dd">_RspMsg</a>()</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        msg = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        count = 0;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        cmd = -1;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="struct__RspMsg.html#a9e47430cae74f0c5d766bbd6b739ebff">   80</a></span>&#160;    <a class="code" href="struct__RspMsg.html#a9e47430cae74f0c5d766bbd6b739ebff">~_RspMsg</a>()</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">if</span> (msg)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keyword">delete</span>[] <a class="code" href="struct__RspMsg.html#a1ae5ed143d05321a65df81c24c91d95f">msg</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        msg = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;} <a class="code" href="struct__RspMsg.html">RspMsg</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classCAgrcList_html"><div class="ttname"><a href="classCAgrcList.html">CAgrcList</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:8</div></div>
+<div class="ttc" id="struct__RspMsg_html"><div class="ttname"><a href="struct__RspMsg.html">_RspMsg</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:69</div></div>
+<div class="ttc" id="classCAgrcList_html_ad920ca4368268e25e061d1e4a7200e43"><div class="ttname"><a href="classCAgrcList.html#ad920ca4368268e25e061d1e4a7200e43">CAgrcList::GetList</a></div><div class="ttdeci">std::map&lt; const char *, CStream * &gt; &amp; GetList()</div><div class="ttdef"><b>Definition:</b> cargclist.h:53</div></div>
+<div class="ttc" id="classCAgrcList_html_a9c1cdeb09c35dc471a9381b09bebc083"><div class="ttname"><a href="classCAgrcList.html#a9c1cdeb09c35dc471a9381b09bebc083">CAgrcList::m_arglist</a></div><div class="ttdeci">std::map&lt; const char *, CStream * &gt; m_arglist</div><div class="ttdef"><b>Definition:</b> cargclist.h:67</div></div>
+<div class="ttc" id="classCAgrcList_html_a34fbc0a2b2e311c2daa6628325cf4e3c"><div class="ttname"><a href="classCAgrcList.html#a34fbc0a2b2e311c2daa6628325cf4e3c">CAgrcList::GetCount</a></div><div class="ttdeci">int GetCount()</div><div class="ttdef"><b>Definition:</b> cargclist.h:52</div></div>
+<div class="ttc" id="classCStream_html"><div class="ttname"><a href="classCStream.html">CStream</a></div><div class="ttdef"><b>Definition:</b> cstream.h:6</div></div>
+<div class="ttc" id="classCAgrcList_html_adef69842f8185c26a9880b61563d55a9"><div class="ttname"><a href="classCAgrcList.html#adef69842f8185c26a9880b61563d55a9">CAgrcList::CAgrcList</a></div><div class="ttdeci">CAgrcList()</div><div class="ttdef"><b>Definition:</b> cargclist.h:11</div></div>
+<div class="ttc" id="struct__RspMsg_html_aee7aa678cc3c31ccd7660979a9b61f19"><div class="ttname"><a href="struct__RspMsg.html#aee7aa678cc3c31ccd7660979a9b61f19">_RspMsg::count</a></div><div class="ttdeci">int count</div><div class="ttdef"><b>Definition:</b> cargclist.h:72</div></div>
+<div class="ttc" id="classCAgrcList_html_aa7b77c2da453ccee3edfa71976e9f6c4"><div class="ttname"><a href="classCAgrcList.html#aa7b77c2da453ccee3edfa71976e9f6c4">CAgrcList::addCount</a></div><div class="ttdeci">CAgrcList &amp; addCount()</div><div class="ttdef"><b>Definition:</b> cargclist.h:29</div></div>
+<div class="ttc" id="classCAgrcList_html_a8afe470e2ba62934a613241ffec6d73a"><div class="ttname"><a href="classCAgrcList.html#a8afe470e2ba62934a613241ffec6d73a">CAgrcList::GetAgrc</a></div><div class="ttdeci">CStream * GetAgrc(const char *pzName)</div><div class="ttdef"><b>Definition:</b> cargclist.h:43</div></div>
+<div class="ttc" id="classCAgrcList_html_ae6bcb342fc88eb576428d7e238e2ffc1"><div class="ttname"><a href="classCAgrcList.html#ae6bcb342fc88eb576428d7e238e2ffc1">CAgrcList::m_count</a></div><div class="ttdeci">int m_count</div><div class="ttdef"><b>Definition:</b> cargclist.h:66</div></div>
+<div class="ttc" id="namespaceOS_html_acb6d28a6967ec8cdf0ce86a58f86d2b9"><div class="ttname"><a href="namespaceOS.html#acb6d28a6967ec8cdf0ce86a58f86d2b9">OS::find</a></div><div class="ttdeci">T::iterator find(const char *pzName, T &amp;list)</div><div class="ttdef"><b>Definition:</b> template.h:6</div></div>
+<div class="ttc" id="struct__RspMsg_html_a1ae5ed143d05321a65df81c24c91d95f"><div class="ttname"><a href="struct__RspMsg.html#a1ae5ed143d05321a65df81c24c91d95f">_RspMsg::msg</a></div><div class="ttdeci">CAgrcList * msg</div><div class="ttdef"><b>Definition:</b> cargclist.h:71</div></div>
+<div class="ttc" id="classCAgrcList_html_aadb84d7f1c2d1538e175fec68bf938f1"><div class="ttname"><a href="classCAgrcList.html#aadb84d7f1c2d1538e175fec68bf938f1">CAgrcList::addAgrc</a></div><div class="ttdeci">CAgrcList &amp; addAgrc(const char *pzName, const char *pzValue)</div><div class="ttdef"><b>Definition:</b> cargclist.h:34</div></div>
+<div class="ttc" id="classCAgrcList_html_ae02e2eb91863dc6469c31fbf71046fb7"><div class="ttname"><a href="classCAgrcList.html#ae02e2eb91863dc6469c31fbf71046fb7">CAgrcList::~CAgrcList</a></div><div class="ttdeci">~CAgrcList()</div><div class="ttdef"><b>Definition:</b> cargclist.h:55</div></div>
+<div class="ttc" id="classCAgrcList_html_a217a5485ea04b34a7f8fb638b8f42a38"><div class="ttname"><a href="classCAgrcList.html#a217a5485ea04b34a7f8fb638b8f42a38">CAgrcList::GetSize</a></div><div class="ttdeci">size_t GetSize()</div><div class="ttdef"><b>Definition:</b> cargclist.h:54</div></div>
+<div class="ttc" id="classCAgrcList_html_a1838067409b11c9168334710cd71d84f"><div class="ttname"><a href="classCAgrcList.html#a1838067409b11c9168334710cd71d84f">CAgrcList::CAgrcList</a></div><div class="ttdeci">CAgrcList(CAgrcList *argc)</div><div class="ttdef"><b>Definition:</b> cargclist.h:12</div></div>
+<div class="ttc" id="struct__RspMsg_html_af5eed62945b300b08397cba76b2844dd"><div class="ttname"><a href="struct__RspMsg.html#af5eed62945b300b08397cba76b2844dd">_RspMsg::_RspMsg</a></div><div class="ttdeci">_RspMsg()</div><div class="ttdef"><b>Definition:</b> cargclist.h:74</div></div>
+<div class="ttc" id="struct__RspMsg_html_a5456d9b303a99b25ea30b3c7543a1c3c"><div class="ttname"><a href="struct__RspMsg.html#a5456d9b303a99b25ea30b3c7543a1c3c">_RspMsg::cmd</a></div><div class="ttdeci">int cmd</div><div class="ttdef"><b>Definition:</b> cargclist.h:73</div></div>
+<div class="ttc" id="struct__RspMsg_html_a9e47430cae74f0c5d766bbd6b739ebff"><div class="ttname"><a href="struct__RspMsg.html#a9e47430cae74f0c5d766bbd6b739ebff">_RspMsg::~_RspMsg</a></div><div class="ttdeci">~_RspMsg()</div><div class="ttdef"><b>Definition:</b> cargclist.h:80</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

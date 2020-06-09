@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OS系统接口查询手册: 类成员 - 函数</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OS系统接口查询手册
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li><a href="namespaces.html"><span>命名空间</span></a></li>
+      <li class="current"><a href="annotated.html"><span>类</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>类列表</span></a></li>
+      <li><a href="classes.html"><span>类索引</span></a></li>
+      <li><a href="hierarchy.html"><span>类继承关系</span></a></li>
+      <li class="current"><a href="functions.html"><span>类成员</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow3" class="tabs2">
+    <ul class="tablist">
+      <li><a href="functions.html"><span>全部</span></a></li>
+      <li class="current"><a href="functions_func.html"><span>函数</span></a></li>
+      <li><a href="functions_vars.html"><span>变量</span></a></li>
+      <li><a href="functions_type.html"><span>类型定义</span></a></li>
+      <li><a href="functions_enum.html"><span>枚举</span></a></li>
+      <li><a href="functions_eval.html"><span>枚举值</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow4" class="tabs3">
+    <ul class="tablist">
+      <li><a href="#index__"><span>_</span></a></li>
+      <li><a href="#index_a"><span>a</span></a></li>
+      <li><a href="#index_c"><span>c</span></a></li>
+      <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
+      <li><a href="#index_g"><span>g</span></a></li>
+      <li><a href="#index_h"><span>h</span></a></li>
+      <li><a href="#index_i"><span>i</span></a></li>
+      <li><a href="#index_l"><span>l</span></a></li>
+      <li><a href="#index_n"><span>n</span></a></li>
+      <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
+      <li><a href="#index_q"><span>q</span></a></li>
+      <li><a href="#index_r"><span>r</span></a></li>
+      <li><a href="#index_s"><span>s</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_u"><span>u</span></a></li>
+      <li><a href="#index_v"><span>v</span></a></li>
+      <li><a href="#index_w"><span>w</span></a></li>
+      <li class="current"><a href="#index_~"><span>~</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="contents">
+&#160;
+
+<h3><a class="anchor" id="index__"></a>- _ -</h3><ul>
+<li>_AsyncArgc()
+: <a class="el" href="struct__AsyncArgc.html#a62fce652247411c1046e9651fa0256ce">_AsyncArgc</a>
+</li>
+<li>_ObjModule()
+: <a class="el" href="struct__ObjModule.html#adf22870b123b01773f05717e93beee1a">_ObjModule</a>
+</li>
+<li>_PubInit()
+: <a class="el" href="classCStream.html#a6e5ec207132c9dab6e636f3525df7174">CStream</a>
+</li>
+<li>_RspMsg()
+: <a class="el" href="struct__RspMsg.html#af5eed62945b300b08397cba76b2844dd">_RspMsg</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>Add()
+: <a class="el" href="classClibase.html#aa73f4f3c12aeaea315266905608a33b6">Clibase</a>
+</li>
+<li>addAgrc()
+: <a class="el" href="classCAgrcList.html#aadb84d7f1c2d1538e175fec68bf938f1">CAgrcList</a>
+</li>
+<li>addCount()
+: <a class="el" href="classCAgrcList.html#aa7b77c2da453ccee3edfa71976e9f6c4">CAgrcList</a>
+</li>
+<li>addObj()
+: <a class="el" href="classobjTaskMgr.html#a187477fa5f4263b920591b8633221673">objTaskMgr</a>
+</li>
+<li>AddRefCount()
+: <a class="el" href="classClibase.html#aa249b9ab6f5a710c014791bd86b80fcc">Clibase</a>
+</li>
+<li>AddTimer()
+: <a class="el" href="classTimerManager.html#aab4571a5ff15e6abe7772a48590469f1">TimerManager</a>
+</li>
+<li>Append()
+: <a class="el" href="classCStream.html#a54b0c96508ddd8935dd48c359651ff3d">CStream</a>
+</li>
+<li>apply()
+: <a class="el" href="structMCopyValue.html#aad50bef649e22ee155611923cd6dc439">MCopyValue&lt; bool &gt;</a>
+, <a class="el" href="structMCopyValue_3_01false_01_4.html#ac75ca111820c311c69fbe062362f5ed5">MCopyValue&lt; false &gt;</a>
+</li>
+<li>AsyncNotify()
+: <a class="el" href="classCnotify.html#a27efe46635791799fadad26adcfe327f">Cnotify</a>
+</li>
+<li>AsyncProc()
+: <a class="el" href="classCnotify.html#a8104902a3848c9c90ab43ff7a50a52ea">Cnotify</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>c_str()
+: <a class="el" href="classCStream.html#a14b0f9adcbca6fa73ca1bb258c50abac">CStream</a>
+</li>
+<li>CAgrcList()
+: <a class="el" href="classCAgrcList.html#adef69842f8185c26a9880b61563d55a9">CAgrcList</a>
+</li>
+<li>Clear()
+: <a class="el" href="classCStream.html#acff05fe5ff0c26da4b93aee3078bf5ed">CStream</a>
+</li>
+<li>Clibase()
+: <a class="el" href="classClibase.html#a77e3b2284076dd70f3fdebb610ed5ef0">Clibase</a>
+</li>
+<li>cliMgr()
+: <a class="el" href="classcliMgr.html#ac576a0b12402e5899c3c490a76020afe">cliMgr</a>
+</li>
+<li>CliSys()
+: <a class="el" href="classcliMgr.html#a1a6883bdad5bee60d083290d04fc0795">cliMgr</a>
+</li>
+<li>Cnotify()
+: <a class="el" href="classCnotify.html#ab913ab2a59562f776faefefbd383553d">Cnotify</a>
+</li>
+<li>commit()
+: <a class="el" href="classOS_1_1threadpool.html#ae0ab1d3366da0070a913788140b97221">OS::threadpool</a>
+, <a class="el" href="classworkQ.html#a35c9fbc22bdb51271d09c47664f4e3bc">workQ</a>
+</li>
+<li>CompressLogFile()
+: <a class="el" href="classLogMgr.html#ad7959b66362e60a821b308a2de9b730d">LogMgr</a>
+</li>
+<li>CStream()
+: <a class="el" href="classCStream.html#a204af9bfa136b3365d77244d822afd8f">CStream</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>DecRefCount()
+: <a class="el" href="classClibase.html#abcd22730520aa469fa00eab9657e2a19">Clibase</a>
+</li>
+<li>delObj()
+: <a class="el" href="classobjTaskMgr.html#a04632cacbb3daf0b17975b2a118d474f">objTaskMgr</a>
+</li>
+<li>DetectTimers()
+: <a class="el" href="classTimerManager.html#ad78a2c51b600abe569152d01961f2812">TimerManager</a>
+</li>
+<li>Dispatch()
+: <a class="el" href="classcliMgr.html#a51e1bd4c9a9c7b56e310482a62d29197">cliMgr</a>
+</li>
+<li>dump()
+: <a class="el" href="classcliMgr.html#a9af3420c368a8c0f9c90c3f64f032eaa">cliMgr</a>
+, <a class="el" href="classCnotify.html#a86220e54a7407800ea96adb1ff8fd30b">Cnotify</a>
+, <a class="el" href="classLogMgr.html#af8105c6c09f9dd23131930e9aad37ba0">LogMgr</a>
+, <a class="el" href="classobjbase.html#aa8f9a00bafa8e6088c07e2d3397f6b9c">objbase</a>
+, <a class="el" href="classobjKernel.html#a35ad1cb04dcef5fcfc06b4b1c1fe5a7a">objKernel</a>
+, <a class="el" href="classobjTaskMgr.html#a0b7d782dc98896f68d422cd5069ad6cb">objTaskMgr</a>
+, <a class="el" href="classTimerManager.html#a41108ec7cb25e725f327caa673a1f674">TimerManager</a>
+, <a class="el" href="classworkQ.html#ab3cfd151776b9839c50412b7c90c77db">workQ</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>Entry()
+: <a class="el" href="classobjKernel.html#adce6882a48656709e6edd86e5bea0c33">objKernel</a>
+</li>
+<li>ErrGet()
+: <a class="el" href="classobjKernel.html#a8b8549ec38b3e57eded04021ecb82bd7">objKernel</a>
+</li>
+<li>ErroReg()
+: <a class="el" href="classobjKernel.html#a692a7f95f68b01928d4d6d13c76663e9">objKernel</a>
+</li>
+<li>Extract()
+: <a class="el" href="classCStream.html#ab9ebdc96078cbf06373b8c606aee51b6">CStream</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>FindModule()
+: <a class="el" href="classcliMgr.html#a9d549104f577954c46ecb47a402a6117">cliMgr</a>
+</li>
+<li>FrameWorkMgr()
+: <a class="el" href="classFrameWorkMgr.html#aa6ca33bcd72805b08e58eff80c37cfd2">FrameWorkMgr</a>
+</li>
+<li>FrameWorkMgrCollector()
+: <a class="el" href="classFrameWorkMgrCollector.html#ab0af67823c871bcbfbde3e0e02d15285">FrameWorkMgrCollector</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>genU()
+: <a class="el" href="classMConvertsion.html#a8754ab2de0c1fe1be0aab6a906494dc0">MConvertsion&lt; T, U &gt;</a>
+</li>
+<li>Get()
+: <a class="el" href="classClibase.html#a136a46502df5c5a8865a0ece89875eb2">Clibase</a>
+</li>
+<li>GetAgrc()
+: <a class="el" href="classCAgrcList.html#a8afe470e2ba62934a613241ffec6d73a">CAgrcList</a>
+</li>
+<li>GetBuff()
+: <a class="el" href="classCStream.html#a2d585ede97dd72f2d1cc28debbd55ed1">CStream</a>
+</li>
+<li>GetCount()
+: <a class="el" href="classCAgrcList.html#a34fbc0a2b2e311c2daa6628325cf4e3c">CAgrcList</a>
+, <a class="el" href="classCStream.html#a86614d41d94656de93e02e9877969cca">CStream</a>
+</li>
+<li>GetCurrentMillisecs()
+: <a class="el" href="classTimerManager.html#a8eb2ba62fc053ca76348b5107e137e60">TimerManager</a>
+</li>
+<li>GetDebug()
+: <a class="el" href="classobjbase.html#ae4daa59963772ad4589d15ed253414f7">objbase</a>
+</li>
+<li>GetId()
+: <a class="el" href="classobjTask.html#ae3eac17720cc52d73dd4dbdbc51750d6">objTask</a>
+</li>
+<li>getInstance()
+: <a class="el" href="classFrameWorkMgr.html#a492d0c1b540c207e921ea60a9415d468">FrameWorkMgr</a>
+</li>
+<li>GetInstance()
+: <a class="el" href="classobjTaskMgr.html#a7444ef8ba698509adb014cbb5c4cec4a">objTaskMgr</a>
+</li>
+<li>GetLevelByLog()
+: <a class="el" href="classLogMgr.html#ab066df0dc83bc09adfc6a5886e694004">LogMgr</a>
+</li>
+<li>GetList()
+: <a class="el" href="classCAgrcList.html#ad920ca4368268e25e061d1e4a7200e43">CAgrcList</a>
+</li>
+<li>GetLogTextColor()
+: <a class="el" href="classLogMgr.html#a13d15d476a321077f2a16062bf132c3e">LogMgr</a>
+</li>
+<li>GetLogTreace()
+: <a class="el" href="classLogMgr.html#a960588939d238a28a5fda23a41a84e5b">LogMgr</a>
+</li>
+<li>GetMoreCapacity()
+: <a class="el" href="classCStream.html#a4096bcc2c8caa2d8066a5f1a3de1df1d">CStream</a>
+</li>
+<li>GetPara()
+: <a class="el" href="classobjPara.html#aec175cc280f325d52fd5cc76d03f48e9">objPara</a>
+</li>
+<li>GetPos()
+: <a class="el" href="classCStream.html#ac8df161b52afd39b266d6cd4c6db376b">CStream</a>
+</li>
+<li>GetRefCount()
+: <a class="el" href="classClibase.html#a523c8a4ebd019ece5a6747016f618412">Clibase</a>
+</li>
+<li>GetServerList()
+: <a class="el" href="classTelnet.html#ad5b5842d8eee0dd2993bf6b19040db27">Telnet</a>
+</li>
+<li>GetSize()
+: <a class="el" href="classCAgrcList.html#a217a5485ea04b34a7f8fb638b8f42a38">CAgrcList</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_h"></a>- h -</h3><ul>
+<li>Help()
+: <a class="el" href="classSysCli.html#a79cdadad0680b7fa7fd926a77263c78c">SysCli</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>idlCount()
+: <a class="el" href="classOS_1_1threadpool.html#a82a1a2fc870d89988dc6c4dc3f471624">OS::threadpool</a>
+</li>
+<li>Init()
+: <a class="el" href="classClibase.html#aa8cb0f6cc1e2a4ca6265f817ac5acdcf">Clibase</a>
+, <a class="el" href="classcliMgr.html#a7ae2dcb6fa74324c0017b04ca58d11cb">cliMgr</a>
+, <a class="el" href="classCnotify.html#a576422c4a653afd0d6984495759beb9e">Cnotify</a>
+, <a class="el" href="classCStream.html#ae56cfe93850c8bd71a178f080527d586">CStream</a>
+, <a class="el" href="classLogCmd.html#a83428a7a8bd7637b4a3393f2738b1611">LogCmd</a>
+, <a class="el" href="classLogMgr.html#ad2d45d9d332a596985b5ec3a76e43c64">LogMgr</a>
+, <a class="el" href="classobjbase.html#a0045317689842ce503a5b33b1db99c6f">objbase</a>
+, <a class="el" href="classobjKernel.html#a7fa19daf677534c4d49c5e3b4167204b">objKernel</a>
+, <a class="el" href="classSysCli.html#a48465253ccd6f9661cd93a5b15079db5">SysCli</a>
+, <a class="el" href="classTelnet.html#abb8711f82dc4d35872b65881c692c822">Telnet</a>
+, <a class="el" href="classTimerManager.html#af040d9828e7dbdf2cee12646e8f3cc45">TimerManager</a>
+, <a class="el" href="classworkQ.html#a5072453f4689415892a2e71ca30ab4db">workQ</a>
+</li>
+<li>InterFace()
+: <a class="el" href="classobjKernel.html#a0ba29a7824d61a44629d6d32f3e6a0fb">objKernel</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
+<li>length()
+: <a class="el" href="classCStream.html#a1c41a83bff1334abd9e94db22d4e6223">CStream</a>
+</li>
+<li>LogMgr()
+: <a class="el" href="classLogMgr.html#ad2800fcb69314fc02b6bcc5da63189b5">LogMgr</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>Name()
+: <a class="el" href="classobjTask.html#a94909eba8ad8946db1905621f8078835">objTask</a>
+</li>
+<li>Notify()
+: <a class="el" href="classCnotify.html#a07e223d3a397e28c450cb29cbf7c9f89">Cnotify</a>
+</li>
+<li>NotifyA()
+: <a class="el" href="classCnotify.html#ab4e5be4450d230d28a7b1ef06d23f525">Cnotify</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>objbase()
+: <a class="el" href="classobjbase.html#a31a91e853766e9d9feeec039b0713dd9">objbase</a>
+</li>
+<li>objKernel()
+: <a class="el" href="classobjKernel.html#a7434e272587b2ade8261e8bad635a546">objKernel</a>
+</li>
+<li>objPara()
+: <a class="el" href="classobjPara.html#a451f9bea70defa08a713ce8017835881">objPara</a>
+</li>
+<li>objTask()
+: <a class="el" href="classobjTask.html#a36bbd25a206d397c01bd804e0ff11526">objTask</a>
+</li>
+<li>objTaskMgr()
+: <a class="el" href="classobjTaskMgr.html#ac6c94c695c2a8bc62269d07a3100e4ef">objTaskMgr</a>
+</li>
+<li>OnTimer()
+: <a class="el" href="classTimer.html#aa971ac2e7a2513dfd5850b036905fc51">Timer</a>
+</li>
+<li>operator&lt;&lt;()
+: <a class="el" href="classCStream.html#aa174a564e5434e58039eef83ca0712f0">CStream</a>
+</li>
+<li>operator=()
+: <a class="el" href="classCStream.html#a079cea89abf9f27f39a8d34aa9b83f04">CStream</a>
+, <a class="el" href="classobjKernel.html#af8e5d75a7d7776b288d1e770a7a1aec4">objKernel</a>
+, <a class="el" href="classobjTaskMgr.html#a561d636a14f80ab74d582768ba31b874">objTaskMgr</a>
+, <a class="el" href="classworkQ.html#a0177290f8ec39e9c57440963806f3102">workQ</a>
+</li>
+<li>operator&gt;&gt;()
+: <a class="el" href="classCStream.html#a1fc97d98f2a0c5d1c144988a4c422234">CStream</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>Para()
+: <a class="el" href="classobjTask.html#a402d3b9d61b5875f2f2f0478f92eec84">objTask</a>
+</li>
+<li>PrintEnd()
+: <a class="el" href="classobjbase.html#a2712682cb90ee425c1d39c3c53638ec8">objbase</a>
+</li>
+<li>PrintHead()
+: <a class="el" href="classobjbase.html#a197718900ba160f206115c2fd87755e3">objbase</a>
+</li>
+<li>Proc()
+: <a class="el" href="classworkQ.html#a5b9ab181d5da33d70b49aab2a6ca69f4">workQ</a>
+</li>
+<li>Process()
+: <a class="el" href="classcliMgr.html#a2ed0692f2249339371d1485ac9e797b2">cliMgr</a>
+, <a class="el" href="classLogMgr.html#a10912eb884acfa84347956899a74bd27">LogMgr</a>
+, <a class="el" href="classobjbase.html#aa0e4c39fbda9b3be1da9e39f5cf6b802">objbase</a>
+, <a class="el" href="classTelnet.html#ac4eedc57bdea6ee0f71c37b7a473c0fe">Telnet</a>
+, <a class="el" href="classTimerManager.html#ae45fdbc58a4a1aa04418f7a1807ea571">TimerManager</a>
+, <a class="el" href="classworkQ.html#af0d973ab87b2421685cd072e86dd0be8">workQ</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_q"></a>- q -</h3><ul>
+<li>Query()
+: <a class="el" href="classobjKernel.html#a1beda86314577313092e41d917557b51">objKernel</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>Reg()
+: <a class="el" href="classcliMgr.html#a7d608c28607ca553edca7375d3ca1d24">cliMgr</a>
+, <a class="el" href="classobjbase.html#a9146aa9ff2256df3fcd6c4b73744f3d6">objbase</a>
+, <a class="el" href="classobjKernel.html#ab944b5697a566ff56ea099a4b3130cd2">objKernel</a>
+</li>
+<li>RegCmd()
+: <a class="el" href="classcliMgr.html#a040532e64780f1e44c176f87d1b57438">cliMgr</a>
+</li>
+<li>RegInit()
+: <a class="el" href="classFrameWorkMgr.html#a441806918c239c568624db5e25dafb5e">FrameWorkMgr</a>
+</li>
+<li>regNotify()
+: <a class="el" href="structregNotify.html#af737a90fe0e3458b7effb7f6addbd732">regNotify</a>
+</li>
+<li>RegReceiver()
+: <a class="el" href="classCnotify.html#a943f6702a3fab9fb2e8eb99f71deed6e">Cnotify</a>
+</li>
+<li>Release()
+: <a class="el" href="classobjKernel.html#a747e5eb09f87ef3e72d81be26fcf68b0">objKernel</a>
+</li>
+<li>RemoveTimer()
+: <a class="el" href="classTimerManager.html#a03fb3a87f630564836215a3f127b509f">TimerManager</a>
+</li>
+<li>Report()
+: <a class="el" href="classcliMgr.html#a5074d14b35d2a9a0b47b812336f0a108">cliMgr</a>
+</li>
+<li>Run()
+: <a class="el" href="classobjTask.html#a4ae9d4839750069be0f9835d52cf2433">objTask</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>Set()
+: <a class="el" href="classClibase.html#a88684572aae28f61fcc125dd6e074e1d">Clibase</a>
+</li>
+<li>SetCount()
+: <a class="el" href="classCStream.html#a189d6e93816b185aa1e1454e15e26d41">CStream</a>
+</li>
+<li>SetDebug()
+: <a class="el" href="classobjbase.html#afdf811293f37874262b2fb9dff961a2a">objbase</a>
+</li>
+<li>SetId()
+: <a class="el" href="classobjTask.html#a1c7b35b6f071bb8b4f83c179b3f8b009">objTask</a>
+</li>
+<li>SetLogByLevel()
+: <a class="el" href="classLogMgr.html#affec33f95c985d5c0692f5ed334b80fb">LogMgr</a>
+</li>
+<li>SetLogTextColor()
+: <a class="el" href="classLogMgr.html#ae9559e06e2f3fa45267f08d0fd7265f1">LogMgr</a>
+</li>
+<li>SetLogTreace()
+: <a class="el" href="classLogMgr.html#aa22f9230e09d814c50d5412a8f40569c">LogMgr</a>
+</li>
+<li>SetPos()
+: <a class="el" href="classCStream.html#a8fdf1c88d7875501618ad1a00f73e5a5">CStream</a>
+</li>
+<li>Start()
+: <a class="el" href="classTimer.html#a4e607b129b392c11adddd9641a320436">Timer</a>
+</li>
+<li>Stop()
+: <a class="el" href="classTimer.html#a6379e797f968aaee6ac3bb12dc6b81c5">Timer</a>
+</li>
+<li>sysShutdown()
+: <a class="el" href="classTimerManager.html#aad0aab8ab825cd51506bc69caa626fc4">TimerManager</a>
+, <a class="el" href="classworkQ.html#aad884e9aec439406004b0ec6d8a38fb1">workQ</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>Telnet()
+: <a class="el" href="classTelnet.html#aa6bfd3cb35d428a3ea512978bf649772">Telnet</a>
+</li>
+<li>Test()
+: <a class="el" href="classMConvertsion.html#afa83f327f664d9a7076d80ebf3606ae2">MConvertsion&lt; T, U &gt;</a>
+</li>
+<li>threadpool()
+: <a class="el" href="classOS_1_1threadpool.html#a4bc5b951d669eae7840e3809cd977eb8">OS::threadpool</a>
+</li>
+<li>Timer()
+: <a class="el" href="classTimer.html#adfbc1b8bdb3a4f300cd2f31b9d779824">Timer</a>
+</li>
+<li>TimerManager()
+: <a class="el" href="classTimerManager.html#a42d72899be00f29c69df6001dfa7d766">TimerManager</a>
+</li>
+<li>TimerMsg()
+: <a class="el" href="classTimerManager.html#a3e7342ed36335c673cee40df621d46b7">TimerManager</a>
+</li>
+<li>to_DWORD()
+: <a class="el" href="classCStream.html#ac6d7954f094d626887d09c1582acb06e">CStream</a>
+</li>
+<li>to_WORD()
+: <a class="el" href="classCStream.html#a591ba2c6f2865a6acc3ccc469e73b50a">CStream</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
+<li>UnReg()
+: <a class="el" href="classobjKernel.html#a855c1461a90bbf3abb98a53830b22367">objKernel</a>
+</li>
+<li>UnRegReceiver()
+: <a class="el" href="classCnotify.html#aa8089c66bd2561123eca6734a4bc36ce">Cnotify</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
+<li>VersionGet()
+: <a class="el" href="classobjKernel.html#acdb20effd9283d24d8ce34a9c414fb3f">objKernel</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_w"></a>- w -</h3><ul>
+<li>Welcome()
+: <a class="el" href="classcliMgr.html#a75c3f69f4e40f098caa5b9f087d8418e">cliMgr</a>
+, <a class="el" href="classobjKernel.html#a665e0a5c32e13d5d34dd6fd5e9dcb4f2">objKernel</a>
+</li>
+<li>workQ()
+: <a class="el" href="classworkQ.html#a23bd7e022b2b4cd59f260a4a03730d7c">workQ</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_~"></a>- ~ -</h3><ul>
+<li>~_AsyncArgc()
+: <a class="el" href="struct__AsyncArgc.html#a0ff8a673c9eaf65cb3950ac4436a9705">_AsyncArgc</a>
+</li>
+<li>~_ObjModule()
+: <a class="el" href="struct__ObjModule.html#acc6d4a8dec828ac5178ae755a11f1c00">_ObjModule</a>
+</li>
+<li>~_RspMsg()
+: <a class="el" href="struct__RspMsg.html#a9e47430cae74f0c5d766bbd6b739ebff">_RspMsg</a>
+</li>
+<li>~CAgrcList()
+: <a class="el" href="classCAgrcList.html#ae02e2eb91863dc6469c31fbf71046fb7">CAgrcList</a>
+</li>
+<li>~Clibase()
+: <a class="el" href="classClibase.html#adc4e086315d7dcdb328e5d40da7835f3">Clibase</a>
+</li>
+<li>~cliMgr()
+: <a class="el" href="classcliMgr.html#ac2565bfc628f490eab0e77f382c56618">cliMgr</a>
+</li>
+<li>~Cnotify()
+: <a class="el" href="classCnotify.html#a4410a13ce26c6dcbb19d76aa94dfe650">Cnotify</a>
+</li>
+<li>~CStream()
+: <a class="el" href="classCStream.html#abb2ae8f8ee841f7e42d82f9887cfe468">CStream</a>
+</li>
+<li>~LogMgr()
+: <a class="el" href="classLogMgr.html#aaadc51de2ad9cef7917c961f7f14571c">LogMgr</a>
+</li>
+<li>~objbase()
+: <a class="el" href="classobjbase.html#a27534bcf70bc248448a593057435466b">objbase</a>
+</li>
+<li>~objKernel()
+: <a class="el" href="classobjKernel.html#abfe04b33826f8fb11c5a9e49ae08e193">objKernel</a>
+</li>
+<li>~objPara()
+: <a class="el" href="classobjPara.html#ac0b01fd7d7baea2a4b4e7a4ea12ad044">objPara</a>
+</li>
+<li>~objTask()
+: <a class="el" href="classobjTask.html#a3f13e92a22c5871a0c5aa677732f59cf">objTask</a>
+</li>
+<li>~objTaskMgr()
+: <a class="el" href="classobjTaskMgr.html#a9313050f0a8156f6d37f7f576f8c6f1e">objTaskMgr</a>
+</li>
+<li>~regNotify()
+: <a class="el" href="structregNotify.html#abca27ba154eb3fd91816ff02bb523dfc">regNotify</a>
+</li>
+<li>~Telnet()
+: <a class="el" href="classTelnet.html#a8bf31c61387e7a8c05b2bfd111233836">Telnet</a>
+</li>
+<li>~threadpool()
+: <a class="el" href="classOS_1_1threadpool.html#a9459f9f90abb7f6b40bb2f4cce408e13">OS::threadpool</a>
+</li>
+<li>~TimerManager()
+: <a class="el" href="classTimerManager.html#ae9676f2b9a1ed9b1ffd63f204eeccec6">TimerManager</a>
+</li>
+<li>~workQ()
+: <a class="el" href="classworkQ.html#a737a01b2d619c8b89435c1ce805c1e3e">workQ</a>
+</li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

@@ -31,6 +31,8 @@ private:
     std::mutex m_reglock;
     std::map<const char *, Timer *> heap; //堆
     bool stop;
+    int sysShutdown(CAgrcList *message, RspMsg *outmessage,
+                    int iModule, int iCmd);
 
 public:
     TimerManager();
@@ -42,6 +44,7 @@ public:
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
     static void *TimerMsg(void *args);
     static ull GetCurrentMillisecs(); //得到当前时间(ms)
+    int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd);
 };
 
 #endif

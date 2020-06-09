@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OS系统接口查询手册: LogMgr类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OS系统接口查询手册
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li><a href="namespaces.html"><span>命名空间</span></a></li>
+      <li class="current"><a href="annotated.html"><span>类</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>类列表</span></a></li>
+      <li><a href="classes.html"><span>类索引</span></a></li>
+      <li><a href="hierarchy.html"><span>类继承关系</span></a></li>
+      <li><a href="functions.html"><span>类成员</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="classLogMgr-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">LogMgr类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 LogMgr 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classLogMgr.png" usemap="#LogMgr_map" alt=""/>
+  <map id="LogMgr_map" name="LogMgr_map">
+<area href="classobjbase.html" alt="objbase" shape="rect" coords="0,0,56,24"/>
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:af8105c6c09f9dd23131930e9aad37ba0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#af8105c6c09f9dd23131930e9aad37ba0">dump</a> (int fd, Printfun callback)</td></tr>
+<tr class="separator:af8105c6c09f9dd23131930e9aad37ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10912eb884acfa84347956899a74bd27"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#a10912eb884acfa84347956899a74bd27">Process</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:a10912eb884acfa84347956899a74bd27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a960588939d238a28a5fda23a41a84e5b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#a960588939d238a28a5fda23a41a84e5b">GetLogTreace</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:a960588939d238a28a5fda23a41a84e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa22f9230e09d814c50d5412a8f40569c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#aa22f9230e09d814c50d5412a8f40569c">SetLogTreace</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:aa22f9230e09d814c50d5412a8f40569c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2d45d9d332a596985b5ec3a76e43c64"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#ad2d45d9d332a596985b5ec3a76e43c64">Init</a> ()</td></tr>
+<tr class="separator:ad2d45d9d332a596985b5ec3a76e43c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2800fcb69314fc02b6bcc5da63189b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#ad2800fcb69314fc02b6bcc5da63189b5">LogMgr</a> ()</td></tr>
+<tr class="separator:ad2800fcb69314fc02b6bcc5da63189b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaadc51de2ad9cef7917c961f7f14571c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#aaadc51de2ad9cef7917c961f7f14571c">~LogMgr</a> ()</td></tr>
+<tr class="separator:aaadc51de2ad9cef7917c961f7f14571c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classobjbase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classobjbase')"><img src="closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="classobjbase.html">objbase</a></td></tr>
+<tr class="memitem:a31a91e853766e9d9feeec039b0713dd9 inherit pub_methods_classobjbase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#a31a91e853766e9d9feeec039b0713dd9">objbase</a> ()</td></tr>
+<tr class="separator:a31a91e853766e9d9feeec039b0713dd9 inherit pub_methods_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27534bcf70bc248448a593057435466b inherit pub_methods_classobjbase"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#a27534bcf70bc248448a593057435466b">~objbase</a> ()</td></tr>
+<tr class="separator:a27534bcf70bc248448a593057435466b inherit pub_methods_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4daa59963772ad4589d15ed253414f7 inherit pub_methods_classobjbase"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#ae4daa59963772ad4589d15ed253414f7">GetDebug</a> ()</td></tr>
+<tr class="separator:ae4daa59963772ad4589d15ed253414f7 inherit pub_methods_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdf811293f37874262b2fb9dff961a2a inherit pub_methods_classobjbase"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#afdf811293f37874262b2fb9dff961a2a">SetDebug</a> (int value)</td></tr>
+<tr class="separator:afdf811293f37874262b2fb9dff961a2a inherit pub_methods_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a197718900ba160f206115c2fd87755e3 inherit pub_methods_classobjbase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#a197718900ba160f206115c2fd87755e3">PrintHead</a> (int fd, Printfun callback, const char *tableName, int tatol, char split= '-')</td></tr>
+<tr class="separator:a197718900ba160f206115c2fd87755e3 inherit pub_methods_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2712682cb90ee425c1d39c3c53638ec8 inherit pub_methods_classobjbase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#a2712682cb90ee425c1d39c3c53638ec8">PrintEnd</a> (int fd, Printfun callback, int tatol, char split= '-')</td></tr>
+<tr class="separator:a2712682cb90ee425c1d39c3c53638ec8 inherit pub_methods_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9146aa9ff2256df3fcd6c4b73744f3d6 inherit pub_methods_classobjbase"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#a9146aa9ff2256df3fcd6c4b73744f3d6">Reg</a> (const char *pzName, void *obj, int id)</td></tr>
+<tr class="separator:a9146aa9ff2256df3fcd6c4b73744f3d6 inherit pub_methods_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:ab066df0dc83bc09adfc6a5886e694004"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#ab066df0dc83bc09adfc6a5886e694004">GetLevelByLog</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:ab066df0dc83bc09adfc6a5886e694004"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affec33f95c985d5c0692f5ed334b80fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#affec33f95c985d5c0692f5ed334b80fb">SetLogByLevel</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:affec33f95c985d5c0692f5ed334b80fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9559e06e2f3fa45267f08d0fd7265f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#ae9559e06e2f3fa45267f08d0fd7265f1">SetLogTextColor</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:ae9559e06e2f3fa45267f08d0fd7265f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13d15d476a321077f2a16062bf132c3e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#a13d15d476a321077f2a16062bf132c3e">GetLogTextColor</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:a13d15d476a321077f2a16062bf132c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7959b66362e60a821b308a2de9b730d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLogMgr.html#ad7959b66362e60a821b308a2de9b730d">CompressLogFile</a> (<a class="el" href="classCAgrcList.html">CAgrcList</a> *message, <a class="el" href="struct__RspMsg.html">RspMsg</a> *outmessage, int iModule, int iCmd)</td></tr>
+<tr class="separator:ad7959b66362e60a821b308a2de9b730d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+额外继承的成员函数</h2></td></tr>
+<tr class="inherit_header pub_attribs_classobjbase"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classobjbase')"><img src="closed.png" alt="-"/>&#160;Public 属性 继承自 <a class="el" href="classobjbase.html">objbase</a></td></tr>
+<tr class="memitem:aff2f0f7614f62d6f17dce7b7fe6b3633 inherit pub_attribs_classobjbase"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classobjbase.html#aff2f0f7614f62d6f17dce7b7fe6b3633">m_synclock</a></td></tr>
+<tr class="separator:aff2f0f7614f62d6f17dce7b7fe6b3633 inherit pub_attribs_classobjbase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a class="anchor" id="ad2800fcb69314fc02b6bcc5da63189b5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LogMgr::LogMgr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaadc51de2ad9cef7917c961f7f14571c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LogMgr::~LogMgr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a class="anchor" id="ad7959b66362e60a821b308a2de9b730d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::CompressLogFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af8105c6c09f9dd23131930e9aad37ba0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LogMgr::dump </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Printfun&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>重载 <a class="el" href="classobjbase.html#aa8f9a00bafa8e6088c07e2d3397f6b9c">objbase</a> .</p>
+
+</div>
+</div>
+<a class="anchor" id="ab066df0dc83bc09adfc6a5886e694004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::GetLevelByLog </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a13d15d476a321077f2a16062bf132c3e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::GetLogTextColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a960588939d238a28a5fda23a41a84e5b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::GetLogTreace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad2d45d9d332a596985b5ec3a76e43c64"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::Init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>重载 <a class="el" href="classobjbase.html#a0045317689842ce503a5b33b1db99c6f">objbase</a> .</p>
+
+</div>
+</div>
+<a class="anchor" id="a10912eb884acfa84347956899a74bd27"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::Process </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>重载 <a class="el" href="classobjbase.html#aa0e4c39fbda9b3be1da9e39f5cf6b802">objbase</a> .</p>
+
+</div>
+</div>
+<a class="anchor" id="affec33f95c985d5c0692f5ed334b80fb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::SetLogByLevel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae9559e06e2f3fa45267f08d0fd7265f1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::SetLogTextColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa22f9230e09d814c50d5412a8f40569c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LogMgr::SetLogTreace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCAgrcList.html">CAgrcList</a> *&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__RspMsg.html">RspMsg</a> *&#160;</td>
+          <td class="paramname"><em>outmessage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iCmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

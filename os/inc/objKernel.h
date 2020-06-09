@@ -40,10 +40,17 @@ public:
     void dump(int fd = 0, Printfun callback = LVOS_Printf);
     void Init(void (*EntryFunc)());
     void Reg(const char *pzName, void *obj, int id);
+    void UnReg(int id);
     void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
     void ErroReg(ERR_CODE_INFO *err, int coount);
     ERR_CODE_INFO *ErrGet(int err);
     void ErrGet(std::map<int, ERR_CODE_INFO *> &list);
+    /*
+    ver[0] = Versione
+    ver[1] = VerDate
+    ver[2] = VerTimer
+    */
+    void VersionGet(char *ver[3]) const;
 
 private:
     objKernel(objKernel &) = delete;

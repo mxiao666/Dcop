@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå: D:/code/LiteOS/os/inc/clibase.h Ê∫êÊñá‰ª∂</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Âà∂‰ΩúËÄÖ Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'ÊêúÁ¥¢');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>È¶ñÈ°µ</span></a></li>
+      <li><a href="namespaces.html"><span>ÂëΩÂêçÁ©∫Èó¥</span></a></li>
+      <li><a href="annotated.html"><span>Á±ª</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="ÊêúÁ¥¢" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8b7cb6c889a10e2a101a7e90c854ca4d.html">os</a></li><li class="navelem"><a class="el" href="dir_74a0f00179eada1dfee08aecb51588ec.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">clibase.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __OS_CLIBASE__</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __OS_CLIBASE__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;cargclist.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;objbase.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;frameworkmgr.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;cnotify.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structTblBody.html">    8</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structTblBody.html#ada69065b12c51687bd792be3b9e0053c">   10</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="structTblBody.html#ada69065b12c51687bd792be3b9e0053c">item</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structTblBody.html#a8980d95cf52b9bf18e911240cc2fa25d">   11</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structTblBody.html#a8980d95cf52b9bf18e911240cc2fa25d">fmrlen</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;} <a class="code" href="structTblBody.html">TblBody</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structRspTable.html">   13</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structRspTable.html#a08274c5bb954d6eb2c7291bdb3ea0e6e">   15</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="structRspTable.html#a08274c5bb954d6eb2c7291bdb3ea0e6e">tblName</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structRspTable.html#ac4237f23650f2557b905c1345dd34cbb">   16</a></span>&#160;    <a class="code" href="structTblBody.html">TblBody</a> *<a class="code" href="structRspTable.html#ac4237f23650f2557b905c1345dd34cbb">tblBody</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structRspTable.html#a3963521f07fea55cde794b3ae81b0d29">   17</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structRspTable.html#a3963521f07fea55cde794b3ae81b0d29">count</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <a class="code" href="structRspTable.html">RspTable</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classClibase.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classClibase.html">Clibase</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classClibase.html#a800a2bfb155dd030f7f9a6c48ed7f7d1">   23</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classClibase.html#a800a2bfb155dd030f7f9a6c48ed7f7d1">m_refCount</a> = 0;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classClibase.html#a77e3b2284076dd70f3fdebb610ed5ef0">   26</a></span>&#160;    <a class="code" href="classClibase.html#a77e3b2284076dd70f3fdebb610ed5ef0">Clibase</a>() {}</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classClibase.html#adc4e086315d7dcdb328e5d40da7835f3">   27</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classClibase.html#adc4e086315d7dcdb328e5d40da7835f3">~Clibase</a>()</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        m_refCount = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classClibase.html#a88684572aae28f61fcc125dd6e074e1d">   31</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classClibase.html#a88684572aae28f61fcc125dd6e074e1d">Set</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *inPut, <a class="code" href="classCAgrcList.html">CAgrcList</a> *outPut, <span class="keywordtype">bool</span> *bOp)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classClibase.html#a136a46502df5c5a8865a0ece89875eb2">   35</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classClibase.html#a136a46502df5c5a8865a0ece89875eb2">Get</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *inPut, <a class="code" href="classCAgrcList.html">CAgrcList</a> *outPut, <span class="keywordtype">bool</span> *bOp)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    };</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classClibase.html#aa73f4f3c12aeaea315266905608a33b6">   39</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classClibase.html#aa73f4f3c12aeaea315266905608a33b6">Add</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *inPut, <a class="code" href="classCAgrcList.html">CAgrcList</a> *outPut, <span class="keywordtype">bool</span> *bOp)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    };</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classClibase.html#aa8cb0f6cc1e2a4ca6265f817ac5acdcf">   43</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classClibase.html#aa8cb0f6cc1e2a4ca6265f817ac5acdcf">Init</a>() { <span class="keywordflow">return</span> 0; };</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classClibase.html#a523c8a4ebd019ece5a6747016f618412">   44</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classClibase.html#a523c8a4ebd019ece5a6747016f618412">GetRefCount</a>()</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classClibase.html#a800a2bfb155dd030f7f9a6c48ed7f7d1">m_refCount</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classClibase.html#aa249b9ab6f5a710c014791bd86b80fcc">   48</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classClibase.html#aa249b9ab6f5a710c014791bd86b80fcc">AddRefCount</a>()</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        ++<a class="code" href="classClibase.html#a800a2bfb155dd030f7f9a6c48ed7f7d1">m_refCount</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classClibase.html#abcd22730520aa469fa00eab9657e2a19">   52</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classClibase.html#abcd22730520aa469fa00eab9657e2a19">DecRefCount</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        --<a class="code" href="classClibase.html#a800a2bfb155dd030f7f9a6c48ed7f7d1">m_refCount</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html">   57</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html#a8cf7e6c5f8f67768d24d79c79787c51b">   59</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="structCMD__OBJ.html#a8cf7e6c5f8f67768d24d79c79787c51b">name</a>;   <span class="comment">//√¸¡Ó±æ…Ìµƒ◊÷∑˚¥Æ</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html#a6681bb67c26ee3e9e0097d252e3022b6">   60</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="structCMD__OBJ.html#a6681bb67c26ee3e9e0097d252e3022b6">help</a>;   <span class="comment">//√¸¡Óµƒ∞Ô÷˙–≈œ¢</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html#ad8b5151b8800d857db803a1afcb30615">   61</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structCMD__OBJ.html#ad8b5151b8800d857db803a1afcb30615">cmdModule</a>;      <span class="comment">// √¸¡ÓÀ˘‘⁄ƒ£øÈµƒid</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html#acfb87114ac0a15a3e817d544661a7f7c">   62</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structCMD__OBJ.html#acfb87114ac0a15a3e817d544661a7f7c">cmdId</a>;          <span class="comment">// √¸¡Óµƒid</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html#a3ec2b2f06374ff835232c39612d2d599">   63</a></span>&#160;    <a class="code" href="classClibase.html">Clibase</a> *<a class="code" href="structCMD__OBJ.html#a3ec2b2f06374ff835232c39612d2d599">objCli</a>;   <span class="comment">// √¸¡ÓªÚ–Ì–Ë“™◊‘º∫¥¶¿Ì»Î≤Œ£¨¥¶¿Ì∂‘œÛ     RspTable *rspTable; //√¸¡Ó–Ë“™œÏ”¶ ‰≥ˆ ±£¨∂‘”⁄±Ì∏Ò–≈œ¢
+    bool bSync;         // √¸¡ÓŒ™Õ¨≤Ω true
+} CMD_OBJ;
+class cliMgr : public objbase
+{
+private:
+    std::map&lt;int, CMD_OBJ *&gt; m_cmdList;
+    std::mutex m_reglock;
+    Cnotify *m_Cnotify = nullptr;
+    CMD_OBJ *FindModule(const char *cmdName);
+    const int CMD_OP_MAX = 3;
+    const char *GET_STR = &quot;get&quot;;
+    const char *SET_STR = &quot;set&quot;;
+    const char *ADD_STR = &quot;add&quot;;
+    int Dispatch(CAgrcList *message, CMD_OBJ *, int fd = 0);
+    int Report(RspMsg *outMessage, CMD_OBJ *pcmdObj, int fd = 0);
+    int Report(CAgrcList *message,
+               RspMsg *outmessage,
+               int iModule,
+               int iCmd);
+    int CliSys(int fd, CMD_OBJ *pcmdObj,
+               const char *argc, int *isExit);
+
+public:
+    cliMgr();
+    ~cliMgr();
+    int Init();
+    int Process();
+    int Process(int fd, char *cmdbuffer, int len, int *isExit);
+    void dump(int fd = 0, Printfun callback = LVOS_Printf);
+    void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
+    int RegCmd(CMD_OBJ *list, int count);
+    static int Report(RspMsg *outMessage, int module, int cmd);
+    virtual void Reg(const char *pzName, void *obj, int id);
+    virtual int Process(CAgrcList *message,
+                        RspMsg *outmessage, int iModule, int iCmd);
+};
+#define ARGC_DEFAULT &quot;ARGC&quot;
+#endif
+</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html#aa6fb670ee040be4f3d38b1a638630771">   64</a></span>&#160;    <a class="code" href="structRspTable.html">RspTable</a> *<a class="code" href="structCMD__OBJ.html#aa6fb670ee040be4f3d38b1a638630771">rspTable</a>; <span class="comment">//√¸¡Ó–Ë“™œÏ”¶ ‰≥ˆ ±£¨∂‘”⁄±Ì∏Ò–≈œ¢</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="structCMD__OBJ.html#a21c860b6070e3fed300394700b1844a4">   65</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structCMD__OBJ.html#a21c860b6070e3fed300394700b1844a4">bSync</a>;         <span class="comment">// √¸¡ÓŒ™Õ¨≤Ω true</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <a class="code" href="structCMD__OBJ.html">CMD_OBJ</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classcliMgr.html">   67</a></span>&#160;<span class="keyword">class </span><a class="code" href="classcliMgr.html">cliMgr</a> : <span class="keyword">public</span> <a class="code" href="classobjbase.html">objbase</a></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classcliMgr.html#a36dc1b1c41c7930f6763627e82adb9bb">   70</a></span>&#160;    std::map&lt;int, CMD_OBJ *&gt; <a class="code" href="classcliMgr.html#a36dc1b1c41c7930f6763627e82adb9bb">m_cmdList</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classcliMgr.html#a21fe24fe87f4e309ec1846ce48ab30bf">   71</a></span>&#160;    std::mutex <a class="code" href="classcliMgr.html#a21fe24fe87f4e309ec1846ce48ab30bf">m_reglock</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classcliMgr.html#a73e2fe6364ffe8d89d040b23728eba9e">   72</a></span>&#160;    <a class="code" href="classCnotify.html">Cnotify</a> *<a class="code" href="classcliMgr.html#a73e2fe6364ffe8d89d040b23728eba9e">m_Cnotify</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="structCMD__OBJ.html">CMD_OBJ</a> *<a class="code" href="classcliMgr.html#a9d549104f577954c46ecb47a402a6117">FindModule</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *cmdName);</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classcliMgr.html#a79232abbfd0651a9da128487dcd6b820">   74</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a79232abbfd0651a9da128487dcd6b820">CMD_OP_MAX</a> = 3;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classcliMgr.html#ab32713bd50fab773cee227cba5aa624b">   75</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classcliMgr.html#ab32713bd50fab773cee227cba5aa624b">GET_STR</a> = <span class="stringliteral">&quot;get&quot;</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classcliMgr.html#aad9fb01b8ac48844f2397eff58677950">   76</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classcliMgr.html#aad9fb01b8ac48844f2397eff58677950">SET_STR</a> = <span class="stringliteral">&quot;set&quot;</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classcliMgr.html#a5beefe2feb1a6e0ec3f36f549e056231">   77</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classcliMgr.html#a5beefe2feb1a6e0ec3f36f549e056231">ADD_STR</a> = <span class="stringliteral">&quot;add&quot;</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a51e1bd4c9a9c7b56e310482a62d29197">Dispatch</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *message, <a class="code" href="structCMD__OBJ.html">CMD_OBJ</a> *, <span class="keywordtype">int</span> fd = 0);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#af621d772fcfa70f78ffa8657f8602f3a">Report</a>(<a class="code" href="struct__RspMsg.html">RspMsg</a> *outMessage, <a class="code" href="structCMD__OBJ.html">CMD_OBJ</a> *pcmdObj, <span class="keywordtype">int</span> fd = 0);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#af621d772fcfa70f78ffa8657f8602f3a">Report</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *message,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;               <a class="code" href="struct__RspMsg.html">RspMsg</a> *outmessage,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;               <span class="keywordtype">int</span> iModule,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;               <span class="keywordtype">int</span> iCmd);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a1a6883bdad5bee60d083290d04fc0795">CliSys</a>(<span class="keywordtype">int</span> fd, <a class="code" href="structCMD__OBJ.html">CMD_OBJ</a> *pcmdObj,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;               <span class="keyword">const</span> <span class="keywordtype">char</span> *argc, <span class="keywordtype">int</span> *isExit);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="classcliMgr.html#ac576a0b12402e5899c3c490a76020afe">cliMgr</a>();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="classcliMgr.html#ac2565bfc628f490eab0e77f382c56618">~cliMgr</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a7ae2dcb6fa74324c0017b04ca58d11cb">Init</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a2ed0692f2249339371d1485ac9e797b2">Process</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a2ed0692f2249339371d1485ac9e797b2">Process</a>(<span class="keywordtype">int</span> fd, <span class="keywordtype">char</span> *cmdbuffer, <span class="keywordtype">int</span> len, <span class="keywordtype">int</span> *isExit);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classcliMgr.html#a9af3420c368a8c0f9c90c3f64f032eaa">dump</a>(<span class="keywordtype">int</span> fd = 0, Printfun callback = LVOS_Printf);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classcliMgr.html#a75c3f69f4e40f098caa5b9f087d8418e">Welcome</a>(<span class="keywordtype">int</span> fd = 0, Printfun callback = LVOS_Printf);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a040532e64780f1e44c176f87d1b57438">RegCmd</a>(<a class="code" href="structCMD__OBJ.html">CMD_OBJ</a> *list, <span class="keywordtype">int</span> count);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#af621d772fcfa70f78ffa8657f8602f3a">Report</a>(<a class="code" href="struct__RspMsg.html">RspMsg</a> *outMessage, <span class="keywordtype">int</span> module, <span class="keywordtype">int</span> cmd);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcliMgr.html#a7d608c28607ca553edca7375d3ca1d24">Reg</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pzName, <span class="keywordtype">void</span> *obj, <span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classcliMgr.html#a2ed0692f2249339371d1485ac9e797b2">Process</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *message,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        <a class="code" href="struct__RspMsg.html">RspMsg</a> *outmessage, <span class="keywordtype">int</span> iModule, <span class="keywordtype">int</span> iCmd);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#define ARGC_DEFAULT &quot;ARGC&quot;</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classCAgrcList_html"><div class="ttname"><a href="classCAgrcList.html">CAgrcList</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:8</div></div>
+<div class="ttc" id="classcliMgr_html_a5beefe2feb1a6e0ec3f36f549e056231"><div class="ttname"><a href="classcliMgr.html#a5beefe2feb1a6e0ec3f36f549e056231">cliMgr::ADD_STR</a></div><div class="ttdeci">const char * ADD_STR</div><div class="ttdef"><b>Definition:</b> clibase.h:77</div></div>
+<div class="ttc" id="struct__RspMsg_html"><div class="ttname"><a href="struct__RspMsg.html">_RspMsg</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:69</div></div>
+<div class="ttc" id="structRspTable_html_a08274c5bb954d6eb2c7291bdb3ea0e6e"><div class="ttname"><a href="structRspTable.html#a08274c5bb954d6eb2c7291bdb3ea0e6e">RspTable::tblName</a></div><div class="ttdeci">const char * tblName</div><div class="ttdef"><b>Definition:</b> clibase.h:15</div></div>
+<div class="ttc" id="classcliMgr_html_a79232abbfd0651a9da128487dcd6b820"><div class="ttname"><a href="classcliMgr.html#a79232abbfd0651a9da128487dcd6b820">cliMgr::CMD_OP_MAX</a></div><div class="ttdeci">const int CMD_OP_MAX</div><div class="ttdef"><b>Definition:</b> clibase.h:74</div></div>
+<div class="ttc" id="structCMD__OBJ_html"><div class="ttname"><a href="structCMD__OBJ.html">CMD_OBJ</a></div><div class="ttdef"><b>Definition:</b> clibase.h:57</div></div>
+<div class="ttc" id="classcliMgr_html_a73e2fe6364ffe8d89d040b23728eba9e"><div class="ttname"><a href="classcliMgr.html#a73e2fe6364ffe8d89d040b23728eba9e">cliMgr::m_Cnotify</a></div><div class="ttdeci">Cnotify * m_Cnotify</div><div class="ttdef"><b>Definition:</b> clibase.h:72</div></div>
+<div class="ttc" id="classcliMgr_html_a040532e64780f1e44c176f87d1b57438"><div class="ttname"><a href="classcliMgr.html#a040532e64780f1e44c176f87d1b57438">cliMgr::RegCmd</a></div><div class="ttdeci">int RegCmd(CMD_OBJ *list, int count)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:595</div></div>
+<div class="ttc" id="structCMD__OBJ_html_a6681bb67c26ee3e9e0097d252e3022b6"><div class="ttname"><a href="structCMD__OBJ.html#a6681bb67c26ee3e9e0097d252e3022b6">CMD_OBJ::help</a></div><div class="ttdeci">const char * help</div><div class="ttdef"><b>Definition:</b> clibase.h:60</div></div>
+<div class="ttc" id="classClibase_html_aa73f4f3c12aeaea315266905608a33b6"><div class="ttname"><a href="classClibase.html#aa73f4f3c12aeaea315266905608a33b6">Clibase::Add</a></div><div class="ttdeci">virtual int Add(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)</div><div class="ttdef"><b>Definition:</b> clibase.h:39</div></div>
+<div class="ttc" id="classcliMgr_html_a21fe24fe87f4e309ec1846ce48ab30bf"><div class="ttname"><a href="classcliMgr.html#a21fe24fe87f4e309ec1846ce48ab30bf">cliMgr::m_reglock</a></div><div class="ttdeci">std::mutex m_reglock</div><div class="ttdef"><b>Definition:</b> clibase.h:71</div></div>
+<div class="ttc" id="structCMD__OBJ_html_acfb87114ac0a15a3e817d544661a7f7c"><div class="ttname"><a href="structCMD__OBJ.html#acfb87114ac0a15a3e817d544661a7f7c">CMD_OBJ::cmdId</a></div><div class="ttdeci">int cmdId</div><div class="ttdef"><b>Definition:</b> clibase.h:62</div></div>
+<div class="ttc" id="classcliMgr_html_a7ae2dcb6fa74324c0017b04ca58d11cb"><div class="ttname"><a href="classcliMgr.html#a7ae2dcb6fa74324c0017b04ca58d11cb">cliMgr::Init</a></div><div class="ttdeci">int Init()</div><div class="ttdef"><b>Definition:</b> clibase.cpp:613</div></div>
+<div class="ttc" id="classClibase_html_a136a46502df5c5a8865a0ece89875eb2"><div class="ttname"><a href="classClibase.html#a136a46502df5c5a8865a0ece89875eb2">Clibase::Get</a></div><div class="ttdeci">virtual int Get(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)</div><div class="ttdef"><b>Definition:</b> clibase.h:35</div></div>
+<div class="ttc" id="classcliMgr_html_a9d549104f577954c46ecb47a402a6117"><div class="ttname"><a href="classcliMgr.html#a9d549104f577954c46ecb47a402a6117">cliMgr::FindModule</a></div><div class="ttdeci">CMD_OBJ * FindModule(const char *cmdName)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:546</div></div>
+<div class="ttc" id="structRspTable_html_a3963521f07fea55cde794b3ae81b0d29"><div class="ttname"><a href="structRspTable.html#a3963521f07fea55cde794b3ae81b0d29">RspTable::count</a></div><div class="ttdeci">int count</div><div class="ttdef"><b>Definition:</b> clibase.h:17</div></div>
+<div class="ttc" id="classcliMgr_html_a1a6883bdad5bee60d083290d04fc0795"><div class="ttname"><a href="classcliMgr.html#a1a6883bdad5bee60d083290d04fc0795">cliMgr::CliSys</a></div><div class="ttdeci">int CliSys(int fd, CMD_OBJ *pcmdObj, const char *argc, int *isExit)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:632</div></div>
+<div class="ttc" id="classobjbase_html"><div class="ttname"><a href="classobjbase.html">objbase</a></div><div class="ttdef"><b>Definition:</b> objbase.h:11</div></div>
+<div class="ttc" id="structCMD__OBJ_html_a21c860b6070e3fed300394700b1844a4"><div class="ttname"><a href="structCMD__OBJ.html#a21c860b6070e3fed300394700b1844a4">CMD_OBJ::bSync</a></div><div class="ttdeci">bool bSync</div><div class="ttdef"><b>Definition:</b> clibase.h:65</div></div>
+<div class="ttc" id="classClibase_html"><div class="ttname"><a href="classClibase.html">Clibase</a></div><div class="ttdef"><b>Definition:</b> clibase.h:20</div></div>
+<div class="ttc" id="structCMD__OBJ_html_a3ec2b2f06374ff835232c39612d2d599"><div class="ttname"><a href="structCMD__OBJ.html#a3ec2b2f06374ff835232c39612d2d599">CMD_OBJ::objCli</a></div><div class="ttdeci">Clibase * objCli</div><div class="ttdef"><b>Definition:</b> clibase.h:63</div></div>
+<div class="ttc" id="classcliMgr_html_a36dc1b1c41c7930f6763627e82adb9bb"><div class="ttname"><a href="classcliMgr.html#a36dc1b1c41c7930f6763627e82adb9bb">cliMgr::m_cmdList</a></div><div class="ttdeci">std::map&lt; int, CMD_OBJ * &gt; m_cmdList</div><div class="ttdef"><b>Definition:</b> clibase.h:70</div></div>
+<div class="ttc" id="classClibase_html_aa249b9ab6f5a710c014791bd86b80fcc"><div class="ttname"><a href="classClibase.html#aa249b9ab6f5a710c014791bd86b80fcc">Clibase::AddRefCount</a></div><div class="ttdeci">void AddRefCount()</div><div class="ttdef"><b>Definition:</b> clibase.h:48</div></div>
+<div class="ttc" id="classcliMgr_html_af621d772fcfa70f78ffa8657f8602f3a"><div class="ttname"><a href="classcliMgr.html#af621d772fcfa70f78ffa8657f8602f3a">cliMgr::Report</a></div><div class="ttdeci">int Report(RspMsg *outMessage, CMD_OBJ *pcmdObj, int fd=0)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:357</div></div>
+<div class="ttc" id="classcliMgr_html_a75c3f69f4e40f098caa5b9f087d8418e"><div class="ttname"><a href="classcliMgr.html#a75c3f69f4e40f098caa5b9f087d8418e">cliMgr::Welcome</a></div><div class="ttdeci">void Welcome(int fd=0, Printfun callback=LVOS_Printf)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:420</div></div>
+<div class="ttc" id="structTblBody_html_a8980d95cf52b9bf18e911240cc2fa25d"><div class="ttname"><a href="structTblBody.html#a8980d95cf52b9bf18e911240cc2fa25d">TblBody::fmrlen</a></div><div class="ttdeci">int fmrlen</div><div class="ttdef"><b>Definition:</b> clibase.h:11</div></div>
+<div class="ttc" id="structCMD__OBJ_html_aa6fb670ee040be4f3d38b1a638630771"><div class="ttname"><a href="structCMD__OBJ.html#aa6fb670ee040be4f3d38b1a638630771">CMD_OBJ::rspTable</a></div><div class="ttdeci">RspTable * rspTable</div><div class="ttdef"><b>Definition:</b> clibase.h:64</div></div>
+<div class="ttc" id="structTblBody_html_ada69065b12c51687bd792be3b9e0053c"><div class="ttname"><a href="structTblBody.html#ada69065b12c51687bd792be3b9e0053c">TblBody::item</a></div><div class="ttdeci">const char * item</div><div class="ttdef"><b>Definition:</b> clibase.h:10</div></div>
+<div class="ttc" id="classClibase_html_a77e3b2284076dd70f3fdebb610ed5ef0"><div class="ttname"><a href="classClibase.html#a77e3b2284076dd70f3fdebb610ed5ef0">Clibase::Clibase</a></div><div class="ttdeci">Clibase()</div><div class="ttdef"><b>Definition:</b> clibase.h:26</div></div>
+<div class="ttc" id="classClibase_html_adc4e086315d7dcdb328e5d40da7835f3"><div class="ttname"><a href="classClibase.html#adc4e086315d7dcdb328e5d40da7835f3">Clibase::~Clibase</a></div><div class="ttdeci">virtual ~Clibase()</div><div class="ttdef"><b>Definition:</b> clibase.h:27</div></div>
+<div class="ttc" id="classClibase_html_aa8cb0f6cc1e2a4ca6265f817ac5acdcf"><div class="ttname"><a href="classClibase.html#aa8cb0f6cc1e2a4ca6265f817ac5acdcf">Clibase::Init</a></div><div class="ttdeci">virtual int Init()</div><div class="ttdef"><b>Definition:</b> clibase.h:43</div></div>
+<div class="ttc" id="classcliMgr_html"><div class="ttname"><a href="classcliMgr.html">cliMgr</a></div><div class="ttdef"><b>Definition:</b> clibase.h:67</div></div>
+<div class="ttc" id="classcliMgr_html_aad9fb01b8ac48844f2397eff58677950"><div class="ttname"><a href="classcliMgr.html#aad9fb01b8ac48844f2397eff58677950">cliMgr::SET_STR</a></div><div class="ttdeci">const char * SET_STR</div><div class="ttdef"><b>Definition:</b> clibase.h:76</div></div>
+<div class="ttc" id="classClibase_html_a800a2bfb155dd030f7f9a6c48ed7f7d1"><div class="ttname"><a href="classClibase.html#a800a2bfb155dd030f7f9a6c48ed7f7d1">Clibase::m_refCount</a></div><div class="ttdeci">int m_refCount</div><div class="ttdef"><b>Definition:</b> clibase.h:23</div></div>
+<div class="ttc" id="classClibase_html_abcd22730520aa469fa00eab9657e2a19"><div class="ttname"><a href="classClibase.html#abcd22730520aa469fa00eab9657e2a19">Clibase::DecRefCount</a></div><div class="ttdeci">void DecRefCount()</div><div class="ttdef"><b>Definition:</b> clibase.h:52</div></div>
+<div class="ttc" id="classCnotify_html"><div class="ttname"><a href="classCnotify.html">Cnotify</a></div><div class="ttdef"><b>Definition:</b> cnotify.h:45</div></div>
+<div class="ttc" id="classcliMgr_html_a7d608c28607ca553edca7375d3ca1d24"><div class="ttname"><a href="classcliMgr.html#a7d608c28607ca553edca7375d3ca1d24">cliMgr::Reg</a></div><div class="ttdeci">virtual void Reg(const char *pzName, void *obj, int id)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:627</div></div>
+<div class="ttc" id="structCMD__OBJ_html_ad8b5151b8800d857db803a1afcb30615"><div class="ttname"><a href="structCMD__OBJ.html#ad8b5151b8800d857db803a1afcb30615">CMD_OBJ::cmdModule</a></div><div class="ttdeci">int cmdModule</div><div class="ttdef"><b>Definition:</b> clibase.h:61</div></div>
+<div class="ttc" id="classcliMgr_html_a9af3420c368a8c0f9c90c3f64f032eaa"><div class="ttname"><a href="classcliMgr.html#a9af3420c368a8c0f9c90c3f64f032eaa">cliMgr::dump</a></div><div class="ttdeci">void dump(int fd=0, Printfun callback=LVOS_Printf)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:555</div></div>
+<div class="ttc" id="structRspTable_html_ac4237f23650f2557b905c1345dd34cbb"><div class="ttname"><a href="structRspTable.html#ac4237f23650f2557b905c1345dd34cbb">RspTable::tblBody</a></div><div class="ttdeci">TblBody * tblBody</div><div class="ttdef"><b>Definition:</b> clibase.h:16</div></div>
+<div class="ttc" id="structRspTable_html"><div class="ttname"><a href="structRspTable.html">RspTable</a></div><div class="ttdef"><b>Definition:</b> clibase.h:13</div></div>
+<div class="ttc" id="classcliMgr_html_ac2565bfc628f490eab0e77f382c56618"><div class="ttname"><a href="classcliMgr.html#ac2565bfc628f490eab0e77f382c56618">cliMgr::~cliMgr</a></div><div class="ttdeci">~cliMgr()</div><div class="ttdef"><b>Definition:</b> clibase.cpp:570</div></div>
+<div class="ttc" id="classClibase_html_a88684572aae28f61fcc125dd6e074e1d"><div class="ttname"><a href="classClibase.html#a88684572aae28f61fcc125dd6e074e1d">Clibase::Set</a></div><div class="ttdeci">virtual int Set(CAgrcList *inPut, CAgrcList *outPut, bool *bOp)</div><div class="ttdef"><b>Definition:</b> clibase.h:31</div></div>
+<div class="ttc" id="classcliMgr_html_a2ed0692f2249339371d1485ac9e797b2"><div class="ttname"><a href="classcliMgr.html#a2ed0692f2249339371d1485ac9e797b2">cliMgr::Process</a></div><div class="ttdeci">int Process()</div><div class="ttdef"><b>Definition:</b> clibase.cpp:533</div></div>
+<div class="ttc" id="classcliMgr_html_a51e1bd4c9a9c7b56e310482a62d29197"><div class="ttname"><a href="classcliMgr.html#a51e1bd4c9a9c7b56e310482a62d29197">cliMgr::Dispatch</a></div><div class="ttdeci">int Dispatch(CAgrcList *message, CMD_OBJ *, int fd=0)</div><div class="ttdef"><b>Definition:</b> clibase.cpp:256</div></div>
+<div class="ttc" id="classcliMgr_html_ac576a0b12402e5899c3c490a76020afe"><div class="ttname"><a href="classcliMgr.html#ac576a0b12402e5899c3c490a76020afe">cliMgr::cliMgr</a></div><div class="ttdeci">cliMgr()</div><div class="ttdef"><b>Definition:</b> clibase.cpp:589</div></div>
+<div class="ttc" id="structTblBody_html"><div class="ttname"><a href="structTblBody.html">TblBody</a></div><div class="ttdef"><b>Definition:</b> clibase.h:8</div></div>
+<div class="ttc" id="classcliMgr_html_ab32713bd50fab773cee227cba5aa624b"><div class="ttname"><a href="classcliMgr.html#ab32713bd50fab773cee227cba5aa624b">cliMgr::GET_STR</a></div><div class="ttdeci">const char * GET_STR</div><div class="ttdef"><b>Definition:</b> clibase.h:75</div></div>
+<div class="ttc" id="classClibase_html_a523c8a4ebd019ece5a6747016f618412"><div class="ttname"><a href="classClibase.html#a523c8a4ebd019ece5a6747016f618412">Clibase::GetRefCount</a></div><div class="ttdeci">int GetRefCount()</div><div class="ttdef"><b>Definition:</b> clibase.h:44</div></div>
+<div class="ttc" id="structCMD__OBJ_html_a8cf7e6c5f8f67768d24d79c79787c51b"><div class="ttname"><a href="structCMD__OBJ.html#a8cf7e6c5f8f67768d24d79c79787c51b">CMD_OBJ::name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition:</b> clibase.h:59</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Âà∂‰ΩúËÄÖ &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

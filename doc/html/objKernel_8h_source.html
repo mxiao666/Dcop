@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå: D:/code/LiteOS/os/inc/objKernel.h Ê∫êÊñá‰ª∂</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Âà∂‰ΩúËÄÖ Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'ÊêúÁ¥¢');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>È¶ñÈ°µ</span></a></li>
+      <li><a href="namespaces.html"><span>ÂëΩÂêçÁ©∫Èó¥</span></a></li>
+      <li><a href="annotated.html"><span>Á±ª</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="ÊêúÁ¥¢" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8b7cb6c889a10e2a101a7e90c854ca4d.html">os</a></li><li class="navelem"><a class="el" href="dir_74a0f00179eada1dfee08aecb51588ec.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">objKernel.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __OBJKERNEL_H__</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __OBJKERNEL_H__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;objbase.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="struct__ObjModule.html">    7</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct__ObjModule.html">_ObjModule</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="struct__ObjModule.html#a28e34d49cb8cf6bb996e0add4ec84ccf">    9</a></span>&#160;    <a class="code" href="classobjbase.html">objbase</a> *<a class="code" href="struct__ObjModule.html#a28e34d49cb8cf6bb996e0add4ec84ccf">obj</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="struct__ObjModule.html#a2229eebf231cac251ecbe06e069afe91">   10</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct__ObjModule.html#a2229eebf231cac251ecbe06e069afe91">refCount</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="struct__ObjModule.html#a50f97aa4a417a872c0a86842c58b7b82">   11</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct__ObjModule.html#a50f97aa4a417a872c0a86842c58b7b82">id</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct__ObjModule.html#adf22870b123b01773f05717e93beee1a">   12</a></span>&#160;    <a class="code" href="struct__ObjModule.html#adf22870b123b01773f05717e93beee1a">_ObjModule</a>(<a class="code" href="classobjbase.html">objbase</a> *obj, <span class="keywordtype">int</span> key = 0) : refCount(0)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        this-&gt;obj = <a class="code" href="struct__ObjModule.html#a28e34d49cb8cf6bb996e0add4ec84ccf">obj</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">id</span> = key;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="struct__ObjModule.html#acc6d4a8dec828ac5178ae755a11f1c00">   17</a></span>&#160;    <a class="code" href="struct__ObjModule.html#acc6d4a8dec828ac5178ae755a11f1c00">~_ObjModule</a>()</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">if</span> (obj != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keyword">delete</span> <a class="code" href="struct__ObjModule.html#a28e34d49cb8cf6bb996e0add4ec84ccf">obj</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            obj = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;} <a class="code" href="struct__ObjModule.html">ObjModule</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classobjKernel.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classobjKernel.html">objKernel</a> : <span class="keyword">public</span> <a class="code" href="classobjbase.html">objbase</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classobjKernel.html#a7434e272587b2ade8261e8bad635a546">objKernel</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classobjKernel.html#abfe04b33826f8fb11c5a9e49ae08e193">~objKernel</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">/*∆’Õ®∂‘œÛ≤È—Ø*/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classobjbase.html">objbase</a> *<a class="code" href="classobjKernel.html#a0ba29a7824d61a44629d6d32f3e6a0fb">InterFace</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pzName);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classobjbase.html">objbase</a> *<a class="code" href="classobjKernel.html#a0ba29a7824d61a44629d6d32f3e6a0fb">InterFace</a>(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">/*“˝”√∂‘œÛ≤È—Ø*/</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classobjbase.html">objbase</a> *<a class="code" href="classobjKernel.html#a1beda86314577313092e41d917557b51">Query</a>(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">/*“˝”√∂‘œÛ Õ∑≈ /
+    void Release(int key);
+    void Entry();
+    void dump(int fd = 0, Printfun callback = LVOS_Printf);
+    void Init(void (*EntryFunc)());
+    void Reg(const char *pzName, void *obj, int id);
+    void UnReg(int id);
+    void Welcome(int fd = 0, Printfun callback = LVOS_Printf);
+    void ErroReg(ERR_CODE_INFO *err, int coount);
+    ERR_CODE_INFO *ErrGet(int err);
+    void ErrGet(std::map&lt;int, ERR_CODE_INFO *&gt; &amp;list);
+    /*
+    ver[0] = Versione
+    ver[1] = VerDate
+    ver[2] = VerTimer
+    */
+    void VersionGet(char *ver[3]) const;
+
+private:
+    objKernel(objKernel &amp;) = delete;
+    const objKernel &amp;operator=(const objKernel &amp;) = delete;
+    std::map&lt;const char *, ObjModule *&gt; m_objList;
+    std::map&lt;int, ERR_CODE_INFO *&gt; m_errList;
+    void (*m_EntryFunc)() = nullptr;
+};
+extern objKernel *g_objKernel;
+
+#endif
+*/</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#a747e5eb09f87ef3e72d81be26fcf68b0">Release</a>(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#adce6882a48656709e6edd86e5bea0c33">Entry</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#a35ad1cb04dcef5fcfc06b4b1c1fe5a7a">dump</a>(<span class="keywordtype">int</span> fd = 0, Printfun callback = LVOS_Printf);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjbase.html#a0045317689842ce503a5b33b1db99c6f">Init</a>(<span class="keywordtype">void</span> (*EntryFunc)());</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#ab944b5697a566ff56ea099a4b3130cd2">Reg</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pzName, <span class="keywordtype">void</span> *obj, <span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#a855c1461a90bbf3abb98a53830b22367">UnReg</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#a665e0a5c32e13d5d34dd6fd5e9dcb4f2">Welcome</a>(<span class="keywordtype">int</span> fd = 0, Printfun callback = LVOS_Printf);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#a692a7f95f68b01928d4d6d13c76663e9">ErroReg</a>(<a class="code" href="structERR__CODE__INFO.html">ERR_CODE_INFO</a> *err, <span class="keywordtype">int</span> coount);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="structERR__CODE__INFO.html">ERR_CODE_INFO</a> *<a class="code" href="classobjKernel.html#a8b8549ec38b3e57eded04021ecb82bd7">ErrGet</a>(<span class="keywordtype">int</span> err);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#a8b8549ec38b3e57eded04021ecb82bd7">ErrGet</a>(std::map&lt;int, ERR_CODE_INFO *&gt; &amp;list);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    ver[0] = Versione</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    ver[1] = VerDate</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    ver[2] = VerTimer</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classobjKernel.html#acdb20effd9283d24d8ce34a9c414fb3f">VersionGet</a>(<span class="keywordtype">char</span> *ver[3]) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classobjKernel.html#a7434e272587b2ade8261e8bad635a546">objKernel</a>(<a class="code" href="classobjKernel.html">objKernel</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">const</span> <a class="code" href="classobjKernel.html">objKernel</a> &amp;<a class="code" href="classobjKernel.html#af8e5d75a7d7776b288d1e770a7a1aec4">operator=</a>(<span class="keyword">const</span> <a class="code" href="classobjKernel.html">objKernel</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classobjKernel.html#a3399c042a4b58dcc4de217343d47acd1">   58</a></span>&#160;    std::map&lt;const char *, ObjModule *&gt; <a class="code" href="classobjKernel.html#a3399c042a4b58dcc4de217343d47acd1">m_objList</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classobjKernel.html#a156361cc87667198040f580d0ece4d08">   59</a></span>&#160;    std::map&lt;int, ERR_CODE_INFO *&gt; <a class="code" href="classobjKernel.html#a156361cc87667198040f580d0ece4d08">m_errList</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classobjKernel.html#a10c2081bf788518ceb38ac31a0f63706">   60</a></span>&#160;    void (*<a class="code" href="classobjKernel.html#a10c2081bf788518ceb38ac31a0f63706">m_EntryFunc</a>)() = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">extern</span> <a class="code" href="classobjKernel.html">objKernel</a> *g_objKernel;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structERR__CODE__INFO_html"><div class="ttname"><a href="structERR__CODE__INFO.html">ERR_CODE_INFO</a></div><div class="ttdef"><b>Definition:</b> cmdid.h:50</div></div>
+<div class="ttc" id="classobjKernel_html_a8b8549ec38b3e57eded04021ecb82bd7"><div class="ttname"><a href="classobjKernel.html#a8b8549ec38b3e57eded04021ecb82bd7">objKernel::ErrGet</a></div><div class="ttdeci">ERR_CODE_INFO * ErrGet(int err)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:163</div></div>
+<div class="ttc" id="classobjKernel_html_a855c1461a90bbf3abb98a53830b22367"><div class="ttname"><a href="classobjKernel.html#a855c1461a90bbf3abb98a53830b22367">objKernel::UnReg</a></div><div class="ttdeci">void UnReg(int id)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:139</div></div>
+<div class="ttc" id="classobjKernel_html_af8e5d75a7d7776b288d1e770a7a1aec4"><div class="ttname"><a href="classobjKernel.html#af8e5d75a7d7776b288d1e770a7a1aec4">objKernel::operator=</a></div><div class="ttdeci">const objKernel &amp; operator=(const objKernel &amp;)=delete</div></div>
+<div class="ttc" id="struct__ObjModule_html_acc6d4a8dec828ac5178ae755a11f1c00"><div class="ttname"><a href="struct__ObjModule.html#acc6d4a8dec828ac5178ae755a11f1c00">_ObjModule::~_ObjModule</a></div><div class="ttdeci">~_ObjModule()</div><div class="ttdef"><b>Definition:</b> objKernel.h:17</div></div>
+<div class="ttc" id="classobjKernel_html"><div class="ttname"><a href="classobjKernel.html">objKernel</a></div><div class="ttdef"><b>Definition:</b> objKernel.h:27</div></div>
+<div class="ttc" id="classobjKernel_html_a0ba29a7824d61a44629d6d32f3e6a0fb"><div class="ttname"><a href="classobjKernel.html#a0ba29a7824d61a44629d6d32f3e6a0fb">objKernel::InterFace</a></div><div class="ttdeci">objbase * InterFace(const char *pzName)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:52</div></div>
+<div class="ttc" id="classobjKernel_html_a156361cc87667198040f580d0ece4d08"><div class="ttname"><a href="classobjKernel.html#a156361cc87667198040f580d0ece4d08">objKernel::m_errList</a></div><div class="ttdeci">std::map&lt; int, ERR_CODE_INFO * &gt; m_errList</div><div class="ttdef"><b>Definition:</b> objKernel.h:59</div></div>
+<div class="ttc" id="classobjKernel_html_a692a7f95f68b01928d4d6d13c76663e9"><div class="ttname"><a href="classobjKernel.html#a692a7f95f68b01928d4d6d13c76663e9">objKernel::ErroReg</a></div><div class="ttdeci">void ErroReg(ERR_CODE_INFO *err, int coount)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:151</div></div>
+<div class="ttc" id="classobjKernel_html_adce6882a48656709e6edd86e5bea0c33"><div class="ttname"><a href="classobjKernel.html#adce6882a48656709e6edd86e5bea0c33">objKernel::Entry</a></div><div class="ttdeci">void Entry()</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:115</div></div>
+<div class="ttc" id="classobjbase_html"><div class="ttname"><a href="classobjbase.html">objbase</a></div><div class="ttdef"><b>Definition:</b> objbase.h:11</div></div>
+<div class="ttc" id="classobjKernel_html_acdb20effd9283d24d8ce34a9c414fb3f"><div class="ttname"><a href="classobjKernel.html#acdb20effd9283d24d8ce34a9c414fb3f">objKernel::VersionGet</a></div><div class="ttdeci">void VersionGet(char *ver[3]) const </div><div class="ttdef"><b>Definition:</b> objKernel.cpp:18</div></div>
+<div class="ttc" id="classobjKernel_html_a7434e272587b2ade8261e8bad635a546"><div class="ttname"><a href="classobjKernel.html#a7434e272587b2ade8261e8bad635a546">objKernel::objKernel</a></div><div class="ttdeci">objKernel()</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:12</div></div>
+<div class="ttc" id="classobjKernel_html_a10c2081bf788518ceb38ac31a0f63706"><div class="ttname"><a href="classobjKernel.html#a10c2081bf788518ceb38ac31a0f63706">objKernel::m_EntryFunc</a></div><div class="ttdeci">void(* m_EntryFunc)()</div><div class="ttdef"><b>Definition:</b> objKernel.h:60</div></div>
+<div class="ttc" id="struct__ObjModule_html_a2229eebf231cac251ecbe06e069afe91"><div class="ttname"><a href="struct__ObjModule.html#a2229eebf231cac251ecbe06e069afe91">_ObjModule::refCount</a></div><div class="ttdeci">int refCount</div><div class="ttdef"><b>Definition:</b> objKernel.h:10</div></div>
+<div class="ttc" id="classobjbase_html_a0045317689842ce503a5b33b1db99c6f"><div class="ttname"><a href="classobjbase.html#a0045317689842ce503a5b33b1db99c6f">objbase::Init</a></div><div class="ttdeci">virtual int Init()</div><div class="ttdef"><b>Definition:</b> objbase.h:22</div></div>
+<div class="ttc" id="classobjKernel_html_a3399c042a4b58dcc4de217343d47acd1"><div class="ttname"><a href="classobjKernel.html#a3399c042a4b58dcc4de217343d47acd1">objKernel::m_objList</a></div><div class="ttdeci">std::map&lt; const char *, ObjModule * &gt; m_objList</div><div class="ttdef"><b>Definition:</b> objKernel.h:58</div></div>
+<div class="ttc" id="classobjKernel_html_a747e5eb09f87ef3e72d81be26fcf68b0"><div class="ttname"><a href="classobjKernel.html#a747e5eb09f87ef3e72d81be26fcf68b0">objKernel::Release</a></div><div class="ttdeci">void Release(int key)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:104</div></div>
+<div class="ttc" id="struct__ObjModule_html_a28e34d49cb8cf6bb996e0add4ec84ccf"><div class="ttname"><a href="struct__ObjModule.html#a28e34d49cb8cf6bb996e0add4ec84ccf">_ObjModule::obj</a></div><div class="ttdeci">objbase * obj</div><div class="ttdef"><b>Definition:</b> objKernel.h:9</div></div>
+<div class="ttc" id="struct__ObjModule_html"><div class="ttname"><a href="struct__ObjModule.html">_ObjModule</a></div><div class="ttdef"><b>Definition:</b> objKernel.h:7</div></div>
+<div class="ttc" id="struct__ObjModule_html_a50f97aa4a417a872c0a86842c58b7b82"><div class="ttname"><a href="struct__ObjModule.html#a50f97aa4a417a872c0a86842c58b7b82">_ObjModule::id</a></div><div class="ttdeci">int id</div><div class="ttdef"><b>Definition:</b> objKernel.h:11</div></div>
+<div class="ttc" id="classobjKernel_html_a1beda86314577313092e41d917557b51"><div class="ttname"><a href="classobjKernel.html#a1beda86314577313092e41d917557b51">objKernel::Query</a></div><div class="ttdeci">objbase * Query(int key)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:91</div></div>
+<div class="ttc" id="classobjKernel_html_a35ad1cb04dcef5fcfc06b4b1c1fe5a7a"><div class="ttname"><a href="classobjKernel.html#a35ad1cb04dcef5fcfc06b4b1c1fe5a7a">objKernel::dump</a></div><div class="ttdeci">void dump(int fd=0, Printfun callback=LVOS_Printf)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:69</div></div>
+<div class="ttc" id="classobjKernel_html_ab944b5697a566ff56ea099a4b3130cd2"><div class="ttname"><a href="classobjKernel.html#ab944b5697a566ff56ea099a4b3130cd2">objKernel::Reg</a></div><div class="ttdeci">void Reg(const char *pzName, void *obj, int id)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:135</div></div>
+<div class="ttc" id="classobjKernel_html_abfe04b33826f8fb11c5a9e49ae08e193"><div class="ttname"><a href="classobjKernel.html#abfe04b33826f8fb11c5a9e49ae08e193">objKernel::~objKernel</a></div><div class="ttdeci">~objKernel()</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:38</div></div>
+<div class="ttc" id="struct__ObjModule_html_adf22870b123b01773f05717e93beee1a"><div class="ttname"><a href="struct__ObjModule.html#adf22870b123b01773f05717e93beee1a">_ObjModule::_ObjModule</a></div><div class="ttdeci">_ObjModule(objbase *obj, int key=0)</div><div class="ttdef"><b>Definition:</b> objKernel.h:12</div></div>
+<div class="ttc" id="classobjKernel_html_a665e0a5c32e13d5d34dd6fd5e9dcb4f2"><div class="ttname"><a href="classobjKernel.html#a665e0a5c32e13d5d34dd6fd5e9dcb4f2">objKernel::Welcome</a></div><div class="ttdeci">void Welcome(int fd=0, Printfun callback=LVOS_Printf)</div><div class="ttdef"><b>Definition:</b> objKernel.cpp:24</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Âà∂‰ΩúËÄÖ &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

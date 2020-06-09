@@ -10,7 +10,7 @@
 #include <functional>
 #include <stdexcept>
 
-namespace std
+namespace OS
 {
 #define MAX_THREAD_NUM 256
 
@@ -33,7 +33,7 @@ namespace std
         std::atomic<int> idlThrNum;
 
     public:
-        inline threadpool(unsigned short size = 4) : stoped{false}
+        inline threadpool(unsigned short size = 1) : stoped{false}
         {
             idlThrNum = size < 1 ? 1 : size;
             for (size = 0; size < idlThrNum; ++size)

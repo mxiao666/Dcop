@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå: D:/code/LiteOS/os/inc/cstream.h Ê∫êÊñá‰ª∂</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Âà∂‰ΩúËÄÖ Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'ÊêúÁ¥¢');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>È¶ñÈ°µ</span></a></li>
+      <li><a href="namespaces.html"><span>ÂëΩÂêçÁ©∫Èó¥</span></a></li>
+      <li><a href="annotated.html"><span>Á±ª</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="ÊêúÁ¥¢" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8b7cb6c889a10e2a101a7e90c854ca4d.html">os</a></li><li class="navelem"><a class="el" href="dir_74a0f00179eada1dfee08aecb51588ec.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">cstream.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __OS_CSTREAM_H__</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __OS_CSTREAM_H__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;type.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define Stackm_len 64</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classCStream.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCStream.html">CStream</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="classCStream.html#acd9fd6c1ed458608829da8288047515c">CStream</a>();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="classCStream.html#abb2ae8f8ee841f7e42d82f9887cfe468">~CStream</a>();</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classCStream.html#acd9fd6c1ed458608829da8288047515c">CStream</a>(BYTE *buf, DWORD len);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classCStream.html#acd9fd6c1ed458608829da8288047515c">CStream</a>(<span class="keyword">const</span> BYTE *buf);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    BYTE *<a class="code" href="classCStream.html#a2d585ede97dd72f2d1cc28debbd55ed1">GetBuff</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classCStream.html#a14b0f9adcbca6fa73ca1bb258c50abac">   14</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="classCStream.html#a14b0f9adcbca6fa73ca1bb258c50abac">c_str</a>() { <span class="keywordflow">return</span> (<span class="keywordtype">char</span> *)<a class="code" href="classCStream.html#a29fe119c9310e9dc797a94b1da8b6161">m_cbuf</a>; }</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classCStream.html#a1c41a83bff1334abd9e94db22d4e6223">   15</a></span>&#160;    <span class="keyword">inline</span> DWORD <a class="code" href="classCStream.html#a1c41a83bff1334abd9e94db22d4e6223">length</a>()</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCStream.html#a189101a32dee4dee191cb32cf4db4557">m_curLen</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    }</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classCStream.html#a8fdf1c88d7875501618ad1a00f73e5a5">   19</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classCStream.html#a8fdf1c88d7875501618ad1a00f73e5a5">SetPos</a>(DWORD len)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classCStream.html#abd3a54001f7160ae545c01a1eeff8904">m_pos</a> = len &lt; <a class="code" href="classCStream.html#a298ae548ab69059c73980d3b5ebada92">m_len</a> ? len : <a class="code" href="classCStream.html#a298ae548ab69059c73980d3b5ebada92">m_len</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classCStream.html#ac8df161b52afd39b266d6cd4c6db376b">   23</a></span>&#160;    <span class="keyword">inline</span> DWORD <a class="code" href="classCStream.html#ac8df161b52afd39b266d6cd4c6db376b">GetPos</a>()</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCStream.html#abd3a54001f7160ae545c01a1eeff8904">m_pos</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classCStream.html#a189d6e93816b185aa1e1454e15e26d41">   27</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classCStream.html#a189d6e93816b185aa1e1454e15e26d41">SetCount</a>(DWORD count)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classCStream.html#a1d74962c25218ae3ae84aa6779988607">m_count</a> = count;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classCStream.html#a86614d41d94656de93e02e9877969cca">   31</a></span>&#160;    <span class="keyword">inline</span> DWORD <a class="code" href="classCStream.html#a86614d41d94656de93e02e9877969cca">GetCount</a>()</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classCStream.html#a1d74962c25218ae3ae84aa6779988607">m_count</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aa174a564e5434e58039eef83ca0712f0">operator&lt;&lt;</a>(BYTE t);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aa174a564e5434e58039eef83ca0712f0">operator&lt;&lt;</a>(WORD t);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aa174a564e5434e58039eef83ca0712f0">operator&lt;&lt;</a>(DWORD t);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aa174a564e5434e58039eef83ca0712f0">operator&lt;&lt;</a>(<a class="code" href="classCStream.html">CStream</a> &amp;t);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aca80fa7595f8222f0607672b40570522">operator&gt;&gt;</a>(BYTE &amp;t);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aca80fa7595f8222f0607672b40570522">operator&gt;&gt;</a>(WORD &amp;t);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aca80fa7595f8222f0607672b40570522">operator&gt;&gt;</a>(DWORD &amp;t);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#aca80fa7595f8222f0607672b40570522">operator&gt;&gt;</a>(<a class="code" href="classCStream.html">CStream</a> &amp;t);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#a54b0c96508ddd8935dd48c359651ff3d">Append</a>(<span class="keyword">const</span> BYTE *t, DWORD len);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#ab9ebdc96078cbf06373b8c606aee51b6">Extract</a>(<span class="keyword">const</span> BYTE *buf, DWORD len, DWORD begin = 0);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCStream.html#acff05fe5ff0c26da4b93aee3078bf5ed">Clear</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    WORD <a class="code" href="classCStream.html#a591ba2c6f2865a6acc3ccc469e73b50a">to_WORD</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    DWORD <a class="code" href="classCStream.html#ac6d7954f094d626887d09c1582acb06e">to_DWORD</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classCStream.html#acd9fd6c1ed458608829da8288047515c">CStream</a>(<span class="keyword">const</span> <a class="code" href="classCStream.html">CStream</a> &amp;);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="classCStream.html">CStream</a> &amp;<a class="code" href="classCStream.html#a079cea89abf9f27f39a8d34aa9b83f04">operator=</a>(<span class="keyword">const</span> <a class="code" href="classCStream.html">CStream</a> &amp;);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classCStream.html#a4096bcc2c8caa2d8066a5f1a3de1df1d">GetMoreCapacity</a>(DWORD len);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCStream.html#ae56cfe93850c8bd71a178f080527d586">Init</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCStream.html#a6e5ec207132c9dab6e636f3525df7174">_PubInit</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classCStream.html#a5fb97df57d09672e2a7e9b721fbe2fab">   59</a></span>&#160;    BYTE <a class="code" href="classCStream.html#a5fb97df57d09672e2a7e9b721fbe2fab">m_buf</a>[Stackm_len]; <span class="comment">//»± °÷µ∑≈‘⁄’ª…œ</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classCStream.html#a29fe119c9310e9dc797a94b1da8b6161">   60</a></span>&#160;    BYTE *<a class="code" href="classCStream.html#a29fe119c9310e9dc797a94b1da8b6161">m_cbuf</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264">   61</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264">BufType</a></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264a11699094204fec0ff34d030cca6a6dae">   63</a></span>&#160;        <a class="code" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264a11699094204fec0ff34d030cca6a6dae">USER_BUFFER</a>,</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264aca15aab11608216bfd82a609eeec74b6">   64</a></span>&#160;        <a class="code" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264aca15aab11608216bfd82a609eeec74b6">FREAM_BUFFER</a>,</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264a7b40a0a97801d18f42a17911547224c2">   65</a></span>&#160;        <a class="code" href="classCStream.html#af17a289bbfbc762ab33d714b1699d264a7b40a0a97801d18f42a17911547224c2">MALLOC_BUFFER</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    };</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classCStream.html#abe491b326ccda9c17ebcc0f7c55f39e5">   67</a></span>&#160;    BYTE <a class="code" href="classCStream.html#abe491b326ccda9c17ebcc0f7c55f39e5">m_bufType</a>; <span class="comment">//∏˘æ›¥À÷µæˆ∂® Õ∑≈ø’º‰     DWORD m_len;
+    DWORD m_curLen;
+    DWORD m_pos;
+    DWORD m_count;
+    bool m_isOk; // ¡˜µƒ◊¥Ã¨ «∑Ò’˝≥££¨…œ“ª≤Ω≤Ÿ◊˜ «∑Ò≥…π¶
+};
+
+#endif</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classCStream.html#a298ae548ab69059c73980d3b5ebada92">   68</a></span>&#160;    DWORD <a class="code" href="classCStream.html#a298ae548ab69059c73980d3b5ebada92">m_len</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classCStream.html#a189101a32dee4dee191cb32cf4db4557">   69</a></span>&#160;    DWORD <a class="code" href="classCStream.html#a189101a32dee4dee191cb32cf4db4557">m_curLen</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classCStream.html#abd3a54001f7160ae545c01a1eeff8904">   70</a></span>&#160;    DWORD <a class="code" href="classCStream.html#abd3a54001f7160ae545c01a1eeff8904">m_pos</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classCStream.html#a1d74962c25218ae3ae84aa6779988607">   71</a></span>&#160;    DWORD <a class="code" href="classCStream.html#a1d74962c25218ae3ae84aa6779988607">m_count</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classCStream.html#a1b3b7ab3bc3564199ff399608fdec2c1">   72</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classCStream.html#a1b3b7ab3bc3564199ff399608fdec2c1">m_isOk</a>; <span class="comment">// ¡˜µƒ◊¥Ã¨ «∑Ò’˝≥££¨…œ“ª≤Ω≤Ÿ◊˜ «∑Ò≥…π¶</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classCStream_html_a1d74962c25218ae3ae84aa6779988607"><div class="ttname"><a href="classCStream.html#a1d74962c25218ae3ae84aa6779988607">CStream::m_count</a></div><div class="ttdeci">DWORD m_count</div><div class="ttdef"><b>Definition:</b> cstream.h:71</div></div>
+<div class="ttc" id="classCStream_html_a1c41a83bff1334abd9e94db22d4e6223"><div class="ttname"><a href="classCStream.html#a1c41a83bff1334abd9e94db22d4e6223">CStream::length</a></div><div class="ttdeci">DWORD length()</div><div class="ttdef"><b>Definition:</b> cstream.h:15</div></div>
+<div class="ttc" id="classCStream_html_a189d6e93816b185aa1e1454e15e26d41"><div class="ttname"><a href="classCStream.html#a189d6e93816b185aa1e1454e15e26d41">CStream::SetCount</a></div><div class="ttdeci">void SetCount(DWORD count)</div><div class="ttdef"><b>Definition:</b> cstream.h:27</div></div>
+<div class="ttc" id="classCStream_html_a8fdf1c88d7875501618ad1a00f73e5a5"><div class="ttname"><a href="classCStream.html#a8fdf1c88d7875501618ad1a00f73e5a5">CStream::SetPos</a></div><div class="ttdeci">void SetPos(DWORD len)</div><div class="ttdef"><b>Definition:</b> cstream.h:19</div></div>
+<div class="ttc" id="classCStream_html_a5fb97df57d09672e2a7e9b721fbe2fab"><div class="ttname"><a href="classCStream.html#a5fb97df57d09672e2a7e9b721fbe2fab">CStream::m_buf</a></div><div class="ttdeci">BYTE m_buf[Stackm_len]</div><div class="ttdef"><b>Definition:</b> cstream.h:59</div></div>
+<div class="ttc" id="classCStream_html_aa174a564e5434e58039eef83ca0712f0"><div class="ttname"><a href="classCStream.html#aa174a564e5434e58039eef83ca0712f0">CStream::operator&lt;&lt;</a></div><div class="ttdeci">CStream &amp; operator&lt;&lt;(BYTE t)</div><div class="ttdef"><b>Definition:</b> cstream.cpp:53</div></div>
+<div class="ttc" id="classCStream_html_a29fe119c9310e9dc797a94b1da8b6161"><div class="ttname"><a href="classCStream.html#a29fe119c9310e9dc797a94b1da8b6161">CStream::m_cbuf</a></div><div class="ttdeci">BYTE * m_cbuf</div><div class="ttdef"><b>Definition:</b> cstream.h:60</div></div>
+<div class="ttc" id="classCStream_html"><div class="ttname"><a href="classCStream.html">CStream</a></div><div class="ttdef"><b>Definition:</b> cstream.h:6</div></div>
+<div class="ttc" id="classCStream_html_a079cea89abf9f27f39a8d34aa9b83f04"><div class="ttname"><a href="classCStream.html#a079cea89abf9f27f39a8d34aa9b83f04">CStream::operator=</a></div><div class="ttdeci">CStream &amp; operator=(const CStream &amp;)</div></div>
+<div class="ttc" id="classCStream_html_aca80fa7595f8222f0607672b40570522"><div class="ttname"><a href="classCStream.html#aca80fa7595f8222f0607672b40570522">CStream::operator&gt;&gt;</a></div><div class="ttdeci">CStream &amp; operator&gt;&gt;(BYTE &amp;t)</div><div class="ttdef"><b>Definition:</b> cstream.cpp:91</div></div>
+<div class="ttc" id="classCStream_html_abd3a54001f7160ae545c01a1eeff8904"><div class="ttname"><a href="classCStream.html#abd3a54001f7160ae545c01a1eeff8904">CStream::m_pos</a></div><div class="ttdeci">DWORD m_pos</div><div class="ttdef"><b>Definition:</b> cstream.h:70</div></div>
+<div class="ttc" id="classCStream_html_ab9ebdc96078cbf06373b8c606aee51b6"><div class="ttname"><a href="classCStream.html#ab9ebdc96078cbf06373b8c606aee51b6">CStream::Extract</a></div><div class="ttdeci">CStream &amp; Extract(const BYTE *buf, DWORD len, DWORD begin=0)</div><div class="ttdef"><b>Definition:</b> cstream.cpp:162</div></div>
+<div class="ttc" id="classCStream_html_ac6d7954f094d626887d09c1582acb06e"><div class="ttname"><a href="classCStream.html#ac6d7954f094d626887d09c1582acb06e">CStream::to_DWORD</a></div><div class="ttdeci">DWORD to_DWORD()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:191</div></div>
+<div class="ttc" id="classCStream_html_a189101a32dee4dee191cb32cf4db4557"><div class="ttname"><a href="classCStream.html#a189101a32dee4dee191cb32cf4db4557">CStream::m_curLen</a></div><div class="ttdeci">DWORD m_curLen</div><div class="ttdef"><b>Definition:</b> cstream.h:69</div></div>
+<div class="ttc" id="classCStream_html_a54b0c96508ddd8935dd48c359651ff3d"><div class="ttname"><a href="classCStream.html#a54b0c96508ddd8935dd48c359651ff3d">CStream::Append</a></div><div class="ttdeci">CStream &amp; Append(const BYTE *t, DWORD len)</div><div class="ttdef"><b>Definition:</b> cstream.cpp:149</div></div>
+<div class="ttc" id="classCStream_html_a6e5ec207132c9dab6e636f3525df7174"><div class="ttname"><a href="classCStream.html#a6e5ec207132c9dab6e636f3525df7174">CStream::_PubInit</a></div><div class="ttdeci">void _PubInit()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:25</div></div>
+<div class="ttc" id="classCStream_html_a14b0f9adcbca6fa73ca1bb258c50abac"><div class="ttname"><a href="classCStream.html#a14b0f9adcbca6fa73ca1bb258c50abac">CStream::c_str</a></div><div class="ttdeci">char * c_str()</div><div class="ttdef"><b>Definition:</b> cstream.h:14</div></div>
+<div class="ttc" id="classCStream_html_a591ba2c6f2865a6acc3ccc469e73b50a"><div class="ttname"><a href="classCStream.html#a591ba2c6f2865a6acc3ccc469e73b50a">CStream::to_WORD</a></div><div class="ttdeci">WORD to_WORD()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:187</div></div>
+<div class="ttc" id="classCStream_html_a86614d41d94656de93e02e9877969cca"><div class="ttname"><a href="classCStream.html#a86614d41d94656de93e02e9877969cca">CStream::GetCount</a></div><div class="ttdeci">DWORD GetCount()</div><div class="ttdef"><b>Definition:</b> cstream.h:31</div></div>
+<div class="ttc" id="classCStream_html_acd9fd6c1ed458608829da8288047515c"><div class="ttname"><a href="classCStream.html#acd9fd6c1ed458608829da8288047515c">CStream::CStream</a></div><div class="ttdeci">CStream()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:13</div></div>
+<div class="ttc" id="classCStream_html_af17a289bbfbc762ab33d714b1699d264"><div class="ttname"><a href="classCStream.html#af17a289bbfbc762ab33d714b1699d264">CStream::BufType</a></div><div class="ttdeci">BufType</div><div class="ttdef"><b>Definition:</b> cstream.h:61</div></div>
+<div class="ttc" id="classCStream_html_abe491b326ccda9c17ebcc0f7c55f39e5"><div class="ttname"><a href="classCStream.html#abe491b326ccda9c17ebcc0f7c55f39e5">CStream::m_bufType</a></div><div class="ttdeci">BYTE m_bufType</div><div class="ttdef"><b>Definition:</b> cstream.h:67</div></div>
+<div class="ttc" id="classCStream_html_ac8df161b52afd39b266d6cd4c6db376b"><div class="ttname"><a href="classCStream.html#ac8df161b52afd39b266d6cd4c6db376b">CStream::GetPos</a></div><div class="ttdeci">DWORD GetPos()</div><div class="ttdef"><b>Definition:</b> cstream.h:23</div></div>
+<div class="ttc" id="classCStream_html_a2d585ede97dd72f2d1cc28debbd55ed1"><div class="ttname"><a href="classCStream.html#a2d585ede97dd72f2d1cc28debbd55ed1">CStream::GetBuff</a></div><div class="ttdeci">BYTE * GetBuff()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:145</div></div>
+<div class="ttc" id="classCStream_html_ae56cfe93850c8bd71a178f080527d586"><div class="ttname"><a href="classCStream.html#ae56cfe93850c8bd71a178f080527d586">CStream::Init</a></div><div class="ttdeci">void Init()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:17</div></div>
+<div class="ttc" id="classCStream_html_acff05fe5ff0c26da4b93aee3078bf5ed"><div class="ttname"><a href="classCStream.html#acff05fe5ff0c26da4b93aee3078bf5ed">CStream::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:196</div></div>
+<div class="ttc" id="classCStream_html_a1b3b7ab3bc3564199ff399608fdec2c1"><div class="ttname"><a href="classCStream.html#a1b3b7ab3bc3564199ff399608fdec2c1">CStream::m_isOk</a></div><div class="ttdeci">bool m_isOk</div><div class="ttdef"><b>Definition:</b> cstream.h:72</div></div>
+<div class="ttc" id="classCStream_html_af17a289bbfbc762ab33d714b1699d264aca15aab11608216bfd82a609eeec74b6"><div class="ttname"><a href="classCStream.html#af17a289bbfbc762ab33d714b1699d264aca15aab11608216bfd82a609eeec74b6">CStream::FREAM_BUFFER</a></div><div class="ttdef"><b>Definition:</b> cstream.h:64</div></div>
+<div class="ttc" id="classCStream_html_af17a289bbfbc762ab33d714b1699d264a7b40a0a97801d18f42a17911547224c2"><div class="ttname"><a href="classCStream.html#af17a289bbfbc762ab33d714b1699d264a7b40a0a97801d18f42a17911547224c2">CStream::MALLOC_BUFFER</a></div><div class="ttdef"><b>Definition:</b> cstream.h:65</div></div>
+<div class="ttc" id="classCStream_html_a4096bcc2c8caa2d8066a5f1a3de1df1d"><div class="ttname"><a href="classCStream.html#a4096bcc2c8caa2d8066a5f1a3de1df1d">CStream::GetMoreCapacity</a></div><div class="ttdeci">bool GetMoreCapacity(DWORD len)</div><div class="ttdef"><b>Definition:</b> cstream.cpp:112</div></div>
+<div class="ttc" id="classCStream_html_abb2ae8f8ee841f7e42d82f9887cfe468"><div class="ttname"><a href="classCStream.html#abb2ae8f8ee841f7e42d82f9887cfe468">CStream::~CStream</a></div><div class="ttdeci">~CStream()</div><div class="ttdef"><b>Definition:</b> cstream.cpp:45</div></div>
+<div class="ttc" id="classCStream_html_af17a289bbfbc762ab33d714b1699d264a11699094204fec0ff34d030cca6a6dae"><div class="ttname"><a href="classCStream.html#af17a289bbfbc762ab33d714b1699d264a11699094204fec0ff34d030cca6a6dae">CStream::USER_BUFFER</a></div><div class="ttdef"><b>Definition:</b> cstream.h:63</div></div>
+<div class="ttc" id="classCStream_html_a298ae548ab69059c73980d3b5ebada92"><div class="ttname"><a href="classCStream.html#a298ae548ab69059c73980d3b5ebada92">CStream::m_len</a></div><div class="ttdeci">DWORD m_len</div><div class="ttdef"><b>Definition:</b> cstream.h:68</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Âà∂‰ΩúËÄÖ &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

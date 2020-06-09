@@ -93,7 +93,7 @@ int LVOS_Printf(int fd, const char *format, ...)
     return nWrittenBytes;
 }
 
-class LogCmd : public CClibase
+class LogCmd : public Clibase
 {
     virtual int Init()
     {

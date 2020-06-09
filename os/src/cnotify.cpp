@@ -27,13 +27,22 @@ void Cnotify::UnRegReceiver(int iModule)
 void Cnotify::NotifyA(CAgrcList *message,
                       RspMsg *outmessage,
                       int iModule,
-                      int iCmd)
+                      int iCmd,
+                      bool sync)
 {
     for (auto &iter : observerList)
     {
-        (void)AsyncNotify(message, iter.first, iCmd, nullptr);
+        if (sync)
+        {
+            (void)iter.second->obj->Process(message, outmessage, iModule, iCmd);
+        }
+        else
+        {
+            (void)AsyncNotify(message, iter.first, iCmd, nullptr);
+        }
     }
 }
+
 int Cnotify::Notify(CAgrcList *message,
                     RspMsg *outmessage,
                     int iModule,

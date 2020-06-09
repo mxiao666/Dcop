@@ -6,7 +6,7 @@
 #include <map>
 #include "objbase.h"
 #include <queue>
-
+#include "objKernel.h"
 typedef struct _AsyncArgc
 {
     CAgrcList *msg;
@@ -49,7 +49,7 @@ public:
     virtual ~Cnotify();
     void UnRegReceiver(int iModule);
     void NotifyA(CAgrcList *message,
-                 RspMsg *outmessage, int iModule, int iCmd);
+                 RspMsg *outmessage, int iModule, int iCmd, bool sync = false);
     void RegReceiver(int iModule, REGNOTIFY *pRecv);
     int Notify(CAgrcList *message,
                RspMsg *outmessage, int iModule, int iCmd);

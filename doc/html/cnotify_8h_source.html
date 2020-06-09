@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå: D:/code/LiteOS/os/inc/cnotify.h Ê∫êÊñá‰ª∂</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OSÁ≥ªÁªüÊé•Âè£Êü•ËØ¢ÊâãÂÜå
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Âà∂‰ΩúËÄÖ Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'ÊêúÁ¥¢');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>È¶ñÈ°µ</span></a></li>
+      <li><a href="namespaces.html"><span>ÂëΩÂêçÁ©∫Èó¥</span></a></li>
+      <li><a href="annotated.html"><span>Á±ª</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="ÊêúÁ¥¢" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8b7cb6c889a10e2a101a7e90c854ca4d.html">os</a></li><li class="navelem"><a class="el" href="dir_74a0f00179eada1dfee08aecb51588ec.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">cnotify.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef NOTIFIER_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define NOTIFIER_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;objbase.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;objKernel.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="struct__AsyncArgc.html">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct__AsyncArgc.html">_AsyncArgc</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct__AsyncArgc.html#af79eff7bb1fb4d7a8328cad89186d630">   12</a></span>&#160;    <a class="code" href="classCAgrcList.html">CAgrcList</a> *<a class="code" href="struct__AsyncArgc.html#af79eff7bb1fb4d7a8328cad89186d630">msg</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="struct__AsyncArgc.html#adfe12dd179214b038cbaf832a9ac1467">   13</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct__AsyncArgc.html#adfe12dd179214b038cbaf832a9ac1467">iModule</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct__AsyncArgc.html#a6c9a1bf69f063c074409da63b18ef595">   14</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct__AsyncArgc.html#a6c9a1bf69f063c074409da63b18ef595">iCmd</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="struct__AsyncArgc.html#aa0893586569275e27c3a8904020acece">   15</a></span>&#160;    <span class="keywordtype">void</span> *<a class="code" href="struct__AsyncArgc.html#aa0893586569275e27c3a8904020acece">m_ptr</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="struct__AsyncArgc.html#a62fce652247411c1046e9651fa0256ce">   16</a></span>&#160;    <a class="code" href="struct__AsyncArgc.html#a62fce652247411c1046e9651fa0256ce">_AsyncArgc</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *objmsg, <span class="keywordtype">int</span> module, <span class="keywordtype">int</span> cmd, <span class="keywordtype">void</span> *parm = <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        msg = <span class="keyword">new</span> <a class="code" href="classCAgrcList.html">CAgrcList</a>(objmsg);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        iModule = module;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        iCmd = cmd;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        m_ptr = parm;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="struct__AsyncArgc.html#a0ff8a673c9eaf65cb3950ac4436a9705">   23</a></span>&#160;    <a class="code" href="struct__AsyncArgc.html#a0ff8a673c9eaf65cb3950ac4436a9705">~_AsyncArgc</a>()</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">if</span> (msg)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keyword">delete</span> <a class="code" href="struct__AsyncArgc.html#af79eff7bb1fb4d7a8328cad89186d630">msg</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <a class="code" href="struct__AsyncArgc.html">AsyncArgc</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structregNotify.html">   30</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structregNotify.html">regNotify</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define REG_NAME_MAX_LEN 16</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structregNotify.html#ae2eeb72236cb614b7bec0ca34c4475d9">   33</a></span>&#160;    <a class="code" href="classobjbase.html">objbase</a> *<a class="code" href="structregNotify.html#ae2eeb72236cb614b7bec0ca34c4475d9">obj</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structregNotify.html#ab9d501423e31c48fc8acd9c57aae0273">   34</a></span>&#160;    <span class="keywordtype">char</span> <a class="code" href="structregNotify.html#ab9d501423e31c48fc8acd9c57aae0273">name</a>[REG_NAME_MAX_LEN];</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structregNotify.html#af737a90fe0e3458b7effb7f6addbd732">   35</a></span>&#160;    <a class="code" href="structregNotify.html#af737a90fe0e3458b7effb7f6addbd732">regNotify</a>(<a class="code" href="classobjbase.html">objbase</a> *_obj, <span class="keyword">const</span> <span class="keywordtype">char</span> *_name)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        this-&gt;obj = _obj;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        (void)snprintf(this-&gt;name, REG_NAME_MAX_LEN, <span class="stringliteral">&quot;%s&quot;</span>, _name);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structregNotify.html#abca27ba154eb3fd91816ff02bb523dfc">   40</a></span>&#160;    <a class="code" href="structregNotify.html#abca27ba154eb3fd91816ff02bb523dfc">~regNotify</a>()</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        this-&gt;obj = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <a class="code" href="structregNotify.html">REGNOTIFY</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classCnotify.html">   45</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCnotify.html">Cnotify</a> : <span class="keyword">public</span> <a class="code" href="classobjbase.html">objbase</a></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classCnotify.html#ab913ab2a59562f776faefefbd383553d">Cnotify</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classCnotify.html#a4410a13ce26c6dcbb19d76aa94dfe650">~Cnotify</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCnotify.html#aa8089c66bd2561123eca6734a4bc36ce">UnRegReceiver</a>(<span class="keywordtype">int</span> iModule);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCnotify.html#ab4e5be4450d230d28a7b1ef06d23f525">NotifyA</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *message,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                 <a class="code" href="struct__RspMsg.html">RspMsg</a> *outmessage, <span class="keywordtype">int</span> iModule, <span class="keywordtype">int</span> iCmd, <span class="keywordtype">bool</span> sync = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCnotify.html#a943f6702a3fab9fb2e8eb99f71deed6e">RegReceiver</a>(<span class="keywordtype">int</span> iModule, <a class="code" href="structregNotify.html">REGNOTIFY</a> *pRecv);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCnotify.html#a07e223d3a397e28c450cb29cbf7c9f89">Notify</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *message,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;               <a class="code" href="struct__RspMsg.html">RspMsg</a> *outmessage, <span class="keywordtype">int</span> iModule, <span class="keywordtype">int</span> iCmd);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCnotify.html#a86220e54a7407800ea96adb1ff8fd30b">dump</a>(<span class="keywordtype">int</span> fd = 0, Printfun callback = LVOS_Printf);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCnotify.html#a8104902a3848c9c90ab43ff7a50a52ea">AsyncProc</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCnotify.html#a576422c4a653afd0d6984495759beb9e">Init</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCnotify.html#a27efe46635791799fadad26adcfe327f">AsyncNotify</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *message, <span class="keywordtype">int</span> iModule,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <span class="keywordtype">int</span> iCmd, <span class="keywordtype">void</span> *parm = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classCnotify.html#ada11ca448715e2b252e0ab80194ac0d7">   63</a></span>&#160;    std::map&lt;int, REGNOTIFY *&gt; <a class="code" href="classCnotify.html#ada11ca448715e2b252e0ab80194ac0d7">observerList</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classCnotify.html#a270f5d0006e9f99553cc6d881ee305e7">   64</a></span>&#160;    std::mutex <a class="code" href="classCnotify.html#a270f5d0006e9f99553cc6d881ee305e7">m_reglock</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">// »ŒŒÒ∂”¡–     std::queue&lt;AsyncArgc *&gt; tasks;
+    // Õ¨≤Ω
+    std::mutex m_lock;
+    // Ãıº˛◊Ë»˚
+    std::condition_variable cv_task;
+    //  «∑Òπÿ±’Ã·Ωª
+    std::atomic&lt;bool&gt; stoped;
+    //ø’œ–œﬂ≥Ã ˝¡ø
+    std::atomic&lt;int&gt; idlThrNum;
+};
+
+#endif // NOTIFIER_H
+</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classCnotify.html#a148787bf18cc77e93390ef46dae42596">   66</a></span>&#160;    std::queue&lt;AsyncArgc *&gt; <a class="code" href="classCnotify.html#a148787bf18cc77e93390ef46dae42596">tasks</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// Õ¨≤Ω</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classCnotify.html#a0ed49580b7ace74ba46916e87519fe3c">   68</a></span>&#160;    std::mutex <a class="code" href="classCnotify.html#a0ed49580b7ace74ba46916e87519fe3c">m_lock</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Ãıº˛◊Ë»˚</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classCnotify.html#aa30437754ace978b49252fd928e56603">   70</a></span>&#160;    std::condition_variable <a class="code" href="classCnotify.html#aa30437754ace978b49252fd928e56603">cv_task</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">//  «∑Òπÿ±’Ã·Ωª</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classCnotify.html#ab3caa0e8d835dc29fafd900a08854030">   72</a></span>&#160;    std::atomic&lt;bool&gt; <a class="code" href="classCnotify.html#ab3caa0e8d835dc29fafd900a08854030">stoped</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">//ø’œ–œﬂ≥Ã ˝¡ø</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classCnotify.html#a90ba66a36d3932681169585123c7f8d5">   74</a></span>&#160;    std::atomic&lt;int&gt; <a class="code" href="classCnotify.html#a90ba66a36d3932681169585123c7f8d5">idlThrNum</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif // NOTIFIER_H</span></div>
+<div class="ttc" id="classCnotify_html_ab3caa0e8d835dc29fafd900a08854030"><div class="ttname"><a href="classCnotify.html#ab3caa0e8d835dc29fafd900a08854030">Cnotify::stoped</a></div><div class="ttdeci">std::atomic&lt; bool &gt; stoped</div><div class="ttdef"><b>Definition:</b> cnotify.h:72</div></div>
+<div class="ttc" id="classCnotify_html_a943f6702a3fab9fb2e8eb99f71deed6e"><div class="ttname"><a href="classCnotify.html#a943f6702a3fab9fb2e8eb99f71deed6e">Cnotify::RegReceiver</a></div><div class="ttdeci">void RegReceiver(int iModule, REGNOTIFY *pRecv)</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:5</div></div>
+<div class="ttc" id="classCAgrcList_html"><div class="ttname"><a href="classCAgrcList.html">CAgrcList</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:8</div></div>
+<div class="ttc" id="structregNotify_html_ab9d501423e31c48fc8acd9c57aae0273"><div class="ttname"><a href="structregNotify.html#ab9d501423e31c48fc8acd9c57aae0273">regNotify::name</a></div><div class="ttdeci">char name[REG_NAME_MAX_LEN]</div><div class="ttdef"><b>Definition:</b> cnotify.h:34</div></div>
+<div class="ttc" id="struct__RspMsg_html"><div class="ttname"><a href="struct__RspMsg.html">_RspMsg</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:69</div></div>
+<div class="ttc" id="structregNotify_html"><div class="ttname"><a href="structregNotify.html">regNotify</a></div><div class="ttdef"><b>Definition:</b> cnotify.h:30</div></div>
+<div class="ttc" id="struct__AsyncArgc_html_a0ff8a673c9eaf65cb3950ac4436a9705"><div class="ttname"><a href="struct__AsyncArgc.html#a0ff8a673c9eaf65cb3950ac4436a9705">_AsyncArgc::~_AsyncArgc</a></div><div class="ttdeci">~_AsyncArgc()</div><div class="ttdef"><b>Definition:</b> cnotify.h:23</div></div>
+<div class="ttc" id="classCnotify_html_a148787bf18cc77e93390ef46dae42596"><div class="ttname"><a href="classCnotify.html#a148787bf18cc77e93390ef46dae42596">Cnotify::tasks</a></div><div class="ttdeci">std::queue&lt; AsyncArgc * &gt; tasks</div><div class="ttdef"><b>Definition:</b> cnotify.h:66</div></div>
+<div class="ttc" id="classCnotify_html_a90ba66a36d3932681169585123c7f8d5"><div class="ttname"><a href="classCnotify.html#a90ba66a36d3932681169585123c7f8d5">Cnotify::idlThrNum</a></div><div class="ttdeci">std::atomic&lt; int &gt; idlThrNum</div><div class="ttdef"><b>Definition:</b> cnotify.h:74</div></div>
+<div class="ttc" id="classCnotify_html_a0ed49580b7ace74ba46916e87519fe3c"><div class="ttname"><a href="classCnotify.html#a0ed49580b7ace74ba46916e87519fe3c">Cnotify::m_lock</a></div><div class="ttdeci">std::mutex m_lock</div><div class="ttdef"><b>Definition:</b> cnotify.h:68</div></div>
+<div class="ttc" id="classCnotify_html_a8104902a3848c9c90ab43ff7a50a52ea"><div class="ttname"><a href="classCnotify.html#a8104902a3848c9c90ab43ff7a50a52ea">Cnotify::AsyncProc</a></div><div class="ttdeci">void AsyncProc()</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:85</div></div>
+<div class="ttc" id="struct__AsyncArgc_html"><div class="ttname"><a href="struct__AsyncArgc.html">_AsyncArgc</a></div><div class="ttdef"><b>Definition:</b> cnotify.h:10</div></div>
+<div class="ttc" id="struct__AsyncArgc_html_aa0893586569275e27c3a8904020acece"><div class="ttname"><a href="struct__AsyncArgc.html#aa0893586569275e27c3a8904020acece">_AsyncArgc::m_ptr</a></div><div class="ttdeci">void * m_ptr</div><div class="ttdef"><b>Definition:</b> cnotify.h:15</div></div>
+<div class="ttc" id="classCnotify_html_aa30437754ace978b49252fd928e56603"><div class="ttname"><a href="classCnotify.html#aa30437754ace978b49252fd928e56603">Cnotify::cv_task</a></div><div class="ttdeci">std::condition_variable cv_task</div><div class="ttdef"><b>Definition:</b> cnotify.h:70</div></div>
+<div class="ttc" id="classCnotify_html_aa8089c66bd2561123eca6734a4bc36ce"><div class="ttname"><a href="classCnotify.html#aa8089c66bd2561123eca6734a4bc36ce">Cnotify::UnRegReceiver</a></div><div class="ttdeci">void UnRegReceiver(int iModule)</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:17</div></div>
+<div class="ttc" id="classobjbase_html"><div class="ttname"><a href="classobjbase.html">objbase</a></div><div class="ttdef"><b>Definition:</b> objbase.h:11</div></div>
+<div class="ttc" id="classCnotify_html_a270f5d0006e9f99553cc6d881ee305e7"><div class="ttname"><a href="classCnotify.html#a270f5d0006e9f99553cc6d881ee305e7">Cnotify::m_reglock</a></div><div class="ttdeci">std::mutex m_reglock</div><div class="ttdef"><b>Definition:</b> cnotify.h:64</div></div>
+<div class="ttc" id="structregNotify_html_ae2eeb72236cb614b7bec0ca34c4475d9"><div class="ttname"><a href="structregNotify.html#ae2eeb72236cb614b7bec0ca34c4475d9">regNotify::obj</a></div><div class="ttdeci">objbase * obj</div><div class="ttdef"><b>Definition:</b> cnotify.h:33</div></div>
+<div class="ttc" id="structregNotify_html_abca27ba154eb3fd91816ff02bb523dfc"><div class="ttname"><a href="structregNotify.html#abca27ba154eb3fd91816ff02bb523dfc">regNotify::~regNotify</a></div><div class="ttdeci">~regNotify()</div><div class="ttdef"><b>Definition:</b> cnotify.h:40</div></div>
+<div class="ttc" id="classCnotify_html_a576422c4a653afd0d6984495759beb9e"><div class="ttname"><a href="classCnotify.html#a576422c4a653afd0d6984495759beb9e">Cnotify::Init</a></div><div class="ttdeci">int Init()</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:129</div></div>
+<div class="ttc" id="struct__AsyncArgc_html_adfe12dd179214b038cbaf832a9ac1467"><div class="ttname"><a href="struct__AsyncArgc.html#adfe12dd179214b038cbaf832a9ac1467">_AsyncArgc::iModule</a></div><div class="ttdeci">int iModule</div><div class="ttdef"><b>Definition:</b> cnotify.h:13</div></div>
+<div class="ttc" id="classCnotify_html_a27efe46635791799fadad26adcfe327f"><div class="ttname"><a href="classCnotify.html#a27efe46635791799fadad26adcfe327f">Cnotify::AsyncNotify</a></div><div class="ttdeci">int AsyncNotify(CAgrcList *message, int iModule, int iCmd, void *parm=nullptr)</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:58</div></div>
+<div class="ttc" id="structregNotify_html_af737a90fe0e3458b7effb7f6addbd732"><div class="ttname"><a href="structregNotify.html#af737a90fe0e3458b7effb7f6addbd732">regNotify::regNotify</a></div><div class="ttdeci">regNotify(objbase *_obj, const char *_name)</div><div class="ttdef"><b>Definition:</b> cnotify.h:35</div></div>
+<div class="ttc" id="struct__AsyncArgc_html_a6c9a1bf69f063c074409da63b18ef595"><div class="ttname"><a href="struct__AsyncArgc.html#a6c9a1bf69f063c074409da63b18ef595">_AsyncArgc::iCmd</a></div><div class="ttdeci">int iCmd</div><div class="ttdef"><b>Definition:</b> cnotify.h:14</div></div>
+<div class="ttc" id="classCnotify_html_a4410a13ce26c6dcbb19d76aa94dfe650"><div class="ttname"><a href="classCnotify.html#a4410a13ce26c6dcbb19d76aa94dfe650">Cnotify::~Cnotify</a></div><div class="ttdeci">virtual ~Cnotify()</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:68</div></div>
+<div class="ttc" id="classCnotify_html_ab4e5be4450d230d28a7b1ef06d23f525"><div class="ttname"><a href="classCnotify.html#ab4e5be4450d230d28a7b1ef06d23f525">Cnotify::NotifyA</a></div><div class="ttdeci">void NotifyA(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd, bool sync=false)</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:27</div></div>
+<div class="ttc" id="classCnotify_html"><div class="ttname"><a href="classCnotify.html">Cnotify</a></div><div class="ttdef"><b>Definition:</b> cnotify.h:45</div></div>
+<div class="ttc" id="struct__AsyncArgc_html_af79eff7bb1fb4d7a8328cad89186d630"><div class="ttname"><a href="struct__AsyncArgc.html#af79eff7bb1fb4d7a8328cad89186d630">_AsyncArgc::msg</a></div><div class="ttdeci">CAgrcList * msg</div><div class="ttdef"><b>Definition:</b> cnotify.h:12</div></div>
+<div class="ttc" id="classCnotify_html_ada11ca448715e2b252e0ab80194ac0d7"><div class="ttname"><a href="classCnotify.html#ada11ca448715e2b252e0ab80194ac0d7">Cnotify::observerList</a></div><div class="ttdeci">std::map&lt; int, REGNOTIFY * &gt; observerList</div><div class="ttdef"><b>Definition:</b> cnotify.h:63</div></div>
+<div class="ttc" id="struct__AsyncArgc_html_a62fce652247411c1046e9651fa0256ce"><div class="ttname"><a href="struct__AsyncArgc.html#a62fce652247411c1046e9651fa0256ce">_AsyncArgc::_AsyncArgc</a></div><div class="ttdeci">_AsyncArgc(CAgrcList *objmsg, int module, int cmd, void *parm=nullptr)</div><div class="ttdef"><b>Definition:</b> cnotify.h:16</div></div>
+<div class="ttc" id="classCnotify_html_a86220e54a7407800ea96adb1ff8fd30b"><div class="ttname"><a href="classCnotify.html#a86220e54a7407800ea96adb1ff8fd30b">Cnotify::dump</a></div><div class="ttdeci">void dump(int fd=0, Printfun callback=LVOS_Printf)</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:149</div></div>
+<div class="ttc" id="classCnotify_html_a07e223d3a397e28c450cb29cbf7c9f89"><div class="ttname"><a href="classCnotify.html#a07e223d3a397e28c450cb29cbf7c9f89">Cnotify::Notify</a></div><div class="ttdeci">int Notify(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:46</div></div>
+<div class="ttc" id="classCnotify_html_ab913ab2a59562f776faefefbd383553d"><div class="ttname"><a href="classCnotify.html#ab913ab2a59562f776faefefbd383553d">Cnotify::Cnotify</a></div><div class="ttdeci">Cnotify()</div><div class="ttdef"><b>Definition:</b> cnotify.cpp:80</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Âà∂‰ΩúËÄÖ &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

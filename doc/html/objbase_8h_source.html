@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>OS系统接口查询手册: D:/code/LiteOS/os/inc/objbase.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">OS系统接口查询手册
+   &#160;<span id="projectnumber">v1.0</span>
+   </div>
+   <div id="projectbrief">Janisa</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li><a href="namespaces.html"><span>命名空间</span></a></li>
+      <li><a href="annotated.html"><span>类</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8b7cb6c889a10e2a101a7e90c854ca4d.html">os</a></li><li class="navelem"><a class="el" href="dir_74a0f00179eada1dfee08aecb51588ec.html">inc</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">objbase.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __OBJBASE_H__</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __OBJBASE_H__</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;cargclist.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;frameworkmgr.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;log.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">typedef</span> int (*Printfun)(<span class="keywordtype">int</span> fd, <span class="keyword">const</span> <span class="keywordtype">char</span> *format, ...);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classobjbase.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classobjbase.html">objbase</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classobjbase.html#ae13bcdb59b9b81ffced855d8e304327b">   14</a></span>&#160;    std::atomic&lt;int&gt; <a class="code" href="classobjbase.html#ae13bcdb59b9b81ffced855d8e304327b">m_debug</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classobjbase.html#aff2f0f7614f62d6f17dce7b7fe6b3633">   17</a></span>&#160;    std::mutex <a class="code" href="classobjbase.html#aff2f0f7614f62d6f17dce7b7fe6b3633">m_synclock</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classobjbase.html#a31a91e853766e9d9feeec039b0713dd9">   20</a></span>&#160;    <a class="code" href="classobjbase.html#a31a91e853766e9d9feeec039b0713dd9">objbase</a>() : m_debug(0) {}</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classobjbase.html#a27534bcf70bc248448a593057435466b">   21</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classobjbase.html#a27534bcf70bc248448a593057435466b">~objbase</a>() {}</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classobjbase.html#a0045317689842ce503a5b33b1db99c6f">   22</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classobjbase.html#a0045317689842ce503a5b33b1db99c6f">Init</a>() { <span class="keywordflow">return</span> 0; };</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classobjbase.html#aa8f9a00bafa8e6088c07e2d3397f6b9c">dump</a>(<span class="keywordtype">int</span> fd = 0, Printfun callback = LVOS_Printf);</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classobjbase.html#ae4daa59963772ad4589d15ed253414f7">   24</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classobjbase.html#ae4daa59963772ad4589d15ed253414f7">GetDebug</a>() { <span class="keywordflow">return</span> <a class="code" href="classobjbase.html#ae13bcdb59b9b81ffced855d8e304327b">m_debug</a>; }</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classobjbase.html#afdf811293f37874262b2fb9dff961a2a">   25</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classobjbase.html#afdf811293f37874262b2fb9dff961a2a">SetDebug</a>(<span class="keywordtype">int</span> value) { <span class="keywordflow">return</span> (m_debug = value); }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classobjbase.html#a197718900ba160f206115c2fd87755e3">PrintHead</a>(<span class="keywordtype">int</span> fd, Printfun callback,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                           <span class="keyword">const</span> <span class="keywordtype">char</span> *tableName, <span class="keywordtype">int</span> tatol, <span class="keywordtype">char</span> split = <span class="charliteral">&#39;-&#39;</span>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classobjbase.html#a2712682cb90ee425c1d39c3c53638ec8">PrintEnd</a>(<span class="keywordtype">int</span> fd, Printfun callback,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                          <span class="keywordtype">int</span> tatol, <span class="keywordtype">char</span> split = <span class="charliteral">&#39;-&#39;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classobjbase.html#aa0e4c39fbda9b3be1da9e39f5cf6b802">   30</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classobjbase.html#aa0e4c39fbda9b3be1da9e39f5cf6b802">Process</a>(<a class="code" href="classCAgrcList.html">CAgrcList</a> *message,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                        <a class="code" href="struct__RspMsg.html">RspMsg</a> *outmessage, <span class="keywordtype">int</span> iModule, <span class="keywordtype">int</span> iCmd)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classobjbase.html#a9146aa9ff2256df3fcd6c4b73744f3d6">   35</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classobjbase.html#a9146aa9ff2256df3fcd6c4b73744f3d6">Reg</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pzName, <span class="keywordtype">void</span> *obj, <span class="keywordtype">int</span> <span class="keywordtype">id</span>){};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define PROCESS_BEGIN(cmd)                        \</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">    std::lock_guard&lt;std::mutex&gt; lock{m_synclock}; \</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">    int iRet = 0;                                 \</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">    switch (cmd)                                  \</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">    {</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define PROCESS_CALL(cmd, func)                            \</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">    case cmd:                                              \</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">        iRet = (func)(message, outmessage, iModule, iCmd); \</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">        break;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define PROCESS_END() \</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">    default:          \</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">        iRet = -1;    \</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">        break;        \</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">        }             \</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">        return iRet;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classCAgrcList_html"><div class="ttname"><a href="classCAgrcList.html">CAgrcList</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:8</div></div>
+<div class="ttc" id="struct__RspMsg_html"><div class="ttname"><a href="struct__RspMsg.html">_RspMsg</a></div><div class="ttdef"><b>Definition:</b> cargclist.h:69</div></div>
+<div class="ttc" id="classobjbase_html_a27534bcf70bc248448a593057435466b"><div class="ttname"><a href="classobjbase.html#a27534bcf70bc248448a593057435466b">objbase::~objbase</a></div><div class="ttdeci">virtual ~objbase()</div><div class="ttdef"><b>Definition:</b> objbase.h:21</div></div>
+<div class="ttc" id="classobjbase_html_a197718900ba160f206115c2fd87755e3"><div class="ttname"><a href="classobjbase.html#a197718900ba160f206115c2fd87755e3">objbase::PrintHead</a></div><div class="ttdeci">virtual void PrintHead(int fd, Printfun callback, const char *tableName, int tatol, char split= '-')</div><div class="ttdef"><b>Definition:</b> objbase.cpp:6</div></div>
+<div class="ttc" id="classobjbase_html_a2712682cb90ee425c1d39c3c53638ec8"><div class="ttname"><a href="classobjbase.html#a2712682cb90ee425c1d39c3c53638ec8">objbase::PrintEnd</a></div><div class="ttdeci">virtual void PrintEnd(int fd, Printfun callback, int tatol, char split= '-')</div><div class="ttdef"><b>Definition:</b> objbase.cpp:12</div></div>
+<div class="ttc" id="classobjbase_html"><div class="ttname"><a href="classobjbase.html">objbase</a></div><div class="ttdef"><b>Definition:</b> objbase.h:11</div></div>
+<div class="ttc" id="classobjbase_html_ae4daa59963772ad4589d15ed253414f7"><div class="ttname"><a href="classobjbase.html#ae4daa59963772ad4589d15ed253414f7">objbase::GetDebug</a></div><div class="ttdeci">int GetDebug()</div><div class="ttdef"><b>Definition:</b> objbase.h:24</div></div>
+<div class="ttc" id="classobjbase_html_aa8f9a00bafa8e6088c07e2d3397f6b9c"><div class="ttname"><a href="classobjbase.html#aa8f9a00bafa8e6088c07e2d3397f6b9c">objbase::dump</a></div><div class="ttdeci">virtual void dump(int fd=0, Printfun callback=LVOS_Printf)</div><div class="ttdef"><b>Definition:</b> objbase.cpp:2</div></div>
+<div class="ttc" id="classobjbase_html_a31a91e853766e9d9feeec039b0713dd9"><div class="ttname"><a href="classobjbase.html#a31a91e853766e9d9feeec039b0713dd9">objbase::objbase</a></div><div class="ttdeci">objbase()</div><div class="ttdef"><b>Definition:</b> objbase.h:20</div></div>
+<div class="ttc" id="classobjbase_html_a9146aa9ff2256df3fcd6c4b73744f3d6"><div class="ttname"><a href="classobjbase.html#a9146aa9ff2256df3fcd6c4b73744f3d6">objbase::Reg</a></div><div class="ttdeci">virtual void Reg(const char *pzName, void *obj, int id)</div><div class="ttdef"><b>Definition:</b> objbase.h:35</div></div>
+<div class="ttc" id="classobjbase_html_aff2f0f7614f62d6f17dce7b7fe6b3633"><div class="ttname"><a href="classobjbase.html#aff2f0f7614f62d6f17dce7b7fe6b3633">objbase::m_synclock</a></div><div class="ttdeci">std::mutex m_synclock</div><div class="ttdef"><b>Definition:</b> objbase.h:17</div></div>
+<div class="ttc" id="classobjbase_html_a0045317689842ce503a5b33b1db99c6f"><div class="ttname"><a href="classobjbase.html#a0045317689842ce503a5b33b1db99c6f">objbase::Init</a></div><div class="ttdeci">virtual int Init()</div><div class="ttdef"><b>Definition:</b> objbase.h:22</div></div>
+<div class="ttc" id="classobjbase_html_afdf811293f37874262b2fb9dff961a2a"><div class="ttname"><a href="classobjbase.html#afdf811293f37874262b2fb9dff961a2a">objbase::SetDebug</a></div><div class="ttdeci">int SetDebug(int value)</div><div class="ttdef"><b>Definition:</b> objbase.h:25</div></div>
+<div class="ttc" id="classobjbase_html_aa0e4c39fbda9b3be1da9e39f5cf6b802"><div class="ttname"><a href="classobjbase.html#aa0e4c39fbda9b3be1da9e39f5cf6b802">objbase::Process</a></div><div class="ttdeci">virtual int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)</div><div class="ttdef"><b>Definition:</b> objbase.h:30</div></div>
+<div class="ttc" id="classobjbase_html_ae13bcdb59b9b81ffced855d8e304327b"><div class="ttname"><a href="classobjbase.html#ae13bcdb59b9b81ffced855d8e304327b">objbase::m_debug</a></div><div class="ttdeci">std::atomic&lt; int &gt; m_debug</div><div class="ttdef"><b>Definition:</b> objbase.h:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>
