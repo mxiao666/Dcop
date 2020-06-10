@@ -13,111 +13,126 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\lib">
-      <UniqueIdentifier>{ad283d3d-d4b6-40ed-a30d-23456c9a0a59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\lib">
-      <UniqueIdentifier>{3a07cab4-445c-46d3-b139-a9ff0f2a4a89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\usr">
       <UniqueIdentifier>{ed6b0128-7852-416a-ba01-b589a5994411}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\os">
+      <UniqueIdentifier>{25db3668-e194-4925-a49e-badff1b68913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\os">
+      <UniqueIdentifier>{d565b45b-2df1-4bc2-a49f-0db2e881680b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\elog">
+      <UniqueIdentifier>{e70ddf17-95ab-4d1f-b3b0-daf90ab3291f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\lib\include\cargclist.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\clibase.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\cnotify.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\cstream.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\frameworkmgr.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\log.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\objbase.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\objKernel.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\objTask.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\stacktrace.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\streamhelper.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\system.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\threadpool.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\cmdid.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\template.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\timer.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\include\type.h">
-      <Filter>头文件\lib</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\lib\src\clibase.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\cnotify.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\cstream.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\log.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\objKernel.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\objTask.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\stacktrace.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\streamhelper.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\system.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\src\objbase.cpp">
-      <Filter>源文件\lib</Filter>
-    </ClCompile>
     <ClCompile Include="..\demo\demo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\src\template.cpp">
-      <Filter>源文件\lib</Filter>
+    <ClCompile Include="..\os\src\clibase.cpp">
+      <Filter>源文件\os</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\src\frameworkmgr.cpp">
-      <Filter>源文件\lib</Filter>
+    <ClCompile Include="..\os\src\cnotify.cpp">
+      <Filter>源文件\os</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\src\timer.cpp">
-      <Filter>源文件\lib</Filter>
+    <ClCompile Include="..\os\src\cstream.cpp">
+      <Filter>源文件\os</Filter>
     </ClCompile>
+    <ClCompile Include="..\os\src\errcode.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\frameworkmgr.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\log.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\objbase.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\objKernel.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\objTask.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\stacktrace.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\system.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\template.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+    <ClCompile Include="..\os\src\timer.cpp">
+      <Filter>源文件\os</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\os\inc\cargclist.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\clibase.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\cmdid.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\cnotify.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\cstream.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\frameworkmgr.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\log.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\objbase.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\objKernel.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\objTask.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\stacktrace.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\streamhelper.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\system.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\template.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\threadpool.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\timer.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\os\inc\type.h">
+      <Filter>头文件\os</Filter>
+    </ClInclude>
+    <ClInclude Include="..\elog\plugins\file\elog_file.h">
+      <Filter>头文件\elog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\elog\plugins\file\elog_file_cfg.h">
+      <Filter>头文件\elog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\elog\inc\elog.h">
+      <Filter>头文件\elog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\elog\inc\elog_cfg.h">
+      <Filter>头文件\elog</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

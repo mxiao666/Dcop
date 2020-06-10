@@ -23,6 +23,7 @@ char LogLevelStr[][8] =
 
 int LogInit()
 {
+#ifndef __WIN32__
     /* close printf buffer */
     setbuf(stdout, NULL);
     /* initialize EasyLogger */
@@ -40,9 +41,25 @@ int LogInit()
     debug_backtrace_init();
     /* start EasyLogger */
     elog_start();
+#endif
     return RET_OK;
 }
 
+static bool gIsConslone = false;
+int Win_Printf(const char *format, ...)
+{
+    if (gIsConslone)
+    {
+        char buffer[LOG_MESSAGE_LEN] = {0};
+        va_list arg_ptr;
+        va_start(arg_ptr, format);
+        vsnprintf(buffer, sizeof(buffer), format, arg_ptr);
+        va_end(arg_ptr);
+        printf("%s", buffer);
+        printf("\r\n");
+    }
+    return 0;
+}
 int LVOS_Printf(int fd, const char *format, ...)
 {
     char buffer[LOG_MESSAGE_LEN] = {0};
@@ -123,6 +140,7 @@ REG_TO_FRAMEWORK(TABLE_TWO, MODELU_CLI, LogCmd, MODELU_CLI)
 class LogMgr : public objbase
 {
 private:
+#ifndef __WIN32__
     int GetLevelByLog(CAgrcList *message,
                       RspMsg *outmessage,
                       int iModule,
@@ -143,17 +161,6 @@ private:
         }
         return RET_OK;
     }
-    int GetLogTreace(CAgrcList *message, RspMsg *outmessage,
-                     int iModule, int iCmd)
-    {
-        if (outmessage == nullptr)
-            return -1;
-        CAgrcList *list = new CAgrcList[1];
-        list[0].addAgrc(STATUS, elog_get_Terminal_enabled() ? ON : OFF);
-        outmessage->count = 1;
-        outmessage->msg = list;
-        return 0;
-    }
     int SetLogByLevel(CAgrcList *message, RspMsg *outmessage,
                       int iModule, int iCmd)
     {
@@ -173,24 +180,6 @@ private:
             }
         }
         return ERR_MSG_FIELD;
-    }
-    int SetLogTreace(CAgrcList *message, RspMsg *outmessage,
-                     int iModule, int iCmd)
-    {
-        if (message == nullptr)
-            return ERR_MSG_PARAM;
-        CStream *level = message->GetAgrc(ARGC_DEFAULT);
-        if (level == nullptr)
-            return ERR_MSG_FIELD;
-        if (OS::equal(level->c_str(), ON))
-        {
-            elog_set_Terminal_enabled(true);
-        }
-        else
-        {
-            elog_set_Terminal_enabled(false);
-        }
-        return SUCCESS;
     }
     int SetLogTextColor(CAgrcList *message, RspMsg *outmessage,
                         int iModule, int iCmd)
@@ -217,7 +206,7 @@ private:
         if (outmessage == nullptr)
             return ERR_MSG_PARAM;
         CAgrcList *list = new CAgrcList[1];
-        list[0].addAgrc(STATUS, elog_get_text_color_enabled() ? ON : OFF);
+        list[0].addAgrc(STATUS, elog_get_Terminal_enabled() ? ON : OFF);
         outmessage->count = 1;
         outmessage->msg = list;
         return SUCCESS;
@@ -237,18 +226,6 @@ private:
     }
 
 public:
-    int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
-    {
-        PROCESS_BEGIN(iCmd)
-        PROCESS_CALL(CMD_GET_LOG_LEVEL, GetLevelByLog)
-        PROCESS_CALL(CMD_SET_LOG_LEVEL, SetLogByLevel)
-        PROCESS_CALL(CMD_SET_LOG_TRACE, SetLogTreace)
-        PROCESS_CALL(CMD_GET_LOG_TRACE, GetLogTreace)
-        PROCESS_CALL(CMD_MSG_TIMER, CompressLogFile)
-        PROCESS_CALL(CMD_SET_LOG_COLOR, SetLogTextColor)
-        PROCESS_CALL(CMD_GET_LOG_COLOR, GetLogTextColor)
-        PROCESS_END()
-    }
     void dump(int fd, Printfun callback)
     {
         objbase::PrintHead(fd, callback, "LOG_INFO", 32);
@@ -265,6 +242,63 @@ public:
                        elog_get_output_enabled());
         objbase::PrintEnd(fd, callback, 32);
     }
+
+#endif
+    int Process(CAgrcList *message, RspMsg *outmessage, int iModule, int iCmd)
+    {
+        PROCESS_BEGIN(iCmd)
+        PROCESS_CALL(CMD_SET_LOG_TRACE, SetLogTreace)
+        PROCESS_CALL(CMD_GET_LOG_TRACE, GetLogTreace)
+#ifndef __WIN32__
+        PROCESS_CALL(CMD_GET_LOG_LEVEL, GetLevelByLog)
+        PROCESS_CALL(CMD_SET_LOG_LEVEL, SetLogByLevel)
+        PROCESS_CALL(CMD_MSG_TIMER, CompressLogFile)
+        PROCESS_CALL(CMD_SET_LOG_COLOR, SetLogTextColor)
+        PROCESS_CALL(CMD_GET_LOG_COLOR, GetLogTextColor)
+#endif
+        PROCESS_END()
+    }
+    int GetLogTreace(CAgrcList *message, RspMsg *outmessage,
+                     int iModule, int iCmd)
+    {
+        if (outmessage == nullptr)
+            return -1;
+        CAgrcList *list = new CAgrcList[1];
+        list[0].addAgrc(STATUS,
+#ifndef __WIN32__
+                        elog_get_Terminal_enabled()
+#else
+                        gIsConslone
+#endif
+                            ? ON
+                            : OFF);
+        outmessage->count = 1;
+        outmessage->msg = list;
+        return 0;
+    }
+
+    int SetLogTreace(CAgrcList *message, RspMsg *outmessage,
+                     int iModule, int iCmd)
+    {
+        bool value = false;
+        if (message == nullptr)
+            return ERR_MSG_PARAM;
+        CStream *level = message->GetAgrc(ARGC_DEFAULT);
+        if (level == nullptr)
+            return ERR_MSG_FIELD;
+        if (OS::equal(level->c_str(), ON))
+        {
+            value = true;
+        }
+#ifndef __WIN32__
+        elog_set_Terminal_enabled(value);
+#else
+        gIsConslone = value;
+#endif
+        return SUCCESS;
+    }
+
+public:
     int Init()
     {
         LogInit();

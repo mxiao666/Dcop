@@ -109,7 +109,7 @@ void objKernel::Entry()
         if (pObj != nullptr)
             pObj->obj->Init();
     }
-    /* å¼€å§‹å¾ªç¯å¤„ç† */
+    /* ¿ªÊ¼Ñ­»·´¦Àí */
     if (m_EntryFunc)
         m_EntryFunc();
 }

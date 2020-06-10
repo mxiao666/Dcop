@@ -19,39 +19,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\lib\include\cargclist.h" />
-    <ClInclude Include="..\lib\include\clibase.h" />
-    <ClInclude Include="..\lib\include\cmdid.h" />
-    <ClInclude Include="..\lib\include\cnotify.h" />
-    <ClInclude Include="..\lib\include\cstream.h" />
-    <ClInclude Include="..\lib\include\frameworkmgr.h" />
-    <ClInclude Include="..\lib\include\log.h" />
-    <ClInclude Include="..\lib\include\objbase.h" />
-    <ClInclude Include="..\lib\include\objKernel.h" />
-    <ClInclude Include="..\lib\include\objTask.h" />
-    <ClInclude Include="..\lib\include\stacktrace.h" />
-    <ClInclude Include="..\lib\include\streamhelper.h" />
-    <ClInclude Include="..\lib\include\system.h" />
-    <ClInclude Include="..\lib\include\template.h" />
-    <ClInclude Include="..\lib\include\threadpool.h" />
-    <ClInclude Include="..\lib\include\timer.h" />
-    <ClInclude Include="..\lib\include\type.h" />
+    <ClCompile Include="..\demo\demo.cpp" />
+    <ClCompile Include="..\os\src\clibase.cpp" />
+    <ClCompile Include="..\os\src\cnotify.cpp" />
+    <ClCompile Include="..\os\src\cstream.cpp" />
+    <ClCompile Include="..\os\src\errcode.cpp" />
+    <ClCompile Include="..\os\src\frameworkmgr.cpp" />
+    <ClCompile Include="..\os\src\log.cpp" />
+    <ClCompile Include="..\os\src\objbase.cpp" />
+    <ClCompile Include="..\os\src\objKernel.cpp" />
+    <ClCompile Include="..\os\src\objTask.cpp" />
+    <ClCompile Include="..\os\src\stacktrace.cpp" />
+    <ClCompile Include="..\os\src\system.cpp" />
+    <ClCompile Include="..\os\src\template.cpp" />
+    <ClCompile Include="..\os\src\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\demo\demo.cpp" />
-    <ClCompile Include="..\lib\src\clibase.cpp" />
-    <ClCompile Include="..\lib\src\cnotify.cpp" />
-    <ClCompile Include="..\lib\src\cstream.cpp" />
-    <ClCompile Include="..\lib\src\frameworkmgr.cpp" />
-    <ClCompile Include="..\lib\src\log.cpp" />
-    <ClCompile Include="..\lib\src\objbase.cpp" />
-    <ClCompile Include="..\lib\src\objKernel.cpp" />
-    <ClCompile Include="..\lib\src\objTask.cpp" />
-    <ClCompile Include="..\lib\src\stacktrace.cpp" />
-    <ClCompile Include="..\lib\src\streamhelper.cpp" />
-    <ClCompile Include="..\lib\src\system.cpp" />
-    <ClCompile Include="..\lib\src\template.cpp" />
-    <ClCompile Include="..\lib\src\timer.cpp" />
+    <ClInclude Include="..\elog\inc\elog.h" />
+    <ClInclude Include="..\elog\inc\elog_cfg.h" />
+    <ClInclude Include="..\elog\plugins\file\elog_file.h" />
+    <ClInclude Include="..\elog\plugins\file\elog_file_cfg.h" />
+    <ClInclude Include="..\os\inc\cargclist.h" />
+    <ClInclude Include="..\os\inc\clibase.h" />
+    <ClInclude Include="..\os\inc\cmdid.h" />
+    <ClInclude Include="..\os\inc\cnotify.h" />
+    <ClInclude Include="..\os\inc\cstream.h" />
+    <ClInclude Include="..\os\inc\frameworkmgr.h" />
+    <ClInclude Include="..\os\inc\log.h" />
+    <ClInclude Include="..\os\inc\objbase.h" />
+    <ClInclude Include="..\os\inc\objKernel.h" />
+    <ClInclude Include="..\os\inc\objTask.h" />
+    <ClInclude Include="..\os\inc\stacktrace.h" />
+    <ClInclude Include="..\os\inc\streamhelper.h" />
+    <ClInclude Include="..\os\inc\system.h" />
+    <ClInclude Include="..\os\inc\template.h" />
+    <ClInclude Include="..\os\inc\threadpool.h" />
+    <ClInclude Include="..\os\inc\timer.h" />
+    <ClInclude Include="..\os\inc\type.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -140,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;__WIN32__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)../lib/include;$(ProjectDir)../test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\elog\plugins\file;$(ProjectDir)..\elog\inc;$(ProjectDir)..\os\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

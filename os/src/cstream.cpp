@@ -186,7 +186,7 @@ CStream &CStream::operator<<(CStream &t)
 }
 WORD CStream::to_WORD()
 {
-    return to_DWORD();
+    return (WORD)to_DWORD();
 }
 DWORD CStream::to_DWORD()
 {
